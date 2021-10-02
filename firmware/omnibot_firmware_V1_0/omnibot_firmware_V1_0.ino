@@ -4,15 +4,15 @@
 
 ros::NodeHandle nh;
 
-void FL_cb(const std_msgs::Int16 & data);
-void FR_cb(const std_msgs::Int16 & data);
-void BL_cb(const std_msgs::Int16 & data);
-void BR_cb(const std_msgs::Int16 & data);
+void FL_cb(const std_msgs::Int16 &data);
+void FR_cb(const std_msgs::Int16 &data);
+void BL_cb(const std_msgs::Int16 &data);
+void BR_cb(const std_msgs::Int16 &data);
 
-ros::Subscriber<std_msgs::Int16> FL_sub(FL_WHEEL_SUBTOPIC_NAME,&FL_cb);
-ros::Subscriber<std_msgs::Int16> FR_sub(FR_WHEEL_SUBTOPIC_NAME,&FR_cb);
-ros::Subscriber<std_msgs::Int16> BL_sub(BL_WHEEL_SUBTOPIC_NAME,&BL_cb);
-ros::Subscriber<std_msgs::Int16> BR_sub(BR_WHEEL_SUBTOPIC_NAME,&BR_cb);
+ros::Subscriber<std_msgs::Int16> FL_sub(FL_WHEEL_SUBTOPIC_NAME, &FL_cb);
+ros::Subscriber<std_msgs::Int16> FR_sub(FR_WHEEL_SUBTOPIC_NAME, &FR_cb);
+ros::Subscriber<std_msgs::Int16> BL_sub(BL_WHEEL_SUBTOPIC_NAME, &BL_cb);
+ros::Subscriber<std_msgs::Int16> BR_sub(BR_WHEEL_SUBTOPIC_NAME, &BR_cb);
 
 unsigned long long last_time = 0;
 
@@ -20,15 +20,16 @@ void setup()
 {
     nh.initNode();
 
-    pinMode(FL_MOTOR_PIN_1,OUTPUT);
-    pinMode(FL_MOTOR_PIN_2,OUTPUT);
-    pinMode(FR_MOTOR_PIN_1,OUTPUT);
-    pinMode(FR_MOTOR_PIN_2,OUTPUT);
-    pinMode(BL_MOTOR_PIN_1,OUTPUT);
-    pinMode(BL_MOTOR_PIN_2,OUTPUT);
-    pinMode(BR_MOTOR_PIN_1,OUTPUT);
-    pinMode(BR_MOTOR_PIN_2,OUTPUT);
-    pinMode(LED_BUILTIN,OUTPUT);
+    pinMode(FL_MOTOR_PIN_1, OUTPUT);
+    pinMode(FL_MOTOR_PIN_2, OUTPUT);
+    pinMode(FR_MOTOR_PIN_1, OUTPUT);
+    pinMode(FR_MOTOR_PIN_2, OUTPUT);
+    pinMode(BL_MOTOR_PIN_1, OUTPUT);
+    pinMode(BL_MOTOR_PIN_2, OUTPUT);
+    pinMode(BR_MOTOR_PIN_1, OUTPUT);
+    pinMode(BR_MOTOR_PIN_2, OUTPUT);
+
+    pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
@@ -51,4 +52,77 @@ void loop()
         }
     }
     nh.spinOnce();
+}
+
+void FL_cb(const std_msgs::Int16 &data)
+{
+    if (data.data > 0)
+    {
+        analogWrite(FL_MOTOR_PIN_1, data.data);
+        analogWrite(FL_MOTOR_PIN_2, -data.data);
+    }
+    else if (data.data < 0)
+    {
+        analogWrite(FL_MOTOR_PIN_1, -data.data);
+        analogWrite(FL_MOTOR_PIN_2, data.data);
+    }
+    else
+    {
+        analogWrite(FL_MOTOR_PIN_1, 0);
+        analogWrite(FL_MOTOR_PIN_2, 0);
+    }
+}
+void FR_cb(const std_msgs::Int16 &data)
+{
+    if (data.data > 0)
+    {
+        analogWrite(FR_MOTOR_PIN_1, data.data);
+        analogWrite(FR_MOTOR_PIN_2, -data.data);
+    }
+    else if (data.data < 0)
+    {
+        analogWrite(FR_MOTOR_PIN_1, -data.data);
+        analogWrite(FR_MOTOR_PIN_2, data.data);
+    }
+    else
+    {
+        analogWrite(FR_MOTOR_PIN_1, 0);
+        analogWrite(FR_MOTOR_PIN_2, 0);
+    }
+}
+void BL_cb(const std_msgs::Int16 &data)
+{
+    if (data.data > 0)
+    {
+        analogWrite(BL_MOTOR_PIN_1, data.data);
+        analogWrite(BL_MOTOR_PIN_2, -data.data);
+    }
+    else if (data.data < 0)
+    {
+        analogWrite(BL_MOTOR_PIN_1, -data.data);
+        analogWrite(BL_MOTOR_PIN_2, data.data);
+    }
+    else
+    {
+        analogWrite(BL_MOTOR_PIN_1, 0);
+        analogWrite(BL_MOTOR_PIN_2, 0);
+    }
+}
+void BR_cb(const std_msgs::Int16 &data)
+{
+    if (data.data > 0)
+    {
+        analogWrite(BR_MOTOR_PIN_1, data.data);
+        analogWrite(BR_MOTOR_PIN_2, -data.data);
+    }
+    else if (data.data < 0)
+    {
+        analogWrite(BR_MOTOR_PIN_1, -data.data);
+        analogWrite(BR_MOTOR_PIN_2, data.data);
+    }
+    else
+    {
+        analogWrite(BR_MOTOR_PIN_1, 0);
+        analogWrite(BR_MOTOR_PIN_2, 0);
+    }
 }
