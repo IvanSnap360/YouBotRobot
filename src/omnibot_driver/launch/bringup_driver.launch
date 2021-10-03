@@ -2,15 +2,15 @@
     <arg name="driver_type" default="simple" />
 
     <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
-        <arg name="port" type="string" value="/dev/ttyACM0" />
-        <arg name="baud" type="int" value="115200" />
+        <param name="port" type="string" value="/dev/ttyACM0" />
+        <param name="baud" type="int" value="115200" />
     </node>
 
-    <group if="$(eval arg('driver_type') == 'simple'">
+    <group if="$(eval arg('driver_type') == 'simple')">
         <node name="simple_driver_node" pkg="omnibot_driver" type="simple_driver.py" output="screen" />
     </group>
-    <group if="$(eval arg('driver_type') == 'complex'">
-        <node name="simple_driver_node" pkg="omnibot_driver" type="simple_driver.py" output="screen" />
+    <group if="$(eval arg('driver_type') == 'complex')">
+        <node name="complex_driver_node" pkg="omnibot_driver" type="simple_driver.py" output="screen" />
     </group>
 
 </launch>

@@ -1,0 +1,17 @@
+<launch>
+
+  <arg name="gui" default="off" />
+  <param name="robot_description" textfile="$(find omnibot_manipulator)/urdf/angle_arm.urdf" />
+
+
+  <group if="$(eval arg('gui') == 'on')">
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omnibot_manipulator)/rviz/rviz.rviz" />
+    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+  </group>
+
+  <group if="$(eval arg('gui') == 'off')">
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  </group>
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+</launch>
