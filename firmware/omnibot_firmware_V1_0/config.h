@@ -1,9 +1,9 @@
 //##########
 /* TOPIC NAMES */
-#define FL_WHEEL_SUBTOPIC_NAME   "/wheels/forward_left/target_value"
+#define FL_WHEEL_SUBTOPIC_NAME  "/wheels/forward_left/target_value"
 #define FR_WHEEL_SUBTOPIC_NAME  "/wheels/forward_right/target_value"    
 #define BL_WHEEL_SUBTOPIC_NAME  "/wheels/backward_left/target_value"
-#define BR_WHEEL_SUBTOPIC_NAME "/wheels/backward_right/target_value"
+#define BR_WHEEL_SUBTOPIC_NAME  "/wheels/backward_right/target_value"
 
 
 //##########
