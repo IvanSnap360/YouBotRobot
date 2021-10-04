@@ -9,13 +9,47 @@
     <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
     <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
     <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
-    <group name="angle_manip">
-        <chain base_link="ang_link0" tip_link="ang_link7"/>
-    </group>
     <group name="gripper">
         <joint name="ang_gripper"/>
         <joint name="ang_gripper_sub"/>
     </group>
+    <group name="angle_manip">
+        <link name="ang_link0"/>
+        <link name="ang_link1"/>
+        <link name="ang_link2"/>
+        <link name="ang_link3"/>
+        <link name="ang_link4"/>
+        <link name="ang_link5"/>
+        <joint name="ang_base"/>
+        <joint name="ang_joint1"/>
+        <joint name="ang_joint2"/>
+        <joint name="ang_joint3"/>
+        <joint name="ang_joint4"/>
+        <joint name="ang_joint5"/>
+        <chain base_link="ang_link0" tip_link="ang_link7"/>
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="start_pose" group="angle_manip">
+        <joint name="ang_joint1" value="0"/>
+        <joint name="ang_joint2" value="0"/>
+        <joint name="ang_joint3" value="0"/>
+        <joint name="ang_joint4" value="0"/>
+        <joint name="ang_joint5" value="0"/>
+    </group_state>
+    <group_state name="demon_pose" group="angle_manip">
+        <joint name="ang_joint1" value="0.538"/>
+        <joint name="ang_joint2" value="0.4686"/>
+        <joint name="ang_joint3" value="0.5728"/>
+        <joint name="ang_joint4" value="1.1976"/>
+        <joint name="ang_joint5" value="1.3017"/>
+    </group_state>
+    <group_state name="nose_pose" group="angle_manip">
+        <joint name="ang_joint1" value="-0.7463"/>
+        <joint name="ang_joint2" value="-0.4686"/>
+        <joint name="ang_joint3" value="-0.5033"/>
+        <joint name="ang_joint4" value="-0.6769"/>
+        <joint name="ang_joint5" value="1.3017"/>
+    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="ang_link5" group="gripper"/>
     <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->

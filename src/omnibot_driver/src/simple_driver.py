@@ -105,7 +105,9 @@ def callback(msg: Twist):
         w2 = int(w2)
         w3 = int(w3)
         w4 = int(w4)
-    print(w1,w2,w3,w4)
+
+    # print(w1,w2,w3,w4)
+    
     forward_left_pub.publish(w1)
     forward_right_pub.publish(w2)
     backward_left_pub.publish(w3)
