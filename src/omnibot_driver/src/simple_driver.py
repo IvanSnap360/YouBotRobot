@@ -1,11 +1,11 @@
 #! /usr/bin/env python3
 import rospy
-from std_msgs.msg import Int16 as wheel_type
+from std_msgs.msg import Float32 as wheel_type
 from geometry_msgs.msg import Twist
 
-base_long = 0.07
-base_width = 0.07
-wheel_deameter = 0.05
+base_long = 0.265
+base_width = 0.385
+wheel_deameter = 0.15
 
 OUTPUT_PWM = True
 
@@ -13,8 +13,8 @@ linear_x = 0.0
 linear_y = 0.0
 angular_z = 0.0
 
-MAX_WHEEL_VELOCITY = 20.0
-MIN_PWM = 30
+MAX_WHEEL_VELOCITY = 13.0
+MIN_PWM = 120
 
 rospy.init_node("omni_driver_node")
 
@@ -58,7 +58,7 @@ def callback(msg: Twist):
 
     Ly = base_long / 2
     Lx = base_width / 2
-    r = wheel_deameter
+    r = wheel_deameter / 2
     
     vx = msg.linear.x
     vy = msg.linear.y
@@ -101,10 +101,10 @@ def callback(msg: Twist):
 
         
 
-        w1 = int(w1)
-        w2 = int(w2)
-        w3 = int(w3)
-        w4 = int(w4)
+        # w1 = int(w1)
+        # w2 = int(w2)
+        # w3 = int(w3)
+        # w4 = int(w4)
 
     # print(w1,w2,w3,w4)
     
