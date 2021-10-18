@@ -8,14 +8,14 @@
 
 //##########
 /* PINS */
-#define FL_MOTOR_PIN_1 0
-#define FL_MOTOR_PIN_2 0
-#define FR_MOTOR_PIN_1 0
-#define FR_MOTOR_PIN_2 0
-#define BL_MOTOR_PIN_1 0
-#define BL_MOTOR_PIN_2 0
-#define BR_MOTOR_PIN_1 0
-#define BR_MOTOR_PIN_2 0
+#define FL_MOTOR_PIN_1 11
+#define FL_MOTOR_PIN_2 10
+#define FR_MOTOR_PIN_1 4
+#define FR_MOTOR_PIN_2 5
+#define BL_MOTOR_PIN_1 9
+#define BL_MOTOR_PIN_2 8
+#define BR_MOTOR_PIN_1 6
+#define BR_MOTOR_PIN_2 7
     
 //##########
 //##########

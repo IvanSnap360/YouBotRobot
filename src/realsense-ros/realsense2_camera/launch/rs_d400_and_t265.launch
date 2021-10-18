@@ -46,5 +46,4 @@
       <arg name="clip_distance"         value="$(arg clip_distance)"/>
     </include>
   </group>
-  <node pkg="tf" type="static_transform_publisher" name="t265_to_d400" args="0 0 0 0 0 0 /$(arg tf_prefix_camera1)_link /$(arg tf_prefix_camera2)_link 100"/>
 </launch>

@@ -8,22 +8,20 @@ import os
 import select
 import sys
 
-# teleop_type = input("choose teleop configuration (numpad/wasdx)")
-teleop_type = "wasdx"
-if teleop_type == "wasdx":
-    forward_key = "w"
-    backward_key = "x"
-    left_key = "a"
-    right_key = "d"
-    stop_key = "s"
-    cw_key = "e"
-    ccw_key = "q"
-    info_msg = """
+
+forward_key = "w"
+backward_key = "x"
+left_key = "a"
+right_key = "d"
+stop_key = "s"
+cw_key = "e"
+ccw_key = "q"
+info_msg = """
 ----------------------------------------------------------
 TELEOP CONFIGURATION:\033[04m\033[01m\033[36mWASDX\033[0m
-        w              ccw_rotate: q  cw_rotate: e
-    a   s   d
-        x
+    w              ccw_rotate: q  cw_rotate: e
+a   s   d
+    x
 w - forward
 x - backward
 a - left
@@ -31,27 +29,7 @@ d - right
 s - stop
 ----------------------------------------------------------
 """
-    print(info_msg)
-elif teleop_type == "numpad":
-    forward_key = "8"
-    backward_key = "2"
-    left_key = "4"
-    right_key = "6"
-    stop_key = "5"
-    info_msg = """
-----------------------------------------------------------
-TELEOP CONFIGURATION:\033[04m\033[01m\033[36mNUMPAD\033[0m
-    8
-4   5   6
-    2
-8 - forward
-2 - backward
-4 - left
-6 - right
-5 - stop
-----------------------------------------------------------
-"""
-    print(info_msg)
+print(info_msg)
 
 stop_teleop_key = '\x03'
 
@@ -65,18 +43,19 @@ else:
 
 if os.name != 'nt':
     settings = termios.tcgetattr(sys.stdin)
+#//////////////////////////////////////////////////////////////////////
+linear_x_max = 1.0
+linear_y_max = 1.0
+angular_max = 1.0
 
-
-linear_x_step = 0.01
-linear_x_max = 1
 linear_y_step = 0.01
-linear_y_max = 1
-angular_max = 1
+linear_x_step = 0.01
 angular_step = 0.01
+
 linear_x = 0.0
 linear_y = 0.0
 angular = 0.0
-
+#//////////////////////////////////////////////////////////////////////
 def constrain(input, low, high):
     if input < low:
       input = low
@@ -84,7 +63,6 @@ def constrain(input, low, high):
       input = high
     else:
       input = input
-
     return input
 
 def getKey():
@@ -100,7 +78,7 @@ def getKey():
 
     termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
     return key
-
+#//////////////////////////////////////////////////////////////////////
 
 count = 0
 
@@ -134,17 +112,25 @@ if __name__ == "__main__":
             linear_x = round(linear_x,3)   
             linear_y = round(linear_y,3)  
             angular = round(angular,3)    
+            linear_x = constrain(linear_x,-linear_x_max,linear_x_max)
+            linear_y = constrain(linear_y,-linear_y_max,linear_y_max)
+            angular_z = constrain(angular,-angular_max,angular_max)
+
             print(linear_x,linear_y,angular)
+
+
             count += 1
             if (key == stop_teleop_key):
                 print("-------------------EXIT-------------------")
                 break            
+            
         elif key == None:
             linear_x = 0
             linear_y = 0
             angular = 0
-        vels.linear.x = constrain(linear_x,-linear_x_max,linear_x_max)
-        vels.linear.y = constrain(linear_y,-linear_x_max,linear_x_max)
-        vels.angular.z = constrain(angular,-angular_max,angular_max)
+
+        vels.linear.x = linear_x
+        vels.linear.y = linear_y
+        vels.angular.z = angular_z
 
         vels_pub.publish(vels)
