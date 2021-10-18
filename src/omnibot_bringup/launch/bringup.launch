@@ -5,6 +5,7 @@
         simple - без обратной связи / complex - с обратной связью -->
     <include file="$(find omnibot_driver)/launch/bringup_driver.launch">
         <arg name="driver_type" value="simple" />
+        <arg name="driver_connection" value="on" />
     </include>
     
     <!-- <include file="$(find omnibot_navigation)/launch/bringup_realsenses.launch"/> -->

@@ -42,7 +42,7 @@ void loop()
   if (nh.connected())
   {
 
-    if (millis() - last_time > 1000)
+    if (millis() - last_time > 50)
     {
       toggleLED();
       last_time = millis();
