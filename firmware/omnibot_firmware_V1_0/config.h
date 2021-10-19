@@ -21,6 +21,14 @@
 //##########
 //##########
 //##########
+/*
+{
+    "configuration": "upload_method=UploadMethod",
+    "board": "OpenCM904:OpenCM904:OpenCM904",
+    "sketch": "firmware/omnibot_firmware_V1_0/omnibot_firmware_V1_0.ino",
+    "port": "/dev/ttyACM0"
+}
+*/
 //##########
 
     
