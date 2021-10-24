@@ -22,9 +22,27 @@ cmd_vel_pub = rospy.Publisher(rospy.get_param("/driver_settings/system/velocitie
 while not rospy.is_shutdown():
     cmd_vel_msg = Twist()
 
-    cmd_vel_msg.linear.x = left_joy_msg.position.y / 1000.0
-    cmd_vel_msg.angular.z = left_joy_msg.position.x / 1000.0
-    cmd_vel_msg.linear.y = right_joy_msg.position.y / 1000.0
+    if abs(left_joy_msg.position.y)  < 30:
+        left_joy_msg.position.y = 0
+# 
+    if abs(left_joy_msg.position.x)  < 30:
+        left_joy_msg.position.x = 0
+# 
+    if abs(right_joy_msg.position.y)  < 30:
+        right_joy_msg.position.y = 0
+# 
+    if abs(right_joy_msg.position.x)  < 30:
+        right_joy_msg.position.x = 0
+
+    # right_joy_msg.position.x = round(right_joy_msg.position.x,1)
+    # right_joy_msg.position.y = round(right_joy_msg.position.y,1)
+
+    # left_joy_msg.position.x = round(left_joy_msg.position.x,1)
+    # left_joy_msg.position.y = round(left_joy_msg.position.y,1)
+
+    cmd_vel_msg.linear.x = left_joy_msg.position.y / 3000.0
+    cmd_vel_msg.angular.z = -left_joy_msg.position.x / 2000.0 
+    cmd_vel_msg.linear.y = -right_joy_msg.position.y / 3000.0 
 
     cmd_vel_pub.publish(cmd_vel_msg)
     rate.sleep()
