@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.1.3)
-project(omni_manipulator_moveit)
+project(omnibot_manipulator_moveit)
 
 find_package(catkin REQUIRED)
 

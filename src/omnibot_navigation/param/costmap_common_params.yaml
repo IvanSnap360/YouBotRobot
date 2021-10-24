@@ -1,4 +1,4 @@
-robot_radius: 0.225
+# footprint: [[x0, y0], [x1, y1], ... [xn, yn]]
 
 transform_tolerance: 0.4
 map_type: costmap

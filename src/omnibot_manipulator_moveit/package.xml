@@ -1,12 +1,12 @@
 <package>
 
-  <name>omni_manipulator_moveit</name>
+  <name>omnibot_manipulator_moveit</name>
   <version>0.3.0</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the angle_robot with the MoveIt Motion Planning Framework
   </description>
-  <author email="ivpetr2003@gmail.com">EVAN</author>
-  <maintainer email="ivpetr2003@gmail.com">EVAN</maintainer>
+  <author email="ivpetr2003@gmail.com">ivaneslo</author>
+  <maintainer email="ivpetr2003@gmail.com">ivaneslo</maintainer>
 
   <license>BSD</license>
 
