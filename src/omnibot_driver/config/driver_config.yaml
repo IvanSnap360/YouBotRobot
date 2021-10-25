@@ -10,7 +10,7 @@ driver_settings:
   min_pwm_output: 120.0
 
   system:
-    controller_port: "/devt/ttyACM0"
+    controller_port: "/dev/ttyACM0"
     controller_baudrate: 115200
     velocities_input_topic_name: "/cmd_vel"
     forward_left_output_topic_name: "/wheels/forward_left/target_value"

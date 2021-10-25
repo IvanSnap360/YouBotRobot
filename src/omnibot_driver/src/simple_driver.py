@@ -1,4 +1,4 @@
-#! /usr/bin/env python3
+#! /usr/bin/env python
 import rospy
 from std_msgs.msg import Float32 as wheel_type
 from geometry_msgs.msg import Twist
@@ -25,7 +25,6 @@ def constrain(x, min, max):
         x = min
     return x
 
-
 def goOutDeadZone(x):
     if x < 0 and x > -MIN_PWM:
         x = -MIN_PWM
@@ -35,7 +34,6 @@ def goOutDeadZone(x):
 
 def map(x, in_min,  in_max,  out_min,  out_max):
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
-
 
 w1 = 0
 w2 = 0
@@ -87,14 +85,11 @@ def callback(msg : Twist):
         w4 = int(w4)
     elif OUTPUT == "ANGULAR_VELOCITIES":
         pass
-
-    # print(w1,w2,w3,w4)
     
     forward_left_pub.publish(w1)
     forward_right_pub.publish(w2)
     backward_left_pub.publish(w3)
     backward_right_pub.publish(w4)
-
 
 rospy.Subscriber(rospy.get_param("/driver_settings/system/velocities_input_topic_name"), Twist, callback=callback)
 
@@ -114,6 +109,5 @@ backward_left_pub = rospy.Publisher(
 
 backward_right_pub = rospy.Publisher(
     rospy.get_param("/driver_settings/system/backward_right_output_topic_name"), wheel_type, queue_size=10)
-
 
 rospy.spin()

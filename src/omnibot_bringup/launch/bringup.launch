@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <launch>
-    
+
     <!-- подключаем ноду драйвера указывая тип 
         simple - без обратной связи / complex - с обратной связью -->
     <include file="$(find omnibot_driver)/launch/bringup_driver.launch">
         <arg name="driver_type" value="simple" />
         <arg name="driver_connection" value="on" />
     </include>
-    
-    <!-- <include file="$(find omnibot_navigation)/launch/bringup_realsenses.launch"/> -->
-    
-    
+
+    <include file="$(find omnibot_navigation)/launch/bringup_navigation.launch" />
+
+    <node name="record_topics_for_verification" pkg="rosbag" type="record" args="-0 ../logs/ -a" output="screen" />
 </launch>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="map_name" default="map"/>
+  <node name="map_saver1" pkg="map_server" type="map_saver" args="-f $(find omnibot_navigation)/maps/$(arg map_name)"/>
+</launch>

@@ -1,12 +1,17 @@
 <launch>
     <arg name="driver_type" default="simple" />
     <arg name="driver_connection" default="off" />
+    
+    
 
     <rosparam command="load" file="$(find omnibot_driver)/config/driver_config.yaml" />
+    
+    <!-- <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" /> -->
 
     <group if="$(eval arg('driver_connection') == 'on')">
         <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
             <param name="port" type="string" value="/dev/ttyACM0" />
+            
             <param name="baud" type="int" value="115200" />
         </node>
     </group>
