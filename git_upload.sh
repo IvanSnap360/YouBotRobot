@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "\n"
+echo "                                               "
 echo "###############UPLOAD####################" >> git_log.log
 echo "UPLOAD TO GIT $(basename `git rev-parse --show-toplevel`)"
 date >> git_log.log
