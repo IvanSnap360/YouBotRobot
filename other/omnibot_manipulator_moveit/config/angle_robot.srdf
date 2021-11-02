@@ -16,7 +16,13 @@
         <link name="ang_link3"/>
         <link name="ang_link4"/>
         <link name="ang_link5"/>
-        <chain base_link="ang_link0" tip_link="tip_link"/>
+        <joint name="ang_base"/>
+        <joint name="ang_joint1"/>
+        <joint name="ang_joint2"/>
+        <joint name="ang_joint3"/>
+        <joint name="ang_joint4"/>
+        <joint name="ang_joint5"/>
+        <chain base_link="ang_link0" tip_link="ang_link5"/>
     </group>
     <group name="gripper">
         <link name="ang_link6"/>
@@ -32,8 +38,17 @@
         <joint name="ang_joint4" value="0"/>
         <joint name="ang_joint5" value="0"/>
     </group_state>
+    <group_state name="pose1" group="arm">
+        <joint name="ang_joint1" value="-2.2737"/>
+        <joint name="ang_joint2" value="0.6075"/>
+        <joint name="ang_joint3" value="0.5728"/>
+        <joint name="ang_joint4" value="1.1976"/>
+        <joint name="ang_joint5" value="1.8571"/>
+    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="gripper" parent_link="tip_link" group="gripper" parent_group="arm"/>
+    <end_effector name="gripper" parent_link="ang_link5" group="gripper" parent_group="arm"/>
+    <!--VIRTUAL JOINT: Purpose: this element defines a virtual joint between a robot link and an external frame of reference (considered fixed with respect to the robot)-->
+    <virtual_joint name="tip" type="fixed" parent_frame="ang_link5" child_link="ang_link5"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="ang_link0" link2="ang_link1" reason="Adjacent"/>
     <disable_collisions link1="ang_link1" link2="ang_link2" reason="Adjacent"/>
@@ -45,5 +60,5 @@
     <disable_collisions link1="ang_link4" link2="ang_link7" reason="Never"/>
     <disable_collisions link1="ang_link5" link2="ang_link6" reason="Adjacent"/>
     <disable_collisions link1="ang_link5" link2="ang_link7" reason="Adjacent"/>
-    <disable_collisions link1="ang_link6" link2="ang_link7" reason="Adjacent"/>
+    <disable_collisions link1="ang_link6" link2="ang_link7" reason="Default"/>
 </robot>

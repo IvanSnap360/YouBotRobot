@@ -2,7 +2,6 @@
 
   <!-- specify the planning pipeline -->
   <arg name="pipeline" default="ompl" />
-  <!-- <arg name="pipeline" default="chomp" /> -->
 
   <!-- By default, we do not start a database (it can be large) -->
   <arg name="db" default="false" />

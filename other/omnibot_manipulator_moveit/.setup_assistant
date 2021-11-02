@@ -6,6 +6,6 @@ moveit_setup_assistant_config:
   SRDF:
     relative_path: config/angle_robot.srdf
   CONFIG:
-    author_name: ivnel
+    author_name: ivaneslo
     author_email: ivpetr2003@gmail.com
-    generated_timestamp: 1635787009
+    generated_timestamp: 1635782954

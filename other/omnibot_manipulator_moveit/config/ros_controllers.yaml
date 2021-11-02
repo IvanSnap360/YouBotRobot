@@ -37,4 +37,4 @@ controller_list:
     default: True
     type: FollowJointTrajectory
     joints:
-      ang_gripper
+      []

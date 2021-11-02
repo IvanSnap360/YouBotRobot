@@ -1,16 +1,15 @@
 <launch>
   <!-- Arguments -->
-  <arg name="open_rviz" default="true" />
+  <arg name="open_rviz" default="false" />
   <arg name="move_forward_only" default="false" />
   <arg name="only_t265_camera" default="false" />
   <arg name="both_realsense_camera" default="true" />
   <arg name="amcl_map_server" default="false" />
   <arg name="gmapping" default="false" />
+  <arg name="rtabmap" default="false"/>
   <arg name="occupancy" default="true" />
   <arg name="move_base" default="true" />
   <arg name="static_transform" default="true" />
-
-  <machine name="remote_pc" address="192.168.10.101" ros-root="$(env ROS_ROOT)" ros-package-path="$(env ROS_PACKAGE_PATH)" user="ivan" />
 
   <group if="$(arg only_t265_camera)">
     <!-- T265  -->
@@ -44,6 +43,11 @@
 
   </group>
 
+  <group if="$(arg rtabmap)">
+    <include file="$(find omnibot_navigation)/launch/rtabmap.launch" />
+
+  </group>
+
 
   <group if="$(arg occupancy)">
     <include file="$(find omnibot_navigation)/launch/occupancy.launch" />
@@ -65,7 +69,8 @@
   </group> -->
 
   <group if="$(arg open_rviz)">
-
-    <node pkg="rviz" type="rviz" name="rviz" required="true" machine="remote_pc" args="-d $(find omnibot_navigation)/rviz/omnibot_navigation.rviz" />
+    <include file="$(find omnibot_navigation)/launch/bringup_rviz.launch">
+      <arg name="remote" value="true"/>
+    </include>
   </group>
 </launch>

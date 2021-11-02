@@ -30,7 +30,8 @@
 		<origin xyz="0 0 0.107" rpy="1.57 0 -1.57" />
 		<axis xyz="0 1 0" />
 		<dynamics damping="0.99" />
-		<limit effort="5.0" velocity="5.0" />
+		<limit  effort="5.0" velocity="5.0" />
+		<!-- lower="-3.14" upper="3.14" -->
 	</joint>
 
 	<link name="ang_link1">
@@ -50,13 +51,13 @@
 			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
 		</inertial>
 	</link>
-	<joint name="ang_joint2" type="continuous">
+	<joint name="ang_joint2" type="revolute">
 		<parent link="ang_link1" />
 		<child link="ang_link2" />
 		<origin xyz="0 0.0518 0" rpy="0 0 0" />
 		<axis xyz="0 0 1" />
 		<dynamics damping="0.99" />
-		<limit effort="5.0" velocity="5.0" />
+		<limit lower="-1.57" upper="1.57" effort="5.0" velocity="5.0" />
 	</joint>
 
 	<link name="ang_link2">
@@ -77,13 +78,13 @@
 		</inertial>
 	</link>
 
-	<joint name="ang_joint3" type="continuous">
+	<joint name="ang_joint3" type="revolute">
 		<parent link="ang_link2" />
 		<child link="ang_link3" />
 		<origin xyz="0.0626 0.1989 0" rpy="0 0 0" />
 		<axis xyz="0 0 1" />
 		<dynamics damping="0.99" />
-		<limit effort="5.0" velocity="5.0" />
+		<limit lower="-1.57" upper="1.57" effort="5.0" velocity="5.0" />
 	</joint>
 
 	<link name="ang_link3">
@@ -104,13 +105,13 @@
 		</inertial>
 	</link>
 
-	<joint name="ang_joint4" type="continuous">
+	<joint name="ang_joint4" type="revolute">
 		<parent link="ang_link3" />
 		<child link="ang_link4" />
 		<origin xyz="0.13093 0 0" rpy="-1.57 0 1.57" />
 		<axis xyz="0 -1 0" />
 		<dynamics damping="0.99" />
-		<limit effort="5.0" velocity="5.0" />
+		<limit lower="-1.45" upper="1.45" effort="5.0" velocity="5.0" />
 	</joint>
 
 	<link name="ang_link4">
@@ -137,7 +138,7 @@
 		<origin xyz="0 0 -0.06174" rpy="0 0 0" />
 		<axis xyz="0 0 -1" />
 		<dynamics damping="0.99" />
-		<limit effort="5.0" velocity="5.0" />
+		<limit lower="-1.57" upper="1.57" effort="5.0" velocity="5.0" />
 	</joint>
 
 	<link name="ang_link5">
@@ -158,10 +159,28 @@
 		</inertial>
 	</link>
 
+	<link name="tip_link">
+		<!-- <visual>
+			<geometry>
+				<sphere radius="0.02"/>
+			</geometry>
+			
+		</visual> -->
+		
+	</link>
+	
+	<joint name="tip_joint" type="fixed">
+		<origin xyz="0.0 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+		<parent link="ang_link5"/>
+		<child link="tip_link"/>
+		<axis xyz="0.0 0.0 0.0"/>
+		<limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/>
+	</joint>
+
 	<joint name="ang_gripper" type="prismatic">
-		<parent link="ang_link5" />
+		<parent link="tip_link" />
 		<child link="ang_link6" />
-		<origin xyz="0 0 -0.0715" rpy="1.57 3.14 0" />
+		<origin xyz="0.0 0.0 0.0285" rpy="1.57 3.14 0" />
 		<axis xyz="0 0 1" />
 		<limit effort="3" lower="0" upper="0.025" velocity="0.05" />
 		<dynamics damping="0.99" />
@@ -185,9 +204,9 @@
 		</inertial>
 	</link>
 	<joint name="ang_gripper_sub" type="prismatic">
-		<parent link="ang_link5" />
+		<parent link="tip_link" />
 		<child link="ang_link7" />
-		<origin xyz="0 0 -0.0715" rpy="-1.57 0 0" />
+		<origin xyz="0.0 0.0 0.0285" rpy="-1.57 0 0" />
 		<axis xyz="0 0 1" />
 		<limit effort="3" lower="0" upper="0.025" velocity="0.05" />
 		<mimic joint="ang_gripper" multiplier="1" offset="0" />
@@ -210,4 +229,8 @@
 			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
 		</inertial>
 	</link>
+
+	
+
+	
 </robot>
