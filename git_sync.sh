@@ -6,4 +6,4 @@ git fetch >> git_log.log
 git pull >> git_log.log
 echo "############### DONE ####################" >> git_log.log
 echo "############### DONE ####################" 
-
+echo ""
