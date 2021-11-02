@@ -1,9 +1,9 @@
 #!/bin/sh
-# git config --global credential.helper cache
-
-git pull
-# git add -A
-# git add *
-# git commit -m "$1"
-# git push 
+echo "SYNCHRONIZATION WITH GIT $(basename `git rev-parse --show-toplevel`)"
+echo "###############DOWNLOAD##################" >> git_log.log
+date >> git_log.log
+git fetch >> git_log.log
+git pull >> git_log.log
+echo "############### DONE ####################" >> git_log.log
+echo "############### DONE ####################" 
 

@@ -1,0 +1,2 @@
+now=$(date)
+echo $(date)
