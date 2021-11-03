@@ -1,6 +1,6 @@
 <launch>
     <arg name="driver_type" default="simple" />
-    <arg name="driver_connection" default="off" />
+    <arg name="driver_connection" default="true" />
     
     
 
@@ -8,7 +8,7 @@
     
     <!-- <arg name="port" default="$(optenv HUSKY_PORT /dev/prolific)" /> -->
 
-    <group if="$(eval arg('driver_connection') == 'on')">
+    <group if="$(arg driver_connection)">
         <node name="rosserial_python" pkg="rosserial_python" type="serial_node.py" output="screen">
             <param name="port" type="string" value="/dev/ttyACM0" />
             
