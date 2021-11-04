@@ -8,5 +8,5 @@ git commit -m "$x" >> git_log.log
 git push >> git_log.log
 printf "############### DONE ####################\n" >> git_log.log
 printf "############### DONE ####################\n" 
-printf "\n"
+printf %"s\n"
 
