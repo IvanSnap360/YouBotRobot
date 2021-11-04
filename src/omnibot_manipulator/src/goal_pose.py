@@ -1,4 +1,4 @@
-from __future__ import print_function
+#! /usr/bin/env python3 
 import sys
 import rospy
 from moveit_commander import roscpp_initialize,RobotCommander,PlanningSceneInterface,MoveGroupCommander

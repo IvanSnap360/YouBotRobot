@@ -1,3 +1,4 @@
+#! /usr/bin/env python3 
 from __future__ import print_function
 import sys
 import rospy
@@ -5,6 +6,10 @@ from moveit_commander import roscpp_initialize,RobotCommander,PlanningSceneInter
 import moveit_msgs.msg
 import geometry_msgs.msg
 from std_msgs.msg import Empty
+from tf.transformations import quaternion_from_euler
+
+
+
 
 roscpp_initialize(sys.argv)
 rospy.init_node("move_group_python_interface_tutorial", anonymous=True)
@@ -14,10 +19,9 @@ scene = PlanningSceneInterface()
 group_name = "arm"
 move_group = MoveGroupCommander(group_name)
 move_group.allow_replanning(True)
-move_group.set_num_planning_attempts(100)
+move_group.set_num_planning_attempts(10)
 move_group.set_planning_time(10)
-# move_group.set_planning_pipeline_id("chomp")
-# move_group.set_planner_id("SBL")
+
 display_trajectory_publisher = rospy.Publisher(
     "/move_group/display_planned_path",
     moveit_msgs.msg.DisplayTrajectory,
@@ -25,13 +29,16 @@ display_trajectory_publisher = rospy.Publisher(
 )
 rviz_goal_state_trigger = rospy.Publisher("/rviz/moveit/update_goal_state",Empty,queue_size=10)
 
+q = quaternion_from_euler(1.57,-1.57,0.0)
+
 pose_target = geometry_msgs.msg.Pose()
-pose_target.orientation.x = 0.0
-pose_target.orientation.y = 0.0
-pose_target.orientation.z = 0.0
+pose_target.orientation.x = q[0]
+pose_target.orientation.y = q[1]
+pose_target.orientation.z = q[2]
+pose_target.orientation.w = q[3]
 pose_target.position.x = 0.0
-pose_target.position.y = 0.3
-pose_target.position.z = 0.1
+pose_target.position.y = 0.5
+pose_target.position.z = 0.0
 move_group.set_pose_target(pose_target)
 plan = move_group.plan()
 move_group.go(wait=True)
