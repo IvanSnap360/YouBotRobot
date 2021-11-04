@@ -1,4 +1,4 @@
-#! /usr/bin/env python3 
+#! /usr/bin/env python2 
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 

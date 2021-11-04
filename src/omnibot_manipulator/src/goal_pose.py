@@ -1,4 +1,4 @@
-#! /usr/bin/env python3 
+#! /usr/bin/env python2 
 import sys
 import rospy
 from moveit_commander import roscpp_initialize,RobotCommander,PlanningSceneInterface,MoveGroupCommander
