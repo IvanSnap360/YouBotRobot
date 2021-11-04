@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot name="angle_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-	<link name="map" />
+	<!-- <link name="map" />
 	<joint name="ang_base" type="fixed">
-		<parent link="map" />
+		<parent link="base_link" />
 		<child link="ang_link0" />
 		<origin rpy="0 0 3.14" xyz="0 0 0.01" />
-	</joint>
+	</joint> -->
 
 	<link name="ang_link0">
 		<visual>

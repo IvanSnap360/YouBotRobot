@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="gui" default="true" />
+    <group if="$(arg gui)">
+      <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omnibot_description)/rviz/rviz.rviz" />
+      <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    </group>
+    <param name="robot_description" command="xacro --inorder $(find omnibot_description)/urdf/RTK.urdf.xacro" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="tf" type="static_transform_publisher" name="map2base_link" args="0 0 0.050 0 0 0 /base_link /map 100"/>
+
+
+
+</launch>

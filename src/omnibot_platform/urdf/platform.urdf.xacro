@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot name="omnibot_platform" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:property name="base_lenth" value="0.265" />
+    <xacro:property name="base_width" value="0.385" />
+    <xacro:property name="base_height" value="0.15" />
+
+    <xacro:property name="wheel_x_offset" value="${(base_lenth / 2) + 0.03}" />
+    <xacro:property name="wheel_y_offset" value="${(base_width / 2)}" />
+    <xacro:macro name="wheel_caster" params="suffix *origin">
+        <link name="${suffix}_wheel_link">
+            <visual name="">
+                <origin xyz="0.2 0.0 0.0" rpy="0.0 0.0 1.57" />
+                <geometry>
+                    <mesh filename="package://omnibot_platform/meshes/wheel.STL" scale="0.001 0.001 0.001" />
+                </geometry>
+                <material name="">
+                    <color rgba="1.0 0.0 0.0 1.0" />
+                    <texture filename="" />
+                </material>
+            </visual>
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://omnibot_platform/meshes/wheel.STL" scale="0.001 0.001 0.001" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${suffix}_wheel_joint" type="fixed">
+            <xacro:insert_block name="origin" />
+            <parent link="base_link" />
+            <child link="${suffix}_wheel_link" />
+            <axis xyz="0.0 0.0 0.0" />
+            <limit effort="0.0" velocity="0.0" />
+        </joint>
+    </xacro:macro>
+
+
+    <link name="base_link">
+        <visual name="">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <box size="${base_lenth} ${base_width} ${base_height/2}" />
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.5 1.0" />
+                <texture filename="" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <box size="${base_lenth} ${base_width} ${base_height/2}" />
+            </geometry>
+        </collision>
+    </link>
+    <xacro:wheel_caster suffix="right_forward">
+        <origin xyz="${wheel_x_offset} ${wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+    </xacro:wheel_caster>
+
+    <xacro:wheel_caster suffix="left_forward">
+        <origin xyz="${-wheel_x_offset} ${wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+    </xacro:wheel_caster>
+
+    <xacro:wheel_caster suffix="left_backward">
+        <origin xyz="${-wheel_x_offset} ${-wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+    </xacro:wheel_caster>
+
+    <xacro:wheel_caster suffix="right_backward">
+        <origin xyz="${wheel_x_offset} ${-wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+    </xacro:wheel_caster>
+
+</robot>
