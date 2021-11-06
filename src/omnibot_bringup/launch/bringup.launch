@@ -3,26 +3,11 @@
 
     <!-- подключаем ноду драйвера указывая тип 
         simple - без обратной связи / complex - с обратной связью -->
-    <!-- <include file="$(find omnibot_driver)/launch/bringup_driver.launch">
+    <include file="$(find omnibot_driver)/launch/bringup_driver.launch">
         <arg name="driver_type" value="simple" />
-        <arg name="driver_connection" value="on" />
-    </include> -->
-
-    <!-- <include file="$(find omnibot_navigation)/launch/bringup_navigation.launch" /> -->
-    <include file="$(find omnibot_description)/launch/omnibot_description.launch">
-        <arg name="gui" default="true" />
+        <arg name="driver_connection" value="true" />
     </include>
-    <!-- <include file="$(find omnibot_manipulator_moveit)/launch/move_group.launch">
-        <arg name="allow_trajectory_execution" value="true"/>
-        <arg name="fake_execution" value="true"/>
-        <arg name="execution_type" value="interpolate"/>
-        <arg name="info" value="true"/>
-        <arg name="debug" value="false"/>
-        <arg name="pipeline" value="ompl"/>
-        <arg name="load_robot_description" value="true"/>
-      </include> -->
-    <!-- <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch">
-        <arg name="use_rviz" default="true" />
-    </include> -->
-    <!-- <node name="record_topics_for_verification" pkg="rosbag" type="record" args="-0 ../logs/ -a" output="screen" /> -->
+
+    <include file="$(find omnibot_navigation)/launch/bringup_navigation.launch" />
+    
 </launch>

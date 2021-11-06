@@ -16,13 +16,13 @@
         <link name="ang_link3"/>
         <link name="ang_link4"/>
         <link name="ang_link5"/>
+        <link name="tip_link"/>
+        <joint name="manip2platform_connector"/>
         <joint name="ang_joint1"/>
         <joint name="ang_joint2"/>
         <joint name="ang_joint3"/>
         <joint name="ang_joint4"/>
         <joint name="ang_joint5"/>
-        <joint name="tip_joint"/>
-        <joint name="manip2platform_connector"/>
         <chain base_link="ang_link0" tip_link="tip_link"/>
     </group>
     <group name="gripper">
@@ -31,19 +31,24 @@
         <joint name="ang_gripper"/>
         <joint name="ang_gripper_sub"/>
     </group>
-    <group name="platform">
-        <link name="right_backward_wheel_link"/>
-        <link name="right_forward_wheel_link"/>
-        <link name="left_forward_wheel_link"/>
-        <link name="left_backward_wheel_link"/>
-        <link name="base_link"/>
-        <joint name="right_backward_wheel_joint"/>
-        <joint name="right_forward_wheel_joint"/>
-        <joint name="left_forward_wheel_joint"/>
-        <joint name="left_backward_wheel_joint"/>
-    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="home" group="gripper">
+        <joint name="ang_gripper" value="0.025"/>
+    </group_state>
+    <group_state name="default" group="arm">
+        <joint name="ang_joint1" value="-0.0174"/>
+        <joint name="ang_joint2" value="0"/>
+        <joint name="ang_joint3" value="0"/>
+        <joint name="ang_joint4" value="0"/>
+        <joint name="ang_joint5" value="0"/>
+    </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="gripper" parent_link="ang_link5" group="gripper" parent_group="arm"/>
+    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
+    <passive_joint name="left_backward_wheel_joint"/>
+    <passive_joint name="left_forward_wheel_joint"/>
+    <passive_joint name="right_backward_wheel_joint"/>
+    <passive_joint name="right_forward_wheel_joint"/>
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="ang_link0" link2="ang_link1" reason="Adjacent"/>
     <disable_collisions link1="ang_link0" link2="ang_link2" reason="Never"/>
@@ -62,15 +67,10 @@
     <disable_collisions link1="ang_link2" link2="ang_link3" reason="Adjacent"/>
     <disable_collisions link1="ang_link2" link2="ang_link4" reason="Never"/>
     <disable_collisions link1="ang_link2" link2="base_link" reason="Never"/>
-    <disable_collisions link1="ang_link2" link2="left_backward_wheel_link" reason="Never"/>
-    <disable_collisions link1="ang_link2" link2="left_forward_wheel_link" reason="Never"/>
-    <disable_collisions link1="ang_link2" link2="right_backward_wheel_link" reason="Never"/>
-    <disable_collisions link1="ang_link2" link2="right_forward_wheel_link" reason="Never"/>
     <disable_collisions link1="ang_link3" link2="ang_link4" reason="Adjacent"/>
     <disable_collisions link1="ang_link3" link2="ang_link5" reason="Never"/>
     <disable_collisions link1="ang_link3" link2="ang_link6" reason="Never"/>
     <disable_collisions link1="ang_link3" link2="ang_link7" reason="Never"/>
-    <disable_collisions link1="ang_link3" link2="right_forward_wheel_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="ang_link5" reason="Adjacent"/>
     <disable_collisions link1="ang_link4" link2="ang_link6" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="ang_link7" reason="Never"/>
@@ -81,10 +81,8 @@
     <disable_collisions link1="base_link" link2="left_forward_wheel_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="right_backward_wheel_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="right_forward_wheel_link" reason="Adjacent"/>
-    <disable_collisions link1="left_backward_wheel_link" link2="left_forward_wheel_link" reason="Never"/>
     <disable_collisions link1="left_backward_wheel_link" link2="right_backward_wheel_link" reason="Never"/>
     <disable_collisions link1="left_backward_wheel_link" link2="right_forward_wheel_link" reason="Never"/>
     <disable_collisions link1="left_forward_wheel_link" link2="right_backward_wheel_link" reason="Never"/>
     <disable_collisions link1="left_forward_wheel_link" link2="right_forward_wheel_link" reason="Never"/>
-    <disable_collisions link1="right_backward_wheel_link" link2="right_forward_wheel_link" reason="Never"/>
 </robot>

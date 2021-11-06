@@ -1,12 +1,12 @@
 <launch>
 
   <arg name="gui" default="false" />
-  <param name="manipulator_description" command="xacro --inorder $(find omnibot_manipulator)/urdf/angle_arm.urdf" />
+  <param name="robot_description" textfile="$(find omnibot_manipulator)/urdf/angle_arm.urdf" />
 
 
   <group if="$(arg gui)">
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omnibot_manipulator)/rviz/rviz.rviz" />
-    <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
+    <!-- <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" /> -->
   </group>
 
   <group if="$(arg gui)">

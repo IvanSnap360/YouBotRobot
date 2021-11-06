@@ -1,6 +1,6 @@
 <package>
 
-  <name>omnibot_moveit</name>
+  <name>omnibot_moveit_pkg</name>
   <version>0.3.0</version>
   <description>
      An automatically generated package with all the configuration and launch files for using the omnibot with the MoveIt Motion Planning Framework

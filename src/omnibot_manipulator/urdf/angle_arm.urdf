@@ -18,11 +18,11 @@
 				<mesh filename="package://omnibot_manipulator/meshes/link1.dae" scale="0.001 0.001 0.001" />
 			</geometry>
 		</collision>
-		<inertial>
+		<!-- <inertial>
 			<origin xyz="0 0 0.5" rpy="0 0 0" />
 			<mass value="1" />
 			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
-		</inertial>
+		</inertial> -->
 	</link>
 	<joint name="ang_joint1" type="continuous">
 		<parent link="ang_link0" />

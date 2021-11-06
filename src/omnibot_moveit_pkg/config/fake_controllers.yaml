@@ -11,12 +11,8 @@ controller_list:
     type: $(arg execution_type)
     joints:
       - ang_gripper
-  - name: fake_platform_controller
-    type: $(arg execution_type)
-    joints:
-      []
 initial:  # Define initial robot poses.
-#  - group: arm
-#    pose: home
-
-  []
+  - group: arm
+    pose: default
+  - group: gripper
+    pose: home

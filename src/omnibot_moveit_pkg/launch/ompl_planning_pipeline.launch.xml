@@ -23,6 +23,6 @@
   <!-- Add MoveGroup capabilities specific to this pipeline -->
   <!-- <param name="capabilities" value="" /> -->
 
-  <rosparam command="load" file="$(find omnibot_moveit)/config/ompl_planning.yaml"/>
+  <rosparam command="load" file="$(find omnibot_moveit_pkg)/config/ompl_planning.yaml"/>
 
 </launch>
