@@ -1055,11 +1055,11 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="GND2" gate="1" x="15.24" y="83.82"/>
 </instances>
 <busses>
-<bus name="J1B,J1B,J1X,J2B,J2X,J2Y">
+<bus name="J1B,J1X,J1Y,J2B,J2X,J2Y">
 <segment>
-<wire x1="-66.04" y1="88.9" x2="-30.48" y2="88.9" width="0.762" layer="92"/>
-<wire x1="-30.48" y1="88.9" x2="35.56" y2="88.9" width="0.762" layer="92"/>
-<wire x1="-30.48" y1="88.9" x2="-30.48" y2="68.58" width="0.762" layer="92"/>
+<wire x1="-66.04" y1="88.9" x2="-33.02" y2="88.9" width="0.762" layer="92"/>
+<wire x1="-33.02" y1="88.9" x2="35.56" y2="88.9" width="0.762" layer="92"/>
+<wire x1="-33.02" y1="88.9" x2="-33.02" y2="68.58" width="0.762" layer="92"/>
 </segment>
 </bus>
 </busses>
@@ -1070,12 +1070,22 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="-55.88" y1="101.6" x2="-55.88" y2="88.9" width="0.1524" layer="91"/>
 <label x="-55.88" y="91.44" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A0"/>
+<wire x1="-27.94" y1="81.28" x2="-33.02" y2="81.28" width="0.1524" layer="91"/>
+<label x="-30.48" y="81.28" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="J1Y" class="0">
 <segment>
 <pinref part="U$1" gate="G$1" pin="VRY"/>
 <wire x1="-53.34" y1="101.6" x2="-53.34" y2="88.9" width="0.1524" layer="91"/>
 <label x="-53.34" y="91.44" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A1"/>
+<wire x1="-27.94" y1="78.74" x2="-33.02" y2="78.74" width="0.1524" layer="91"/>
+<label x="-30.48" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="J1B" class="0">
@@ -1091,12 +1101,22 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="22.86" y1="101.6" x2="22.86" y2="88.9" width="0.1524" layer="91"/>
 <label x="22.86" y="91.44" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A2"/>
+<wire x1="-27.94" y1="76.2" x2="-33.02" y2="76.2" width="0.1524" layer="91"/>
+<label x="-30.48" y="76.2" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="J2Y" class="0">
 <segment>
 <pinref part="U$2" gate="G$1" pin="VRY"/>
 <wire x1="25.4" y1="101.6" x2="25.4" y2="88.9" width="0.1524" layer="91"/>
 <label x="25.4" y="91.44" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="A3"/>
+<wire x1="-27.94" y1="73.66" x2="-33.02" y2="73.66" width="0.1524" layer="91"/>
+<label x="-30.48" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="J2B" class="0">
