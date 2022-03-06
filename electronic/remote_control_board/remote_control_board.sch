@@ -5882,6 +5882,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <segment>
 <pinref part="B1" gate="G$1" pin="D7"/>
 <wire x1="0" y1="60.96" x2="-2.54" y2="60.96" width="0.1524" layer="91"/>
+<label x="0" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="J2X" class="0">
@@ -5917,6 +5918,7 @@ Source: http://www.mouser.com/ds/2/392/products_18-2245.pdf</description>
 <segment>
 <pinref part="B1" gate="G$1" pin="D2"/>
 <wire x1="0" y1="73.66" x2="-2.54" y2="73.66" width="0.1524" layer="91"/>
+<label x="-2.54" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="+5V" class="0">

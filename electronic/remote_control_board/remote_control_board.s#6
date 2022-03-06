@@ -1040,6 +1040,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1053,6 +1055,8 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <instance part="P+2" gate="1" x="5.08" y="104.14"/>
 <instance part="GND1" gate="1" x="-73.66" y="86.36"/>
 <instance part="GND2" gate="1" x="15.24" y="83.82"/>
+<instance part="P+3" gate="1" x="-33.02" y="58.42"/>
+<instance part="GND3" gate="1" x="-33.02" y="35.56"/>
 </instances>
 <busses>
 <bus name="J1B,J1X,J1Y,J2B,J2X,J2Y">
@@ -1141,6 +1145,12 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <pinref part="U$2" gate="G$1" pin="+5V"/>
 <wire x1="20.32" y1="96.52" x2="20.32" y2="101.6" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="P+3" gate="1" pin="+5V"/>
+<wire x1="-33.02" y1="55.88" x2="-33.02" y2="53.34" width="0.1524" layer="91"/>
+<pinref part="B1" gate="G$1" pin="5V"/>
+<wire x1="-33.02" y1="53.34" x2="-27.94" y2="53.34" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -1155,6 +1165,16 @@ Comments, suggestions and bug reports please send to: &lt;b&gt;&lt;a href="mailt
 <wire x1="15.24" y1="86.36" x2="15.24" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="GND"/>
 <wire x1="15.24" y1="101.6" x2="17.78" y2="101.6" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="B1" gate="G$1" pin="GND@2"/>
+<pinref part="B1" gate="G$1" pin="GND@0"/>
+<wire x1="-27.94" y1="45.72" x2="-27.94" y2="43.18" width="0.1524" layer="91"/>
+<wire x1="-27.94" y1="43.18" x2="-27.94" y2="40.64" width="0.1524" layer="91"/>
+<junction x="-27.94" y="43.18"/>
+<wire x1="-27.94" y1="43.18" x2="-33.02" y2="43.18" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="GND"/>
+<wire x1="-33.02" y1="43.18" x2="-33.02" y2="38.1" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
