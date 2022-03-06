@@ -5,9 +5,9 @@
   <arg name="only_t265_camera" default="false" />
   <arg name="both_realsense_camera" default="true" />
   <arg name="amcl_map_server" default="false" />
-  <arg name="gmapping" default="false" />
+  <arg name="gmapping" default="true" />
   <arg name="rtabmap" default="false"/>
-  <arg name="occupancy" default="true" />
+  <arg name="occupancy" default="false" />
   <arg name="move_base" default="true" />
   <arg name="static_transform" default="true" />
 

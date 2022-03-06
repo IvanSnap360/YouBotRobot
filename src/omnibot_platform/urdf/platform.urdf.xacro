@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <robot name="omnibot_platform" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:property name="base_lenth" value="0.265" />
-    <xacro:property name="base_width" value="0.385" />
+    <xacro:property name="base_lenth" value="0.30510" />
+    <xacro:property name="base_width" value="0.336" />
     <xacro:property name="base_height" value="0.15" />
 
-    <xacro:property name="wheel_x_offset" value="${(base_lenth / 2) + 0.03}" />
+    <xacro:property name="wheel_x_offset" value="${(base_lenth / 2)}" />
     <xacro:property name="wheel_y_offset" value="${(base_width / 2)}" />
 
     <!-- wheel template -->
     <xacro:macro name="wheel_template" params="suffix *origin">
         <link name="${suffix}_wheel_link">
             <visual name="">
-                <origin xyz="0.2 0.0 0.0" rpy="0.0 0.0 1.57" />
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
                 <geometry>
                     <mesh filename="package://omnibot_platform/meshes/wheel.STL" scale="0.001 0.001 0.001" />
                 </geometry>
@@ -32,7 +32,7 @@
             <xacro:insert_block name="origin" />
             <parent link="base_link" />
             <child link="${suffix}_wheel_link" />
-            <axis xyz="1.0 0.0 0.0" />
+            <axis xyz="0.0 0.0 1.0" />
             <limit effort="0.0" velocity="0.0" />
         </joint>
 
@@ -51,9 +51,9 @@
 
     <link name="base_link">
         <visual name="">
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 3.14" />
             <geometry>
-                <box size="${base_lenth} ${base_width} ${base_height/2}" />
+                <mesh filename="package://omnibot_platform/meshes/base.STL" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="">
                 <color rgba="1.0 0.0 0.5 1.0" />
@@ -63,25 +63,25 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="${base_lenth} ${base_width} ${base_height/2}" />
+                <mesh filename="package://omnibot_platform/meshes/base.STL" scale="0.001 0.001 0.001"/>
             </geometry>
         </collision>
     </link>
     
     <xacro:wheel_template suffix="left_forward">
-        <origin xyz="${-wheel_x_offset} ${wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="${-wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 1.57 0.0" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="right_forward">
-        <origin xyz="${wheel_x_offset} ${wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="${wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 -1.57 0.0" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="left_backward">
-        <origin xyz="${-wheel_x_offset} ${-wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="${-wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 1.57 0.0" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="right_backward">
-        <origin xyz="${wheel_x_offset} ${-wheel_y_offset} 0.0" rpy="0.0 0.0 0.0" />
+        <origin xyz="${wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 -1.57 0.0" />
     </xacro:wheel_template>
 
 </robot>
