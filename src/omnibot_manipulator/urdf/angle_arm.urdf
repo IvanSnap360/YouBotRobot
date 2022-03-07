@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <robot name="angle_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-	<!-- <link name="map" />
-	<joint name="ang_base" type="fixed">
-		<parent link="base_link" />
-		<child link="ang_link0" />
-		<origin rpy="0 0 3.14" xyz="0 0 0.01" />
-	</joint> -->
+
 
 	<link name="ang_link0">
 		<visual>
@@ -18,11 +13,11 @@
 				<mesh filename="package://omnibot_manipulator/meshes/link1.dae" scale="0.001 0.001 0.001" />
 			</geometry>
 		</collision>
-		<!-- <inertial>
+		<inertial>
 			<origin xyz="0 0 0.5" rpy="0 0 0" />
 			<mass value="1" />
 			<inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
-		</inertial> -->
+		</inertial>
 	</link>
 	<joint name="ang_joint1" type="continuous">
 		<parent link="ang_link0" />
@@ -31,7 +26,7 @@
 		<axis xyz="0 1 0" />
 		<dynamics damping="0.99" />
 		<limit  effort="5.0" velocity="5.0" />
-		<!-- lower="-3.14" upper="3.14" -->
+
 	</joint>
 
 	<link name="ang_link1">
@@ -159,15 +154,8 @@
 		</inertial>
 	</link>
 
-	<link name="tip_link">
-		<!-- <visual>
-			<geometry>
-				<sphere radius="0.02"/>
-			</geometry>
-			
-		</visual> -->
-		
-	</link>
+	<link name="tip_link"/>
+	
 	
 	<joint name="tip_joint" type="fixed">
 		<origin xyz="0.0 0.0 -0.1" rpy="0.0 0.0 0.0"/>

@@ -7,13 +7,12 @@
     <xacro:property name="wheel_x_offset" value="${(base_lenth / 2)}" />
     <xacro:property name="wheel_y_offset" value="${(base_width / 2)}" />
 
-    <!-- wheel template -->
     <xacro:macro name="wheel_template" params="suffix *origin">
         <link name="${suffix}_wheel_link">
             <visual name="">
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
                 <geometry>
-                    <mesh filename="package://omnibot_platform/meshes/wheel.STL" scale="0.001 0.001 0.001" />
+                    <mesh filename="package://omnibot_platform/meshes/wheel_low.dae" scale="0.001 0.001 0.001" />
                 </geometry>
                 <material name="">
                     <color rgba="1.0 0.0 0.0 1.0" />
@@ -23,7 +22,7 @@
             <collision>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
                 <geometry>
-                    <mesh filename="package://omnibot_platform/meshes/wheel.STL" scale="0.001 0.001 0.001" />
+                    <mesh filename="package://omnibot_platform/meshes/wheel_low.dae" scale="0.001 0.001 0.001" />
                 </geometry>
             </collision>
         </link>
@@ -36,7 +35,7 @@
             <limit effort="0.0" velocity="0.0" />
         </joint>
 
-        <transmission name="${suffix}_wheel_trans" type="SimpleTransmission">
+        <transmission name="${suffix}_wheel_transmission" type="SimpleTransmission">
             <type>transmission_interface/SimpleTransmission</type>
             <actuator name="${suffix}_wheel_motor">
                 <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
@@ -47,13 +46,12 @@
             </joint>
         </transmission>
     </xacro:macro>
-    <!-- #######################################################################################################333333333 -->
 
     <link name="base_link">
         <visual name="">
-            <origin xyz="0.0 0.0 0.0" rpy="-1.57 0.0 3.14" />
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 3.14 0.0" />
             <geometry>
-                <mesh filename="package://omnibot_platform/meshes/base.STL" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://omnibot_platform/meshes/hodovaya_low.dae" scale="0.001 0.001 0.001"/>
             </geometry>
             <material name="">
                 <color rgba="1.0 0.0 0.5 1.0" />
@@ -63,25 +61,25 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <mesh filename="package://omnibot_platform/meshes/base.STL" scale="0.001 0.001 0.001"/>
+                <mesh filename="package://omnibot_platform/meshes/hodovaya_low.dae" scale="0.001 0.001 0.001"/>
             </geometry>
         </collision>
     </link>
     
     <xacro:wheel_template suffix="left_forward">
-        <origin xyz="${-wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 1.57 0.0" />
+        <origin xyz="${-wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 0.0 1.57" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="right_forward">
-        <origin xyz="${wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 -1.57 0.0" />
+        <origin xyz="${wheel_x_offset} ${wheel_y_offset} 0.013285" rpy="0.0 0.0 1.57" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="left_backward">
-        <origin xyz="${-wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 1.57 0.0" />
+        <origin xyz="${-wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 0.0  1.57" />
     </xacro:wheel_template>
 
     <xacro:wheel_template suffix="right_backward">
-        <origin xyz="${wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 -1.57 0.0" />
+        <origin xyz="${wheel_x_offset} ${-wheel_y_offset} 0.013285" rpy="0.0 0.0  1.57" />
     </xacro:wheel_template>
 
 </robot>
