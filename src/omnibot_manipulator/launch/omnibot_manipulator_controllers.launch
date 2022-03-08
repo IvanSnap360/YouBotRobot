@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ns" default=""/>
+    <node name="omnibot_manipulator_controllers_spawner_angle" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg ns)" args="
+    angle_joint1_controller
+    angle_joint2_controller
+    angle_joint3_controller 
+    angle_joint4_controller 
+    angle_joint5_controller 
+    angle_gripper_controller
+    angle_gripper_sub_controller"
+    />
+
+</launch>

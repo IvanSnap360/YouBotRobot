@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 <robot name="omnibot_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-    <xacro:include filename="$(find omnibot_manipulator)/urdf/angle_arm.urdf"/>
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <!-- <robotNamespace>/omnibot_robot</robotNamespace> -->
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+    <xacro:include filename="$(find omnibot_manipulator)/urdf/manipulator.urdf"/>
     <xacro:include filename="$(find omnibot_platform)/urdf/platform.urdf.xacro"/>
     <joint name="manip2platform_connector" type="fixed">
         <parent link="base_link"/>
