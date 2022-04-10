@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 left_forward_wheel_controller:
   type: velocity_controllers/JointVelocityController
@@ -15,5 +16,35 @@ right_backward_wheel_controller:
   type: velocity_controllers/JointVelocityController
   joint: right_backward_wheel_joint
   pid: {p: 100.0, i: 0.01, d: 10.0}
+=======
+left_forward_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_forward_wheel_joint
+  pid:
+    p: 10000.0
+    i: 1.0
+    d: 1000.0
+right_forward_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_forward_wheel_joint
+  pid:
+    p: 10000.0
+    i: 1.0
+    d: 1000.0
+left_backward_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: left_backward_wheel_joint
+  pid:
+    p: 10000.0
+    i: 1.0
+    d: 1000.0
+right_backward_wheel_controller:
+  type: velocity_controllers/JointVelocityController
+  joint: right_backward_wheel_joint
+  pid:
+    p: 10000.0
+    i: 1.0
+    d: 1000.0
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
 
   
