@@ -1,6 +1,11 @@
 joint_state_controller:
     type: joint_state_controller/JointStateController
     publish_rate: 50
+    
+# joint_velocity_controller:
+#     type: JointVelocityController
+#     publish_rate: 50
+
 gazebo_ros_control:
   pid_gains:
     left_forward_wheel_joint:

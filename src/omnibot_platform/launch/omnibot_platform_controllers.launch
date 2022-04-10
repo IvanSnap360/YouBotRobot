@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="ns" default="" />
-    <node name="omnibot_platform_controllers_spawner_angle" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg ns)" args="
+    <node name="omnibot_platform_controllers_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg ns)" args="
     left_forward_wheel_controller 
     right_forward_wheel_controller 
     left_backward_wheel_controller  
