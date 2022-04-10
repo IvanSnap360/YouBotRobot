@@ -2,7 +2,7 @@
 
 
     <!-- these are the arguments you can pass this launch file, for example paused:=true -->
-    <arg name="paused" default="true" />
+    <arg name="paused" default="false" />
     <arg name="use_sim_time" default="true" />
     <arg name="gui" default="true" />
     <arg name="headless" default="false" />
@@ -30,14 +30,19 @@
     <include file="$(find omnibot_manipulator)/launch/omnibot_manipulator_controllers.launch">
         <arg name="ns" value=""/>
     </include>
+    <!-- <node name="joint_velocity_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_velocity_controller"/> -->
+    <!-- <node name="forward_command_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="forward_command_controller"/> -->
     <!-- connect platform controllers -->
     <include file="$(find omnibot_platform)/launch/omnibot_platform_controllers.launch">
         <arg name="ns" value=""/>
     </include>
     
+    <!-- connect diff drive controller -->
+    <!-- <include file="$(find omnibot_driver)/launch/bringup_diff_controller.launch"></include> -->
 
+    <!-- bringup world -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
-        <arg name="world_name" value="$(find omnibot_simulator)/worlds/world.world" />
+        <arg name="world_name" value="$(find omnibot_simulator)/worlds/world2.world" />
         <arg name="paused" default="true" />
         <arg name="use_sim_time" default="true" />
         <arg name="gui" default="true" />
