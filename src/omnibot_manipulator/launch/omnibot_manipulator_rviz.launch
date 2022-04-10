@@ -1,7 +1,7 @@
 <launch>
 
   <arg name="gui" default="false" />
-  <param name="robot_description" textfile="$(find omnibot_manipulator)/urdf/angle_arm.urdf" />
+  <param name="robot_description" textfile="$(find omnibot_manipulator)/urdf/manipulator.urdf" />
 
 
   <group if="$(arg gui)">

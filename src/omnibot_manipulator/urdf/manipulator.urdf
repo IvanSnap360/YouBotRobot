@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<robot name="angle_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
-
-
+<robot name="omnibot_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
+    <xacro:include filename="$(find omnibot_manipulator)/urdf/manipulator.gazebo" />
 	<link name="ang_link0">
 		<visual>
 			<geometry>
@@ -154,7 +153,13 @@
 		</inertial>
 	</link>
 
-	<link name="tip_link"/>
+	<link name="tip_link">
+			<inertial>
+			    <origin xyz="0 0.0 0" rpy="0 0 0" />
+			    <mass value="0.00002" />
+			    <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01" />
+		    </inertial>
+	</link>
 	
 	
 	<joint name="tip_joint" type="fixed">
