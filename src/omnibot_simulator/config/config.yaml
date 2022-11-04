@@ -1,32 +1,29 @@
-angle_robot:
-    joint_state_controller:
-        type: joint_state_controller/JointStateController
-        publish_rate: 50
-    angle_joint1_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_joint1
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_joint2_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_joint2
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_joint3_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_joint3
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_joint4_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_joint4
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_joint5_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_joint5
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_gripper_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_gripper
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
-    angle_gripper_sub_controller:
-        type: effort_controllers/JointPositionController
-        joint: ang_gripper_sub
-        pid: {p: 1000.0, i: 0.01, d: 0.0}
+joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+<<<<<<< HEAD
+=======
+    
+# joint_velocity_controller:
+#     type: JointVelocityController
+#     publish_rate: 50
+
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
+gazebo_ros_control:
+  pid_gains:
+    left_forward_wheel_joint:
+      p: 100.0
+      i: 0.01
+      d: 10.0
+    right_forward_wheel_joint:
+      p: 100.0
+      i: 0.01
+      d: 10.0
+    left_backward_wheel_joint:
+      p: 100.0
+      i: 0.01
+      d: 10.0
+    right_backward_wheel_joint:
+      p: 100.0
+      i: 0.01
+      d: 10.0

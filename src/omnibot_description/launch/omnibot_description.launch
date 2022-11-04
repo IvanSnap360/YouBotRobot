@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <launch>
     <arg name="gui" default="true" />
-    <param name="robot_description" command="xacro --inorder $(find omnibot_description)/urdf/RTK.urdf.xacro" />
+    <param name="robot_description" command="xacro --inorder $(find omnibot_description)/urdf/omnibot_robot.urdf.xacro" />
+    
     <group if="$(arg gui)">
       <node name="rviz" pkg="rviz" type="rviz" args="-d $(find omnibot_description)/rviz/rviz.rviz" />
       <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />

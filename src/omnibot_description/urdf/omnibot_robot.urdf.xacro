@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot name="omnibot_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<<<<<<< HEAD
+<gazebo>
+  <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+    <!-- <robotNamespace>/omnibot_robot</robotNamespace> -->
+    <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+  </plugin>
+</gazebo>
+    <xacro:include filename="$(find omnibot_manipulator)/urdf/manipulator.urdf"/>
+    <xacro:include filename="$(find omnibot_platform)/urdf/platform.urdf.xacro"/>
+    <joint name="manip2platform_connector" type="fixed">
+        <parent link="base_link"/>
+        <child link="ang_link0"/>
+        <origin xyz="0.0 0.096 0.113" rpy="0.0 0.0 3.14"/>
+    </joint>
+=======
+  <gazebo>
+    <!-- <plugin name="gazebo_ros_control" filename="libgazebo_ros_planar_move.so"> -->
+      <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <!-- <plugin name="differential_drive_controller" filename="libdiffdrive_plugin.so"> -->
+      <!-- <robotNamespace>/omnibot_robot</robotNamespace> -->
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <!-- <commandTopic>cmd_vel</commandTopic> -->
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <odometryRate>100.0</odometryRate>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
+      <publishTF>false</publishTF>
+      
+    </plugin>
+  </gazebo>
+  <xacro:include filename="$(find omnibot_manipulator)/urdf/manipulator.urdf" />
+  <xacro:include filename="$(find omnibot_platform)/urdf/platform.urdf.xacro" />
+  <joint name="manip2platform_connector" type="fixed">
+    <parent link="base_link" />
+    <child link="ang_link0" />
+    <origin xyz="0.0 0.096 0.113" rpy="0.0 0.0 3.14" />
+  </joint>
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
+</robot>
