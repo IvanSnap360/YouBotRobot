@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_platform">
+    
+
+    <!-- BASELINK  -->
+    <xacro:property name="wheel_base_width" value="0.306100"/>
+    <xacro:property name="wheel_base_lenth" value="0.336000"/>
+
+    <xacro:property name="base_link_offset_x" value="0.0"/>
+    <xacro:property name="base_link_offset_y" value="0.0"/>
+    <xacro:property name="base_link_offset_z" value="0.0"/>
+
+    <xacro:property name="base_link_rotate_x" value="0.0"/>
+    <xacro:property name="base_link_rotate_y" value="3.14"/>
+    <xacro:property name="base_link_rotate_z" value="-1.57"/>
+
+    <xacro:property name="base_link_mesh_path" value="package://omnibot_platform_description/meshes/base.dae"/>
+    <xacro:property name="base_link_mesh_scale_x" value="0.001"/>
+    <xacro:property name="base_link_mesh_scale_y" value="0.001"/>
+    <xacro:property name="base_link_mesh_scale_z" value="0.001"/>
+    
+    <!-- OMNIWHEEL -->
+    
+    <xacro:property name="omniwheel_offset_x" value="${(wheel_base_lenth / 2)}"/>
+    <xacro:property name="omniwheel_offset_y" value="${(wheel_base_width / 2)}"/>
+    <xacro:property name="omniwheel_offset_z" value="0.015500"/>
+
+    <xacro:property name="omniwheel_macro_path" value="$(find omnibot_platform_description)/urdf/omniwheel.urdf.xacro"/>
+
+    <!-- REALSENSE -->
+    <xacro:property name="rs435_macro_path" value="$(find omnibot_platform_description)/urdf/d435.urdf.xacro"/>
+    <xacro:property name="rs265_macro_path" value="$(find omnibot_platform_description)/urdf/tracker.xacro"/>
+    <xacro:property name="rs_d435_mesh_path" value="package://omnibot_platform_description/meshes/d435.stl"/>
+    <xacro:property name="rs_t265_mesh_path" value="package://omnibot_platform_description/meshes/t265.stl"/>
+    
+
+    <!--  INCLUDES -->
+    <xacro:include filename="${omniwheel_macro_path}"/>
+    <xacro:include filename="${rs435_macro_path}"/>
+    <xacro:include filename="${rs265_macro_path}"/>
+
+
+    <!--  PLATFORM DESCRIPTION -->
+    <link name="base_link">
+        <inertial>
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}" rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}"/>
+            <mass value="0.0"/>
+            <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0"/>
+        </inertial>
+        <visual name="">
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}" rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}"/>
+            <geometry>
+                <mesh filename="${base_link_mesh_path}" scale="${base_link_mesh_scale_x} ${base_link_mesh_scale_y} ${base_link_mesh_scale_z}"/>
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+                <texture filename=""/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}" rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}"/>
+            <geometry>
+                <mesh filename="${base_link_mesh_path}" scale="${base_link_mesh_scale_x} ${base_link_mesh_scale_y} ${base_link_mesh_scale_z}"/>
+            </geometry>
+        </collision>
+    </link>
+
+    <xacro:omniwheel_macro suffix="left_forward">
+        <origin xyz="${omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}" rpy="0.0 0.0 0.0"/>
+    </xacro:omniwheel_macro>
+
+    <xacro:omniwheel_macro suffix="right_forward">
+        <origin xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}" rpy="0.0 0.0 3.14"/>
+    </xacro:omniwheel_macro>
+
+    <xacro:omniwheel_macro suffix="left_backward">
+        <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}" rpy="0.0 0.0 0.0"/>
+    </xacro:omniwheel_macro>
+
+    <xacro:omniwheel_macro suffix="right_backward">
+        <origin xyz="${-omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}" rpy="0.0 0.0 3.14"/>
+    </xacro:omniwheel_macro>
+    
+    <xacro:d435 offset_x="${0.196 + 0.0105}" offset_y="0.0" offset_z="0.114" mesh_path="${rs_d435_mesh_path}"/>
+
+    <xacro:realsense_T265 sensor_name="t265" parent_link="base_link" rate="30.0" mesh_path="${rs_t265_mesh_path}">
+        <origin rpy="0 0 0" xyz="0.226500 0 0.094250"/>
+    </xacro:realsense_T265>
+</robot>
