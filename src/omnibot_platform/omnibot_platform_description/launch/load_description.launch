@@ -9,7 +9,7 @@
 
     <group if="$(arg rviz)">
         <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find omnibot_platform_description)/config/rviz.rviz "/> 
-        <node pkg="tf" type="static_transform_publisher" name="map2base_link" args="0.0 0.0 0.03 0.0 0.0 0.0 /map /base_link 100"/>   
+        <node pkg="tf" type="static_transform_publisher" name="map2base_link" args="0.0 0.0 0.05 0.0 0.0 0.0 /map /base_link 100"/>   
     </group>
 
 
@@ -20,6 +20,7 @@
     <group unless="$(arg gui)">
         <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />  
     </group>
+
 
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
     

@@ -1,0 +1,25 @@
+<launch>
+
+
+  <include file="$(find omnibot_platform_description)/launch/load_description.launch">
+    <arg name="gui" value="false" />
+    <arg name="rviz" value="false" />
+  </include>
+
+  <rosparam command="load" file="$(find omnibot_gazebo)/config/gazebo_pids.yaml" />
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="true" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="gui" value="true" />
+    <arg name="recording" value="false" />
+    <arg name="debug" value="false" />
+  </include>
+
+  <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
+    args="-urdf -param robot_description -z 0.05 -model omnibot_robot" respawn="false"
+    output="screen" />
+
+  <!-- <include file="$(find omnibot_platform_pkg)/launch/load_controllers.launch"/> -->
+
+</launch>
