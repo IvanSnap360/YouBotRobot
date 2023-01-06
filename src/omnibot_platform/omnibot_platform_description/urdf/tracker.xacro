@@ -214,6 +214,7 @@
             <updateRate>${rate}</updateRate>
             <bodyName>${sensor_name}_odom_frame</bodyName>
             <topicName>${sensor_name}/odom/sample</topicName>
+            <!-- <topicName>/odom</topicName> -->
             <gaussianNoise>0.001</gaussianNoise>
             <frameName>world</frameName>
             <xyzOffsets>0 0 0</xyzOffsets>

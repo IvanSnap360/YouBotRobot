@@ -42,23 +42,23 @@ THE SOFTWARE.
         <xacro:property name="d435_cam_depth_pz" value="${d435_cam_height/2}"/>
 
         
-        <joint name="camera_joint" type="fixed">
+        <joint name="d400_joint" type="fixed">
             <parent link="base_link"/>
-            <child link="camera_bottom_screw_frame" />
+            <child link="d400_bottom_screw_frame" />
             <origin rpy="0.0 0.0 0" xyz="${offset_x} ${offset_y} ${offset_z}"/>
         </joint>
-        <link name="camera_bottom_screw_frame"/>
-        <gazebo reference="camera_bottom_screw_frame">
+        <link name="d400_bottom_screw_frame"/>
+        <gazebo reference="d400_bottom_screw_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <joint name="camera_link_joint" type="fixed">
+        <joint name="d400_link_joint" type="fixed">
             <origin xyz="0 ${d435_cam_depth_py} ${d435_cam_depth_pz}" rpy="0 0 0"/>
-            <parent link="camera_bottom_screw_frame"/>
-            <child link="camera_link" />
+            <parent link="d400_bottom_screw_frame"/>
+            <child link="d400_link" />
         </joint>
 
-        <link name="camera_link">
+        <link name="d400_link">
             <visual>
                 <origin xyz="${d435_cam_mount_from_center_offset} ${-d435_cam_depth_py} 0" rpy="${M_PI_2} 0 ${M_PI_2}"/>
                 <geometry>
@@ -81,111 +81,111 @@ THE SOFTWARE.
             <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
         </inertial>
         </link>
-        <gazebo reference="camera_link">
+        <gazebo reference="d400_link">
             <turnGravityOff>false</turnGravityOff>
             <material>Gazebo/Grey</material>
         </gazebo>
     
-        <!-- camera depth joints and links -->
-        <joint name="camera_depth_joint" type="fixed">
+        <!-- d400 depth joints and links -->
+        <joint name="d400_depth_joint" type="fixed">
             <origin xyz="0 0 0" rpy="0 0 0"/>
-            <parent link="camera_link"/>
-            <child link="camera_depth_frame" />
+            <parent link="d400_link"/>
+            <child link="d400_depth_frame" />
         </joint>
-        <link name="camera_depth_frame"/>
-        <gazebo reference="camera_depth_frame">
+        <link name="d400_depth_frame"/>
+        <gazebo reference="d400_depth_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <joint name="camera_depth_optical_joint" type="fixed">
+        <joint name="d400_depth_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="${-M_PI_2} 0 ${-M_PI_2}" />
-            <parent link="camera_depth_frame" />
-            <child link="camera_depth_optical_frame" />
+            <parent link="d400_depth_frame" />
+            <child link="d400_depth_optical_frame" />
         </joint>
-        <link name="camera_depth_optical_frame"/>
-        <gazebo reference="camera_depth_optical_frame">
+        <link name="d400_depth_optical_frame"/>
+        <gazebo reference="d400_depth_optical_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
         
-        <!-- camera left IR joints and links -->
-        <joint name="camera_left_ir_joint" type="fixed">
+        <!-- d400 left IR joints and links -->
+        <joint name="d400_left_ir_joint" type="fixed">
             <origin xyz="0 ${d435_cam_depth_to_left_ir_offset} 0" rpy="0 0 0" />
-            <parent link="camera_depth_frame" />
-            <child link="camera_left_ir_frame" />
+            <parent link="d400_depth_frame" />
+            <child link="d400_left_ir_frame" />
         </joint>
-        <link name="camera_left_ir_frame"/>
-        <gazebo reference="camera_left_ir_frame">
+        <link name="d400_left_ir_frame"/>
+        <gazebo reference="d400_left_ir_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <joint name="camera_left_ir_optical_joint" type="fixed">
+        <joint name="d400_left_ir_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="${-M_PI_2} 0 ${-M_PI_2}" />
-            <parent link="camera_left_ir_frame" />
-            <child link="camera_left_ir_optical_frame" />
+            <parent link="d400_left_ir_frame" />
+            <child link="d400_left_ir_optical_frame" />
         </joint>
-        <link name="camera_left_ir_optical_frame"/>
-        <gazebo reference="camera_left_ir_optical_frame">
+        <link name="d400_left_ir_optical_frame"/>
+        <gazebo reference="d400_left_ir_optical_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <!-- camera right IR joints and links -->
-        <joint name="camera_right_ir_joint" type="fixed">
+        <!-- d400 right IR joints and links -->
+        <joint name="d400_right_ir_joint" type="fixed">
             <origin xyz="0 ${d435_cam_depth_to_right_ir_offset} 0" rpy="0 0 0" />
-            <parent link="camera_depth_frame" />
-            <child link="camera_right_ir_frame" />
+            <parent link="d400_depth_frame" />
+            <child link="d400_right_ir_frame" />
         </joint>
-        <link name="camera_right_ir_frame"/>
-        <gazebo reference="camera_right_ir_frame">
+        <link name="d400_right_ir_frame"/>
+        <gazebo reference="d400_right_ir_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <joint name="camera_right_ir_optical_joint" type="fixed">
+        <joint name="d400_right_ir_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="${-M_PI_2} 0 ${-M_PI_2}" />
-            <parent link="camera_right_ir_frame" />
-            <child link="camera_right_ir_optical_frame" />
+            <parent link="d400_right_ir_frame" />
+            <child link="d400_right_ir_optical_frame" />
         </joint>
-        <link name="camera_right_ir_optical_frame"/>
-        <gazebo reference="camera_right_ir_optical_frame">
+        <link name="d400_right_ir_optical_frame"/>
+        <gazebo reference="d400_right_ir_optical_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <!-- camera color joints and links -->
-        <joint name="camera_color_joint" type="fixed">
+        <!-- d400 color joints and links -->
+        <joint name="d400_color_joint" type="fixed">
             <origin xyz="0 ${d435_cam_depth_to_color_offset} 0" rpy="0 0 0" />
-            <parent link="camera_depth_frame" />
-            <child link="camera_color_frame" />
+            <parent link="d400_depth_frame" />
+            <child link="d400_color_frame" />
         </joint>
-        <link name="camera_color_frame"/>
-        <gazebo reference="camera_color_frame">
+        <link name="d400_color_frame"/>
+        <gazebo reference="d400_color_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <joint name="camera_color_optical_joint" type="fixed">
+        <joint name="d400_color_optical_joint" type="fixed">
             <origin xyz="0 0 0" rpy="${-M_PI_2} 0 ${-M_PI_2}" />
-            <parent link="camera_color_frame" />
-            <child link="camera_color_optical_frame" />
+            <parent link="d400_color_frame" />
+            <child link="d400_color_optical_frame" />
         </joint>
-        <link name="camera_color_optical_frame"/>
-        <gazebo reference="camera_color_optical_frame">
+        <link name="d400_color_optical_frame"/>
+        <gazebo reference="d400_color_optical_frame">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
-        <link name="camera_depth_frame_gazebo"/>
+        <link name="d400_depth_frame_gazebo"/>
         <joint name="gazebo_joint" type="fixed">
             <origin xyz="0 0 0" rpy="${-M_PI_2} 0 ${-M_PI_2}" />
-            <parent link="camera_link" />
-            <child link="camera_depth_frame_gazebo" />
+            <parent link="d400_link" />
+            <child link="d400_depth_frame_gazebo" />
         </joint>
-        <gazebo reference="camera_depth_frame_gazebo">
+        <gazebo reference="d400_depth_frame_gazebo">
             <turnGravityOff>false</turnGravityOff>
         </gazebo>
 
     </xacro:macro>
     
-    <gazebo reference="camera_link">
+    <gazebo reference="d400_link">
         <sensor name="d435" type="depth">
             <update_rate>30</update_rate>
-            <camera>
+            <d400>
                 <horizontal_fov>1.59174</horizontal_fov>
                 <image>
                     <width>640</width>
@@ -196,19 +196,19 @@ THE SOFTWARE.
                     <near>0.02</near>
                     <far>6</far>
                 </clip>
-            </camera>
+            </d400>
             <plugin name="camera_plugin" filename="libgazebo_ros_openni_kinect.so">
                 <visualize>true</visualize>
                 <baseline>0.05</baseline>
                 <alwaysOn>true</alwaysOn>
                 <updateRate>0.0</updateRate>
                 <cameraName>d435</cameraName>
-                <imageTopicName>/camera/color/image_raw</imageTopicName>
-                <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
-                <depthImageTopicName>/camera/aligned_depth_to_color/image_raw</depthImageTopicName>
-                <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
-                <pointCloudTopicName>/camera/depth/color/points</pointCloudTopicName>
-                <frameName>camera_depth_frame_gazebo</frameName>
+                <imageTopicName>/d400/color/image_raw</imageTopicName>
+                <cameraInfoTopicName>/d400/color/camera_info</cameraInfoTopicName>
+                <depthImageTopicName>/d400/aligned_depth_to_color/image_raw</depthImageTopicName>
+                <depthImageInfoTopicName>/d400/depth/camera_info</depthImageInfoTopicName>
+                <pointCloudTopicName>/d400/depth/color/points</pointCloudTopicName>
+                <frameName>d400_depth_frame_gazebo</frameName>
                 <pointCloudCutoff>0.02</pointCloudCutoff>
                 <distortionK1>0</distortionK1>
                 <distortionK2>0</distortionK2>
