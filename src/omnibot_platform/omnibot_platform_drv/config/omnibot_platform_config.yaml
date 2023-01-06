@@ -1,4 +1,5 @@
 input_topic_name: "/cmd_vel"
+input_x_y_remap: false
 output_topic_name: "/joint_control"
 output_topic_frame_id: "/joint_control"
 
@@ -31,12 +32,15 @@ pid_gains:
       i: 0.0
       d: 0.0
 
+# wheels_joints_reverse: [false, true, true, false]
 wheels_joints_reverse: [false, false, false, false]
-wheels_deameter: 1.1
-wheels_width: 1.1
+wheels_deameter: 0.15
+wheels_width: 0.3
+wheel_max_velocity: 1.0
 
-wheel_base_width: 1.1
-wheel_base_lenth: 1.1
+
+wheel_base_width: 0.306100
+wheel_base_lenth: 0.336000
 
 max_linear_x_velocity: 1.1
 min_linear_x_velocity: 1.1

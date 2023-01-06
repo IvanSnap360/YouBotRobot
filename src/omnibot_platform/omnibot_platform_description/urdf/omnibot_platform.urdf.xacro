@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_platform">
 
-    <!-- <gazebo>
+    <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
             <robotNamespace>/</robotNamespace>
         </plugin>
-    </gazebo> -->
+    </gazebo>
     <!-- BASELINK  -->
     <xacro:property name="wheel_base_width" value="0.306100" />
     <xacro:property name="wheel_base_lenth" value="0.336000" />

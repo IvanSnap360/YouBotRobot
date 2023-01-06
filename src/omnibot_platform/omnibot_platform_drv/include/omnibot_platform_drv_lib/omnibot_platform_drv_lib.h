@@ -20,6 +20,7 @@ typedef struct
     double min_angular_z_velocity;
 
     bool reverse_wheels[4];
+    double max_wheel_veloicity;
 
 }omnibot_platform_drv_cfg_t;
 

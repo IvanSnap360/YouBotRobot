@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+    <rosparam command="load" file="$(find omnibot_platform_control)/config/config.yaml"/>
+    <param name="omnibot_platform_retanslation_config" value="$(find omnibot_platform_control)/config/translation_config.yaml"/>
+
+    
+
+    <node name="omnibot_platform_controllers_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+        joint_state_controller
+        left_front_omniwheel_controller 
+        right_front_omniwheel_controller 
+        left_back_omniwheel_controller  
+        right_back_omniwheel_controller"
+    />
+
+    <node pkg="omnibot_platform_control" type="joint_control_to_contoller_translate_node" name="joint_control_to_contoller_translate_node"/>
+
+</launch>

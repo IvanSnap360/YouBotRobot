@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     {
         config.reverse_wheels[i] = joint_reverse[i].as<bool>();
     }
+    config.max_wheel_veloicity = omnibot_platform_config["wheel_max_velocity"].as<double>();
     
     op_drv.setConfig(&config);
 
@@ -109,8 +110,18 @@ void LoadConfigFile(const std::string yaml_file)
 
 void cmd_vel_sub_cb_f(const geometry_msgs::Twist::ConstPtr &cmd_vel)
 {
-    op_drv.setXVelocity(cmd_vel->linear.x);
-    op_drv.setYVelocity(cmd_vel->linear.y);
+    if (omnibot_platform_config["input_x_y_remap"].as<bool>() == true)
+    {
+        op_drv.setXVelocity(cmd_vel->linear.y);
+        op_drv.setYVelocity(cmd_vel->linear.x);
+    }
+    else
+    {
+        op_drv.setXVelocity(cmd_vel->linear.x);
+        op_drv.setYVelocity(cmd_vel->linear.y);
+    }
+    
+    
     op_drv.setZVelocity(cmd_vel->angular.z);
 
     op_drv.getWheelsVelocity(&wheels_vels);

@@ -1,0 +1,8 @@
+from: "/joint_control"
+to:
+  [
+    "/left_back_omniwheel_controller/command",
+    "/left_front_omniwheel_controller/command",
+    "/right_back_omniwheel_controller/command",
+    "/right_front_omniwheel_controller/command",
+  ]
