@@ -1,0 +1,10 @@
+keys:
+  forward: "w"
+  backwad: "s"
+  left:    "a"
+  right:   "d"
+  rot_ccw: "q"
+  rot_cw:  "e"
+  stop:    "space"   
+
+

@@ -27,12 +27,16 @@
     <!-- OMNIWHEEL -->
 
     <xacro:property name="omniwheel_offset_x" value="${(wheel_base_lenth / 2)}" />
-    <xacro:property name="omniwheel_offset_y" value="${(wheel_base_width / 2)}" />
+    <xacro:property name="omniwheel_offset_y" value="${(wheel_base_width / 2) + 0.035}" />
     <xacro:property name="omniwheel_offset_z" value="0.015500" />
-
+    <!-- 
+    <xacro:property name="omniwheel_macro_path"
+            value="$(find
+    omnibot_platform_description)/urdf/omniwheel.urdf.xacro" /> -->
 
     <xacro:property name="omniwheel_macro_path"
-        value="$(find omnibot_platform_description)/urdf/omniwheel.urdf.xacro" />
+        value="$(find omnibot_platform_description)/urdf/mecanum_wheel_macro.xacro" />
+
 
     <!-- REALSENSE -->
     <xacro:property name="rs435_macro_path"
@@ -81,25 +85,54 @@
         </collision>
     </link>
 
-    <xacro:omniwheel_macro suffix="left_front">
-        <origin xyz="${omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
+    <!-- <xacro:omniwheel_macro suffix="left_front">
+        <origin xyz="${omniwheel_offset_x}
+    ${omniwheel_offset_y} ${omniwheel_offset_z}"
             rpy="0.0 0.0 0.0" />
     </xacro:omniwheel_macro>
 
     <xacro:omniwheel_macro suffix="right_front">
-        <origin xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0 0.0 3.14" />
+        <origin
+    xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0
+    0.0 3.14" />
     </xacro:omniwheel_macro>
 
     <xacro:omniwheel_macro suffix="left_back">
-        <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0 0.0 0.0" />
+    <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0
+    0.0 0.0" />
     </xacro:omniwheel_macro>
 
     <xacro:omniwheel_macro suffix="right_back">
+    <origin xyz="${-omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0
+    0.0 3.14" />
+    </xacro:omniwheel_macro> -->
+
+    <xacro:mecanum_wheel name="left_front" side="1"
+        interface="hardware_interface/EffortJointInterface">
+        <origin xyz="${omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0 0.0 1.57" />
+    </xacro:mecanum_wheel>
+
+    <xacro:mecanum_wheel name="right_front" side="-1"
+        interface="hardware_interface/EffortJointInterface">
+        <origin xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0 0.0 1.57" />
+    </xacro:mecanum_wheel>
+    
+    <xacro:mecanum_wheel name="left_back" side="-1"
+        interface="hardware_interface/EffortJointInterface">
+        <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
+            rpy="0.0 0.0 -1.57" />
+    </xacro:mecanum_wheel>
+
+    <xacro:mecanum_wheel name="right_back" side="1"
+        interface="hardware_interface/EffortJointInterface">
         <origin xyz="${-omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0 0.0 3.14" />
-    </xacro:omniwheel_macro>
+            rpy="0.0 0.0 -1.57" />
+    </xacro:mecanum_wheel>
 
     <xacro:d435 offset_x="${0.196 + 0.0105+0.005}" offset_y="0.0" offset_z="0.114"
         mesh_path="${rs_d435_mesh_path}" />
