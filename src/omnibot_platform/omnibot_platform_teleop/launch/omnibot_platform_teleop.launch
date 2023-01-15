@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-    <arg name="control_keys_variant" default="numpad"/> <!-- wasd / numpad  -->
+    <arg name="control_keys_variant" default="wasd"/> <!-- wasd / numpad  -->
     <param name="omnibot_platform_teleop_config" value="$(find omnibot_platform_teleop)/config/teleop_config.yaml"/>
     <rosparam file="$(find omnibot_platform_teleop)/config/teleop_config.yaml" command="load" ns="/teleop_config" />
     

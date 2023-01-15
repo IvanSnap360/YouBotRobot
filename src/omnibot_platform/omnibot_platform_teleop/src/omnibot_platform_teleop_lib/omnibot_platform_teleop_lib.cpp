@@ -108,7 +108,7 @@ OMNIBOT_PLATFORM_TELEOP_LIB::~OMNIBOT_PLATFORM_TELEOP_LIB()
 
 int getch(void)
 {
-    int ch;
+    int ch = -1;
     struct termios oldt;
     struct termios newt;
 
@@ -137,84 +137,88 @@ int getch(void)
 int OMNIBOT_PLATFORM_TELEOP_LIB::process()
 {
     char ch = getch();
-    
-    if (_info_msg_skip_keys_counter > _info_msg_skip_keys_counter_max)
+    if (ch != -1)
     {
-        std::cout << _info_msg << std::endl;
-        _info_msg_skip_keys_counter = 0;
-    }
-    else
-        _info_msg_skip_keys_counter++;
+        if (_info_msg_skip_keys_counter > _info_msg_skip_keys_counter_max)
+        {
+            std::cout << _info_msg << std::endl;
+            _info_msg_skip_keys_counter = 0;
+        }
+        else
+            _info_msg_skip_keys_counter++;
 
+        if (ch == _terminate_program_key)
+        {
+            return -1;
+        }
+        else if (ch == _moving_forward_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
+        }
+        else if (ch == _moving_backward_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
+        }
+        else if (ch == _moving_left_key_code)
+        {
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
+        }
+        else if (ch == _moving_right_key_code)
+        {
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
+        }
+        else if (ch == _moving_forward_left_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
+        }
+        else if (ch == _moving_forward_right_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
+        }
+        else if (ch == _moving_backward_left_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
+        }
+        else if (ch == _moving_backward_right_key_code)
+        {
+            _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
+            _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
+        }
+        else if (ch == _rotating_clockwise_key_code)
+        {
+            _current_angular_z_velocity += (_angular_z_velocity_inverse ? -_velocity_step : _velocity_step);
+        }
+        else if (ch == _rotating_counterclockwise_key_code)
+        {
+            _current_angular_z_velocity += (_angular_z_velocity_inverse ? _velocity_step : -_velocity_step);
+        }
+        else if (ch == _stop_key_code)
+        {
+            _current_linear_x_velocity = 0.0;
+            _current_linear_y_velocity = 0.0;
+            _current_angular_z_velocity = 0.0;
+        }
+        else
+        {
+            return 0 ;
+        }
 
-    if (ch == _terminate_program_key)
-    {
-        return -1;
-    } 
-    else if (ch == _moving_forward_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
-    }
-    else if (ch == _moving_backward_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
-    }
-    else if (ch == _moving_left_key_code)
-    {
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
-    }
-    else if (ch == _moving_right_key_code)
-    {
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
-    }
-    else if (ch == _moving_forward_left_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
-    }
-    else if (ch == _moving_forward_right_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? -_velocity_step : _velocity_step);
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
-    }
-    else if (ch == _moving_backward_left_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? -_velocity_step : _velocity_step);
-    }
-    else if (ch == _moving_backward_right_key_code)
-    {
-        _current_linear_x_velocity += (_linear_x_velocity_inverse ? _velocity_step : -_velocity_step);
-        _current_linear_y_velocity += (_linear_y_velocity_inverse ? _velocity_step : -_velocity_step);
-    }
-    else if (ch == _rotating_clockwise_key_code)
-    {   
-        _current_angular_z_velocity += (_angular_z_velocity_inverse ? -_velocity_step : _velocity_step);
-    }
-    else if (ch == _rotating_counterclockwise_key_code)
-    {
-        _current_angular_z_velocity += (_angular_z_velocity_inverse ? _velocity_step : +_velocity_step);
-    }
-    else if (ch == _stop_key_code)
-    {
-        _current_linear_x_velocity  = 0.0;
-        _current_linear_y_velocity  = 0.0;
-        _current_angular_z_velocity = 0.0;
-    }
+        _current_linear_x_velocity = constrain(_current_linear_x_velocity, _min_linear_x_velocity, _max_linear_x_velocity);
+        _current_linear_y_velocity = constrain(_current_linear_y_velocity, _min_linear_x_velocity, _max_linear_x_velocity);
+        _current_angular_z_velocity = constrain(_current_angular_z_velocity, _min_linear_x_velocity, _max_linear_x_velocity);
 
-    _current_linear_x_velocity  = constrain(_current_linear_x_velocity,   _min_linear_x_velocity, _max_linear_x_velocity);
-    _current_linear_y_velocity  = constrain(_current_linear_y_velocity,   _min_linear_x_velocity, _max_linear_x_velocity);
-    _current_angular_z_velocity = constrain(_current_angular_z_velocity,  _min_linear_x_velocity, _max_linear_x_velocity);
+        ROS_INFO("Publishing velocities to [%s] topic : linear_x: %f linear_y: %f angular_z: %f",
+                 _output_topic.c_str(), _current_linear_x_velocity, _current_linear_y_velocity, _current_angular_z_velocity);
 
-    ROS_INFO("Publishing velocities to [%s] topic : linear_x: %f linear_y: %f angular_z: %f", 
-        _output_topic.c_str(), _current_linear_x_velocity,_current_linear_y_velocity,_current_angular_z_velocity);
+        _cmd_vel_msg.linear.x = _current_linear_x_velocity;
+        _cmd_vel_msg.linear.y = _current_linear_y_velocity;
+        _cmd_vel_msg.angular.z = _current_angular_z_velocity;
 
-    _cmd_vel_msg.linear.x = _current_linear_x_velocity;
-    _cmd_vel_msg.linear.y = _current_linear_y_velocity;
-    _cmd_vel_msg.angular.z = _current_angular_z_velocity;
-
-    _cmd_vel_pub.publish(_cmd_vel_msg);
-
+        _cmd_vel_pub.publish(_cmd_vel_msg);
+    }
     return 0;
 }
 

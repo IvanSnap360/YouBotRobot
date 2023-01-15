@@ -45,7 +45,7 @@ wasd_keys:
 
   moving:
     forward: "w"
-    backward: "s"
+    backward: "x"
     left: "a"
     right: "d"
     forward_left: "q"
