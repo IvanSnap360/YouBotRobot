@@ -15,7 +15,7 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
         <joint name="${name}_mecanum_joint">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <hardwareInterface>${interface}</hardwareInterface>
         </joint>
     </transmission>
 
@@ -24,7 +24,7 @@
         <parent link="base_link" />
         <child link="${name}_mecanum_wheel_link" />
         <axis xyz="1 0 0" />
-        <limit lower="-3.14" upper="3.14" effort="1000.0" velocity="50.0" />
+        <limit lower="-3.14" upper="3.14" effort="1000.0" velocity="100.0" />
     </joint>
 
   </xacro:macro>

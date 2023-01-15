@@ -20,6 +20,8 @@
 
     <xacro:property name="base_link_mesh_path"
         value="package://omnibot_platform_description/meshes/base.dae" />
+
+        
     <xacro:property name="base_link_mesh_scale_x" value="0.001" />
     <xacro:property name="base_link_mesh_scale_y" value="0.001" />
     <xacro:property name="base_link_mesh_scale_z" value="0.001" />
@@ -111,25 +113,25 @@
     </xacro:omniwheel_macro> -->
 
     <xacro:mecanum_wheel name="left_front" side="1"
-        interface="hardware_interface/EffortJointInterface">
+        interface="hardware_interface/VelocityJointInterface">
         <origin xyz="${omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
             rpy="0.0 0.0 1.57" />
     </xacro:mecanum_wheel>
 
     <xacro:mecanum_wheel name="right_front" side="-1"
-        interface="hardware_interface/EffortJointInterface">
+        interface="hardware_interface/VelocityJointInterface">
         <origin xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
             rpy="0.0 0.0 1.57" />
     </xacro:mecanum_wheel>
     
     <xacro:mecanum_wheel name="left_back" side="-1"
-        interface="hardware_interface/EffortJointInterface">
+        interface="hardware_interface/VelocityJointInterface">
         <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
             rpy="0.0 0.0 -1.57" />
     </xacro:mecanum_wheel>
 
     <xacro:mecanum_wheel name="right_back" side="1"
-        interface="hardware_interface/EffortJointInterface">
+        interface="hardware_interface/VelocityJointInterface">
         <origin xyz="${-omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
             rpy="0.0 0.0 -1.57" />
     </xacro:mecanum_wheel>

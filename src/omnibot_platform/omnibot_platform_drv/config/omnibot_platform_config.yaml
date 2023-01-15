@@ -8,32 +8,32 @@ output_topic_hz: 40.0
 wheels_joints_count: 4
 wheels_joints_names:
   [
-    "left_front_omniwheel_joint",
-    "right_front_omniwheel_joint",
-    "left_back_omniwheel_joint",
-    "right_back_omniwheel_joint",
+    "left_front_mecanum_joint",
+    "right_front_mecanum_joint",
+    "left_back_mecanum_joint",
+    "right_back_mecanum_joint",
   ]
 
 pid_gains:
-    left_front_omniwheel_joint:
+    left_front_mecanum_joint:
       p: 1.0
       i: 0.0
       d: 0.0
-    right_front_omniwheel_joint:
+    right_front_mecanum_joint:
       p: 1.0
       i: 0.0
       d: 0.0
-    left_back_omniwheel_joint:
+    left_back_mecanum_joint:
       p: 1.0
       i: 0.0
       d: 0.0
-    right_back_omniwheel_joint:
+    right_back_mecanum_joint:
       p: 1.0
       i: 0.0
       d: 0.0
 
 # wheels_joints_reverse: [false, true, true, false]
-wheels_joints_reverse: [false, false, false, false]
+wheels_joints_reverse: [false, true, false, true]
 wheels_deameter: 0.15
 wheels_width: 0.3
 wheel_max_velocity: 1.0
@@ -43,10 +43,10 @@ wheel_base_width: 0.306100
 wheel_base_lenth: 0.336000
 
 max_linear_x_velocity: 1.1
-min_linear_x_velocity: 1.1
+min_linear_x_velocity: -1.1
 
 max_linear_y_velocity: 1.1
-min_linear_y_velocity: 1.1
+min_linear_y_velocity: -1.1
 
 max_angular_z_velocity: 1.1
-min_angular_z_velocity: 1.1
+min_angular_z_velocity: -1.1

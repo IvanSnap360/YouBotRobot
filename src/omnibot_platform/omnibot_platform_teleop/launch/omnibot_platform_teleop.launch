@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="control_keys_variant" default="numpad"/> <!-- wasd / numpad  -->
+    <param name="omnibot_platform_teleop_config" value="$(find omnibot_platform_teleop)/config/teleop_config.yaml"/>
+    <rosparam file="$(find omnibot_platform_teleop)/config/teleop_config.yaml" command="load" ns="/teleop_config" />
+    
+    <node pkg="omnibot_platform_teleop" type="omnibot_platform_teleop_node" name="omnibot_platform_teleop_node" output="screen" 
+        args="$(arg control_keys_variant)"/>
+
+</launch>

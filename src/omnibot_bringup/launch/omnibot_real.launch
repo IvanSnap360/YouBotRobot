@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+    <include file="$(find omnibot_platform_description)/launch/load_description.launch">
+        <arg name="gui" value="false" />
+        <arg name="rviz" value="false" />
+    </include>
+
+    <include file="$(find omnibot_platform_control)/launch/omnibot_platform_contol.launch"/>
+
+    <include file="$(find omnibot_platform_drv)/launch/omnibot_platform_drv.launch"/>
+
+    <include file="$(find omnibot_navigation)/launch/omnibot_navigation.launch" />
+
+</launch>
