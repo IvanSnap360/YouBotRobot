@@ -68,9 +68,13 @@ void joints_control_sub_cb_f(const sensor_msgs::JointState::ConstPtr &state)
         return;
     }
 
-    for (std::size_t i = 0; i < state->velocity.size(); i++)
+    for (int i = 0; i < (std::size_t)state->velocity.size(); i++)
     {
-        controller_msgs[i].data = state->velocity[i];
+        if(i == LEFT_FRONT || i == RIGHT_FRONT)
+            controller_msgs[i].data = state->velocity[i];
+        else if (i == LEFT_BACK || i == RIGHT_BACK)
+            controller_msgs[i].data = -state->velocity[i];
+
     }
 
     left_front_omniwheel_pub.publish(controller_msgs[LEFT_FRONT]);

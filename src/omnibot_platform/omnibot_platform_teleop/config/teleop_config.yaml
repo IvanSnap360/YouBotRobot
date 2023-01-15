@@ -1,6 +1,6 @@
 workMode: "terminal" # terminal, web(not working), joy(not working)
 
-workRate: 40.0 # also influence to output topic publish rate
+workRate: 50.0 # also influence to output topic publish rate
 output_topic: "/cmd_vel"
 
 exit_key: 3 #Ctrl + C
@@ -15,14 +15,14 @@ velocities_inverse:
 
 velocities_params_paths:
   
-  max_linear_x_velocity: "/omnibot_platform_drv_config/max_linear_x_velocity"
-  min_linear_x_velocity: "/omnibot_platform_drv_config/min_linear_x_velocity"
+  max_linear_x_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_x_max"
+  min_linear_x_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_x_min"
 
-  max_linear_y_velocity: "/omnibot_platform_drv_config/max_linear_y_velocity"
-  min_linear_y_velocity: "/omnibot_platform_drv_config/min_linear_y_velocity"
+  max_linear_y_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_y_max"
+  min_linear_y_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_y_min"
   
-  max_angular_z_velocity: "/omnibot_platform_drv_config/max_angular_z_velocity"
-  min_angular_z_velocity: "/omnibot_platform_drv_config/min_angular_z_velocity"
+  max_angular_z_velocity: "/omnibot_platform_drv_config/velocities_limits/angular_z_max"
+  min_angular_z_velocity: "/omnibot_platform_drv_config/velocities_limits/angular_z_min"
 
   
 numpad_keys:

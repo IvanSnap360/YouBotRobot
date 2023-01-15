@@ -1,88 +1,179 @@
 #include "omnibot_platform_drv_lib/omnibot_platform_drv_lib.h"
 
-OMNIBOT_PLATFORM_DRV_LIB::OMNIBOT_PLATFORM_DRV_LIB()
+
+OMNIBOT_PLATFORM_DRV_LIB::OMNIBOT_PLATFORM_DRV_LIB(ros::NodeHandle *nh, std::string config_path)
 {
+    _config = YAML::LoadFile(config_path);
+
+    if (_config == NULL)
+        ROS_FATAL("CANT READ YAML FILE!!!!!");
+    else
+        ROS_INFO("SUCCESS TO READ YAML FILE");
+
+    _output_topic_frame_id = _config["output_topic_frame_id"].as<std::string>();
+    _input_topic_name = _config["input_topic"].as<std::string>();
+    _output_topic_name = _config["output_topic"].as<std::string>();
+    _output_topic_rate = _config["output_topic_rate"].as<double>();
+
+    _linear_x_velocity_min_limit = _config["velocities_limits"]["linear_x_min"].as<double>();
+    _linear_y_velocity_min_limit = _config["velocities_limits"]["linear_y_min"].as<double>();
+    _angular_z_velocity_min_limit = _config["velocities_limits"]["angular_z_min"].as<double>();
+
+    _linear_x_velocity_max_limit = _config["velocities_limits"]["linear_x_max"].as<double>();
+    _linear_y_velocity_max_limit = _config["velocities_limits"]["linear_y_max"].as<double>();
+    _angular_z_velocity_max_limit = _config["velocities_limits"]["angular_z_max"].as<double>();    
+
+    _wheel_base_lenth = _config["wheel_base_lenth"].as<double>();
+    _wheel_base_width = _config["wheel_base_width"].as<double>();
+    _wheels_deameter  = _config["wheels_deameter"].as<double>();
+    _wheels_width     = _config["wheels_width"].as<double>();
+    _wheels_max_velocity = _config["wheels_max_velocity"].as<double>();
+
+    _wheels_joints_count = _config["wheels_joints_count"].as<int>();
+
+    _joints_names.resize(_wheels_joints_count);
+    _joints_reverse.resize(_wheels_joints_count);
+
+    _joints_control_msg.name.resize(_wheels_joints_count);
+    _joints_control_msg.effort.resize(_wheels_joints_count);
+    _joints_control_msg.velocity.resize(_wheels_joints_count);
+    _joints_control_msg.position.resize(_wheels_joints_count);
     
+
+
+    if (_check_is_node_IsSequence(_config,"wheels_joints_names"))
+    {
+        _joints_names = _config["wheels_joints_names"].as<std::vector<std::string>>();
+        _joints_control_msg.name = _joints_names;
+        
+
+
+        ROS_INFO(R"(Recieve this joints: )"); 
+        for (const auto &name : _joints_control_msg.name) std::cout << "\033[36m" << name << "  "; 
+        std::cout <<"\033[0m"<< std::endl; 
+    } 
+
+    if (_check_is_node_IsSequence(_config,"wheels_joints_reverse"))
+    {
+        _joints_reverse = _config["wheels_joints_reverse"].as<std::vector<bool>>();
+
+        for (int i  = 0; i < _wheels_joints_count; i++)
+        {
+            std::cout << "Joint \033[36m"  << _joints_names[i] << "\033[0m Reverse: "<< (_joints_reverse[i] ? "TRUE" : "FALSE") << std::endl;
+        }
+    }
+
+    _joints_control_msg.header.frame_id = _output_topic_frame_id;
+    _cmd_vel_sub = nh->subscribe<geometry_msgs::Twist>(_input_topic_name,10,&OMNIBOT_PLATFORM_DRV_LIB::_cmd_vel_sub_cb_f,this);
+    _joint_control_pub = nh->advertise<sensor_msgs::JointState>(_output_topic_name,10);
 }
+
+
+void OMNIBOT_PLATFORM_DRV_LIB::_cmd_vel_sub_cb_f(const geometry_msgs::Twist::ConstPtr &twist)
+{
+    _cmd_vel_input_msg = *twist;
+}
+
 
 OMNIBOT_PLATFORM_DRV_LIB::~OMNIBOT_PLATFORM_DRV_LIB()
 {
+
 }
 
-void OMNIBOT_PLATFORM_DRV_LIB::setConfig(omnibot_platform_drv_cfg_t* config)
+void OMNIBOT_PLATFORM_DRV_LIB::process(const ros::TimerEvent&)
 {
-    _config = config;
+    double r = _wheels_deameter   / 2;
+    double Lx = _wheel_base_lenth / 2;
+    double Ly = _wheel_base_width / 2;
+
+    _wheels_target_velocities.w1 = (1 / r) * (_cmd_vel_input_msg.linear.x - _cmd_vel_input_msg.linear.y - (Lx + Ly) * _cmd_vel_input_msg.angular.z);
+    _wheels_target_velocities.w2 = (1 / r) * (_cmd_vel_input_msg.linear.x + _cmd_vel_input_msg.linear.y + (Lx + Ly) * _cmd_vel_input_msg.angular.z);
+    _wheels_target_velocities.w3 = (1 / r) * (_cmd_vel_input_msg.linear.x + _cmd_vel_input_msg.linear.y - (Lx + Ly) * _cmd_vel_input_msg.angular.z);
+    _wheels_target_velocities.w4 = (1 / r) * (_cmd_vel_input_msg.linear.x - _cmd_vel_input_msg.linear.y + (Lx + Ly) * _cmd_vel_input_msg.angular.z);
+
+    _wheels_target_velocities.w1 = _joints_reverse[0] ? -_wheels_target_velocities.w1 : _wheels_target_velocities.w1;
+    _wheels_target_velocities.w2 = _joints_reverse[1] ? -_wheels_target_velocities.w2 : _wheels_target_velocities.w2;
+    _wheels_target_velocities.w3 = _joints_reverse[2] ? -_wheels_target_velocities.w3 : _wheels_target_velocities.w3;
+    _wheels_target_velocities.w4 = _joints_reverse[3] ? -_wheels_target_velocities.w4 : _wheels_target_velocities.w4;
+
+    if (_wheels_target_velocities.w1 > _wheels_max_velocity)
+    {
+        _wheels_target_velocities.w1 = _wheels_max_velocity;
+    }
+    else if (_wheels_target_velocities.w1 < -_wheels_max_velocity)
+    {
+        _wheels_target_velocities.w1 = -_wheels_max_velocity;
+    }
+
+    if (_wheels_target_velocities.w2 > _wheels_max_velocity)
+    {
+        _wheels_target_velocities.w2 = _wheels_max_velocity;
+    }
+    else if (_wheels_target_velocities.w2 < -_wheels_max_velocity)
+    {
+        _wheels_target_velocities.w2 = -_wheels_max_velocity;
+    }
+
+    if (_wheels_target_velocities.w3 > _wheels_max_velocity)
+    {
+        _wheels_target_velocities.w3 = _wheels_max_velocity;
+    }
+    else if (_wheels_target_velocities.w3 < -_wheels_max_velocity)
+    {
+        _wheels_target_velocities.w3 = -_wheels_max_velocity;
+    }
+
+    if (_wheels_target_velocities.w4 > _wheels_max_velocity)
+    {
+        _wheels_target_velocities.w4 = _wheels_max_velocity;
+    }
+    else if (_wheels_target_velocities.w4 < -_wheels_max_velocity)
+    {
+        _wheels_target_velocities.w4 = -_wheels_max_velocity;
+    }
+
+    
+
+    _joints_control_msg.velocity[0] = _wheels_target_velocities.w1;
+    _joints_control_msg.velocity[1] = _wheels_target_velocities.w2;
+    _joints_control_msg.velocity[2] = _wheels_target_velocities.w3;
+    _joints_control_msg.velocity[3] = _wheels_target_velocities.w4;
+
+    for (int i = 0; i < _joints_control_msg.name.size(); i++)
+    {
+        std::string vel_str  = boost::lexical_cast<std::string>(_joints_control_msg.velocity[i]);
+        
+        if (vel_str.find((std::string)"e") != std::string::npos) 
+            _joints_control_msg.velocity[i] = 0.0;
+    }
+
+    _joints_control_msg.header.stamp = ros::Time().now();
+    _joints_control_msg.header.seq += 1;
+
+    _joint_control_pub.publish(_joints_control_msg);
+}      
+
+
+double OMNIBOT_PLATFORM_DRV_LIB::getWorkRate()
+{   
+    return _output_topic_rate;
 }
 
-void OMNIBOT_PLATFORM_DRV_LIB::setXVelocity(double vel)
+
+bool OMNIBOT_PLATFORM_DRV_LIB::_check_is_node_IsSequence(YAML::Node node, std::string name)
 {
-    x_lvel = vel;
+    if (!node[name].IsSequence())
+    {
+        ROS_FATAL("Node %s isn`t sequence!!! Stop Node!!!",name.c_str());
+        ros::shutdown();
+        return false;
+        
+    }
+    else
+    {
+        ROS_INFO("Node %s is sequence!!!",name.c_str());
+        return true;
+    }
+
 }
 
-void OMNIBOT_PLATFORM_DRV_LIB::setYVelocity(double vel)
-{
-    y_lvel = vel;
-}
-
-void OMNIBOT_PLATFORM_DRV_LIB::setZVelocity(double vel)
-{
-    z_avel = vel;
-}
-
-void OMNIBOT_PLATFORM_DRV_LIB::getWheelsVelocity(wheels_angular_vel_t *wheels_output)
-{
-
-    double  r = _config->wheels_deameter   / 2;
-    double Lx = _config->wheel_base_lenth  / 2;
-    double Ly = _config->wheel_base_width  / 2;
-
-    wheels_output->w1 = (1 / r) * (x_lvel - y_lvel - (Lx + Ly) * z_avel);
-    wheels_output->w2 = (1 / r) * (x_lvel + y_lvel + (Lx + Ly) * z_avel);
-    wheels_output->w3 = (1 / r) * (x_lvel + y_lvel - (Lx + Ly) * z_avel);
-    wheels_output->w4 = (1 / r) * (x_lvel - y_lvel + (Lx + Ly) * z_avel);
-
-    wheels_output->w1 = _config->reverse_wheels[0] ? -wheels_output->w1 : wheels_output->w1;
-    wheels_output->w2 = _config->reverse_wheels[1] ? -wheels_output->w2 : wheels_output->w2;
-    wheels_output->w3 = _config->reverse_wheels[2] ? -wheels_output->w3 : wheels_output->w3;
-    wheels_output->w4 = _config->reverse_wheels[3] ? -wheels_output->w4 : wheels_output->w4;
-
-
-    if(wheels_output->w1 > _config->max_wheel_veloicity)
-    {
-        wheels_output->w1 = _config->max_wheel_veloicity;
-    }
-    else if (wheels_output->w1 < -_config->max_wheel_veloicity)
-    {
-        wheels_output->w1 = - _config->max_wheel_veloicity;
-    }
-
-
-    if(wheels_output->w2 > _config->max_wheel_veloicity)
-    {
-        wheels_output->w2 = _config->max_wheel_veloicity;
-    }
-    else if (wheels_output->w2 < -_config->max_wheel_veloicity)
-    {
-        wheels_output->w2 = - _config->max_wheel_veloicity;
-    }
-
-
-    if(wheels_output->w3 > _config->max_wheel_veloicity)
-    {
-        wheels_output->w3 = _config->max_wheel_veloicity;
-    }
-    else if (wheels_output->w3 < -_config->max_wheel_veloicity)
-    {
-        wheels_output->w3 = - _config->max_wheel_veloicity;
-    }
-
-
-    if(wheels_output->w4 > _config->max_wheel_veloicity)
-    {
-        wheels_output->w4 = _config->max_wheel_veloicity;
-    }
-    else if (wheels_output->w4 < -_config->max_wheel_veloicity)
-    {
-        wheels_output->w4 = - _config->max_wheel_veloicity;
-    }
-}
