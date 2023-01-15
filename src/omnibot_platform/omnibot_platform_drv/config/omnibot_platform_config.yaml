@@ -33,10 +33,11 @@ pid_gains:
       d: 0.0
 
 # wheels_joints_reverse: [false, true, true, false]
-wheels_joints_reverse: [false, true, false, true]
+# wheels_joints_reverse: [false, true, false, true]
+wheels_joints_reverse: [true, false, true, false]
 wheels_deameter: 0.15
 wheels_width: 0.3
-wheel_max_velocity: 1.0
+wheel_max_velocity: 50.0
 
 
 wheel_base_width: 0.306100

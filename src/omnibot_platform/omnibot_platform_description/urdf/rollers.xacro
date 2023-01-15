@@ -57,8 +57,8 @@
         <surface>
           <friction>
             <ode>
-              <mu1>1.2</mu1>
-              <mu2>1.2</mu2>
+              <mu1>10.2</mu1>
+              <mu2>10.2</mu2>
               <kp>1e15</kp>
               <kd>1e13</kd>
             </ode>
@@ -69,7 +69,7 @@
           </bounce>
           <contact>
             <ode>
-              <max_vel>10</max_vel>
+              <max_vel>100</max_vel>
             </ode>
           </contact>
         </surface>

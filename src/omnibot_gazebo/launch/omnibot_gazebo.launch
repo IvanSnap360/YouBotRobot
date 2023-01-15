@@ -12,7 +12,7 @@
   </include>
 
   <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
-    args="-urdf -param robot_description -z 0.10 -model omnibot_robot" respawn="false"
+    args="-urdf -param robot_description -z 0.040 -model omnibot_robot" respawn="false"
     output="screen" />
 
 
