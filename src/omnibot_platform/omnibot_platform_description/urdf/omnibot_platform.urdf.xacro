@@ -87,30 +87,7 @@
         </collision>
     </link>
 
-    <!-- <xacro:omniwheel_macro suffix="left_front">
-        <origin xyz="${omniwheel_offset_x}
-    ${omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0 0.0 0.0" />
-    </xacro:omniwheel_macro>
 
-    <xacro:omniwheel_macro suffix="right_front">
-        <origin
-    xyz="${omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0
-    0.0 3.14" />
-    </xacro:omniwheel_macro>
-
-    <xacro:omniwheel_macro suffix="left_back">
-    <origin xyz="${-omniwheel_offset_x} ${omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0
-    0.0 0.0" />
-    </xacro:omniwheel_macro>
-
-    <xacro:omniwheel_macro suffix="right_back">
-    <origin xyz="${-omniwheel_offset_x} ${-omniwheel_offset_y} ${omniwheel_offset_z}"
-            rpy="0.0
-    0.0 3.14" />
-    </xacro:omniwheel_macro> -->
 
     <xacro:mecanum_wheel name="left_front" side="1"
         interface="hardware_interface/VelocityJointInterface">

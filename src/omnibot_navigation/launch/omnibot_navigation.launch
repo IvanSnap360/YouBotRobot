@@ -24,12 +24,13 @@
     </group>
 
     <include file="$(find omnibot_navigation)/launch/rs_rtabmap.launch">
-        <arg name="device_type_camera1"    		value="t265"/>
-        <arg name="device_type_camera2"    		value="d435"/>
-        <arg name="camera1"              	    value="t265"/>
-        <arg name="camera2"              		value="d400"/>
+        <arg name="device_type_camera1"    		value="$(arg camera1)"/>
+        <arg name="device_type_camera2"    		value="$(arg camera2)"/>
+        <arg name="camera1"              	    value="$(arg camera1)"/>
+        <arg name="camera2"              		value="$(arg camera2)"/>
         <arg name="use_rviz"                    value="false"/>
         <arg name="use_rtabmapviz"              value="false"/>
     </include>
-
+    <!-- <remap from="/t265/odom/sample " to="/odom"/> -->
+    
 </launch>

@@ -1,7 +1,8 @@
 workMode: "terminal" # terminal, web(not working), joy(not working)
 
-workRate: 50.0 # also influence to output topic publish rate
+workRate: 200.0 # also influence to output topic publish rate
 output_topic: "/cmd_vel"
+# output_topic: joy
 
 exit_key: 3 #Ctrl + C
 info_msg_counter_max: 30
@@ -11,7 +12,7 @@ velocity_control_step: 0.05
 velocities_inverse:
   linear_x_velocity:  false
   linear_y_velocity:  true
-  angular_z_velocity: false
+  angular_z_velocity: true
 
 velocities_params_paths:
   

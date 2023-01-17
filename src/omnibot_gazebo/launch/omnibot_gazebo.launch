@@ -9,6 +9,7 @@
     <arg name="gui" value="true" />
     <arg name="recording" value="false" />
     <arg name="debug" value="false" />
+    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_stage_1.world"/>
   </include>
 
   <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
