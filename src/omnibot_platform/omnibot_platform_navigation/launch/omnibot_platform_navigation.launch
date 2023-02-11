@@ -47,7 +47,7 @@
         <arg name="rtabmapviz" value="$(arg use_rtabmapviz)" />
         <arg name="odom_frame_id" value="odom" />
         <arg name="map_frame_id" value="map" />
-        <arg name="rviz_cfg" value="$(find omnibot_navigation)/rviz/rtab_cfg2.rviz" />
+        <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
     </include>
 
 

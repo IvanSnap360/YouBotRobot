@@ -13,9 +13,9 @@
     <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
 
-    <include file="$(find omnibot_navigation)/launch/omnibot_navigation.launch" >
+    <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >
         <arg name="sim" value="true"/>
-        <arg name="use_rviz" value="false"/>
+        <arg name="use_rviz" value="true"/>
     </include>
     
 </launch>
