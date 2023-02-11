@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="sensor_odom_manager_config_path" value="$(find sensor_odom_manager)/config/manager_config.yaml"/>
+    <node pkg="sensor_odom_manager" type="sensor_odom_manager_node" name="sensor_odom_manager_node" output="screen"/>
+
+</launch>

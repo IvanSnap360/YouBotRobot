@@ -4,7 +4,7 @@
   <xacro:include filename="$(find omnibot_platform_description)/urdf/wheel.xacro" />
   <xacro:include filename="$(find omnibot_platform_description)/urdf/rollers.xacro"  />
 
-  <xacro:macro name="mecanum_wheel" params="name side interface *origin">  
+  <xacro:macro name="mecanum_wheel" params="name side interface *origin parent">  
     
     <xacro:wheel_link name="${name}" side="${side}" />    
     <xacro:rollers_link name="${name}" side="${side}" />
@@ -21,7 +21,7 @@
 
     <joint name="${name}_mecanum_joint" type="continuous">
         <xacro:insert_block name="origin" />
-        <parent link="base_link" />
+        <parent link="${parent}" />
         <child link="${name}_mecanum_wheel_link" />
         <axis xyz="1 0 0" />
         <limit lower="-3.14" upper="3.14" effort="1000.0" velocity="100.0" />

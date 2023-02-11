@@ -126,7 +126,7 @@ int main(int argc, char **argv)
 
     // register callbacks
     ros::Subscriber sub_pose = n.subscribe("/t265/odom/sample", 1, poseCallback, ros::TransportHints().udp());  // min. latency: queue size = 1, use UDP
-    ros::Subscriber sub_depth = n.subscribe("/d400/depth/image_rect_raw", 1, depthCallback, ros::TransportHints().udp());
+    ros::Subscriber sub_depth = n.subscribe("/d400/aligned_depth_to_color/image_raw", 1, depthCallback, ros::TransportHints().udp());
 
     // publish
     unique_ptr<SP_OccupancyGridMsg> occGrid(new SP_OccupancyGridMsg);

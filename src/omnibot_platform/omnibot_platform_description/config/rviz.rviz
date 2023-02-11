@@ -67,104 +67,326 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_bottom_screw_frame:
+        base_link_footprint:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        camera_color_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_color_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_frame_gazebo:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_depth_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_left_ir_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_left_ir_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_link:
+        left_back_mecanum_adapter_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        camera_right_ir_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        camera_right_ir_optical_frame:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        left_back_omniwheel_link:
+        left_back_mecanum_wheel_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        left_front_omniwheel_link:
+        left_back_roller1_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        right_back_omniwheel_link:
+        left_back_roller1_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        right_front_omniwheel_link:
+        left_back_roller1_3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        t265_accel_frame:
+        left_back_roller1_4_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_fisheye1_frame:
+          Value: true
+        left_back_roller1_5_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_fisheye1_optical_frame:
+          Value: true
+        left_back_roller1_6_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_fisheye2_frame:
+          Value: true
+        left_back_roller1_7_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_fisheye2_optical_frame:
+          Value: true
+        left_back_roller2_1_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_gyro_frame:
+          Value: true
+        left_back_roller2_2_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_link:
+          Value: true
+        left_back_roller2_3_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_odom_frame:
+          Value: true
+        left_back_roller2_4_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
-        t265_pose_frame:
+          Value: true
+        left_back_roller2_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_back_roller2_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_back_roller2_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_mecanum_adapter_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_mecanum_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller1_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        left_front_roller2_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_mecanum_adapter_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_mecanum_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller1_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_back_roller2_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_mecanum_adapter_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_mecanum_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller1_7_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_1_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_2_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_3_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_4_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_5_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_6_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_front_roller2_7_link:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -182,55 +404,137 @@ Visualization Manager:
         All Enabled: true
         base_link:
           Value: true
-        camera_bottom_screw_frame:
+        base_link_footprint:
           Value: true
-        camera_color_frame:
+        left_back_mecanum_adapter_link:
           Value: true
-        camera_color_optical_frame:
+        left_back_mecanum_wheel_link:
           Value: true
-        camera_depth_frame:
+        left_back_roller1_1_link:
           Value: true
-        camera_depth_frame_gazebo:
+        left_back_roller1_2_link:
           Value: true
-        camera_depth_optical_frame:
+        left_back_roller1_3_link:
           Value: true
-        camera_left_ir_frame:
+        left_back_roller1_4_link:
           Value: true
-        camera_left_ir_optical_frame:
+        left_back_roller1_5_link:
           Value: true
-        camera_link:
+        left_back_roller1_6_link:
           Value: true
-        camera_right_ir_frame:
+        left_back_roller1_7_link:
           Value: true
-        camera_right_ir_optical_frame:
+        left_back_roller2_1_link:
           Value: true
-        left_back_omniwheel_link:
+        left_back_roller2_2_link:
           Value: true
-        left_front_omniwheel_link:
+        left_back_roller2_3_link:
+          Value: true
+        left_back_roller2_4_link:
+          Value: true
+        left_back_roller2_5_link:
+          Value: true
+        left_back_roller2_6_link:
+          Value: true
+        left_back_roller2_7_link:
+          Value: true
+        left_front_mecanum_adapter_link:
+          Value: true
+        left_front_mecanum_wheel_link:
+          Value: true
+        left_front_roller1_1_link:
+          Value: true
+        left_front_roller1_2_link:
+          Value: true
+        left_front_roller1_3_link:
+          Value: true
+        left_front_roller1_4_link:
+          Value: true
+        left_front_roller1_5_link:
+          Value: true
+        left_front_roller1_6_link:
+          Value: true
+        left_front_roller1_7_link:
+          Value: true
+        left_front_roller2_1_link:
+          Value: true
+        left_front_roller2_2_link:
+          Value: true
+        left_front_roller2_3_link:
+          Value: true
+        left_front_roller2_4_link:
+          Value: true
+        left_front_roller2_5_link:
+          Value: true
+        left_front_roller2_6_link:
+          Value: true
+        left_front_roller2_7_link:
           Value: true
         map:
           Value: true
-        right_back_omniwheel_link:
+        right_back_mecanum_adapter_link:
           Value: true
-        right_front_omniwheel_link:
+        right_back_mecanum_wheel_link:
           Value: true
-        t265_accel_frame:
+        right_back_roller1_1_link:
           Value: true
-        t265_fisheye1_frame:
+        right_back_roller1_2_link:
           Value: true
-        t265_fisheye1_optical_frame:
+        right_back_roller1_3_link:
           Value: true
-        t265_fisheye2_frame:
+        right_back_roller1_4_link:
           Value: true
-        t265_fisheye2_optical_frame:
+        right_back_roller1_5_link:
           Value: true
-        t265_gyro_frame:
+        right_back_roller1_6_link:
           Value: true
-        t265_link:
+        right_back_roller1_7_link:
           Value: true
-        t265_odom_frame:
+        right_back_roller2_1_link:
           Value: true
-        t265_pose_frame:
+        right_back_roller2_2_link:
+          Value: true
+        right_back_roller2_3_link:
+          Value: true
+        right_back_roller2_4_link:
+          Value: true
+        right_back_roller2_5_link:
+          Value: true
+        right_back_roller2_6_link:
+          Value: true
+        right_back_roller2_7_link:
+          Value: true
+        right_front_mecanum_adapter_link:
+          Value: true
+        right_front_mecanum_wheel_link:
+          Value: true
+        right_front_roller1_1_link:
+          Value: true
+        right_front_roller1_2_link:
+          Value: true
+        right_front_roller1_3_link:
+          Value: true
+        right_front_roller1_4_link:
+          Value: true
+        right_front_roller1_5_link:
+          Value: true
+        right_front_roller1_6_link:
+          Value: true
+        right_front_roller1_7_link:
+          Value: true
+        right_front_roller2_1_link:
+          Value: true
+        right_front_roller2_2_link:
+          Value: true
+        right_front_roller2_3_link:
+          Value: true
+        right_front_roller2_4_link:
+          Value: true
+        right_front_roller2_5_link:
+          Value: true
+        right_front_roller2_6_link:
+          Value: true
+        right_front_roller2_7_link:
           Value: true
       Marker Alpha: 0.5
       Marker Scale: 0.15000000596046448
@@ -241,43 +545,131 @@ Visualization Manager:
       Tree:
         map:
           base_link:
-            camera_bottom_screw_frame:
-              camera_link:
-                camera_depth_frame:
-                  camera_color_frame:
-                    camera_color_optical_frame:
-                      {}
-                  camera_depth_optical_frame:
-                    {}
-                  camera_left_ir_frame:
-                    camera_left_ir_optical_frame:
-                      {}
-                  camera_right_ir_frame:
-                    camera_right_ir_optical_frame:
-                      {}
-                camera_depth_frame_gazebo:
+            base_link_footprint:
+              left_back_mecanum_wheel_link:
+                left_back_mecanum_adapter_link:
                   {}
-            left_back_omniwheel_link:
-              {}
-            left_front_omniwheel_link:
-              {}
-            right_back_omniwheel_link:
-              {}
-            right_front_omniwheel_link:
-              {}
-            t265_odom_frame:
-              t265_pose_frame:
-                t265_link:
-                  t265_accel_frame:
-                    {}
-                  t265_fisheye1_frame:
-                    t265_fisheye1_optical_frame:
-                      {}
-                  t265_fisheye2_frame:
-                    t265_fisheye2_optical_frame:
-                      {}
-                  t265_gyro_frame:
-                    {}
+                left_back_roller1_1_link:
+                  {}
+                left_back_roller1_2_link:
+                  {}
+                left_back_roller1_3_link:
+                  {}
+                left_back_roller1_4_link:
+                  {}
+                left_back_roller1_5_link:
+                  {}
+                left_back_roller1_6_link:
+                  {}
+                left_back_roller1_7_link:
+                  {}
+                left_back_roller2_1_link:
+                  {}
+                left_back_roller2_2_link:
+                  {}
+                left_back_roller2_3_link:
+                  {}
+                left_back_roller2_4_link:
+                  {}
+                left_back_roller2_5_link:
+                  {}
+                left_back_roller2_6_link:
+                  {}
+                left_back_roller2_7_link:
+                  {}
+              left_front_mecanum_wheel_link:
+                left_front_mecanum_adapter_link:
+                  {}
+                left_front_roller1_1_link:
+                  {}
+                left_front_roller1_2_link:
+                  {}
+                left_front_roller1_3_link:
+                  {}
+                left_front_roller1_4_link:
+                  {}
+                left_front_roller1_5_link:
+                  {}
+                left_front_roller1_6_link:
+                  {}
+                left_front_roller1_7_link:
+                  {}
+                left_front_roller2_1_link:
+                  {}
+                left_front_roller2_2_link:
+                  {}
+                left_front_roller2_3_link:
+                  {}
+                left_front_roller2_4_link:
+                  {}
+                left_front_roller2_5_link:
+                  {}
+                left_front_roller2_6_link:
+                  {}
+                left_front_roller2_7_link:
+                  {}
+              right_back_mecanum_wheel_link:
+                right_back_mecanum_adapter_link:
+                  {}
+                right_back_roller1_1_link:
+                  {}
+                right_back_roller1_2_link:
+                  {}
+                right_back_roller1_3_link:
+                  {}
+                right_back_roller1_4_link:
+                  {}
+                right_back_roller1_5_link:
+                  {}
+                right_back_roller1_6_link:
+                  {}
+                right_back_roller1_7_link:
+                  {}
+                right_back_roller2_1_link:
+                  {}
+                right_back_roller2_2_link:
+                  {}
+                right_back_roller2_3_link:
+                  {}
+                right_back_roller2_4_link:
+                  {}
+                right_back_roller2_5_link:
+                  {}
+                right_back_roller2_6_link:
+                  {}
+                right_back_roller2_7_link:
+                  {}
+              right_front_mecanum_wheel_link:
+                right_front_mecanum_adapter_link:
+                  {}
+                right_front_roller1_1_link:
+                  {}
+                right_front_roller1_2_link:
+                  {}
+                right_front_roller1_3_link:
+                  {}
+                right_front_roller1_4_link:
+                  {}
+                right_front_roller1_5_link:
+                  {}
+                right_front_roller1_6_link:
+                  {}
+                right_front_roller1_7_link:
+                  {}
+                right_front_roller2_1_link:
+                  {}
+                right_front_roller2_2_link:
+                  {}
+                right_front_roller2_3_link:
+                  {}
+                right_front_roller2_4_link:
+                  {}
+                right_front_roller2_5_link:
+                  {}
+                right_front_roller2_6_link:
+                  {}
+                right_front_roller2_7_link:
+                  {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -308,7 +700,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 0.9000560641288757
+      Distance: 0.9599238634109497
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -324,9 +716,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.33979615569114685
+      Pitch: 0.3797958195209503
       Target Frame: <Fixed Frame>
-      Yaw: 6.2785820960998535
+      Yaw: 2.1904006004333496
     Saved: ~
 Window Geometry:
   Displays:
@@ -345,4 +737,4 @@ Window Geometry:
     collapsed: false
   Width: 2548
   X: 144
-  Y: 54
+  Y: 0
