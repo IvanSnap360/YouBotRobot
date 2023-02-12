@@ -1,6 +1,6 @@
-input_topic: "/cmd_vel"
-output_topic: "/joint_control"
-output_topic_frame_id: "/joint_control"
+input_topic: "/omnibot_platform/cmd_vel"
+output_topic: "/omnibot_platform/joint_control"
+output_topic_frame_id: "/omnibot_platform/joint_control"
 output_topic_rate: 40.0
 
 wheels_joints_count: 4

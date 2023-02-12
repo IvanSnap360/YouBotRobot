@@ -12,6 +12,7 @@
         right_front_mecanum_controller 
         left_back_mecanum_controller  
         right_back_mecanum_controller"
+        ns="omnibot_platform"
     />
 
     <node pkg="omnibot_platform_control" type="joint_control_to_contoller_translate_node" name="joint_control_to_contoller_translate_node"/>

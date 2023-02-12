@@ -1,7 +1,7 @@
 workMode: "terminal" # terminal, web(not working), joy(not working)
 
 workRate: 200.0 # also influence to output topic publish rate
-output_topic: "/cmd_vel"
+output_topic: "/omnibot_platform/cmd_vel"
 # output_topic: joy
 
 exit_key: 3 #Ctrl + C
