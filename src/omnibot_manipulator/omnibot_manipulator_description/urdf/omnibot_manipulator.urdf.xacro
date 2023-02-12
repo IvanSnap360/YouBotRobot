@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <robot name="omnibot_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
-	
+
 	<xacro:include
 		filename="$(find omnibot_manipulator_description)/urdf/omnibot_manipulator.gazebo" />
 
@@ -35,19 +35,19 @@
 	<xacro:property name="joint_5_upper_limit" value="2.60" />
 	<xacro:property name="joint_5_lower_limit" value="-2.60" />
 
-	<arg name="work_mode" default="notest"/>
-	
-	<xacro:property name="mode" value="$(arg work_mode)"/>
-	
+	<arg name="work_mode" default="notest" />
+
+	<xacro:property name="mode" value="$(arg work_mode)" />
+
 
 	<xacro:if value="${mode == 'test'}">
-		<link name="world"/>
+		<link name="world" />
 		<joint name="map2base" type="fixed">
-			<parent link="world"/>
-			<child link="ang_link0"/>
-			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+			<parent link="world" />
+			<child link="ang_link0" />
+			<origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
 		</joint>
-		
+
 	</xacro:if>
 
 
@@ -60,7 +60,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0.5" rpy="0 0 0" />
-			<mass value="1" />
+			<mass value="0.5" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -93,7 +93,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0.25 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -125,7 +125,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0.15 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -158,7 +158,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -191,7 +191,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -224,7 +224,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -262,7 +262,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.3" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"
@@ -293,7 +293,7 @@
 		</visual>
 		<inertial>
 			<origin xyz="0 0 0" rpy="0 0 0" />
-			<mass value="0.001" />
+			<mass value="0.1" />
 			<inertia
 				ixx="0.01" ixy="0.0" ixz="0.0"
 				iyy="0.01" iyz="0.0"

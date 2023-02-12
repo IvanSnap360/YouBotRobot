@@ -22,13 +22,16 @@
     </group>
 
     <group unless="$(arg gui)">
-        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+        <node name="omnibot_robot_joint_state_publisher" pkg="joint_state_publisher"
+            type="joint_state_publisher" />
     </group>
 
 
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
-        <param name="publish_frequency" value="500" />
+    <node name="omnibot_robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" ns="omnibot_platform">
+        <param name="publish_frequency" value="200" />
         <param name="use_tf_static" value="false" />
+        <remap from="joint_state" to="/omnibot_robot/joint_state" />
     </node>
 
 </launch>
