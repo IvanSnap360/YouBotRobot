@@ -19,7 +19,12 @@
 
     </group>
 
+    <group ns="rtabmap">
+        <param name="use_action_for_goal" type="bool" value="true"/>
+        <remap from="move_base"            to="/move_base"/>
+    </group>
 
+    
     <group unless="$(arg sim)">
         <include file="$(find realsense2_camera)/launch/rs_d400_and_t265.launch">
             <arg name="device_type_camera1" value="$(arg device_type_camera1)" />
@@ -30,6 +35,7 @@
         </include>
     </group>
 
+   
 
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
         <arg name="rtabmap_args" value="--delete_db_on_start" />
@@ -50,5 +56,13 @@
         <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
     </include>
 
-
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/global_costmap_params.yaml" command="load" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/base_local_planner_params.yaml" command="load" />
+        <remap from="/cmd_vel" to="/omnibot_platform/cmd_vel"/>
+     </node>
+    
 </launch>
