@@ -1,11 +1,6 @@
 <?xml version="1.0"?>
 <robot>
-	<gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-		        <robotNamespace>/omnibot_manipulator</robotNamespace>
-			
-		</plugin>
-	</gazebo>
+	
 
 	<!-- transmission -->
 	<transmission name="ang_tran1">

@@ -1,6 +1,14 @@
 <?xml version="1.0"?>
 <robot name="omnibot_manipulator" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
+	<arg name="standalone_load" default="true" />
+
+	<gazebo>
+		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+			<robotNamespace>/omnibot_manipulator</robotNamespace>
+		</plugin>
+	</gazebo>
+
 	<xacro:include
 		filename="$(find omnibot_manipulator_description)/urdf/omnibot_manipulator.gazebo" />
 
@@ -35,12 +43,11 @@
 	<xacro:property name="joint_5_upper_limit" value="2.60" />
 	<xacro:property name="joint_5_lower_limit" value="-2.60" />
 
-	<arg name="work_mode" default="notest" />
-
-	<xacro:property name="mode" value="$(arg work_mode)" />
 
 
-	<xacro:if value="${mode == 'test'}">
+
+
+	<xacro:if value="$(arg standalone_load)">
 		<link name="world" />
 		<joint name="map2base" type="fixed">
 			<parent link="world" />

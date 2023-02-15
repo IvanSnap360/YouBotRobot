@@ -1,13 +1,11 @@
 <launch>
   <arg name="rviz" default="false" />
   <arg name="gui" default="false" />
-  <arg name="description_mode" default="motest"/>
+  <arg name="standalone_load" default="true"/>
   
-
-  <group ns="/">
     <param name="robot_description"
       command="$(find xacro)/xacro --inorder $(find omnibot_manipulator_description)/urdf/omnibot_manipulator.urdf.xacro 
-      work_mode:=$(arg description_mode)" />
+      standalone_load:=$(arg standalone_load)" />
 
 
     <group if="$(arg rviz)">
@@ -32,7 +30,6 @@
       <param name="publish_frequency" value="100" />
       <param name="use_tf_static" value="false" />
     </node>
-  </group>
 
 
 </launch>
