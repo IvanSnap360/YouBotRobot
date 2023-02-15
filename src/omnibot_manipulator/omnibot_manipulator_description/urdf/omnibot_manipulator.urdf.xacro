@@ -3,11 +3,15 @@
 
 	<arg name="standalone_load" default="true" />
 
-	<gazebo>
-		<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-			<robotNamespace>/omnibot_manipulator</robotNamespace>
-		</plugin>
-	</gazebo>
+	<arg name="robot_namespace" default="omnibot_manipulator" />
+	<xacro:property name="ns" value="$(arg robot_namespace)" />
+	<xacro:unless value="${ns == '/' or ns != 'omnibot_manipulator'}">
+		<gazebo>
+			<plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+				<robotNamespace>${ns}</robotNamespace>
+			</plugin>
+		</gazebo>
+	</xacro:unless>
 
 	<xacro:include
 		filename="$(find omnibot_manipulator_description)/urdf/omnibot_manipulator.gazebo" />
@@ -42,9 +46,6 @@
 
 	<xacro:property name="joint_5_upper_limit" value="2.60" />
 	<xacro:property name="joint_5_lower_limit" value="-2.60" />
-
-
-
 
 
 	<xacro:if value="$(arg standalone_load)">

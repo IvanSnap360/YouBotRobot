@@ -1,22 +1,32 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_robot">
 
-    <xacro:arg name="use_manipulator" default="false"/>
+    <xacro:arg name="use_manipulator" default="false" />
+    <xacro:arg name="robot_namespace" default="omnibot_robot" />
+    <xacro:arg name="standalone_load" default="false" />
+
+    <xacro:property name="ns" value="$(arg robot_namespace)"/>
+    
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>${ns}</robotNamespace>
+        </plugin>
+    </gazebo>
     
     <xacro:include filename="$(find omnibot_platform_description)/urdf/omnibot_platform.urdf.xacro" />
 
 
     <xacro:if value="$(arg use_manipulator)">
-        <xacro:arg name="standalone_load" default="false" />
-    <xacro:include filename="$(find omnibot_manipulator_description)/urdf/omnibot_manipulator.urdf.xacro"/>
+        
+        <xacro:include
+            filename="$(find omnibot_manipulator_description)/urdf/omnibot_manipulator.urdf.xacro" />
 
-    <joint name="manipulator_connector" type="fixed">
-        <parent link="base_footprint" />
-        <child link="ang_link0" />
-        <origin xyz="0.096 0.0  0.113" rpy="0.0 0.0 1.57" />
-    </joint>
+        <joint name="manipulator_connector" type="fixed">
+            <parent link="base_footprint" />
+            <child link="ang_link0" />
+            <origin xyz="0.096 0.0  0.113" rpy="0.0 0.0 1.57" />
+        </joint>
     </xacro:if>
-    
 
 
 </robot>

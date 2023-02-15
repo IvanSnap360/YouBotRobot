@@ -5,14 +5,15 @@
   
     <param name="robot_description"
       command="$(find xacro)/xacro --inorder $(find omnibot_manipulator_description)/urdf/omnibot_manipulator.urdf.xacro 
-      standalone_load:=$(arg standalone_load)" />
+      standalone_load:=$(arg standalone_load) 
+      robot_namespace:=omnibot_manipulator" />
 
 
     <group if="$(arg rviz)">
       <node name="rviz" pkg="rviz" type="rviz" output="screen"
         args="-d $(find omnibot_manipulator_description)/rviz/rviz.rviz " />
       <node pkg="tf" type="static_transform_publisher" name="map2ang_link0"
-        args="0.0 0.0 0.01 0.0 0.0 0.0 /map /ang_link0 100" />
+        args="0.0 0.0 0.01 0.0 0.0 0.0 /map /world 100" />
     </group>
 
 
