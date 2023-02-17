@@ -1,20 +1,25 @@
 <?xml version="1.0"?>
 <launch>
-
-    <rosparam command="load" file="$(find omnibot_platform_control)/config/config.yaml"/>
+    <arg name="namespace" default="omnibot_platform"/>
+    <rosparam command="load" file="$(find omnibot_platform_control)/config/config.yaml" ns="$(arg namespace)"/>
     <param name="omnibot_platform_retanslation_config" value="$(find omnibot_platform_control)/config/translation_config.yaml"/>
 
     
 
     <node name="omnibot_platform_controllers_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
-        joint_state_controller
         left_front_mecanum_controller 
         right_front_mecanum_controller 
         left_back_mecanum_controller  
         right_back_mecanum_controller"
-        ns="omnibot_platform"
+        ns="$(arg namespace)"
     />
 
-    <node pkg="omnibot_platform_control" type="joint_control_to_contoller_translate_node" name="joint_control_to_contoller_translate_node"/>
+    <node pkg="omnibot_platform_control" type="joint_control_to_contoller_translate_node" name="joint_control_to_contoller_translate_node">
+        <remap from="/left_front_mecanum_controller/command" to="$(arg namespace)/left_front_mecanum_controller/command"/>
+        <remap from="/right_front_mecanum_controller/command" to="$(arg namespace)/right_front_mecanum_controller/command"/>
+        <remap from="/left_back_mecanum_controller/command" to="$(arg namespace)/left_back_mecanum_controller/command"/>
+        <remap from="/right_back_mecanum_controller/command" to="$(arg namespace)/right_back_mecanum_controller/command"/>
+        <remap from="/joint_control" to="$(arg namespace)/joint_control"/>
+    </node>
 
 </launch>

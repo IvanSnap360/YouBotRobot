@@ -8,19 +8,24 @@
         <arg name="rviz" value="false" />
         <arg name="manipulator" value="$(arg use_manipulator)" />
     </include>
+    <include file="$(find omnibot_control)/launch/omnibot_control.launch"/>
 
-    <include file="$(find omnibot_platform_control)/launch/omnibot_platform_contol.launch"/>
+    <include file="$(find omnibot_platform_control)/launch/omnibot_platform_contol.launch">
+        <arg name="namespace" value="omnibot_robot"/>
+    </include>
 
     <include file="$(find omnibot_platform_drv)/launch/omnibot_platform_drv.launch"/>
     
     <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
     <group if="$(arg use_manipulator)">
-        <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch"/>
-
+        <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch">
+            <arg name="namespace" value="omnibot_robot"/>
+        </include>
     </group>
 
     <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch"/>
+
 
 
     <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >

@@ -28,10 +28,9 @@
 
 
     <node name="omnibot_robot_state_publisher" pkg="robot_state_publisher"
-        type="robot_state_publisher" ns="omnibot_platform">
+        type="robot_state_publisher" ns="omnibot_robot">
         <param name="publish_frequency" value="200" />
         <param name="use_tf_static" value="false" />
-        <remap from="joint_state" to="/omnibot_robot/joint_state" />
     </node>
 
 </launch>

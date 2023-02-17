@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <launch>
-    <rosparam file="$(find omnibot_manipulator_control)/config/config.yaml" command="load" />
+    <arg name="namespace" default="omnibot_manipulator"/>
+    
+    <rosparam file="$(find omnibot_manipulator_control)/config/config.yaml" command="load" ns="$(arg namespace)" />
     
     <node name="controller_spawner_angle" pkg="controller_manager" type="spawner" respawn="false"
         output="screen"
-        ns="omnibot_manipulator"
+        ns="$(arg namespace)"
         args="
       angle_joint1_controller 
       angle_joint2_controller 
