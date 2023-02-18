@@ -62,7 +62,7 @@
         <rosparam file="$(find omnibot_platform_navigation)/config/local_costmap_params.yaml" command="load" />
         <rosparam file="$(find omnibot_platform_navigation)/config/global_costmap_params.yaml" command="load" /> 
         <rosparam file="$(find omnibot_platform_navigation)/config/base_local_planner_params.yaml" command="load" />
-        <remap from="/cmd_vel" to="/omnibot_platform/cmd_vel"/>
+        <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>
      </node>
     
 </launch>

@@ -19,9 +19,11 @@
     <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
     <group if="$(arg use_manipulator)">
-        <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch">
+        <!-- <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch">
             <arg name="namespace" value="omnibot_robot"/>
-        </include>
+        </include> -->
+
+        <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch"/>
     </group>
 
     <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch"/>
