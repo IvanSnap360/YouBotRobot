@@ -59,8 +59,8 @@ public:
     double getVelocity();
 
     void tick();
-    static void encA_ISR();
-    static void encB_ISR();
+    void encA_ISR();
+    void encB_ISR();
 
     ~ACTUATOR();
 };

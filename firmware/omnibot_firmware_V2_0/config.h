@@ -1,7 +1,7 @@
 #include "actuator.h"
 #include <Arduino.h>
 
-// #define ROS_MODE 
+#define ROS_MODE 
 
 
 

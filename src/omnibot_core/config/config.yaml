@@ -1,0 +1,14 @@
+io:
+  manipulator:
+    action_name
+omnibot_manipulator:
+  moveit:
+    manipulator:
+      planning_group_name: maipulator_group
+    gripper:
+      planning_group_name: gripper_group
+
+    logname: omnibot_manipulator_log
+    
+visual:
+  link: ang_link0

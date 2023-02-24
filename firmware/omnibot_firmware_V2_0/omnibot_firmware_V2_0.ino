@@ -50,8 +50,7 @@ void setup()
     for (int i = 0; i < WHEELS_COUNT; i++)
     {
         actuator[i].setConfig(&actuators_config[i]);
-        attachInterrupt(digitalPinToInterrupt(actuators_config[i].encoder_pinA), actuator[i].encA_ISR, RISING);
-        attachInterrupt(digitalPinToInterrupt(actuators_config[i].encoder_pinB), actuator[i].encB_ISR, RISING);
+
     }
 
 #ifndef ROS_MODE

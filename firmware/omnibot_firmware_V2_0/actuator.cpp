@@ -8,8 +8,8 @@ void ACTUATOR::setConfig(actuator_cfg_t *cfg)
     pinMode(_config->motor_pinA, OUTPUT);
     pinMode(_config->motor_pinB, OUTPUT);
 
-    pinMode(digitalPinToInterrupt(_config->encoder_pinA), INPUT_PULLDOWN);
-    pinMode(digitalPinToInterrupt(_config->encoder_pinB), INPUT_PULLDOWN);
+    pinMode(_config->encoder_pinA, INPUT_PULLDOWN);
+    pinMode(_config->encoder_pinB, INPUT_PULLDOWN);
 }
 
 void ACTUATOR::setPID(double kp, double ki, double kd)
