@@ -28,7 +28,7 @@
   <param name="ros_control_namespace" value="omnibot_robot"/>
 	<param name="moveit_controller_manager" value="moveit_ros_control_interface::MoveItControllerManager" />
     <!-- Spawn the Gazebo ROS controllers -->
-    
+
 
     <!-- Given the published joint states, publish tf for the robot links -->
 

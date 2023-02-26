@@ -22,7 +22,7 @@
         <joint name="ang_joint3"/>
         <joint name="ang_joint4"/>
         <joint name="ang_joint5"/>
-        <chain base_link="ang_link0" tip_link="ang_link5"/>
+        <chain base_link="ang_link0" tip_link="tip_link"/>
     </group>
     <group name="gripper_group">
         <link name="ang_link6"/>
@@ -46,7 +46,7 @@
         <joint name="ang_joint5" value="0"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
-    <end_effector name="gripper" parent_link="ang_link5" group="gripper_group" parent_group="maipulator_group"/>
+    <end_effector name="gripper" parent_link="tip_link" group="gripper_group" parent_group="maipulator_group"/>
     <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
     <passive_joint name="left_back_mecanum_joint"/>
     <passive_joint name="left_back_roller_1_1_joint"/>
@@ -389,19 +389,16 @@
     <disable_collisions link1="ang_link4" link2="ang_link7" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_mecanum_adapter_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_1_1_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_back_roller_1_2_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_1_3_link" reason="Never"/>
+    <disable_collisions link1="ang_link4" link2="left_back_roller_1_4_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_1_5_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_1_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_back_roller_2_1_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_back_roller_2_2_link" reason="Never"/>
+    <disable_collisions link1="ang_link4" link2="left_back_roller_1_7_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_2_3_link" reason="Never"/>
+    <disable_collisions link1="ang_link4" link2="left_back_roller_2_4_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_2_5_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="left_back_roller_2_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_front_roller_1_2_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_front_roller_2_2_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_front_roller_2_3_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="left_front_roller_2_4_link" reason="Never"/>
+    <disable_collisions link1="ang_link4" link2="left_back_roller_2_7_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="right_back_mecanum_adapter_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="right_back_mecanum_wheel_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="right_back_roller_1_1_link" reason="Never"/>
@@ -418,40 +415,24 @@
     <disable_collisions link1="ang_link4" link2="right_back_roller_2_5_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="right_back_roller_2_6_link" reason="Never"/>
     <disable_collisions link1="ang_link4" link2="right_back_roller_2_7_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="right_front_roller_1_1_link" reason="Never"/>
-    <disable_collisions link1="ang_link4" link2="right_front_roller_1_3_link" reason="Never"/>
     <disable_collisions link1="ang_link5" link2="ang_link6" reason="Adjacent"/>
     <disable_collisions link1="ang_link5" link2="ang_link7" reason="Adjacent"/>
-    <disable_collisions link1="ang_link5" link2="left_back_roller_1_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link5" link2="left_back_roller_2_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link5" link2="right_back_roller_1_2_link" reason="Never"/>
-    <disable_collisions link1="ang_link5" link2="right_back_roller_2_2_link" reason="Never"/>
-    <disable_collisions link1="ang_link5" link2="right_back_roller_2_3_link" reason="Never"/>
+    <disable_collisions link1="ang_link5" link2="right_back_roller_2_4_link" reason="Never"/>
+    <disable_collisions link1="ang_link5" link2="right_front_roller_2_2_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="ang_link7" reason="Default"/>
-    <disable_collisions link1="ang_link6" link2="left_back_roller_1_3_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="left_back_roller_1_5_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="left_back_roller_1_6_link" reason="Never"/>
+    <disable_collisions link1="ang_link6" link2="left_back_roller_1_1_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="left_back_roller_1_7_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="left_back_roller_2_2_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="left_back_roller_2_3_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="left_back_roller_2_7_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="left_front_roller_1_2_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="left_front_roller_2_3_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="right_back_roller_1_2_link" reason="Never"/>
     <disable_collisions link1="ang_link6" link2="right_back_roller_2_1_link" reason="Never"/>
-    <disable_collisions link1="ang_link6" link2="right_back_roller_2_3_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_back_roller_1_4_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_back_roller_1_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_back_roller_1_7_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_back_roller_2_5_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_back_roller_2_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_front_roller_1_6_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="left_front_roller_2_4_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="right_back_roller_1_1_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="right_back_roller_1_2_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="right_back_roller_1_3_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="right_back_roller_1_4_link" reason="Never"/>
-    <disable_collisions link1="ang_link7" link2="right_back_roller_2_3_link" reason="Never"/>
+    <disable_collisions link1="ang_link6" link2="right_back_roller_2_5_link" reason="Never"/>
+    <disable_collisions link1="ang_link6" link2="right_front_roller_1_6_link" reason="Never"/>
+    <disable_collisions link1="ang_link7" link2="left_back_roller_1_1_link" reason="Never"/>
+    <disable_collisions link1="ang_link7" link2="left_back_roller_2_7_link" reason="Never"/>
+    <disable_collisions link1="ang_link7" link2="left_front_roller_1_4_link" reason="Never"/>
+    <disable_collisions link1="ang_link7" link2="left_front_roller_2_1_link" reason="Never"/>
+    <disable_collisions link1="ang_link7" link2="right_back_roller_1_6_link" reason="Never"/>
     <disable_collisions link1="base_link" link2="d400_link" reason="Adjacent"/>
     <disable_collisions link1="base_link" link2="left_back_mecanum_adapter_link" reason="Never"/>
     <disable_collisions link1="base_link" link2="left_back_mecanum_wheel_link" reason="Adjacent"/>

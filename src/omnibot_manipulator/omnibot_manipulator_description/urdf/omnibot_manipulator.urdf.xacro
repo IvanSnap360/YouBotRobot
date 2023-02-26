@@ -223,6 +223,9 @@
 			velocity="5.0" />
 	</joint>
 
+	
+	
+
 	<link name="ang_link5">
 		<visual>
 			<geometry>
@@ -245,6 +248,14 @@
 			</geometry>
 		</collision>
 	</link>
+
+	<link name="tip_link"/>
+	<joint name="tip_joint" type="fixed">
+		<parent link="ang_link5"/>
+		<child link="tip_link"/>
+		<origin xyz="0.0 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+	</joint>
+	
 
 	<joint name="ang_gripper" type="prismatic">
 		<parent link="ang_link5" />

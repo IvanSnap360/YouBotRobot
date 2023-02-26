@@ -11,7 +11,9 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  gazebo_ros
 )
+find_package(gazebo REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -105,8 +107,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES omnibot_gazebo
-#  CATKIN_DEPENDS roscpp rospy std_msgs
-#  DEPENDS system_lib
+ CATKIN_DEPENDS gazebo_ros roscpp rospy std_msgs
+ DEPENDS GAZEBO
 )
 
 ###########
@@ -118,7 +120,8 @@ catkin_package(
 include_directories(
 # include
   ${catkin_INCLUDE_DIRS}
-)
+  ${GAZEBO_INCLUDE_DIRS}
+  )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
@@ -191,6 +194,9 @@ include_directories(
 #   # myfile2
 #   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 # )
+install(DIRECTORY launch models rviz worlds 
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 #############
 ## Testing ##

@@ -2,6 +2,6 @@ global_costmap:
   global_frame: map
   robot_base_frame: base_footprint
   static_map: true
-  update_frequency: 2
-  publish_frequency: 2
+  update_frequency: 10
+  publish_frequency: 10
   transform_tolerance: 0.3

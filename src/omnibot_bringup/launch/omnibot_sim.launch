@@ -2,6 +2,8 @@
 <launch>
 
     <arg name="use_manipulator" default="true" />
+    <arg name="rviz" default="true"/>
+    
     
     <include file="$(find omnibot_description)/launch/load_description.launch">
         <arg name="gui" value="false" />
@@ -15,7 +17,7 @@
     </include>
 
     <include file="$(find omnibot_platform_drv)/launch/omnibot_platform_drv.launch"/>
-    
+   
     <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
     <group if="$(arg use_manipulator)">
@@ -23,16 +25,20 @@
             <arg name="namespace" value="omnibot_robot"/>
         </include> -->
 
-        <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch"/>
+        <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch">
+            <arg name="use_rviz" value="false"/>
+        </include>
     </group>
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find omnibot_bringup)/rviz/rviz.rviz "/> 
 
     <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch"/>
 
 
 
+
     <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >
         <arg name="sim" value="true"/>
-        <arg name="use_rviz" value="true"/>
+        <arg name="use_rviz" value="false"/>
     </include>
     
 </launch>
