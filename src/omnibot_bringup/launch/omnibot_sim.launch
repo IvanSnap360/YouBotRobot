@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}"/>
 
     <arg name="use_manipulator" default="true" />
     <arg name="rviz" default="true"/>
@@ -34,11 +35,15 @@
     <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch"/>
 
 
-
+    <!-- <node pkg="map_server" type="map_server" name="map_server">
+        
+    </node> -->
 
     <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >
         <arg name="sim" value="true"/>
         <arg name="use_rviz" value="false"/>
+        <arg name="localization"            value="false"/>
+        <arg name="initial_pose"            value=""/>     
     </include>
     
 </launch>

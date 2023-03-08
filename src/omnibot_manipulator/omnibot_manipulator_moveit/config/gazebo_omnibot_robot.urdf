@@ -4517,7 +4517,7 @@
     <joint name="tip_joint" type="fixed">
         <parent link="ang_link5" />
         <child link="tip_link" />
-        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.1" />
+        <origin rpy="0.0 0.0 0.0" xyz="0.0 0.0 -0.118" />
     </joint>
     <joint name="ang_gripper" type="prismatic">
         <parent link="ang_link5" />

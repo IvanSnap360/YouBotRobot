@@ -90,7 +90,6 @@ void loop()
     }
     nh.spinOnce();
 #endif // WORK_MODE__ROS
-
 }
 
 #ifdef WORK_MODE__ROS

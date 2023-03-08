@@ -39,7 +39,10 @@ uint32_t _last_compute_time;
     bool _enc_A_state,_enc_B_state;
 
 
-    uint32_t _encoder_tick;  
+    int32_t _relative_encoder_tick;
+
+    uint32_t _last_encoder_flash_time;
+
 public:
     ACTUATOR();
     void setConfig(actuator_config_t *config);

@@ -27,19 +27,27 @@ double ACTUATOR::getVelocity()
 
 void ACTUATOR::encA_ISR()
 {
+    _current_velocity = 60 / ((double)(micros() - _last_encoder_flash_time) / 1000000);
+    _last_encoder_flash_time = micros();
+
     _enc_A_state = digitalRead(_cfg->encoder_pin_A);
-    _enc_A_state == _enc_B_state ? _encoder_tick++ : _encoder_tick--;
+    _enc_A_state == _enc_B_state ? _relative_encoder_tick++ : _relative_encoder_tick--;
 }
 
 void ACTUATOR::encB_ISR()
 {
     _enc_B_state = digitalRead(_cfg->encoder_pin_B);
-    _enc_A_state == _enc_B_state ? _encoder_tick++ : _encoder_tick--;
+    _enc_A_state == _enc_B_state ? _relative_encoder_tick++ : _relative_encoder_tick--;
 }
 
 void ACTUATOR::tick()
 {
-    
+
+    if ((micros() - _last_encoder_flash_time) > 500e3)
+    {
+        _current_velocity = 0;
+    }
+
     if (millis() - _last_compute_time > (uint32_t)_pid_dt)
     {
         if (_target_velocity == 0.0)
@@ -48,12 +56,12 @@ void ACTUATOR::tick()
             _integral = 0.0;
         }
 
-        _compute_velocity= this->computePID(_current_velocity, _target_velocity,
-                                                   _cfg->kp, _cfg->ki, _cfg->kd,
-                                                   _pid_dt,
-                                                   -_cfg->max_pwm, _cfg->max_pwm);
-
+        _compute_velocity = this->computePID(_current_velocity, _target_velocity,
+                                             _cfg->kp, _cfg->ki, _cfg->kd,
+                                             _pid_dt,
+                                             -_cfg->max_pwm, _cfg->max_pwm);
     }
+
     this->setMotor(_compute_velocity);
 }
 

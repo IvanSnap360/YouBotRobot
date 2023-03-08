@@ -11,6 +11,8 @@
     <arg name="clip_distance" default="-2" />
     <arg name="use_rviz" default="true" />
     <arg name="use_rtabmapviz" default="false" />
+    <arg name="localization"            default="false"/>
+    <arg name="initial_pose"            default=""/>       
 
     <arg name="sim" default="false" />
 
@@ -48,7 +50,8 @@
         <arg name="camera_info_topic" value="/$(arg camera2)/color/camera_info" />
         <arg name="queue_size" value="200" />
 
-
+        <arg name="localization"            default="$(arg localization)"/>
+        <arg name="initial_pose"            default="$(arg initial_pose)"/>        
         <arg name="rviz" value="$(arg use_rviz)" />
         <arg name="rtabmapviz" value="$(arg use_rtabmapviz)" />
         <arg name="odom_frame_id" value="odom" />
