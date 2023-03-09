@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<robot name="wheel" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="roller_origin" params="r th side wheel_side">
+
+    <xacro:if value="${side==1 and wheel_side==1}">
+      <origin xyz="0 ${r*cos(th)} ${0.040289*sin(th)}"
+        rpy="${atan(-tan(th)*sqrt(2.0))} ${asin(cos(th)/sqrt(2.0))} ${atan(sin(th))}" />
+    </xacro:if>
+
+    <xacro:if value="${side==1 and wheel_side==-1}">
+      <origin xyz="0 ${r*cos(th)} ${0.040289*sin(th)}"
+        rpy="${3.14+atan(-tan(th)*sqrt(2.0))} ${3.14+asin(cos(th)/sqrt(2.0))} ${atan(sin(th))}" />
+    </xacro:if>
+
+    <xacro:if value="${side==-1 and wheel_side==1}">
+      <origin xyz="0 ${r*cos(th)} ${r*sin(th)}"
+        rpy="${atan(-tan(th)*sqrt(2.0))} ${asin(-cos(th)/sqrt(2.0))} ${atan(-sin(th))}" />
+    </xacro:if>
+
+    <xacro:if value="${side==-1 and wheel_side==-1}">
+      <origin xyz="0 ${r*cos(th)} ${r*sin(th)}"
+        rpy="${3.14+atan(-tan(th)*sqrt(2.0))} ${3.14+asin(-cos(th)/sqrt(2.0))} ${atan(-sin(th))}" />
+    </xacro:if>
+
+  </xacro:macro>
+
+  <xacro:macro name="roller_loop" params="name side num loop wheel_side2">
+
+
+    <xacro:if value="${loop}">
+
+      <xacro:if value="${wheel_side2==1}">
+        <xacro:property name="joint_name" value="${name}_roller_1_${loop}" />
+      </xacro:if>
+      <xacro:if value="${wheel_side2==-1}">
+        <xacro:property name="joint_name" value="${name}_roller_2_${loop}" />
+      </xacro:if>
+
+      <link name="${joint_name}_link">
+        <visual>
+          <origin xyz="-0.002 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://omnibot_platform_description/meshes/wheel_roller2.dae"
+              scale="0.001 0.001 0.001" />
+          </geometry>
+        </visual>
+        <collision>
+          <origin xyz="-0.002 0 0" rpy="0 0 0" />
+          <geometry>
+            <mesh filename="package://omnibot_platform_description/meshes/wheel_roller2.dae"
+              scale="0.001 0.001 0.001" />
+          </geometry>
+        </collision>
+        <inertial>
+          <origin xyz="-0.002 0 0" rpy="0 0 0" />
+          <mass value="0.3" />
+          <inertia ixx="0.00024000" ixy="0.0" ixz="0.0"
+            iyy="0.00076000" iyz="0.0"
+            izz="0.00076000" />
+        </inertial>
+        <surface>
+          <friction>
+            <ode>
+              <mu1>10.2</mu1>
+              <mu2>10.2</mu2>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0.01</restitution_coefficient>
+            <threshold>0</threshold>
+          </bounce>
+          <contact>
+            <ode>
+              <max_vel>100</max_vel>
+            </ode>
+          </contact>
+        </surface>
+
+      </link>
+
+      <joint name="${joint_name}_joint" type="continuous">
+        <xacro:roller_origin th="${radians(360/num*(loop-1))}" side="${side}"
+          wheel_side="${wheel_side2}" r="0.040293" />
+        <axis xyz="1 0 0" />
+        <parent link="${name}_mecanum_wheel_link" />
+        <child link="${joint_name}_link" />
+        <!-- <safety_controller k_velocity="10.0" /> -->
+        <dynamics damping="0.001" friction="0.0001" />
+      </joint>
+
+
+      <transmission name="${joint_name}_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <joint name="${joint_name}_joint">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+        </joint>
+        <actuator name="${joint_name}_motor">
+          <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+          <mechanismReduction>1</mechanismReduction>
+        </actuator>
+      </transmission>
+
+      <!-- <gazebo reference="${joint_name}_link">
+        <selfCollide>0</selfCollide>
+        <kp>1000000</kp>
+        <kd>100</kd>
+      </gazebo> -->
+
+      <xacro:roller_loop name="${name}" side="${side}" num="${num}" loop="${loop - 1}"
+        wheel_side2="${wheel_side2}" />
+
+
+    </xacro:if>
+
+  </xacro:macro>
+
+  <xacro:macro name="rollers_link" params="name side">
+    <xacro:roller_loop name="${name}" side="${side}" num="7" loop="7" wheel_side2="1" />
+    <xacro:roller_loop name="${name}" side="${side}" num="7" loop="7" wheel_side2="-1" />
+  </xacro:macro>
+
+</robot>

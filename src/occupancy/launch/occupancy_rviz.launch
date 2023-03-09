@@ -1,0 +1,7 @@
+<launch>
+  <include file="$(find occupancy)/launch/occupancy.launch"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find occupancy)/rviz/pointcloud_w_occupancy.rviz">
+  </node>
+  <!-- <node pkg="tf" type="static_transform_publisher" name="map2basefootprint" args="0.0 0.0 0.0 0.0 0.0 0.0 /map /base_footprint 100"/> -->
+
+</launch>

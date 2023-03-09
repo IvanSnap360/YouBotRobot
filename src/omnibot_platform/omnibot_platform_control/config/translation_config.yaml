@@ -1,0 +1,9 @@
+
+from: "/omnibot_robot/joint_control"
+to:
+  [
+    "/omnibot_robot/left_front_mecanum_controller/command",
+    "/omnibot_robot/right_front_mecanum_controller/command",
+    "/omnibot_robot/left_back_mecanum_controller/command",
+    "/omnibot_robot/right_back_mecanum_controller/command",
+  ]

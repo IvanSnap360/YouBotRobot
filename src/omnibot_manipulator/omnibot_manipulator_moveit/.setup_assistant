@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: omnibot_description
+    relative_path: urdf/omnibot_description.urdf.xacro
+    xacro_args: use_manipulator:=true
+  SRDF:
+    relative_path: config/omnibot_robot.srdf
+  CONFIG:
+    author_name: __Druid__
+    author_email: oldsnapdruid@gmail.com
+    generated_timestamp: 1677225514
