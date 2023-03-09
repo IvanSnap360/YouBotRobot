@@ -17511,6 +17511,9 @@ part number 2062-2P from STA</description>
 <part name="C10" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="CPOL-EU" device="153CLV-0810" package3d_urn="urn:adsk.eagle:package:25893/1"/>
 <part name="J1" library="SparkFun-Connectors" deviceset="CONN_02" device="5MM"/>
 <part name="J2" library="SparkFun-Connectors" deviceset="CONN_02" device="5MM"/>
+<part name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="5MM" package3d_urn="urn:adsk.eagle:package:15799/2"/>
+<part name="R6" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="R-EU_" device="R0805" package3d_urn="urn:adsk.eagle:package:26059/1"/>
+<part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -17545,6 +17548,9 @@ part number 2062-2P from STA</description>
 <instance part="C10" gate="G$1" x="99.06" y="58.42"/>
 <instance part="J1" gate="G$1" x="-7.62" y="55.88"/>
 <instance part="J2" gate="G$1" x="114.3" y="58.42" rot="R180"/>
+<instance part="LED2" gate="G$1" x="76.2" y="76.2" rot="R90"/>
+<instance part="R6" gate="G$1" x="93.98" y="76.2"/>
+<instance part="GND6" gate="1" x="101.6" y="73.66"/>
 </instances>
 <busses>
 </busses>
@@ -17650,6 +17656,11 @@ part number 2062-2P from STA</description>
 <pinref part="GND5" gate="1" pin="GND"/>
 <wire x1="96.52" y1="20.32" x2="96.52" y2="17.78" width="0.1524" layer="91"/>
 </segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<pinref part="GND6" gate="1" pin="GND"/>
+<wire x1="99.06" y1="76.2" x2="101.6" y2="76.2" width="0.1524" layer="91"/>
+</segment>
 </net>
 <net name="VDD" class="0">
 <segment>
@@ -17658,8 +17669,9 @@ part number 2062-2P from STA</description>
 <wire x1="71.12" y1="58.42" x2="71.12" y2="55.88" width="0.1524" layer="91"/>
 <wire x1="71.12" y1="58.42" x2="71.12" y2="60.96" width="0.1524" layer="91"/>
 <junction x="71.12" y="58.42"/>
-<wire x1="71.12" y1="60.96" x2="83.82" y2="60.96" width="0.1524" layer="91"/>
+<wire x1="71.12" y1="60.96" x2="73.66" y2="60.96" width="0.1524" layer="91"/>
 <pinref part="VDD1" gate="G$1" pin="VDD"/>
+<wire x1="73.66" y1="60.96" x2="83.82" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="83.82" y1="60.96" x2="88.9" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="60.96" x2="93.98" y2="60.96" width="0.1524" layer="91"/>
 <wire x1="93.98" y1="60.96" x2="99.06" y2="60.96" width="0.1524" layer="91"/>
@@ -17677,6 +17689,9 @@ part number 2062-2P from STA</description>
 <wire x1="106.68" y1="58.42" x2="104.14" y2="58.42" width="0.1524" layer="91"/>
 <wire x1="104.14" y1="58.42" x2="104.14" y2="60.96" width="0.1524" layer="91"/>
 <junction x="104.14" y="60.96"/>
+<pinref part="LED2" gate="G$1" pin="A"/>
+<wire x1="73.66" y1="76.2" x2="73.66" y2="60.96" width="0.1524" layer="91"/>
+<junction x="73.66" y="60.96"/>
 </segment>
 <segment>
 <pinref part="R1" gate="G$1" pin="2"/>
@@ -17734,6 +17749,13 @@ part number 2062-2P from STA</description>
 <pinref part="R5" gate="G$1" pin="1"/>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <wire x1="22.86" y1="35.56" x2="15.24" y2="35.56" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="LED2" gate="G$1" pin="C"/>
+<wire x1="88.9" y1="76.2" x2="81.28" y2="76.2" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
