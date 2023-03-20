@@ -28,7 +28,7 @@ THE SOFTWARE.
   <param name="costmap_topic" value="rtabmap/grid_map"/>
   <!--<param name="costmap_updates_topic" value="rtabmap/grid_map"/>-->
   <param name="visualize" value="true"/>
-  <param name="planner_frequency" value="10.0"/>
+  <param name="planner_frequency" value="50.0"/>
   <param name="progress_timeout" value="30.0"/>
   <param name="potential_scale" value="3.0"/>
   <param name="orientation_scale" value="0.0"/>

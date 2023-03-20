@@ -1,0 +1,12 @@
+COM:
+  port: /dev/ttyUSB0
+  baudrate: 9600
+  timeout_ms: 100
+
+update_topic_data_rate_hz: 2.0
+
+Battery:
+  cells_count: 3
+
+
+

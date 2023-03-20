@@ -15,13 +15,13 @@ typedef struct
 
     double motor_reduction;
     uint8_t max_pwm, min_pwm, min_work_pwm;
-    double max_velocity,min_velocity, min_work_velocity;
+    double max_velocity, min_velocity, min_work_velocity;
 } actuator_config_t;
 
 class ACTUATOR
 {
 private:
-uint32_t _last_compute_time;
+    uint32_t _last_compute_time;
     actuator_config_t *_cfg;
 
     double _target_velocity;
@@ -29,15 +29,13 @@ uint32_t _last_compute_time;
     double _compute_velocity;
 
 
-    double _integral, _prevErr;
+    double _err, _sum,_proportional, _integral, _differential, _prevErr;
 
-    double computePID(double input, double setpoint, double kp, double ki, double kd, double dt, double minOut, double maxOut);
+
     void setMotor(double val);
     double _pid_dt;
 
-
-    bool _enc_A_state,_enc_B_state;
-
+    bool _enc_A_state, _enc_B_state;
 
     int32_t _relative_encoder_tick;
 

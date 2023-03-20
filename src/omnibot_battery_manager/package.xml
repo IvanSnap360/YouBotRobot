@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>omnibot_platform_navigation</name>
+  <name>omnibot_battery_manager</name>
   <version>0.0.0</version>
-  <description>The omnibot_platform_navigation package</description>
+  <description>The omnibot_battery_manager package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/omnibot_platform_navigation</url> -->
+  <!-- <url type="website">http://wiki.ros.org/omnibot_battery_manager</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -58,9 +58,11 @@
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rospy</exec_depend>
   <exec_depend>std_msgs</exec_depend>
-
-  <export>
-    <exploration_server plugin="${prefix}/example_plugin.xml" />
-  </export>
+  <build_depend>serial</build_depend>
+  <exec_depend>serial</exec_depend>
   <!-- The export tag contains other, unspecified, tags -->
+  <export>
+    <!-- Other tools can request additional information be placed here -->
+
+  </export>
 </package>

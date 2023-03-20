@@ -14,12 +14,11 @@
  *
  */
 // #define WORK_MODE__ROS
-#define WORK_MODE__SERIAL
+// #define WORK_MODE__SERIAL
 
 #ifdef WORK_MODE__ROS
 #pragma message("ROS WORKMODE")
 #endif // WORK_MODE__ROS
-
 
 #ifdef WORK_MODE__SERIAL
 #pragma message("SERIAL WORKMODE")
@@ -54,7 +53,7 @@
  *
  */
 
-#define COM_SERIAL__BAUDRATE 9600
+#define COM_SERIAL__BAUDRATE 115200
 
 /**
  * COMMON INTERFACE PARAMS
@@ -89,22 +88,22 @@ enum
 #define REDUCTION /*                           */ (double)(1 / 100)
 #define MAX_VELOCITY /*                        */ 110.0 // rev/min
 #define MIN_VELOCITY /*                        */ 0.0   // rev/min
-#define MIN_PWM_VELOCITY /*                    */ 1.0   // rev/min
-#define PID_HZ /*                              */ 50.0  // HZ
-#define PID_KP /*                              */ 0.0
+#define MIN_PWM_VELOCITY /*                    */ 0.0   // rev/min
+#define PID_HZ /*                              */ 5.0   // HZ
+#define PID_KP /*                              */ 1.0
 #define PID_KI /*                              */ 0.0
 #define PID_KD /*                              */ 0.0
 #define ENCODER_WORK_MODE /*                   */ RISING
-#define ENCODER_TIKS_PER_REVOLUTION /*          */ 100     
+#define ENCODER_TIKS_PER_REVOLUTION /*          */ 100
 
 //  LEFT FRONT MOTOR CONFIG  //
-#define LEFT_FRONT__MOTOR_PIN1 /*              */ 0
-#define LEFT_FRONT__MOTOR_PIN2 /*              */ 0
+#define LEFT_FRONT__MOTOR_PIN1 /*              */ 6
+#define LEFT_FRONT__MOTOR_PIN2 /*              */ 7
 #define LEFT_FRONT__ENCODER_PIN_A /*           */ 0
-#define LEFT_FRONT__ENCODER_PIN_B /*           */ 0
+#define LEFT_FRONT__ENCODER_PIN_B /*           */ 1
 #define LEFT_FRONT__ENCODER_WORK_MODE /*       */ ENCODER_WORK_MODE
 #define LEFT_FRONT__INPIN_WORK_MODE /*         */ INPUT_PULLDOWN
-#define LEFT_FRONT__MOTOR_REVERSE /*           */ false
+#define LEFT_FRONT__MOTOR_REVERSE /*           */ true
 #define LEFT_FRONT__ENCODER_REVERSE /*         */ false
 #define LEFT_FRONT__KP /*                      */ PID_KP
 #define LEFT_FRONT__KI /*                      */ PID_KI
@@ -120,10 +119,10 @@ enum
 
 //  RIGHT FRONT MOTOR CONFIG  //
 
-#define RIGHT_FRONT__MOTOR_PIN1 /*              */ 0
-#define RIGHT_FRONT__MOTOR_PIN2 /*              */ 0
-#define RIGHT_FRONT__ENCODER_PIN_A /*           */ 0
-#define RIGHT_FRONT__ENCODER_PIN_B /*           */ 0
+#define RIGHT_FRONT__MOTOR_PIN1 /*              */ 4
+#define RIGHT_FRONT__MOTOR_PIN2 /*              */ 5
+#define RIGHT_FRONT__ENCODER_PIN_A /*           */ 16
+#define RIGHT_FRONT__ENCODER_PIN_B /*           */ 17
 #define RIGHT_FRONT__ENCODER_WORK_MODE /*       */ ENCODER_WORK_MODE
 #define RIGHT_FRONT__INPIN_WORK_MODE /*         */ INPUT_PULLDOWN
 #define RIGHT_FRONT__MOTOR_REVERSE /*           */ false
@@ -141,13 +140,13 @@ enum
 #define RIGHT_FRONT__MIN_WORK_VELOCITY /*       */ MIN_PWM_VELOCITY
 
 //  LEFT BACK MOTOR CONFIG  //
-#define LEFT_BACK__MOTOR_PIN1 /*                */ 0
-#define LEFT_BACK__MOTOR_PIN2 /*                */ 0
-#define LEFT_BACK__ENCODER_PIN_A /*             */ 0
-#define LEFT_BACK__ENCODER_PIN_B /*             */ 0
+#define LEFT_BACK__MOTOR_PIN1 /*                */ 8
+#define LEFT_BACK__MOTOR_PIN2 /*                */ 9
+#define LEFT_BACK__ENCODER_PIN_A /*             */ 11
+#define LEFT_BACK__ENCODER_PIN_B /*             */ 12
 #define LEFT_BACK__ENCODER_WORK_MODE /*         */ ENCODER_WORK_MODE
 #define LEFT_BACK__INPIN_WORK_MODE /*           */ INPUT_PULLDOWN
-#define LEFT_BACK__MOTOR_REVERSE /*             */ false
+#define LEFT_BACK__MOTOR_REVERSE /*             */ true
 #define LEFT_BACK__ENCODER_REVERSE /*           */ false
 #define LEFT_BACK__KP /*                        */ PID_KP
 #define LEFT_BACK__KI /*                        */ PID_KI
@@ -162,13 +161,13 @@ enum
 #define LEFT_BACK__MIN_WORK_VELOCITY /*         */ MIN_PWM_VELOCITY
 
 //  RIGHT BACK MOTOR CONFIG  //
-#define RIGHT_BACK__MOTOR_PIN1 /*               */ 0
-#define RIGHT_BACK__MOTOR_PIN2 /*               */ 0
-#define RIGHT_BACK__ENCODER_PIN_A /*            */ 0
-#define RIGHT_BACK__ENCODER_PIN_B /*            */ 0
+#define RIGHT_BACK__MOTOR_PIN1 /*               */ 2
+#define RIGHT_BACK__MOTOR_PIN2 /*               */ 3
+#define RIGHT_BACK__ENCODER_PIN_A /*            */ 18
+#define RIGHT_BACK__ENCODER_PIN_B /*            */ 19
 #define RIGHT_BACK__ENCODER_WORK_MODE /*        */ ENCODER_WORK_MODE
 #define RIGHT_BACK__INPIN_WORK_MODE /*          */ INPUT_PULLDOWN
-#define RIGHT_BACK__MOTOR_REVERSE /*            */ false
+#define RIGHT_BACK__MOTOR_REVERSE /*            */ true
 #define RIGHT_BACK__ENCODER_REVERSE /*          */ false
 #define RIGHT_BACK__KP /*                       */ PID_KP
 #define RIGHT_BACK__KI /*                       */ PID_KI
@@ -182,7 +181,7 @@ enum
 #define RIGHT_BACK__MIN_VELOCITY /*             */ MIN_VELOCITY
 #define RIGHT_BACK__MIN_WORK_VELOCITY /*        */ MIN_PWM_VELOCITY
 
-static actuator_config_t _actuator_config[ACTUATORS_COUNT] = {
+actuator_config_t _actuator_config[ACTUATORS_COUNT] = {
 
     //  LEFT FRONT MOTOR CONFIG  //
     {
@@ -289,12 +288,12 @@ void RIGHT_BACK_ENC_A_ISR()
 {
     actuators[RIGHT_BACK].encA_ISR();
 }
-void (*functptr_enc_A[])() =
-    {
+void (*functptr_enc_A[])() = {
         LEFT_FRONT_ENC_A_ISR,
         RIGHT_FRONT_ENC_A_ISR,
         LEFT_BACK_ENC_A_ISR,
-        RIGHT_BACK_ENC_A_ISR};
+        RIGHT_BACK_ENC_A_ISR,
+};
 
 void LEFT_FRONT_ENC_B_ISR()
 {
@@ -312,8 +311,7 @@ void RIGHT_BACK_ENC_B_ISR()
 {
     actuators[RIGHT_BACK].encB_ISR();
 }
-void (*functptr_enc_B[])() =
-    {
+void (*functptr_enc_B[])() = {
         LEFT_FRONT_ENC_B_ISR,
         RIGHT_FRONT_ENC_B_ISR,
         LEFT_BACK_ENC_B_ISR,

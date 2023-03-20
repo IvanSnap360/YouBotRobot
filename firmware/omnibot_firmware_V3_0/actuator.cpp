@@ -56,13 +56,22 @@ void ACTUATOR::tick()
             _integral = 0.0;
         }
 
-        _compute_velocity = this->computePID(_current_velocity, _target_velocity,
-                                             _cfg->kp, _cfg->ki, _cfg->kd,
-                                             _pid_dt,
-                                             -_cfg->max_pwm, _cfg->max_pwm);
+        _err = _target_velocity - _current_velocity;
+        _proportional = _err * _cfg->kp;
+        _integral = _integral + (_err * _pid_dt);
+        _differential = (_err - _prevErr) / _pid_dt;
+        _prevErr = _err;
+        
+        _sum = _proportional + _integral + _differential;
+        _compute_velocity = _target_velocity;
+
+
+        Serial.println(_compute_velocity);
+         
+        _last_compute_time = millis();
     }
 
-    this->setMotor(_compute_velocity);
+    ACTUATOR::setMotor(_compute_velocity);
 }
 
 ACTUATOR::~ACTUATOR()
@@ -73,21 +82,11 @@ ACTUATOR::ACTUATOR()
 {
 }
 
-double ACTUATOR::computePID(double input, double setpoint, double kp, double ki, double kd, double dt, double minOut, double maxOut)
-{
-    double err = setpoint - input;
-    _integral = 0, _prevErr = 0;
-    _integral = constrain(_integral + (float)err * dt * ki, minOut, maxOut);
-    float D = (err - _prevErr) / dt;
-    _prevErr = err;
-    return constrain(err * kp + _integral + D * kd, minOut, maxOut);
-}
-
 void ACTUATOR::setMotor(double val)
 {
     if (val > 0 && val <= _cfg->min_work_pwm)
         val = _cfg->min_work_pwm;
-    if (val < 0 && val >= _cfg->min_work_pwm)
+    else if (val < 0 && val >= _cfg->min_work_pwm)
         val = -_cfg->min_work_pwm;
 
     if (val > 0)
@@ -95,7 +94,7 @@ void ACTUATOR::setMotor(double val)
         analogWrite(_cfg->motor_reverse ? _cfg->motor_pin2 : _cfg->motor_pin1, 0);
         analogWrite(_cfg->motor_reverse ? _cfg->motor_pin1 : _cfg->motor_pin2, (uint32_t)abs(val));
     }
-    else if (val > 0)
+    else if (val < 0)
     {
         analogWrite(_cfg->motor_reverse ? _cfg->motor_pin2 : _cfg->motor_pin1, (uint32_t)abs(val));
         analogWrite(_cfg->motor_reverse ? _cfg->motor_pin1 : _cfg->motor_pin2, 0);

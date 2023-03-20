@@ -42,7 +42,7 @@
     <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >
         <arg name="sim" value="true"/>
         <arg name="use_rviz" value="false"/>
-        <arg name="localization"            value="false"/>
+        <arg name="localization"            value="true"/>
         <arg name="initial_pose"            value=""/>     
     </include>
     

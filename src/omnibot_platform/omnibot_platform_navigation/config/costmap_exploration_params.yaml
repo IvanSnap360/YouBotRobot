@@ -1,5 +1,5 @@
 # The MIT License
-# 
+#
 # Copyright (c) 2019 Giovanni di Dio Bruno https://gbr1.github.io
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -21,19 +21,47 @@
 # THE SOFTWARE.
 #
 #
-track_unknown_space: true
+footprint: [[-0.25, 0.25], [0.25, 0.25], [0.25, -0.25], [-0.25, -0.25]]
+# robot_radius: 0.10
+
+transform_tolerance: 0.5
+update_frequency: 5.0
+publish_frequency: 5.0
+
+#must match incoming static map
 global_frame: map
+robot_base_frame: base_footprint
+resolution: 0.01
+
 rolling_window: false
+track_unknown_space: true
 
-plugins: 
-- {name: external,            type: "costmap_2d::StaticLayer"}
-- {name: explore_boundary,    type: "polygon_layer::PolygonLayer"}
-#Can disable sensor layer if gmapping is fast enough to update scans
-- {name: obstacles_laser,     type: "costmap_2d::ObstacleLayer"}
-- {name: inflation,           type: "costmap_2d::InflationLayer"}
+plugins:
+    - { name: static, type: "costmap_2d::StaticLayer" }
+    - { name: polygon_layer, type: "polygon_layer::PolygonLayer" }
+    #Can disable sensor layer if gmapping is fast enough to update scans
+    - { name: sensor, type: "costmap_2d::ObstacleLayer" }
+    - { name: inflation, type: "costmap_2d::InflationLayer" }
 
-explore_boundary:
-  resize_to_boundary: false
-  frontier_travel_point: middle
-  #set to false for gmapping, true if re-exploring a known area
-  explore_clear_space: false
+static:
+    #Can pull data from gmapping, map_server or a non-rolling costmap
+    map_topic: /rtabmap/grid_map
+    # map_topic: move_base/global_costmap/costmap
+    subscribe_to_updates: true
+
+polygon_layer:
+    resize_to_polygon: true
+
+sensor:
+    observation_sources: point_cloud_sensor
+
+    point_cloud_sensor:
+        {
+            sensor_frame: d400_link,
+            data_type: PointCloud2,
+            topic: /d400/depth/color/points,
+            marking: true,
+            clearing: true
+        }
+inflation:
+    inflation_radius: 0.15

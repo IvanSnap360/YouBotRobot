@@ -1,8 +1,6 @@
 #include "actuator.h"
 #include "config.h"
 
-
-
 #ifdef WORK_MODE__SERIAL
 #endif // WORK_MODE__SERIAL
 
@@ -56,7 +54,7 @@ void setup()
     }
 #endif // WORK_MODE__SERIAL
 
-    for (byte i = 0; i < ACTUATORS_COUNT; i++)
+    for (int i = 0; i < ACTUATORS_COUNT; i++)
     {
         actuators[i].setConfig(&_actuator_config[i]);
         attachInterrupt(_actuator_config->encoder_pin_A, (*functptr_enc_A[i]), ENCODER_WORK_MODE);
@@ -66,10 +64,17 @@ void setup()
 
 void loop()
 {
-    for (auto &actuator : actuators)
-    {
-        actuator.tick();
-    }
+    // 
+    actuators[LEFT_FRONT ].setVelocity(200.0);
+    actuators[RIGHT_FRONT].setVelocity( 200.0);
+    actuators[LEFT_BACK  ].setVelocity( 200.0);
+    actuators[RIGHT_BACK ].setVelocity(200.0);
+
+
+    actuators[LEFT_FRONT ].tick();
+    actuators[RIGHT_FRONT].tick();
+    actuators[LEFT_BACK  ].tick();
+    actuators[RIGHT_BACK ].tick();
 
 #ifdef WORK_MODE__ROS
     if (nh.connected())
@@ -110,3 +115,32 @@ void right_back_controller_sub_cb_f(const std_msgs::Float64 &val)
     actuators[RIGHT_BACK].setVelocity((double)val.data);
 }
 #endif // WORK_MODE__ROS
+
+#ifdef WORK_MODE__SERIAL
+// void serial_pid_setup()
+// {
+//     if (Serial.available() > 1)
+//     {
+//         int actuator  = Serial.parseInt();
+//         char incoming = Serial.read();
+//         float value = Serial.parseFloat();
+//         switch (incoming)
+//         {
+//         case 'p':
+//             Kp = value;
+//             break;
+//         case 'i':
+//             Ki = value;
+//             break;
+//         case 'd':
+//             Kd = value;
+//             break;
+//         case 's':
+//             setpoint = value;
+//             breaku
+//         }
+//         Serial.println(incoming);
+//         Serial.println(value);
+//     }
+// }
+#endif // WORK_MODE__SERIAL

@@ -16,6 +16,15 @@ OMNIBOT_CORE_LIB::OMNIBOT_CORE_LIB(ros::NodeHandle *nh, std::string config_path)
 
 void OMNIBOT_CORE_LIB::run()
 {
+    
+}
+
+OMNIBOT_CORE_LIB::~OMNIBOT_CORE_LIB()
+{
+}
+
+
+/*
     ros::AsyncSpinner spinner(1); spinner.start();
     moveit::planning_interface::MoveGroupInterface move_group(_manip_arm_planning_group);
     moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
@@ -40,8 +49,4 @@ void OMNIBOT_CORE_LIB::run()
     {
         move_group.asyncMove();
     }
-}
-
-OMNIBOT_CORE_LIB::~OMNIBOT_CORE_LIB()
-{
-}
+*/
