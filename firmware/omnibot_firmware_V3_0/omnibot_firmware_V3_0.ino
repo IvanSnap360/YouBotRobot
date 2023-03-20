@@ -64,17 +64,13 @@ void setup()
 
 void loop()
 {
-    // 
     actuators[LEFT_FRONT ].setVelocity(200.0);
-    actuators[RIGHT_FRONT].setVelocity( 200.0);
-    actuators[LEFT_BACK  ].setVelocity( 200.0);
+    actuators[RIGHT_FRONT].setVelocity(200.0);
+    actuators[LEFT_BACK  ].setVelocity(200.0);
     actuators[RIGHT_BACK ].setVelocity(200.0);
 
 
-    actuators[LEFT_FRONT ].tick();
-    actuators[RIGHT_FRONT].tick();
-    actuators[LEFT_BACK  ].tick();
-    actuators[RIGHT_BACK ].tick();
+    for (auto &actuator : actuators) actuator.tick();
 
 #ifdef WORK_MODE__ROS
     if (nh.connected())
@@ -117,30 +113,22 @@ void right_back_controller_sub_cb_f(const std_msgs::Float64 &val)
 #endif // WORK_MODE__ROS
 
 #ifdef WORK_MODE__SERIAL
-// void serial_pid_setup()
-// {
-//     if (Serial.available() > 1)
-//     {
-//         int actuator  = Serial.parseInt();
-//         char incoming = Serial.read();
-//         float value = Serial.parseFloat();
-//         switch (incoming)
-//         {
-//         case 'p':
-//             Kp = value;
-//             break;
-//         case 'i':
-//             Ki = value;
-//             break;
-//         case 'd':
-//             Kd = value;
-//             break;
-//         case 's':
-//             setpoint = value;
-//             breaku
-//         }
-//         Serial.println(incoming);
-//         Serial.println(value);
-//     }
-// }
+void serial_pid_setup()
+{
+    if (Serial.available() > 1)
+    {
+        int actuator  = Serial.parseInt();
+        char incoming = Serial.read();
+        float value = Serial.parseFloat();
+        switch (incoming)
+        {
+        case 'p': actuators[actuator].setPID_KOEF(pid_enum::Kp, value);
+        case 'i': actuators[actuator].setPID_KOEF(pid_enum::Kp, value);
+        case 'd': actuators[actuator].setPID_KOEF(pid_enum::Kp, value);
+        case 's': actuators[actuator].setVelocity(value);
+        }
+        Serial.println(incoming);
+        Serial.println(value);
+    }
+}
 #endif // WORK_MODE__SERIAL

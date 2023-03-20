@@ -62,12 +62,7 @@ void ACTUATOR::tick()
         _differential = (_err - _prevErr) / _pid_dt;
         _prevErr = _err;
         
-        _sum = _proportional + _integral + _differential;
-        _compute_velocity = _target_velocity;
-
-
-        Serial.println(_compute_velocity);
-         
+        _sum = _proportional + _integral + _differential;         
         _last_compute_time = millis();
     }
 
@@ -103,5 +98,28 @@ void ACTUATOR::setMotor(double val)
     {
         analogWrite(_cfg->motor_pin1, 0);
         analogWrite(_cfg->motor_pin2, 0);
+    }
+}
+
+
+
+void ACTUATOR::setPID_KOEF(pid_enum koef, double val)
+{
+    switch ((int)koef)
+    {
+    case (pid_enum::Kp):
+        _cfg->kp = val;
+        break;
+
+    case (pid_enum::Ki):
+        _cfg->ki = val;
+        break;
+
+    case (pid_enum::Kd):
+        _cfg->kd = val;
+        break;
+    
+    default:
+        break;
     }
 }

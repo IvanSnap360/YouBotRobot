@@ -14,14 +14,16 @@
  *
  */
 // #define WORK_MODE__ROS
-// #define WORK_MODE__SERIAL
+#define WORK_MODE__SERIAL
 
 #ifdef WORK_MODE__ROS
 #pragma message("ROS WORKMODE")
+#undef WORK_MODE__SERIAL
 #endif // WORK_MODE__ROS
 
 #ifdef WORK_MODE__SERIAL
 #pragma message("SERIAL WORKMODE")
+#undef WORK_MODE__ROS
 #endif // WORK_MODE__SERIAL
 /**
  *

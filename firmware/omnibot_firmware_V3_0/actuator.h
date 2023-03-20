@@ -18,6 +18,11 @@ typedef struct
     double max_velocity, min_velocity, min_work_velocity;
 } actuator_config_t;
 
+typedef enum
+{
+    Kp, Ki, Kd
+} pid_enum;
+
 class ACTUATOR
 {
 private:
@@ -46,6 +51,8 @@ public:
     void setConfig(actuator_config_t *config);
     void setVelocity(double vel);
     double getVelocity();
+
+    void setPID_KOEF(pid_enum koef, double val);
 
     void encA_ISR();
     void encB_ISR();
