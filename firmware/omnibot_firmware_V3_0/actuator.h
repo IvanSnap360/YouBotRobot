@@ -42,6 +42,7 @@ private:
 
     bool _enc_A_state, _enc_B_state;
 
+    int _absolute_encoder_tick;
     int32_t _relative_encoder_tick;
 
     uint32_t _last_encoder_flash_time;

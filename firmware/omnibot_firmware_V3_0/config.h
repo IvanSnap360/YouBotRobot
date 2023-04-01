@@ -14,7 +14,7 @@
  *
  */
 // #define WORK_MODE__ROS
-#define WORK_MODE__SERIAL
+// #define WORK_MODE__SERIAL
 
 #ifdef WORK_MODE__ROS
 #pragma message("ROS WORKMODE")

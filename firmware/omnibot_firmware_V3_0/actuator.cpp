@@ -27,8 +27,11 @@ double ACTUATOR::getVelocity()
 
 void ACTUATOR::encA_ISR()
 {
+    
     _current_velocity = 60 / ((double)(micros() - _last_encoder_flash_time) / 1000000);
     _last_encoder_flash_time = micros();
+
+    
 
     _enc_A_state = digitalRead(_cfg->encoder_pin_A);
     _enc_A_state == _enc_B_state ? _relative_encoder_tick++ : _relative_encoder_tick--;
@@ -81,8 +84,11 @@ void ACTUATOR::setMotor(double val)
 {
     if (val > 0 && val <= _cfg->min_work_pwm)
         val = _cfg->min_work_pwm;
+
     else if (val < 0 && val >= _cfg->min_work_pwm)
         val = -_cfg->min_work_pwm;
+
+
 
     if (val > 0)
     {
