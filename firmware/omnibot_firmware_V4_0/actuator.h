@@ -64,11 +64,16 @@ private:
     uint32_t _lastflash;
     int counter;
 
+    double P = 0;
+    double I = 0;
+    double D = 0;
+    double val = 0;
+
 
 public:
     ACTUATOR();
     void setConfig(actuator_cfg_t *cfg);
-    const actuator_cfg_t *getConfig();
+    actuator_cfg_t *getConfig();
     void setVelocity(double velocity);
     double getVelocity();
     void tick();

@@ -8,11 +8,11 @@
 // ##################################################################### //
 // ############################ WORK PARAMS ############################ //
 // ##################################################################### //
-// #define WORK_MODE__SERIAL
+#define WORK_MODE__SERIAL
 // #define ROS_WORK_MODE
 // ##################################################################### //
 // ######################## COMMUNICATION PARAMS ####################### //
-// ##################################################################### // 
+// ##################################################################### //
 uint32_t blink_last_time = 0;
 #define CONNECTION_LED_BLINK_RATE_HZ 10.0
 #define DISCONNECTION_LED_BLINK_RATE_HZ 2.0
@@ -22,7 +22,26 @@ uint32_t blink_last_time = 0;
 // ##################################################################### //
 #define COM_SERIAL__BAUDRATE 115200
 
+#ifdef WORK_MODE__SERIAL
+/**/ #define ENABLE_OUTPUT
+#endif // WORK_MODE__SERIAL
 
+#ifdef ENABLE_OUTPUT
+// /**/ #define OUTPUT_PID_ANALAYZER
+// /**/ #define OUTPUT_ECODER_TIKS
+// /**/ #define OUTPUT_ACTUATORS_ANGULAR_VELOCITY
+#endif // ENABLE_OUTPUT
+
+#ifdef OUTPUT_PID_ANALAYZER
+/**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER LEFT_FRONT
+// /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER RIGHT_FRONT
+// /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER LEFT_BACK
+// /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER RIGHT_BACK
+#endif // OUTPUT_PID_ANALAYZER
+
+#define OUTPUT_SEND_FREQ 10.0
+#define OUTPUT_SEND_PERIOD (uint32_t)(1000.0 / OUTPUT_SEND_FREQ)
+uint32_t last_send_time = 0;
 // ##################################################################### //
 // ############################# ROS PARAMS ############################ //
 // ##################################################################### //
@@ -37,8 +56,31 @@ uint32_t blink_last_time = 0;
 #define ROS_TOPIC_RIGHT_FRONT_WHEEL_CONTROLLER /* */ "/omnibot_robot/right_front_mecanum_controller/command"
 #define ROS_TOPIC_LEFT_BACK_WHEEL_CONTROLLER /*   */ "/omnibot_robot/left_back_mecanum_controller/command"
 #define ROS_TOPIC_RIGHT_BACK_WHEEL_CONTROLLER /*  */ "/omnibot_robot/right_back_mecanum_controller/command"
-#define ROS_NODE__WORK_RATE_HZ 50.0
+#define ROS_NODE__WORK_RATE_HZ /*                 */ 25.0
 
+// ##################################################################### //
+// ############################ PROTECTIONS ############################ //
+// ##################################################################### //
+#ifdef WORK_MODE__SERIAL
+/**/ #undef ROS_WORK_MODE
+#warning WORK IN SERIAL_MODE, DISABLING ALL ROS COMMUNICATION!!!
+#endif // WORK_MODE__SERIAL
+
+#ifdef ROS_WORK_MODE
+#warning WORK IN ROS_MODE, DISABLING ALL SERIAL OUTPUTS!!!
+/**/ #undef ENABLE_OUTPUT
+/**/ #undef WORK_MODE__SERIAL
+#endif // ROS_WORK_MODE
+
+#ifdef OUTPUT_PID_ANALAYZER
+/**/ #undef OUTPUT_ECODER_TIKS
+/**/ #undef OUTPUT_ACTUATORS_ANGULAR_VELOCITY
+#warning WORK IN SERIAL_PID_ANALAYZER_MODE, DISABLING ALL ROS COMMUNICATION AND ANOTHER SERIAL OUTPUTS!!!
+#endif // OUTPUT_PID_ANALAYZER
+
+#if defined(OUTPUT_PID_ANALAYZER) && !defined(ACTUATOR_NUMBER_FOR_PID_ANALAYZER)
+/**/ #error Not choose ACTUATOR_NUMBER_FOR_PID_ANALAYZER!!!
+#endif // !ACTUATOR_NUMBER_FOR_PID_ANALAYZER
 // ##################################################################### //
 // ###################### COMMON ACTUATORS PARAMS ###################### //
 // ##################################################################### //
@@ -59,11 +101,11 @@ enum actuator_enum // actuator enumerator
 #define MIN_PWM /*                      */ 0
 
 // ~~~~~~~~~ COMMON MOTOR PARAMS ~~~~~~~~~ //
-#define MOTOR_REDUCTION_VALUE /*        */ (double)1.0
+#define MOTOR_REDUCTION_VALUE /*        */ (double)(1.0 / 90.0)
 
 // ~~~~~~~~~~ COMMON RPM PARAMS ~~~~~~~~~~ //
-#define MAX_RPM /*                      */ 111.0
-#define MIN_WORK_RPM /*                 */ 2.0
+#define MAX_RPM /*                      */ 110.0
+#define MIN_WORK_RPM /*                 */ 10.0
 #define MIN_RPM /*                      */ 0.0
 
 // ~~~~ COMMON ANGULAR VELOCITY PARAMS ~~~ //
@@ -84,8 +126,8 @@ enum actuator_enum // actuator enumerator
 #define PID_Kp /*                       */ 0.0
 #define PID_Ki /*                       */ 0.0
 #define PID_Kd /*                       */ 0.0
-#define PID_FREQ /*                     */ 30.0
-#define PID_PERIOD /*                   */ (uint32_t)(1 / PID_FREQ)
+#define PID_FREQ /*                     */ 50.0
+#define PID_PERIOD /*                   */ (uint32_t)(1000.0 / PID_FREQ)
 
 // ##################################################################### //
 // ########################## ACTUATORS PARAMS ######################### //
@@ -337,10 +379,10 @@ void RIGHT_BACK_ENC_A_ISR()
     actuators_list[RIGHT_BACK].enc_A_ISR();
 }
 void (*functptr_enc_A[])() = {
-        LEFT_FRONT_ENC_A_ISR,
-        RIGHT_FRONT_ENC_A_ISR,
-        LEFT_BACK_ENC_A_ISR,
-        RIGHT_BACK_ENC_A_ISR,
+    LEFT_FRONT_ENC_A_ISR,
+    RIGHT_FRONT_ENC_A_ISR,
+    LEFT_BACK_ENC_A_ISR,
+    RIGHT_BACK_ENC_A_ISR,
 };
 
 // ##################################################################### //
@@ -363,8 +405,8 @@ void RIGHT_BACK_ENC_B_ISR()
     actuators_list[RIGHT_BACK].enc_B_ISR();
 }
 void (*functptr_enc_B[])() = {
-        LEFT_FRONT_ENC_B_ISR,
-        RIGHT_FRONT_ENC_B_ISR,
-        LEFT_BACK_ENC_B_ISR,
-        RIGHT_BACK_ENC_B_ISR,
+    LEFT_FRONT_ENC_B_ISR,
+    RIGHT_FRONT_ENC_B_ISR,
+    LEFT_BACK_ENC_B_ISR,
+    RIGHT_BACK_ENC_B_ISR,
 };

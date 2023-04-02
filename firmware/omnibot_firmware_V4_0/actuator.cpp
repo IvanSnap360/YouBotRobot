@@ -17,9 +17,9 @@ void ACTUATOR::setConfig(actuator_cfg_t *cfg)
     pinMode(_cfg->encoder_pin_B, _cfg->encoder_pins_mode);
 }
 
-const actuator_cfg_t* ACTUATOR::getConfig()
+actuator_cfg_t* ACTUATOR::getConfig()
 {
-    return (const actuator_cfg_t*)_cfg;
+    return _cfg;
 }
 
 void ACTUATOR::setVelocity(double velocity)
@@ -44,10 +44,10 @@ void ACTUATOR::tick()
 
         double _err = _target_velocity - _current_velocity;
 
-        double P = _cfg->Kp * _err;
-        double I = _lastI + (_cfg->Ki * _err);
-        double D = _cfg->Kd * (_err - _lastErr);
-        double val = round(P + I + D);
+        P = _cfg->Kp * _err;
+        I = _lastI + (_cfg->Ki * _err);
+        D = _cfg->Kd * (_err - _lastErr);
+        val = round(P + I + D);
 
         _lastI = I;
         _lastErr = _err;
