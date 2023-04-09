@@ -27,17 +27,20 @@ uint32_t blink_last_time = 0;
 #endif // WORK_MODE__SERIAL
 
 #ifdef ENABLE_OUTPUT
-// /**/ #define OUTPUT_PID_ANALAYZER
+/**/ #define OUTPUT_PID_ANALAYZER
 // /**/ #define OUTPUT_ECODER_TIKS
 // /**/ #define OUTPUT_ACTUATORS_ANGULAR_VELOCITY
+// /**/ #define OUTPUT_ACTUATORS_RPM
 #endif // ENABLE_OUTPUT
 
 #ifdef OUTPUT_PID_ANALAYZER
-/**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER LEFT_FRONT
-// /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER RIGHT_FRONT
+// /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER LEFT_FRONT
+/**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER RIGHT_FRONT
 // /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER LEFT_BACK
 // /**/ #define ACTUATOR_NUMBER_FOR_PID_ANALAYZER RIGHT_BACK
 #endif // OUTPUT_PID_ANALAYZER
+
+
 
 #define OUTPUT_SEND_FREQ 10.0
 #define OUTPUT_SEND_PERIOD (uint32_t)(1000.0 / OUTPUT_SEND_FREQ)
@@ -75,6 +78,7 @@ uint32_t last_send_time = 0;
 #ifdef OUTPUT_PID_ANALAYZER
 /**/ #undef OUTPUT_ECODER_TIKS
 /**/ #undef OUTPUT_ACTUATORS_ANGULAR_VELOCITY
+/**/ #undef OUTPUT_ACTUATORS_RPM
 #warning WORK IN SERIAL_PID_ANALAYZER_MODE, DISABLING ALL ROS COMMUNICATION AND ANOTHER SERIAL OUTPUTS!!!
 #endif // OUTPUT_PID_ANALAYZER
 
@@ -95,13 +99,17 @@ enum actuator_enum // actuator enumerator
     RIGHT_BACK
 };
 
+// ~~~~~~~~~~~~ CONTROL PARAMS ~~~~~~~~~~~ //
+#define CONTROLLER_FREQ /*              */ 20.0
+#define CONTROLLER_PERIOD /*            */ (uint32_t)(1000.0 / CONTROLLER_FREQ)
+
 // ~~~~~~~~~~ COMMON PWM PARAMS ~~~~~~~~~~ //
 #define MAX_PWM /*                      */ 255
 #define MIN_WORK_PWM /*                 */ 50
 #define MIN_PWM /*                      */ 0
 
 // ~~~~~~~~~ COMMON MOTOR PARAMS ~~~~~~~~~ //
-#define MOTOR_REDUCTION_VALUE /*        */ (double)(1.0 / 90.0)
+#define MOTOR_REDUCTION_VALUE /*        */ 90
 
 // ~~~~~~~~~~ COMMON RPM PARAMS ~~~~~~~~~~ //
 #define MAX_RPM /*                      */ 110.0
@@ -114,8 +122,8 @@ enum actuator_enum // actuator enumerator
 #define MIN_ANGULAR_VELOCITY /*         */ RPM_2_RADS(MIN_RPM)
 
 // ~~~~~~~~ COMMON ENCODERS PARAMS ~~~~~~~ //
-#define ENCODER_WORK_MODE /*            */ 1
-#define ENCODER_PINS_MODE /*            */ INPUT_PULLDOWN
+#define ENCODER_WORK_MODE /*            */ RISING // (RISING, FALLING, CHANGE)
+#define ENCODER_PINS_MODE /*            */ INPUT
 #define ENCODER_TIKS_PER_REVOLUTION /*  */ 11
 
 // ~~~~~~~~~ COMMON WHEELS PARAMS ~~~~~~~~ //
@@ -123,11 +131,10 @@ enum actuator_enum // actuator enumerator
 #define WHEEL_RADIUS /*                 */ (double)(WHEEL_DEAMETER / 2)
 
 // ~~~~~~~~~~ COMMON PID PARAMAS ~~~~~~~~~ //
-#define PID_Kp /*                       */ 0.0
+#define PID_Kp /*                       */ 1.0
 #define PID_Ki /*                       */ 0.0
 #define PID_Kd /*                       */ 0.0
-#define PID_FREQ /*                     */ 50.0
-#define PID_PERIOD /*                   */ (uint32_t)(1000.0 / PID_FREQ)
+
 
 // ##################################################################### //
 // ########################## ACTUATORS PARAMS ######################### //
@@ -136,11 +143,11 @@ enum actuator_enum // actuator enumerator
 // ====================================================== //
 // ============= LEFT FRONT ACTUATOR PARAMS ============= //
 // ====================================================== //
-#define LEFT_FRONT__MOTOR_PIN_A /*                   */ 0
-#define LEFT_FRONT__MOTOR_PIN_B /*                   */ 0
+#define LEFT_FRONT__MOTOR_PIN_A /*                   */ 6
+#define LEFT_FRONT__MOTOR_PIN_B /*                   */ 7
 #define LEFT_FRONT__MOTOR_REVERSE /*                 */ FALSE
 #define LEFT_FRONT__MOTOR_REDUCTION_VALUE /*         */ MOTOR_REDUCTION_VALUE
-#define LEFT_FRONT__ENCODER_PIN_A /*                 */ 0
+#define LEFT_FRONT__ENCODER_PIN_A /*                 */ 1
 #define LEFT_FRONT__ENCODER_PIN_B /*                 */ 0
 #define LEFT_FRONT__ENCODER_WORK_MODE /*             */ ENCODER_WORK_MODE
 #define LEFT_FRONT__ENCODER_PINS_MODE /*             */ ENCODER_PINS_MODE
@@ -149,7 +156,7 @@ enum actuator_enum // actuator enumerator
 #define LEFT_FRONT__KP /*                            */ PID_Kp
 #define LEFT_FRONT__KI /*                            */ PID_Ki
 #define LEFT_FRONT__KD /*                            */ PID_Kd
-#define LEFT_FRONT__PID_PERIOD /*                    */ PID_PERIOD
+#define LEFT_FRONT__CONTROLLER_PERIOD /*                    */ CONTROLLER_PERIOD
 #define LEFT_FRONT__MAX_PWM /*                       */ MAX_PWM
 #define LEFT_FRONT__MIN_PWM /*                       */ MIN_PWM
 #define LEFT_FRONT__MIN_WORK_PWM /*                  */ MIN_WORK_PWM
@@ -164,20 +171,20 @@ enum actuator_enum // actuator enumerator
 // ============= RIGHT FRONT ACTUATOR PARAMS ============ //
 // ====================================================== //
 
-#define RIGHT_FRONT__MOTOR_PIN_A /*                  */ 0
-#define RIGHT_FRONT__MOTOR_PIN_B /*                  */ 0
-#define RIGHT_FRONT__MOTOR_REVERSE /*                */ FALSE
+#define RIGHT_FRONT__MOTOR_PIN_A /*                  */ 4
+#define RIGHT_FRONT__MOTOR_PIN_B /*                  */ 5
+#define RIGHT_FRONT__MOTOR_REVERSE /*                */ TRUE
 #define RIGHT_FRONT__MOTOR_REDUCTION_VALUE /*        */ MOTOR_REDUCTION_VALUE
-#define RIGHT_FRONT__ENCODER_PIN_A /*                */ 0
-#define RIGHT_FRONT__ENCODER_PIN_B /*                */ 0
+#define RIGHT_FRONT__ENCODER_PIN_A /*                */ 16
+#define RIGHT_FRONT__ENCODER_PIN_B /*                */ 17
 #define RIGHT_FRONT__ENCODER_WORK_MODE /*            */ ENCODER_WORK_MODE
 #define RIGHT_FRONT__ENCODER_PINS_MODE /*            */ ENCODER_PINS_MODE
-#define RIGHT_FRONT__ENCODER_REVERSE /*              */ FALSE
+#define RIGHT_FRONT__ENCODER_REVERSE /*              */ TRUE
 #define RIGHT_FRONT__ENCODER_TIKS_PER_REVOLUTION /*  */ ENCODER_TIKS_PER_REVOLUTION
 #define RIGHT_FRONT__KP /*                           */ PID_Kp
 #define RIGHT_FRONT__KI /*                           */ PID_Ki
 #define RIGHT_FRONT__KD /*                           */ PID_Kd
-#define RIGHT_FRONT__PID_PERIOD /*                   */ PID_PERIOD
+#define RIGHT_FRONT__CONTROLLER_PERIOD /*                   */ CONTROLLER_PERIOD
 #define RIGHT_FRONT__MAX_PWM /*                      */ MAX_PWM
 #define RIGHT_FRONT__MIN_PWM /*                      */ MIN_PWM
 #define RIGHT_FRONT__MIN_WORK_PWM /*                 */ MIN_WORK_PWM
@@ -191,20 +198,20 @@ enum actuator_enum // actuator enumerator
 // ====================================================== //
 // ============== LEFT BACK ACTUATOR PARAMS ============= //
 // ====================================================== //
-#define LEFT_BACK__MOTOR_PIN_A /*                    */ 0
-#define LEFT_BACK__MOTOR_PIN_B /*                    */ 0
+#define LEFT_BACK__MOTOR_PIN_A /*                    */ 8
+#define LEFT_BACK__MOTOR_PIN_B /*                    */ 9
 #define LEFT_BACK__MOTOR_REVERSE /*                  */ FALSE
 #define LEFT_BACK__MOTOR_REDUCTION_VALUE /*          */ MOTOR_REDUCTION_VALUE
-#define LEFT_BACK__ENCODER_PIN_A /*                  */ 0
-#define LEFT_BACK__ENCODER_PIN_B /*                  */ 0
+#define LEFT_BACK__ENCODER_PIN_A /*                  */ 11
+#define LEFT_BACK__ENCODER_PIN_B /*                  */ 12
 #define LEFT_BACK__ENCODER_WORK_MODE /*              */ ENCODER_WORK_MODE
 #define LEFT_BACK__ENCODER_PINS_MODE /*              */ ENCODER_PINS_MODE
-#define LEFT_BACK__ENCODER_REVERSE /*                */ FALSE
+#define LEFT_BACK__ENCODER_REVERSE /*                */ TRUE
 #define LEFT_BACK__ENCODER_TIKS_PER_REVOLUTION /*    */ ENCODER_TIKS_PER_REVOLUTION
 #define LEFT_BACK__KP /*                             */ PID_Kp
 #define LEFT_BACK__KI /*                             */ PID_Ki
 #define LEFT_BACK__KD /*                             */ PID_Kd
-#define LEFT_BACK__PID_PERIOD /*                     */ PID_PERIOD
+#define LEFT_BACK__CONTROLLER_PERIOD /*                     */ CONTROLLER_PERIOD
 #define LEFT_BACK__MAX_PWM /*                        */ MAX_PWM
 #define LEFT_BACK__MIN_PWM /*                        */ MIN_PWM
 #define LEFT_BACK__MIN_WORK_PWM /*                   */ MIN_WORK_PWM
@@ -218,20 +225,20 @@ enum actuator_enum // actuator enumerator
 // ====================================================== //
 // ============= RIGHT BACK ACTUATOR PARAMS ============= //
 // ====================================================== //
-#define RIGHT_BACK__MOTOR_PIN_A /*                   */ 0
-#define RIGHT_BACK__MOTOR_PIN_B /*                   */ 0
+#define RIGHT_BACK__MOTOR_PIN_A /*                   */ 2
+#define RIGHT_BACK__MOTOR_PIN_B /*                   */ 3
 #define RIGHT_BACK__MOTOR_REVERSE /*                 */ FALSE
 #define RIGHT_BACK__MOTOR_REDUCTION_VALUE /*         */ MOTOR_REDUCTION_VALUE
-#define RIGHT_BACK__ENCODER_PIN_A /*                 */ 0
-#define RIGHT_BACK__ENCODER_PIN_B /*                 */ 0
+#define RIGHT_BACK__ENCODER_PIN_A /*                 */ 18
+#define RIGHT_BACK__ENCODER_PIN_B /*                 */ 19
 #define RIGHT_BACK__ENCODER_WORK_MODE /*             */ ENCODER_WORK_MODE
 #define RIGHT_BACK__ENCODER_PINS_MODE /*             */ ENCODER_PINS_MODE
-#define RIGHT_BACK__ENCODER_REVERSE /*               */ FALSE
+#define RIGHT_BACK__ENCODER_REVERSE /*               */ TRUE
 #define RIGHT_BACK__ENCODER_TIKS_PER_REVOLUTION /*   */ ENCODER_TIKS_PER_REVOLUTION
 #define RIGHT_BACK__KP /*                            */ PID_Kp
 #define RIGHT_BACK__KI /*                            */ PID_Ki
 #define RIGHT_BACK__KD /*                            */ PID_Kd
-#define RIGHT_BACK__PID_PERIOD /*                    */ PID_PERIOD
+#define RIGHT_BACK__CONTROLLER_PERIOD /*                    */ CONTROLLER_PERIOD
 #define RIGHT_BACK__MAX_PWM /*                       */ MAX_PWM
 #define RIGHT_BACK__MIN_PWM /*                       */ MIN_PWM
 #define RIGHT_BACK__MIN_WORK_PWM /*                  */ MIN_WORK_PWM
@@ -261,7 +268,7 @@ actuator_cfg_t _actuator_config[ACTUATORS_COUNT] = {
         .Kp = /*                             */ LEFT_FRONT__KP,
         .Ki = /*                             */ LEFT_FRONT__KI,
         .Kd = /*                             */ LEFT_FRONT__KD,
-        .period = /*                         */ LEFT_FRONT__PID_PERIOD,
+        .period = /*                         */ LEFT_FRONT__CONTROLLER_PERIOD,
         .max_pwm = /*                        */ LEFT_FRONT__MAX_PWM,
         .min_pwm = /*                        */ LEFT_FRONT__MIN_PWM,
         .min_work_pwm = /*                   */ LEFT_FRONT__MIN_WORK_PWM,
@@ -289,7 +296,7 @@ actuator_cfg_t _actuator_config[ACTUATORS_COUNT] = {
         .Kp = /*                             */ RIGHT_FRONT__KP,
         .Ki = /*                             */ RIGHT_FRONT__KI,
         .Kd = /*                             */ RIGHT_FRONT__KD,
-        .period = /*                         */ RIGHT_FRONT__PID_PERIOD,
+        .period = /*                         */ RIGHT_FRONT__CONTROLLER_PERIOD,
         .max_pwm = /*                        */ RIGHT_FRONT__MAX_PWM,
         .min_pwm = /*                        */ RIGHT_FRONT__MIN_PWM,
         .min_work_pwm = /*                   */ RIGHT_FRONT__MIN_WORK_PWM,
@@ -318,7 +325,7 @@ actuator_cfg_t _actuator_config[ACTUATORS_COUNT] = {
         .Kp = /*                             */ LEFT_BACK__KP,
         .Ki = /*                             */ LEFT_BACK__KI,
         .Kd = /*                             */ LEFT_BACK__KD,
-        .period = /*                         */ LEFT_BACK__PID_PERIOD,
+        .period = /*                         */ LEFT_BACK__CONTROLLER_PERIOD,
         .max_pwm = /*                        */ LEFT_BACK__MAX_PWM,
         .min_pwm = /*                        */ LEFT_BACK__MIN_PWM,
         .min_work_pwm = /*                   */ LEFT_BACK__MIN_WORK_PWM,
@@ -347,7 +354,7 @@ actuator_cfg_t _actuator_config[ACTUATORS_COUNT] = {
         .Kp = /*                             */ RIGHT_BACK__KP,
         .Ki = /*                             */ RIGHT_BACK__KI,
         .Kd = /*                             */ RIGHT_BACK__KD,
-        .period = /*                         */ RIGHT_BACK__PID_PERIOD,
+        .period = /*                         */ RIGHT_BACK__CONTROLLER_PERIOD,
         .max_pwm = /*                        */ RIGHT_BACK__MAX_PWM,
         .min_pwm = /*                        */ RIGHT_BACK__MIN_PWM,
         .min_work_pwm = /*                   */ RIGHT_BACK__MIN_WORK_PWM,

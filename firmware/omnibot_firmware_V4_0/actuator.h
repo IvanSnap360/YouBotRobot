@@ -2,6 +2,8 @@
 #define __ACTUATOR_H__
 #include <stdint.h>
 #include <Arduino.h>
+#include "Tacho.h"
+
 #define RPM_2_RADS(rpm) (double)(rpm * (PI / 30))
 #define RADS_2_RPM(rads) (double)((rads * 30) / PI)
 typedef struct actuator_cfg_s
@@ -16,7 +18,7 @@ typedef struct actuator_cfg_s
     // ====================================================== //
     // =================== ENCODER PARAMS =================== //
     // ====================================================== //
-    uint32_t encoder_pin_A; /*                                */ // encoder A pin 
+    uint32_t encoder_pin_A; /*                                */ // encoder A pin
     uint32_t encoder_pin_B; /*                                */ // encoder B pin
     uint32_t encoder_work_mode; /*                            */ // encoder work mode(RAISE, FALLING, CHANGE)
     uint32_t encoder_pins_mode; /*                            */ // encoder pins mode (INPUT_PULLDOWN, INPUT_PULLUP)
@@ -28,7 +30,7 @@ typedef struct actuator_cfg_s
     double Kp; /*                                             */ // PID proportional coef
     double Ki; /*                                             */ // PID integral coef
     double Kd; /*                                             */ // PID differential coef
-    uint32_t period; /*                                       */ // compute period 
+    uint32_t period; /*                                       */ // compute period
     // ====================================================== //
     // ===================== PWM PARAMS ===================== //
     // ====================================================== //
@@ -54,35 +56,50 @@ typedef struct actuator_cfg_s
 
 class ACTUATOR
 {
+
 private:
+    Tacho _tacho;
     actuator_cfg_t *_cfg;
-    double _lastErr, _lastI;
+
     double _target_velocity;
     double _current_velocity;
+    int _target_rpm;
+    int _current_rpm;
 
     uint32_t _last_tick_time_val;
-    uint32_t _lastflash;
-    int counter;
+    int32_t _cntrl_val = 0;
 
-    double P = 0;
-    double I = 0;
-    double D = 0;
-    double val = 0;
+    bool _encA_flg;
+    bool _encB_flg;
+    int _enc_ticks;
+    uint64_t _lastflash;
 
+    float _integral = 0, _prevErr = 0;
 
+    int computePID(float input, float setpoint, float kp, float ki, float kd, float dt, int minOut, int maxOut);
+    
 public:
     ACTUATOR();
+    //
     void setConfig(actuator_cfg_t *cfg);
     actuator_cfg_t *getConfig();
+    //
     void setVelocity(double velocity);
     double getVelocity();
+    //
+    void setRPM(int rpm);
+    int getRPM();
+    //
+    void setPWM(int val);
+    int getPWM();
+    //
+    int getEncoderTiks();
+    //
     void tick();
-
+    //
     void enc_A_ISR();
     void enc_B_ISR();
-
-    
-
+    //
     ~ACTUATOR();
 };
 

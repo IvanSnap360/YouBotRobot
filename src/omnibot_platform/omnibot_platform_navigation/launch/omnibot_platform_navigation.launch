@@ -59,28 +59,57 @@
         <arg name="odom_frame_id" value="odom" />
         <arg name="map_frame_id" value="map" />
         <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
+
+
+        <!-- RTAB-Map's parameters -->
+        <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
+        <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
+        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
+
+        <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/> 
+
+        <param name="Reg/Force3DoF"    value="true" />
+
+        <param name="Vis/MaxDepth" type="string" value="3.5"/>
+        <param name="Grid/MaxGroundHeight" value="0.1"/>
+        <param name="Grid/MaxObstacleHeight" value="0.2"/>
+        <param name="Grid/CellSize" value="0.025" />
+ 
+        <param name="cloud_noise_filtering_radius" value="0.05" />
+        <param name="cloud_noise_filtering_min_neighbors" value="2" />
+       
+   
+        <param name="Optimizer/Strategy" type="string" value="1" />
+        <param name="Optimizer/Robust" type="string" value="true" />
+        <param name="RGBD/OptimizeMaxError" type="int" value="10" />
+        <param name="Mem/IncrementalMemory" type="bool" value="true"/>
+   
     </include>
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <param name="base_global_planner" value="navfn/NavfnROS" />
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
         <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
-        <!-- <param name="base_global_planner" value="global_planner/RRTGlobalPlanner"/>  -->
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml" command="load" ns="explore_costmap" />
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_exploration_params.yaml" command="load" ns="explore_costmap" />
-       
-        <rosparam file="$(find omnibot_platform_navigation)/config/rrt_global_planner.yaml" command="load" />
-        <rosparam file="$(find omnibot_platform_navigation)/config/dwa_local_planner_params.yaml" command="load" />
+
         
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-        <rosparam file="$(find omnibot_platform_navigation)/config/local_costmap_params.yaml" command="load" />
-        <rosparam file="$(find omnibot_platform_navigation)/config/global_costmap_params.yaml" command="load" /> 
-        <rosparam file="$(find omnibot_platform_navigation)/config/base_local_planner_params.yaml" command="load" />
+        <!-- <param name="base_global_planner" value="global_planner/RRTGlobalPlanner"/>  -->
+
+        <rosparam file="$(find omnibot_platform_navigation)/config/navfn_global_planner_params.yaml"  command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/rrt_global_planner.yaml"         command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/dwa_local_planner_params.yaml"   command="load" />
+        
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="global_costmap" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="local_costmap" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/local_costmap_params.yaml"       command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/global_costmap_params.yaml"      command="load" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/base_local_planner_params.yaml"  command="load" />
 
 
-        <rosparam file="$(find omnibot_platform_navigation)/config/teb_local_planner_params.yaml" command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/teb_local_planner_params.yaml"   command="load" />
 
-
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="explore_costmap" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_exploration_params.yaml" command="load" ns="explore_costmap" />
+        
         <param name="controller_frequency" value="10.0"/>
         <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>
      </node>
