@@ -110,6 +110,7 @@ void loop_f_in_serial_mode()
     }
 #endif // ENABLE_OUTPUT
 }
+
 void loop_f_in_ros_mode()
 {
 }

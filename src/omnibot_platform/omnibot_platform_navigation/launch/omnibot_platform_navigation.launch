@@ -107,9 +107,6 @@
 
         <rosparam file="$(find omnibot_platform_navigation)/config/teb_local_planner_params.yaml"   command="load" />
 
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="explore_costmap" />
-        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_exploration_params.yaml" command="load" ns="explore_costmap" />
-        
         <param name="controller_frequency" value="10.0"/>
         <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>
      </node>

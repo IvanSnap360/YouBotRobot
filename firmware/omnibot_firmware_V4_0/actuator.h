@@ -54,12 +54,18 @@ typedef struct actuator_cfg_s
     // ====================================================== //
 } actuator_cfg_t;
 
+#define TACHO_AMOUNT 50
+
 class ACTUATOR
 {
 
 private:
     Tacho _tacho;
     actuator_cfg_t *_cfg;
+
+    volatile uint8_t _tacho_values[TACHO_AMOUNT];
+    volatile int _tacho_values_ptr = 0;
+    volatile bool _tacho_overflow = false;
 
     double _target_velocity;
     double _current_velocity;
@@ -72,7 +78,7 @@ private:
     bool _encA_flg;
     bool _encB_flg;
     int _enc_ticks;
-    uint64_t _lastflash;
+    volatile uint64_t _lastflash;
 
     float _integral = 0, _prevErr = 0;
 

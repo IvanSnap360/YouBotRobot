@@ -42,7 +42,7 @@ uint32_t blink_last_time = 0;
 
 
 
-#define OUTPUT_SEND_FREQ 10.0
+#define OUTPUT_SEND_FREQ 20.0
 #define OUTPUT_SEND_PERIOD (uint32_t)(1000.0 / OUTPUT_SEND_FREQ)
 uint32_t last_send_time = 0;
 // ##################################################################### //
@@ -100,7 +100,7 @@ enum actuator_enum // actuator enumerator
 };
 
 // ~~~~~~~~~~~~ CONTROL PARAMS ~~~~~~~~~~~ //
-#define CONTROLLER_FREQ /*              */ 20.0
+#define CONTROLLER_FREQ /*              */ 100.0
 #define CONTROLLER_PERIOD /*            */ (uint32_t)(1000.0 / CONTROLLER_FREQ)
 
 // ~~~~~~~~~~ COMMON PWM PARAMS ~~~~~~~~~~ //
@@ -131,9 +131,9 @@ enum actuator_enum // actuator enumerator
 #define WHEEL_RADIUS /*                 */ (double)(WHEEL_DEAMETER / 2)
 
 // ~~~~~~~~~~ COMMON PID PARAMAS ~~~~~~~~~ //
-#define PID_Kp /*                       */ 1.0
-#define PID_Ki /*                       */ 0.0
-#define PID_Kd /*                       */ 0.0
+#define PID_Kp /*                       */ 30.0 // 30 20
+#define PID_Ki /*                       */ 15.0  // 15 8
+#define PID_Kd /*                       */ 0.6
 
 
 // ##################################################################### //
