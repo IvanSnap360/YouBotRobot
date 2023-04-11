@@ -8,8 +8,8 @@
 // ##################################################################### //
 // ############################ WORK PARAMS ############################ //
 // ##################################################################### //
-#define WORK_MODE__SERIAL
-// #define ROS_WORK_MODE
+// #define WORK_MODE__SERIAL
+#define ROS_WORK_MODE
 // ##################################################################### //
 // ######################## COMMUNICATION PARAMS ####################### //
 // ##################################################################### //
@@ -55,10 +55,10 @@ uint32_t last_send_time = 0;
 #define ROS_SERIAL__MAX_INPUT_BUFFER_SIZE /*      */ 2048
 #define ROS_SERIAL__MAX_OUTPUT_BUFFER_SIZE /*     */ 2048
 
-#define ROS_TOPIC_LEFT_FRONT_WHEEL_CONTROLLER /*  */ "/omnibot_robot/left_front_mecanum_controller/command"
-#define ROS_TOPIC_RIGHT_FRONT_WHEEL_CONTROLLER /* */ "/omnibot_robot/right_front_mecanum_controller/command"
-#define ROS_TOPIC_LEFT_BACK_WHEEL_CONTROLLER /*   */ "/omnibot_robot/left_back_mecanum_controller/command"
-#define ROS_TOPIC_RIGHT_BACK_WHEEL_CONTROLLER /*  */ "/omnibot_robot/right_back_mecanum_controller/command"
+#define ROS_TOPIC_LEFT_FRONT_WHEEL_CONTROLLER /*  */     "/omnibot_robot_platform_controller/left_front_mecanum_controller/command"
+#define ROS_TOPIC_RIGHT_FRONT_WHEEL_CONTROLLER /* */     "/omnibot_robot_platform_controller/right_front_mecanum_controller/command"
+#define ROS_TOPIC_LEFT_BACK_WHEEL_CONTROLLER /*   */     "/omnibot_robot_platform_controller/left_back_mecanum_controller/command"
+#define ROS_TOPIC_RIGHT_BACK_WHEEL_CONTROLLER /*  */     "/omnibot_robot_platform_controller/right_back_mecanum_controller/command"
 #define ROS_NODE__WORK_RATE_HZ /*                 */ 25.0
 
 // ##################################################################### //
@@ -100,7 +100,7 @@ enum actuator_enum // actuator enumerator
 };
 
 // ~~~~~~~~~~~~ CONTROL PARAMS ~~~~~~~~~~~ //
-#define CONTROLLER_FREQ /*              */ 100.0
+#define CONTROLLER_FREQ /*              */ 1000.0
 #define CONTROLLER_PERIOD /*            */ (uint32_t)(1000.0 / CONTROLLER_FREQ)
 
 // ~~~~~~~~~~ COMMON PWM PARAMS ~~~~~~~~~~ //

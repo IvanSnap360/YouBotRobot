@@ -2,10 +2,10 @@
 #define __ACTUATOR_H__
 #include <stdint.h>
 #include <Arduino.h>
-#include "Tacho.h"
 
 #define RPM_2_RADS(rpm) (double)(rpm * (PI / 30))
 #define RADS_2_RPM(rads) (double)((rads * 30) / PI)
+
 typedef struct actuator_cfg_s
 {
     // ====================================================== //
@@ -60,7 +60,6 @@ class ACTUATOR
 {
 
 private:
-    Tacho _tacho;
     actuator_cfg_t *_cfg;
 
     volatile uint8_t _tacho_values[TACHO_AMOUNT];

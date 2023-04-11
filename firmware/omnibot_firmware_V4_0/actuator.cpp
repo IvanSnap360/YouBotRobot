@@ -93,6 +93,11 @@ void ACTUATOR::tick()
         // _current_rpm = _tacho.guetRPM() / _cfg->motor_reduction;
         _current_velocity = RPM_2_RADS(_current_rpm); // current rpm to rads/s
 
+        if (_target_rpm == 0)
+        {
+            _integral = 0;
+            _prevErr = 0;
+        }
 
         _cntrl_val = computePID(_current_rpm, abs(_target_rpm),
                                 //
