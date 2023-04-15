@@ -28,6 +28,9 @@ private:
     std::string _manip_grp_planning_group;
     std::string _visual_link;
 
+    moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
+    moveit::planning_interface::MoveGroupInterface *move_group;
+    const robot_state::JointModelGroup *joint_model_group;
  
 
 public:
