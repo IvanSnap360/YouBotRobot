@@ -3,19 +3,23 @@
 
   <rosparam command="load" file="$(find omnibot_gazebo)/config/gazebo_pids.yaml" />
 
+  <arg name="x_pos" default="-4.0"/>
+  <arg name="y_pos" default="4.50"/>
+  <arg name="z_pos" default="0.040"/>
+
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="paused" value="false" />
     <arg name="use_sim_time" value="true" />
-    <arg name="gui" value="true" />
+    <arg name="gui" value="false" />
     <arg name="recording" value="false" />
     <arg name="debug" value="false" />
     <arg name="verbose" value="false" />
-    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_world.world" />
+    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_house.world" />
   </include>
 
   <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
-    args="-urdf -param robot_description -x -2 -z 0.040 -model omnibot_robot" respawn="false"
+    args="-urdf -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -model omnibot_robot" respawn="false"
     output="screen" />
 
 

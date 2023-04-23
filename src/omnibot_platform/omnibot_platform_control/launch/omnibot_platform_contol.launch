@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<launch>
+<launch>   
     <arg name="namespace" default="omnibot_platform" />
     <rosparam command="load" file="$(find omnibot_platform_control)/config/config.yaml"
         ns="$(arg namespace)" />

@@ -1,8 +1,6 @@
 #include "actuator.h"
 #include "config.h"
 
-
-
 #ifdef WORK_MODE__SERIAL
 #endif // WORK_MODE__SERIAL
 
@@ -56,7 +54,7 @@ void setup()
     }
 #endif // WORK_MODE__SERIAL
 
-    for (byte i = 0; i < ACTUATORS_COUNT; i++)
+    for (int i = 0; i < ACTUATORS_COUNT; i++)
     {
         actuators[i].setConfig(&_actuator_config[i]);
         attachInterrupt(_actuator_config->encoder_pin_A, (*functptr_enc_A[i]), ENCODER_WORK_MODE);
@@ -66,10 +64,9 @@ void setup()
 
 void loop()
 {
+   
     for (auto &actuator : actuators)
-    {
         actuator.tick();
-    }
 
 #ifdef WORK_MODE__ROS
     if (nh.connected())
@@ -90,7 +87,6 @@ void loop()
     }
     nh.spinOnce();
 #endif // WORK_MODE__ROS
-
 }
 
 #ifdef WORK_MODE__ROS
@@ -111,3 +107,46 @@ void right_back_controller_sub_cb_f(const std_msgs::Float64 &val)
     actuators[RIGHT_BACK].setVelocity((double)val.data);
 }
 #endif // WORK_MODE__ROS
+
+#ifdef WORK_MODE__SERIAL
+void serial_pid_setup()
+{
+    static int actuator = -1;
+    if (Serial.available() > 1)
+    {
+        actuator = Serial.parseInt();
+        char incoming = Serial.read();
+        float value = Serial.parseFloat();
+        switch (incoming)
+        {
+        case 'p':
+            actuators[actuator].setPID_KOEF(pid_enum::Kp, value);
+        case 'i':
+            actuators[actuator].setPID_KOEF(pid_enum::Ki, value);
+        case 'd':
+            actuators[actuator].setPID_KOEF(pid_enum::Kd, value);
+        case 's':
+            actuators[actuator].setVelocity(value);
+        }
+        Serial.println(incoming);
+        Serial.println(value);
+    }
+    if (actuator > -1 && actuator < ACTUATORS_COUNT)
+    {
+        String actuator_name = "";
+        switch (actuator)
+        {
+        case LEFT_FRONT:
+            actuator_name = "LEFT_FRONT";
+        case RIGHT_FRONT:
+            actuator_name = "RIGHT_FRONT";
+        case LEFT_BACK:
+            actuator_name = "LEFT_BACK";
+        case RIGHT_BACK:
+            actuator_name = "RIGHT_BACK";
+        }
+        Serial.println("Actuator " + actuator_name + " velocity");
+        Serial.println(actuators[actuator].getVelocity());
+    }
+}
+#endif // WORK_MODE__SERIAL

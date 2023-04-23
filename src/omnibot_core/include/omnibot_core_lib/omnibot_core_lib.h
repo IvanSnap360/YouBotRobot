@@ -28,7 +28,6 @@ private:
     std::string _manip_grp_planning_group;
     std::string _visual_link;
 
-    moveit::planning_interface::PlanningSceneInterface _planning_scene_interface;
  
 
 public:

@@ -253,7 +253,7 @@
 	<joint name="tip_joint" type="fixed">
 		<parent link="ang_link5"/>
 		<child link="tip_link"/>
-		<origin xyz="0.0 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+		<origin xyz="0.0 0.0 -0.118" rpy="0.0 0.0 0.0"/>
 	</joint>
 	
 

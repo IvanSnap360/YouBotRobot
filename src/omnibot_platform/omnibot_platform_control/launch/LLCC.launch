@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+    <param name="omnibot_platform_llcc_config"
+        value="$(find omnibot_platform_control)/config/LLCC_config.yaml">
+    </param>
+
+    <node pkg="omnibot_platform_control" type="low_level_controller_connector_node"
+        name="low_level_controller_connector_node" output="screen"/>
+
+</launch>

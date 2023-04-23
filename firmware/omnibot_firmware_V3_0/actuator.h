@@ -3,25 +3,30 @@
 #include <Arduino.h>
 typedef struct
 {
-    uint32_t motor_pin1, motor_pin2;
-    uint32_t encoder_pin_A, encoder_pin_B;
-    uint32_t inpin_work_mode;
+  uint32_t motor_pin1, motor_pin2;
+  uint32_t encoder_pin_A, encoder_pin_B;
+  uint32_t inpin_work_mode;
 
-    bool motor_reverse;
-    bool encoder_reverse;
+  bool motor_reverse;
+  bool encoder_reverse;
 
-    double kp, ki, kd;
-    double pid_rate_hz;
+  double kp, ki, kd;
+  double pid_rate_hz;
 
-    double motor_reduction;
-    uint8_t max_pwm, min_pwm, min_work_pwm;
-    double max_velocity,min_velocity, min_work_velocity;
+  double motor_reduction;
+  uint8_t max_pwm, min_pwm, min_work_pwm;
+  double max_velocity, min_velocity, min_work_velocity;
 } actuator_config_t;
+
+typedef enum
+{
+  Kp, Ki, Kd
+} pid_enum;
 
 class ACTUATOR
 {
-private:
-uint32_t _last_compute_time;
+  private:
+    uint32_t _last_compute_time;
     actuator_config_t *_cfg;
 
     double _target_velocity;
@@ -29,22 +34,26 @@ uint32_t _last_compute_time;
     double _compute_velocity;
 
 
-    double _integral, _prevErr;
+    double _err, _sum, _proportional, _integral, _differential, _prevErr;
 
-    double computePID(double input, double setpoint, double kp, double ki, double kd, double dt, double minOut, double maxOut);
+
     void setMotor(double val);
     double _pid_dt;
 
+    bool _enc_A_state, _enc_B_state;
 
-    bool _enc_A_state,_enc_B_state;
+    int _absolute_encoder_tick;
+    int32_t _relative_encoder_tick;
 
+    uint32_t _last_encoder_flash_time;
 
-    uint32_t _encoder_tick;  
-public:
+  public:
     ACTUATOR();
     void setConfig(actuator_config_t *config);
     void setVelocity(double vel);
     double getVelocity();
+
+    void setPID_KOEF(pid_enum koef, double val);
 
     void encA_ISR();
     void encB_ISR();

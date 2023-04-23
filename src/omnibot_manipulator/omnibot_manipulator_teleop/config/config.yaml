@@ -1,0 +1,18 @@
+control:
+    p_x:
+        up_button:       "8"
+        down_button:     "2"   
+        step:            0.01
+        inverse:         false
+    
+    p_y:
+        up_button:       "4"
+        down_button:     "6"   
+        step:            0.01
+        inverse:         false
+
+    p_z:
+        up_button:       "9"
+        down_button:     "3"   
+        step:            0.01
+        inverse:         false

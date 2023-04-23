@@ -1,0 +1,27 @@
+# low level controller connector (LLCC) config
+from:
+  [
+    "/omnibot_robot/left_front_mecanum_controller/command",
+    "/omnibot_robot/right_front_mecanum_controller/command",
+    "/omnibot_robot/left_back_mecanum_controller/command",
+    "/omnibot_robot/right_back_mecanum_controller/command",
+  ]
+to:
+  [
+    {
+      topic: "/omnibot_robot_platform_controller/left_front_mecanum_controller/command",
+      revese: false,
+    },
+    {
+      topic: "/omnibot_robot_platform_controller/right_front_mecanum_controller/command",
+      revese: false,
+    },
+    {
+      topic: "/omnibot_robot_platform_controller/left_back_mecanum_controller/command",
+      revese: true,
+    },
+    {
+      topic: "/omnibot_robot_platform_controller/right_back_mecanum_controller/command",
+      revese: true,
+    },
+  ]
