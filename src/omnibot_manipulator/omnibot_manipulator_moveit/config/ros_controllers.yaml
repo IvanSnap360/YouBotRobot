@@ -40,6 +40,7 @@ maipulator_group_controller:
       stopped_velocity_tolerance: 0
 gripper_group_controller:
   type: effort_controllers/JointTrajectoryController
+  
   joints:
     - ang_gripper
   gains:

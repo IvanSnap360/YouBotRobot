@@ -5,7 +5,7 @@ TebLocalPlannerROS:
  # Trajectory
   
  teb_autosize: True
- dt_ref: 0.8
+ dt_ref: 0.4
  dt_hysteresis: 0.1
  max_samples: 500
  global_plan_overwrite_orientation: True
@@ -39,10 +39,10 @@ TebLocalPlannerROS:
     
  # Obstacles
     
- min_obstacle_dist: 0.05
- include_costmap_obstacles: False
- costmap_obstacles_behind_robot_dist: 0.05
- inflation_dist: 0.1
+ min_obstacle_dist: 0.5
+ include_costmap_obstacles: True
+ costmap_obstacles_behind_robot_dist: 0.5
+ inflation_dist: 0.5
  obstacle_poses_affected: 30
  costmap_converter_plugin: ""
  costmap_converter_spin_thread: True
