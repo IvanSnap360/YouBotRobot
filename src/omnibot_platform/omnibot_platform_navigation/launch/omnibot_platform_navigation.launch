@@ -9,8 +9,13 @@
     <arg name="camera1" default="t265" />
     <arg name="camera2" default="d400" />
     <arg name="clip_distance" default="-2" />
+<<<<<<< HEAD
     <arg name="use_rviz" default="false" />
     <arg name="use_rtabmapviz" default="false" />
+=======
+    <arg name="use_rviz" default="true" />
+    <arg name="use_rtabmapviz" default="true" />
+>>>>>>> f603f8bc9bcc97764526ce8b357534490cc1f4e5
     <arg name="localization"            default="false"/>
     <arg name="initial_pose"            default=""/>       
 
@@ -52,7 +57,9 @@
     </group>
 
    
-    <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="20.0"/>
+        <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="0.0"/>
+        <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="500"/>
+
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
         <arg name="rtabmap_args" value="--delete_db_on_start" />
         
@@ -68,35 +75,48 @@
         <arg name="initial_pose"            default="$(arg initial_pose)"/>        
         <arg name="rviz" value="$(arg use_rviz)" />
         <arg name="rtabmapviz" value="$(arg use_rtabmapviz)" />
+
+        <param name="odom_tf_linear_variance" value="0.001" />
+        <param name="odom_tf_angular_variance" value="0.001" />
         <arg name="odom_frame_id" value="odom" />
         <arg name="map_frame_id" value="map" />
         <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
 
 
         <!-- RTAB-Map's parameters -->
-        <param name="RGBD/AngularUpdate"        type="string" value="0.01"/>
-        <param name="RGBD/LinearUpdate"         type="string" value="0.01"/>
-        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>
-
-        <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/> 
-
-        <param name="Reg/Force3DoF"    value="true" />
-
-        <param name="Vis/MaxDepth" type="string" value="3.5"/>
-        <param name="Grid/MaxGroundHeight" value="0.1"/>
-        <param name="Grid/MaxObstacleHeight" value="0.2"/>
-        <param name="Grid/CellSize" value="0.025" />
- 
-        <param name="cloud_noise_filtering_radius" value="0.05" />
-        <param name="cloud_noise_filtering_min_neighbors" value="2" />
-       
-   
-        <param name="Optimizer/Strategy" type="string" value="1" />
-        <param name="Optimizer/Robust" type="string" value="true" />
-        <param name="RGBD/OptimizeMaxError" type="int" value="10" />
-        <param name="Mem/IncrementalMemory" type="bool" value="true"/>
-   
+        <!-- <param name="Rtabmap/DetectionRate"  type="string" value="200.0"/> -->
+        
+        <!--  -->
+        <param name="Mem/RehearsalIdUpdatedToNewOne"  type="string" value="true"/>
+        <param name="Mem/RehearsalSimilarity"    type="string" value="0.4"/>
+        <param name="Mem/STMSize"                type="string" value="15"/>   
+        <param name="Mem/BadSignaturesIgnored"   type="string" value="true"/>   
+        <!--  -->
+        <param name="RGBD/Enabled"  type="string" value="true"/>
+        <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>     
+        <param name="RGBD/ProximityBySpace"     type="string" value="true"/>     
+        <param name="RGBD/ProximityByTime"      type="string" value="false"/>    
+        <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="10"/>  
+        <param name="RGBD/LocalRadius"          type="string" value="5"/>       
+        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false"/>    
+        <param name="RGBD/OptimizeMaxError"     type="string" value="2000"/>	
+        <!--  -->
+        <param name="Grid/FromDepth"            type="string" value="true"/>    
+        <!--  -->
+        <param name="Reg/Strategy"              type="string" value="1"/>      
+        <param name="Reg/Force3DoF"             type="string" value="true"/>     
+        <!--  -->
+        <param name="Vis/MinInliers"        type="string" value="12"/>     
+        <!--  -->
+        <param name="Icp/CorrespondenceRatio"   type="string" value="0.2"/>      
+        <param name="Icp/PM"                    type="string" value="false"/>
+        <param name="Icp/PointToPlane"          type="string" value="false"/>
+        <param name="Icp/MaxCorrespondenceDistance"  type="string" value="0.15"/>
+        <param name="Icp/VoxelSize"             type="string" value="0.05"/>
+        <!--  -->
     </include>
+
+    
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <param name="base_global_planner" value="navfn/NavfnROS" />

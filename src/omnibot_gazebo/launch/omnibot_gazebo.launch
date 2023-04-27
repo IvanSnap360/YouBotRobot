@@ -3,10 +3,25 @@
 
   <rosparam command="load" file="$(find omnibot_gazebo)/config/gazebo_pids.yaml" />
 
+  <!-- turtlebot3_house -->
   <arg name="x_pos" default="-4.0"/>
   <arg name="y_pos" default="4.50"/>
   <arg name="z_pos" default="0.040"/>
 
+  <!-- turtlebot3_world -->
+  <!-- <arg name="x_pos" default="-2.0"/>
+  <arg name="y_pos" default="0"/>
+  <arg name="z_pos" default="0.040"/>  -->
+  
+  <!-- WilloGarage -->
+  <!-- <arg name="x_pos" default="-17.0"/>
+  <arg name="y_pos" default="-12.0"/>
+  <arg name="z_pos" default="0.3"/> -->
+
+  <!-- MyWorkShop -->
+  <!-- <arg name="x_pos" default="0.0"/>
+  <arg name="y_pos" default="0.0"/>
+  <arg name="z_pos" default="0.3"/> -->
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="paused" value="false" />
@@ -16,6 +31,13 @@
     <arg name="debug" value="false" />
     <arg name="verbose" value="false" />
     <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_house.world" />
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_stage_3.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_world.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/WillowGarage/WillowGarage.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorkShop/MyWorkShop.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world_design1.world" /> -->
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/garage.world" /> -->
   </include>
 
   <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
