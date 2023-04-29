@@ -31,6 +31,8 @@
         type="robot_state_publisher" ns="omnibot_robot">
         <param name="publish_frequency" value="200" />
         <param name="use_tf_static" value="false" />
+        <param name="rate" value="200" />
+
     </node>
 
 </launch>

@@ -9,13 +9,8 @@
     <arg name="camera1" default="t265" />
     <arg name="camera2" default="d400" />
     <arg name="clip_distance" default="-2" />
-<<<<<<< HEAD
-    <arg name="use_rviz" default="false" />
-    <arg name="use_rtabmapviz" default="false" />
-=======
     <arg name="use_rviz" default="true" />
     <arg name="use_rtabmapviz" default="true" />
->>>>>>> f603f8bc9bcc97764526ce8b357534490cc1f4e5
     <arg name="localization"            default="false"/>
     <arg name="initial_pose"            default=""/>       
 
@@ -50,6 +45,9 @@
         <include file="$(find realsense2_camera)/launch/rs_t265.launch">
             <arg name="camera"              value="$(arg camera1)"/>
             <arg name="enable_sync"           value="true"/>
+            <arg name="publish_odom_tf"     value="false"/>
+            <!-- <arg name="external_manager"         value="true"/>
+            <arg name="manager"                  value="sensor_odom_manager"/> -->
         </include>
 
 
@@ -57,8 +55,8 @@
     </group>
 
    
-        <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="0.0"/>
-        <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="500"/>
+        <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="150.0"/>
+        <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="0"/>
 
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
         <arg name="rtabmap_args" value="--delete_db_on_start" />
@@ -85,7 +83,11 @@
 
         <!-- RTAB-Map's parameters -->
         <!-- <param name="Rtabmap/DetectionRate"  type="string" value="200.0"/> -->
-        
+        <!-- <param name="Grid/MaxGroundHeight" type="string" value="0.2"/>       all points below 20 cm are ground -->
+        <!-- <param name="Grid/MaxObstacleHeight" type="string" value="2"/>       all points above 20 cm and below 2 m are obstacles -->
+        <!-- <param name="Grid/NormalsSegmentation" type="string" value="false"/>  -->
+        <!-- <param name="Grid/MinGroundHeight" value="0.25"/> -->
+        <!-- Use simple passthrough to filter the ground instead of normals segmentation -->
         <!--  -->
         <param name="Mem/RehearsalIdUpdatedToNewOne"  type="string" value="true"/>
         <param name="Mem/RehearsalSimilarity"    type="string" value="0.4"/>
@@ -112,14 +114,14 @@
         <param name="Icp/PM"                    type="string" value="false"/>
         <param name="Icp/PointToPlane"          type="string" value="false"/>
         <param name="Icp/MaxCorrespondenceDistance"  type="string" value="0.15"/>
-        <param name="Icp/VoxelSize"             type="string" value="0.05"/>
+        <param name="Icp/VoxelSize"             type="string" value="0.01s"/>
         <!--  -->
     </include>
 
     
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-        <param name="base_global_planner" value="navfn/NavfnROS" />
+        <!-- <param name="base_global_planner" value="navfn/NavfnROS" /> -->
         <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
         <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
 
