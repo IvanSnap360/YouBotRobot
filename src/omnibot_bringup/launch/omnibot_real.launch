@@ -37,7 +37,15 @@
     </node>
 
     
+    <!--  -->
+    <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
- 
+    <!--  -->
+    <include file="$(find omnibot_platform_navigation)/launch/omnibot_platform_navigation.launch" >
+        <arg name="sim"                     value="false"/>
+        <arg name="use_rviz"                value="false"/>
+        <arg name="localization"            value="$(arg localization)"/>
+        <arg name="initial_pose"            value=""/>     
+    </include>
     
 </launch>

@@ -128,6 +128,7 @@ void SENSOR_ODOM_MANAGER_LIB::_main_f(const ros::TimerEvent &enent)
 
         _tf_msg.header.stamp = ros::Time::now();
         _tf_msg.header.seq = ros::Time::now().toSec();
+        
 
         _odom_out_msg.header.frame_id = _odom_out_frame;
         _odom_out_msg.child_frame_id = _base_frame;
