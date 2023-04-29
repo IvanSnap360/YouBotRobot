@@ -9,7 +9,7 @@
     <arg name="camera1" default="t265" />
     <arg name="camera2" default="d400" />
     <arg name="clip_distance" default="-2" />
-    <arg name="use_rviz" default="true" />
+    <arg name="use_rviz" default="false" />
     <arg name="use_rtabmapviz" default="false" />
     <arg name="localization"            default="false"/>
     <arg name="initial_pose"            default=""/>       
@@ -38,7 +38,7 @@
             <arg name="clip_distance" value="$(arg clip_distance)" />
         </include> -->
 
-        <include file="$(find realsense2_camera)/launch/rs_aligned_depth.launch">
+        <include file="$(find omnibot_platform_navigation)/launch/rs_aligned_depth.launch">
             <arg name="camera"              value="$(arg camera2)"/>
         </include>
 
@@ -54,9 +54,9 @@
         <!-- <node pkg="tf" type="static_transform_publisher" name="t265_to_d400" args="0 0 0 0 0 0 /$(arg camera1)_link /$(arg camera2)_link 100"/> -->
     </group>
 
-   
-        <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="150.0"/>
-        <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="0"/>
+
+    <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="50.0"/>
+    <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="0"/>
 
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
         <arg name="rtabmap_args" value="--delete_db_on_start" />
@@ -80,14 +80,39 @@
         <arg name="map_frame_id" value="map" />
         <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
 
-
         <!-- RTAB-Map's parameters -->
-        <!-- <param name="Rtabmap/DetectionRate"  type="string" value="200.0"/> -->
-        <!-- <param name="Grid/MaxGroundHeight" type="string" value="0.2"/>       all points below 20 cm are ground -->
-        <!-- <param name="Grid/MaxObstacleHeight" type="string" value="2"/>       all points above 20 cm and below 2 m are obstacles -->
-        <!-- <param name="Grid/NormalsSegmentation" type="string" value="false"/>  -->
-        <!-- <param name="Grid/MinGroundHeight" value="0.25"/> -->
-        <!-- Use simple passthrough to filter the ground instead of normals segmentation -->
+        <param name="Grid/CellSize"                           value="0.05"           />                                   
+        <param name="Grid/ClusterRadius"                      value="0.1"            />                              
+        <param name="Grid/DepthDecimation"                    value="4"              />                            
+        <param name="Grid/DepthRoiRatios"                     value="0.0 0.0 0.0 0.0"/>                             
+        <param name="Grid/FlatObstacleDetected"               value="true"           />                               
+        <param name="Grid/FootprintHeight"                    value="0.0"            />                            
+        <param name="Grid/FootprintLength"                    value="0.0"            />                            
+        <param name="Grid/FootprintWidth"                     value="0.0"            />                             
+        <param name="Grid/FromDepth"                          value="true"           />                          
+        <param name="Grid/GroundIsObstacle"                   value="false"          />                           
+        <param name="Grid/MapFrameProjection"                 value="false"          />                                 
+        <param name="Grid/MaxGroundAngle"                     value="45"             />                             
+        <param name="Grid/MaxGroundHeight"                    value="0.2"            />                            
+        <param name="Grid/MaxObstacleHeight"                  value="2.0"            />                                  
+        <param name="Grid/MinClusterSize"                     value="10"             />                             
+        <param name="Grid/MinGroundHeight"                    value="0.0"            />                            
+        <param name="Grid/NoiseFilteringMinNeighbors"         value="5"              />                                         
+        <param name="Grid/NoiseFilteringRadius"               value="1.0"            />                               
+        <param name="Grid/NormalK"                            value="20"             />                    
+        <param name="Grid/NormalsSegmentation"                value="true"           />                                
+        <param name="Grid/PreVoxelFiltering"                  value="true"           />                                  
+        <param name="Grid/RangeMax"                           value="3.0"            />                   
+        <param name="Grid/RangeMin"                           value="0.2"            />                   
+        <param name="Grid/RayTracing"                         value="true"           />                         
+        <param name="Grid/Scan2dUnknownSpaceFilled"           value="true"           />                                   
+        <param name="Grid/ScanDecimation"                     value="2"              />        
+        <!--  -->
+        <param name="GridGlobal/OccupancyThr" value = "0.5" />                     <!--[Occupancy threshold (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbClampingMax" value = "0.971" />                <!--[Probability clamping maximum (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbClampingMin" value = "0.1192" />               <!--[Probability clamping minimum (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbHit" value = "0.7" />                          <!--[Probability of a hit (value between 0.5 and 1).]-->
+        <param name="GridGlobal/ProbMiss" value = "0.4" />                         <!--[Probability of a miss (value between 0 and 0.5).]-->
         <!--  -->
         <param name="Mem/RehearsalIdUpdatedToNewOne"  type="string" value="true"/>
         <param name="Mem/RehearsalSimilarity"    type="string" value="0.4"/>
@@ -119,6 +144,15 @@
     </include>
 
     
+    
+        <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
+            <param name="scan_height" value="0.1"/>
+            <param name="output_frame_id" value="d400_link"/>
+            <param name="range_min" value="0.45"/>
+            <remap from="image" to="/d400/depth/image_rect_raw"/>
+            <remap from="scan" to="/scan"/>
+        </node>
+
 
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
         <!-- <param name="base_global_planner" value="navfn/NavfnROS" /> -->
@@ -143,8 +177,14 @@
 
         <rosparam file="$(find omnibot_platform_navigation)/config/teb_local_planner_params.yaml"   command="load" />
 
-        <param name="controller_frequency" value="50.0"/>
-        <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>
+        <param name="controller_frequency" value="5.0" />
+		<param name="controller_patience" value="15.0" />
+
+        <param name="planner_frequency" value="1.0" />
+		<param name="planner_patience" value="5.0" />
+
+
+        <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>\
      </node>
     
 </launch>
