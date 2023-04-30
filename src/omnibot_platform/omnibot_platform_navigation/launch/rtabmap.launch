@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<launch>
+
+
+    <arg name="camera1" default="t265" />
+    <arg name="camera2" default="d400" />
+    <arg name="use_rviz" default="false" />
+    <arg name="use_rtabmapviz" default="false" />
+    <arg name="localization" default="false" />
+    <arg name="initial_pose" default="" />
+
+
+    <param name="/rtabmap/rtabmap/Rtabmap/DetectionRate" value="50.0" />
+    <param name="/rtabmap/rtabmap/Rtabmap/ImageBufferSize" value="0" />
+
+    <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
+        <arg name="rtabmap_args" value="--delete_db_on_start" />
+
+        <arg name="depth_topic" value="/$(arg camera2)/aligned_depth_to_color/image_raw" />
+        <arg name="frame_id" value="base_link" />
+        <arg name="visual_odometry" value="false" />
+        <arg name="odom_topic" value="/odom" />
+        <arg name="rgb_topic" value="/$(arg camera2)/color/image_raw" />
+        <arg name="camera_info_topic" value="/$(arg camera2)/color/camera_info" />
+        <arg name="queue_size" value="200" />
+
+
+        <arg name="localization" default="$(arg localization)" />
+        <arg name="initial_pose" default="$(arg initial_pose)" />
+        <arg name="rviz" value="$(arg use_rviz)" />
+        <arg name="rtabmapviz" value="$(arg use_rtabmapviz)" />
+
+        <param name="odom_tf_linear_variance" value="0.001" />
+        <param name="odom_tf_angular_variance" value="0.001" />
+        <arg name="odom_frame_id" value="odom" />
+        <arg name="map_frame_id" value="map" />
+        <arg name="rviz_cfg" value="$(find omnibot_platform_navigation)/rviz/rtab_cfg2.rviz" />
+
+        <remap from="scan" to="/$(arg camera2)/scan" />
+
+        <!-- RTAB-Map's parameters -->
+        <param name="Grid/CellSize" value="0.05" />
+        <param name="Grid/ClusterRadius" value="0.1" />
+        <param name="Grid/DepthDecimation" value="4" />
+        <param name="Grid/DepthRoiRatios" value="0.0 0.0 0.0 0.0" />
+        <param name="Grid/FlatObstacleDetected" value="true" />
+        <param name="Grid/FootprintHeight" value="0.0" />
+        <param name="Grid/FootprintLength" value="0.0" />
+        <param name="Grid/FootprintWidth" value="0.0" />
+        <param name="Grid/FromDepth" value="true" />
+        <param name="Grid/GroundIsObstacle" value="false" />
+        <param name="Grid/MapFrameProjection" value="false" />
+        <param name="Grid/MaxGroundAngle" value="45" />
+        <param name="Grid/MaxGroundHeight" value="0.2" />
+        <param name="Grid/MaxObstacleHeight" value="1.0" />
+        <param name="Grid/MinClusterSize" value="10" />
+        <param name="Grid/MinGroundHeight" value="0.0" />
+        <param name="Grid/NoiseFilteringMinNeighbors" value="5" />
+        <param name="Grid/NoiseFilteringRadius" value="1.0" />
+        <param name="Grid/NormalK" value="20" />
+        <param name="Grid/NormalsSegmentation" value="true" />
+        <param name="Grid/PreVoxelFiltering" value="true" />
+        <param name="Grid/RangeMax" value="3.0" />
+        <param name="Grid/RangeMin" value="0.2" />
+        <param name="Grid/RayTracing" value="true" />
+        <param name="Grid/Scan2dUnknownSpaceFilled" value="true" />
+        <param name="Grid/ScanDecimation" value="2" />
+        <!--  -->
+        <param name="GridGlobal/OccupancyThr" value="0.5" />                     <!--[Occupancy
+        threshold (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbClampingMax" value="0.971" />                <!--[Probability
+        clamping maximum (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbClampingMin" value="0.1192" />               <!--[Probability
+        clamping minimum (value between 0 and 1).]-->
+        <param name="GridGlobal/ProbHit" value="0.7" />                          <!--[Probability
+        of a hit (value between 0.5 and 1).]-->
+        <param name="GridGlobal/ProbMiss" value="0.4" />                         <!--[Probability
+        of a miss (value between 0 and 0.5).]-->
+        <!--  -->
+        <param name="Mem/RehearsalIdUpdatedToNewOne" type="string" value="true" />
+        <param name="Mem/RehearsalSimilarity" type="string" value="0.4" />
+        <param name="Mem/STMSize" type="string" value="15" />
+        <param name="Mem/BadSignaturesIgnored" type="string" value="true" />
+        <!--  -->
+        <param name="RGBD/Enabled" type="string" value="true" />
+        <param name="RGBD/NeighborLinkRefining" type="string" value="true" />
+        <param name="RGBD/ProximityBySpace" type="string" value="true" />
+        <param name="RGBD/ProximityByTime" type="string" value="false" />
+        <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="10" />
+        <param name="RGBD/LocalRadius" type="string" value="5" />
+        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" />
+        <param name="RGBD/OptimizeMaxError" type="string" value="2000" />
+        <!--  -->
+        <param name="Grid/FromDepth" type="string" value="true" />
+        <!--  -->
+        <param name="Reg/Strategy" type="string" value="1" />
+        <param name="Reg/Force3DoF" type="string" value="true" />
+        <!--  -->
+        <param name="Vis/MinInliers" type="string" value="12" />
+        <!--  -->
+        <param name="Icp/CorrespondenceRatio" type="string" value="0.2" />
+        <param name="Icp/PM" type="string" value="false" />
+        <param name="Icp/PointToPlane" type="string" value="false" />
+        <param name="Icp/MaxCorrespondenceDistance" type="string" value="0.15" />
+        <param name="Icp/VoxelSize" type="string" value="0.01s" />
+        <!--  -->
+    </include>
+
+
+    <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan"
+        name="depthimage_to_laserscan">
+        <param name="scan_height" value="0.1" />
+        <param name="output_frame_id" value="d400_link" />
+        <param name="range_min" type="double" value="0.45" />
+        <param name="range_max" type="double" value="4" />
+        <remap from="image" to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
+        <remap from="scan" to="/$(arg camera2)/scan" />
+    </node>
+
+</launch>
