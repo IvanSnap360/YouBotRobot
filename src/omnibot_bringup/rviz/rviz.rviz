@@ -6,11 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /3dMap1
         - /Robot1
         - /move_base1/TEB_planner1/global_path1
         - /move_base1/TEB_planner1/Marker1/Namespaces1
         - /move_base1/RRT_Global_Planner1/global_plan1
-        - /MotionPlanning1
       Splitter Ratio: 0.5080732107162476
     Tree Height: 670
   - Class: rviz/Selection
@@ -446,7 +446,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -454,14 +454,14 @@ Visualization Manager:
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
-      Size (Pixels): 3
-      Size (m): 0.05000000074505806
-      Style: Boxes
+      Size (Pixels): 10
+      Size (m): 0.02500000037252903
+      Style: Points
       Topic: /rtabmap/cloud_map
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
@@ -1112,7 +1112,8 @@ Visualization Manager:
               Marker Topic: /move_base/TebLocalPlannerROS/teb_markers
               Name: Marker
               Namespaces:
-                {}
+                RobotFootprintModel: true
+                TebContainer: true
               Queue Size: 100
               Value: true
             - Alpha: 1
@@ -2393,13 +2394,13 @@ Visualization Manager:
       Use rainbow: true
       Value: false
     - Class: rviz/MarkerArray
-      Enabled: false
+      Enabled: true
       Marker Topic: /explore/frontiers
       Name: MarkerArray
       Namespaces:
         {}
       Queue Size: 100
-      Value: false
+      Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -2456,7 +2457,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.612252235412598
+      Distance: 0.2023264616727829
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -2464,17 +2465,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -2.5359842777252197
-        Y: 3.721282482147217
-        Z: -0.39657679200172424
+        X: -0.0117896543815732
+        Y: 0.15823835134506226
+        Z: 2.6182620525360107
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.490398108959198
+      Pitch: 0.43039754033088684
       Target Frame: <Fixed Frame>
-      Yaw: 3.0653979778289795
+      Yaw: 4.700399398803711
     Saved: ~
 Window Geometry:
   Displays:

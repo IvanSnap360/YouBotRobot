@@ -11,11 +11,16 @@ subscribe_to_updates: true
 
 observation_sources: point_cloud_sensor
 
-point_cloud_sensor: {sensor_frame: d400_link, data_type: PointCloud2, topic: /d400/depth/color/points, marking: true, clearing: true}
+point_cloud_sensor: {
+  sensor_frame: d400_link,
+  data_type: PointCloud2, 
+  topic: /d400/depth/color/points,
+  marking: true, 
+  clearing: true}
 
 obstacle_layer:
   enabled:              true
-  max_obstacle_height:  2.0
+  max_obstacle_height:  10.0
   origin_z:             0.0
   z_resolution:         0.2
   z_voxels:             2
@@ -24,23 +29,23 @@ obstacle_layer:
   combination_method:   1
   track_unknown_space:  true    #true needed for disabling global path planning through unknown space
   obstacle_range: 1.2
-  raytrace_range: 1.5
+  raytrace_range: 5.0
   publish_voxel_map: true
   observation_sources:  scan
   scan:
     data_type: PointCloud2
     topic: rtabmap/cloud_obstacles
-    sensor_frame: base_footprint
+    sensor_frame: d400_link
     marking: true
     clearing: true
     min_obstacle_height: 0.05
-    max_obstacle_height: 0.2
+    max_obstacle_height: 5.0
 
 #cost_scaling_factor and inflation_radius were now moved to the inflation_layer ns
 inflation_layer:
   enabled:              true
   cost_scaling_factor:  10.0
-  inflation_radius:     0.36 # 0.36 
+  inflation_radius:     0.5 # 0.36 
 
 static_layer:
   enabled:              true

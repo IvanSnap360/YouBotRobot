@@ -16,13 +16,6 @@
 
     <arg name="sim" default="false" />
 
-
-
-
-    <group if="$(arg sim)">
-
-    </group>
-
     <group ns="rtabmap">
         <param name="use_action_for_goal" type="bool" value="true"/>
         <remap from="move_base"            to="/move_base"/>
@@ -41,14 +34,16 @@
         </include>
     </group>
 
+    <group if="$(arg localization)">
+        <!-- <include file="$(find omnibot_platform_navigation)/launch/load_map.launch" /> -->
+        <!-- <include file="$(find omnibot_platform_navigation)/launch/localization.launch" />  -->
+    </group>
 
-    <include file="$(find omnibot_platform_navigation)/launch/rtabmap.launch" />  
+    <include file="$(find omnibot_platform_navigation)/launch/rtabmap.launch" >
+        <arg name="localization" value="$(arg localization)"/>
+    </include>  
     
     <include file="$(find omnibot_platform_navigation)/launch/move_base.launch" />  
 
-
-
-
-    
     
 </launch>

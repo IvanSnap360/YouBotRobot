@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-    <arg name="map_file" default="$(find omnibot_platform_navigation)/maps/map_1.yaml"/>
+    <arg name="map_file" default="$(find omnibot_platform_navigation)/maps/my_world_map_v3.yaml"/>
     <node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)">
         <remap from="/map" to="/rtabmap/grid_map"/>
     </node>

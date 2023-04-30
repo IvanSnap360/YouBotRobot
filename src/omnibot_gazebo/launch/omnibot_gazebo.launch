@@ -3,10 +3,10 @@
 
   <rosparam command="load" file="$(find omnibot_gazebo)/config/gazebo_pids.yaml" />
 
-  <!-- turtlebot3_house -->
+  <!-- turtlebot3_house
   <arg name="x_pos" default="-4.0"/>
   <arg name="y_pos" default="4.50"/>
-  <arg name="z_pos" default="0.040"/>
+  <arg name="z_pos" default="0.040"/> -->
 
   <!-- turtlebot3_world -->
   <!-- <arg name="x_pos" default="-2.0"/>
@@ -23,6 +23,11 @@
   <arg name="y_pos" default="0.0"/>
   <arg name="z_pos" default="0.3"/> -->
 
+  <!-- MyWorld -->
+  <arg name="x_pos" default="-4.0"/>
+  <arg name="y_pos" default="3.0"/>
+  <arg name="z_pos" default="0.3"/>
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="paused" value="false" />
     <arg name="use_sim_time" value="true" />
@@ -30,7 +35,7 @@
     <arg name="recording" value="false" />
     <arg name="debug" value="false" />
     <arg name="verbose" value="false" />
-    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_house.world" />
+    <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_house.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_stage_3.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/turtlebot3_worlds/turtlebot3_world.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/WillowGarage/WillowGarage.world" /> -->
@@ -38,10 +43,12 @@
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world_design1.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/garage.world" /> -->
+    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorld/MyWorld.world" />
+
   </include>
 
   <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner"
-    args="-urdf -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -model omnibot_robot" respawn="false"
+    args="-urdf -param robot_description -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y 1.57 -model omnibot_robot" respawn="false"
     output="screen" />
 
 

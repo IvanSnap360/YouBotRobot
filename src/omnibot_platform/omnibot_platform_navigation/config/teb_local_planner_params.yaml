@@ -1,22 +1,21 @@
 TebLocalPlannerROS:
 
  odom_topic: odom
- map_frame: map
     
  # Trajectory
   
  teb_autosize: True
- dt_ref: 0.5
+ dt_ref: 0.8
  dt_hysteresis: 0.1
  max_samples: 500
  global_plan_overwrite_orientation: True
  allow_init_with_backwards_motion: False
  max_global_plan_lookahead_dist: 3.0
- global_plan_viapoint_sep: 1
+ global_plan_viapoint_sep: -1
  global_plan_prune_distance: 1
  exact_arc_length: False
  feasibility_check_no_poses: 5
- publish_feedback: True
+ publish_feedback: False
     
  # Robot
          
@@ -40,20 +39,14 @@ TebLocalPlannerROS:
     
  # Obstacles
     
- min_obstacle_dist: 0.7
- include_costmap_obstacles: True
- costmap_obstacles_behind_robot_dist: 1.0
- inflation_dist: 0.35
+ min_obstacle_dist: 0.05
+ include_costmap_obstacles: False
+ costmap_obstacles_behind_robot_dist: 0.05
+ inflation_dist: 0.1
  obstacle_poses_affected: 30
-#  costmap_converter_plugin:  "costmap_converter::CostmapToPolygonsDBSMCCH"
- #costmap_converter_plugin: "costmap_converter::CostmapToLinesDBSRANSAC"
- costmap_converter_plugin: "costmap_converter::CostmapToLinesDBSMCCH"
-#  costmap_converter_plugin: "costmap_converter::CostmapToPolygonsDBSConcaveHull"
-#  costmap_converter_plugin: "" # deactivate plugin
+ costmap_converter_plugin: ""
  costmap_converter_spin_thread: True
  costmap_converter_rate: 5
-
-
 
  # Optimization
     
@@ -78,7 +71,7 @@ TebLocalPlannerROS:
 
  enable_homotopy_class_planning: True
  enable_multithreading: True
- simple_exploration: True
+ simple_exploration: False
  max_number_classes: 4
  roadmap_graph_no_samples: 15
  roadmap_graph_area_width: 5
@@ -86,5 +79,4 @@ TebLocalPlannerROS:
  h_signature_threshold: 0.1
  obstacle_keypoint_offset: 0.1
  obstacle_heading_threshold: 0.45
- visualize_hc_graph: True
-
+ visualize_hc_graph: False
