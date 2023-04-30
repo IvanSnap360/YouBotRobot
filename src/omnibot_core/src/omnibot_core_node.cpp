@@ -8,7 +8,6 @@ int main(int argc, char * argv[])
     ros::NodeHandle nh;
     std::string config_path = nh.param<std::string>("omnibot_core_config_path", " ");
     auto core = OMNIBOT_CORE_LIB(&nh,config_path);
-    core.run();
     ros::spin();
     ros::shutdown();
     

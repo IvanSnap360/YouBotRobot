@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <param name="omnibot_manipulator_control_server_config_path" 
+        value="$(find omnibot_manipulator_control)/config/omnibot_manipulator_control_server_config.yaml"/>
+
+    <node pkg="omnibot_manipulator_control" type="omnibot_manipulator_control_server_node" name="omnibot_manipulator_control_server" output="screen">
+        
+    </node>
+</launch>

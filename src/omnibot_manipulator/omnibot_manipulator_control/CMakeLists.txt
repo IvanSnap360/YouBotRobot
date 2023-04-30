@@ -16,9 +16,18 @@ find_package(catkin REQUIRED COMPONENTS
   trajectory_msgs
   dynamixel_workbench_msgs
   dynamixel_workbench_toolbox
+  moveit_core
+  moveit_ros_planning_interface
+  moveit_visual_tools
 )
 
 ## System dependencies are found with CMake's conventions
+
+
+find_package(Eigen3 REQUIRED)
+find_package(moveit_ros_planning_interface REQUIRED) 
+include_directories(${Eigen_INCLUDE_DIRS})
+include_directories(SYSTEM ${EIGEN3_INCLUDE_DIRS})
 
 
 find_package(Boost REQUIRED COMPONENTS system)
@@ -127,7 +136,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
  INCLUDE_DIRS include
- LIBRARIES omnibot_manipulator_control_lib joint
+ LIBRARIES omnibot_manipulator_control_server_lib 
  CATKIN_DEPENDS roscpp rospy std_msgs dynamixel_workbench_msgs trajectory_msgs dynamixel_workbench_toolbox cmake_modules
 #  DEPENDS system_lib
 )
@@ -146,8 +155,7 @@ include_directories(
 
 ## Declare a C++ library
 add_library(${PROJECT_NAME}
-  src/${PROJECT_NAME}_lib/omnibot_manipulator_control_lib.cpp
-  src/${PROJECT_NAME}_lib/joint.cpp
+  src/${PROJECT_NAME}_server_lib/omnibot_manipulator_control_server_lib.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -158,10 +166,9 @@ add_library(${PROJECT_NAME}
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node 
-  src/omnibot_manipulator_control_node.cpp 
-  src/omnibot_manipulator_control_lib/omnibot_manipulator_control_lib.cpp
-  src/omnibot_manipulator_control_lib/joint.cpp)
+add_executable(${PROJECT_NAME}_server_node
+  src/omnibot_manipulator_control_server_node.cpp 
+  src/omnibot_manipulator_control_server_lib/omnibot_manipulator_control_server_lib.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -170,10 +177,10 @@ add_executable(${PROJECT_NAME}_node
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(${PROJECT_NAME}_server_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(${PROJECT_NAME}_node
+target_link_libraries(${PROJECT_NAME}_server_node
   yaml-cpp
   ${catkin_LIBRARIES}
 )

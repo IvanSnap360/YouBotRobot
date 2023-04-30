@@ -17,8 +17,8 @@
     </node> -->
 
     <include file="$(find rtabmap_ros)/launch/rtabmap.launch">
-        <!-- <arg name="rtabmap_args" value="delete_db_on_start" /> -->
-        <arg name="database_path" value="$(find omnibot_platform_navigation)/maps/my_world.db"/>
+        <arg name="rtabmap_args" value="--delete_db_on_start" />
+        <!-- <arg name="database_path" value="$(find omnibot_platform_navigation)/maps/my_world.db"/> -->
         <!-- <param name="publish_tf" value="false" if="$(arg localization)"/> -->
         
         <arg name="depth_topic" value="/$(arg camera2)/aligned_depth_to_color/image_raw" />
@@ -45,7 +45,7 @@
 
 
         <!-- RTAB-Map's parameters -->
-        <param name="Rtabmap/DetectionRate" type="string" value="50"/>
+        <param name="Rtabmap/DetectionRate" type="string" value="1"/>
         <param name="Rtabmap/ImageBufferSize" type="string" value="0" />
         <!--  -->
         <param name="Grid/CellSize" value="0.1" />

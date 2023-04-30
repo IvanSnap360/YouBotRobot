@@ -1,0 +1,12 @@
+moveit:
+    manipulator:
+      planner: RRT
+      planning_group_name: maipulator_group
+      saved_poses: 
+        home: [0.0,90,-90,0.0,0.0]
+        pack: [-180.0, -21.0, -67.0, -2.0, 0.0]
+    gripper:     
+      planner: NULL
+      planning_group_name: gripper_group
+      saved_poses: []
+
