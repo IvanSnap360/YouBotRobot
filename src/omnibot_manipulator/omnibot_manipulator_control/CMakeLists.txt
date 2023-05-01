@@ -79,8 +79,7 @@ endif(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
 ## Generate messages in the 'msg' folder
 # add_message_files(
 #   FILES
-#   Message1.msg
-#   Message2.msg
+
 # )
 
 ## Generate services in the 'srv' folder
@@ -90,6 +89,8 @@ add_service_files(
   torque_cntrl.srv
   velocity_cntrl.srv
   pos_cntrl.srv
+  manipulator_cmd.srv
+  gripper_cmd.srv
 )
 
 ## Generate actions in the 'action' folder

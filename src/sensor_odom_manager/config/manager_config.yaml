@@ -1,4 +1,4 @@
-calculation_rate_hz: 200
+calculation_rate_hz: 50
 
 odom_input_topic: "/t265/odom/sample"
 

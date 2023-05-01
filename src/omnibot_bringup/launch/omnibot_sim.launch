@@ -32,9 +32,7 @@
 
     <!--  -->
     <group if="$(arg use_manipulator)">
-        <!-- <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch">
-            <arg name="namespace" value="omnibot_robot"/>
-        </include> -->
+        <!-- <include file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control_server.launch"/> -->
 
         <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch">
             <arg name="use_rviz" value="false"/>
