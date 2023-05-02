@@ -43,7 +43,7 @@
         <arg name="localization" value="$(arg localization)"/>
     </include>  
     
-    <include file="$(find omnibot_platform_navigation)/launch/move_base.launch" />  
+    <!-- <include file="$(find omnibot_platform_navigation)/launch/move_base.launch" />   -->
 
     
 </launch>

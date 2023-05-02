@@ -45,11 +45,11 @@
 
 
         <!-- RTAB-Map's parameters -->
-        <param name="Rtabmap/DetectionRate" type="string" value="1"/>
+        <param name="Rtabmap/DetectionRate" type="string" value="100"/>
         <param name="Rtabmap/ImageBufferSize" type="string" value="0" />
         <!--  -->
-        <param name="Grid/CellSize" value="0.1" />
-        <param name="Grid/ClusterRadius" value="0.1" />
+        <param name="Grid/CellSize" value="0.05" />
+        <param name="Grid/ClusterRadius" value="0.5" />
         <param name="Grid/DepthDecimation" value="4" />
         <param name="Grid/DepthRoiRatios" value="0.0 0.0 0.0 0.0" />
         <param name="Grid/FlatObstacleDetected" value="false" />
@@ -60,7 +60,7 @@
         <param name="Grid/GroundIsObstacle" value="false" />
         <param name="Grid/MapFrameProjection" value="false" />
         <param name="Grid/MaxGroundAngle" value="45" />
-        <param name="Grid/MaxGroundHeight" value="0.2" />
+        <param name="Grid/MaxGroundHeight" value="0.5" />
         <param name="Grid/MaxObstacleHeight" value="5.0" />
         <param name="Grid/MinClusterSize" value="10" />
         <param name="Grid/MinGroundHeight" value="0.0" />
@@ -69,22 +69,13 @@
         <param name="Grid/NormalK" value="20" />
         <param name="Grid/NormalsSegmentation" value="false" />
         <param name="Grid/PreVoxelFiltering" value="true" />
-        <param name="Grid/RangeMax" value="3.0" />
+        <param name="Grid/RangeMax" value="2.0" />
         <param name="Grid/RangeMin" value="0.2" />
         <param name="Grid/RayTracing" value="true" />
         <param name="Grid/Scan2dUnknownSpaceFilled" value="true" />
         <param name="Grid/ScanDecimation" value="0" />
         <!--  -->
-        <param name="GridGlobal/OccupancyThr" value="0.5" />                     <!--[Occupancy
-        threshold (value between 0 and 1).]-->
-        <param name="GridGlobal/ProbClampingMax" value="0.971" />                <!--[Probability
-        clamping maximum (value between 0 and 1).]-->
-        <param name="GridGlobal/ProbClampingMin" value="0.1192" />               <!--[Probability
-        clamping minimum (value between 0 and 1).]-->
-        <param name="GridGlobal/ProbHit" value="0.7" />                          <!--[Probability
-        of a hit (value between 0.5 and 1).]-->
-        <param name="GridGlobal/ProbMiss" value="0.4" />                         <!--[Probability
-        of a miss (value between 0 and 0.5).]-->
+     
         <!-- 2D SLAM -->
         <param name="Optimizer/Slam2D" value="true" />
 
@@ -126,10 +117,10 @@
 
     <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan"
         name="depthimage_to_laserscan">
-        <param name="scan_height" value="0.1" />
+        <param name="scan_height" value="0.15" />
         <param name="output_frame_id" value="d400_link" />
-        <param name="range_min" type="double" value="0.45" />
-        <param name="range_max" type="double" value="4" />
+        <param name="range_min" type="double" value="0.1" />
+        <param name="range_max" type="double" value="3.0" />
         <remap from="image" to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
         <remap from="scan" to="/$(arg camera2)/scan" />
     </node>
