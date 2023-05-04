@@ -11,10 +11,6 @@ private:
 public:
     OMNIBOT_CORE_LIB(ros::NodeHandle *nh, std::string config_path);
     ~OMNIBOT_CORE_LIB();
-    void init();
-
-    void run();
-    void terminate();
 };
 
 

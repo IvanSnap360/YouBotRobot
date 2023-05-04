@@ -7,11 +7,12 @@ Panels:
         - /Global Options1
         - /Status1
         - /TF1
+        - /3dMap1
         - /move_base1/TEB_planner1/global_path1
         - /move_base1/TEB_planner1/Marker1/Namespaces1
         - /move_base1/RRT_Global_Planner1/global_plan1
       Splitter Ratio: 0.5080732107162476
-    Tree Height: 1656
+    Tree Height: 1572
   - Class: rviz/Selection
     Name: Selection
   - Class: rviz/Tool Properties
@@ -64,23 +65,13 @@ Visualization Manager:
         All Enabled: true
         ang_link0:
           Value: true
-        ang_link1:
-          Value: true
-        ang_link2:
-          Value: true
-        ang_link3:
-          Value: true
-        ang_link4:
-          Value: true
         ang_link5:
-          Value: true
-        ang_link6:
-          Value: true
-        ang_link7:
           Value: true
         base_footprint:
           Value: true
         base_link:
+          Value: true
+        d400_aligned_depth_to_color_frame:
           Value: true
         d400_bottom_screw_frame:
           Value: true
@@ -106,67 +97,9 @@ Visualization Manager:
           Value: true
         left_back_mecanum_wheel_link:
           Value: true
-        left_back_roller_1_1_link:
-          Value: true
-        left_back_roller_1_2_link:
-          Value: true
-        left_back_roller_1_3_link:
-          Value: true
-        left_back_roller_1_4_link:
-          Value: true
-        left_back_roller_1_5_link:
-          Value: true
-        left_back_roller_1_6_link:
-          Value: true
-        left_back_roller_1_7_link:
-          Value: true
-        left_back_roller_2_1_link:
-          Value: true
-        left_back_roller_2_2_link:
-          Value: true
-        left_back_roller_2_3_link:
-          Value: true
-        left_back_roller_2_4_link:
-          Value: true
-        left_back_roller_2_5_link:
-          Value: true
-        left_back_roller_2_6_link:
-          Value: true
-        left_back_roller_2_7_link:
-          Value: true
         left_front_mecanum_adapter_link:
           Value: true
         left_front_mecanum_wheel_link:
-          Value: true
-        left_front_roller_1_1_link:
-          Value: true
-        left_front_roller_1_2_link:
-          Value: true
-        left_front_roller_1_3_link:
-          Value: true
-        left_front_roller_1_4_link:
-          Value: true
-        left_front_roller_1_5_link:
-          Value: true
-        left_front_roller_1_6_link:
-          Value: true
-        left_front_roller_1_7_link:
-          Value: true
-        left_front_roller_2_1_link:
-          Value: true
-        left_front_roller_2_2_link:
-          Value: true
-        left_front_roller_2_3_link:
-          Value: true
-        left_front_roller_2_4_link:
-          Value: true
-        left_front_roller_2_5_link:
-          Value: true
-        left_front_roller_2_6_link:
-          Value: true
-        left_front_roller_2_7_link:
-          Value: true
-        map:
           Value: true
         odom:
           Value: true
@@ -174,65 +107,9 @@ Visualization Manager:
           Value: true
         right_back_mecanum_wheel_link:
           Value: true
-        right_back_roller_1_1_link:
-          Value: true
-        right_back_roller_1_2_link:
-          Value: true
-        right_back_roller_1_3_link:
-          Value: true
-        right_back_roller_1_4_link:
-          Value: true
-        right_back_roller_1_5_link:
-          Value: true
-        right_back_roller_1_6_link:
-          Value: true
-        right_back_roller_1_7_link:
-          Value: true
-        right_back_roller_2_1_link:
-          Value: true
-        right_back_roller_2_2_link:
-          Value: true
-        right_back_roller_2_3_link:
-          Value: true
-        right_back_roller_2_4_link:
-          Value: true
-        right_back_roller_2_5_link:
-          Value: true
-        right_back_roller_2_6_link:
-          Value: true
-        right_back_roller_2_7_link:
-          Value: true
         right_front_mecanum_adapter_link:
           Value: true
         right_front_mecanum_wheel_link:
-          Value: true
-        right_front_roller_1_1_link:
-          Value: true
-        right_front_roller_1_2_link:
-          Value: true
-        right_front_roller_1_3_link:
-          Value: true
-        right_front_roller_1_4_link:
-          Value: true
-        right_front_roller_1_5_link:
-          Value: true
-        right_front_roller_1_6_link:
-          Value: true
-        right_front_roller_1_7_link:
-          Value: true
-        right_front_roller_2_1_link:
-          Value: true
-        right_front_roller_2_2_link:
-          Value: true
-        right_front_roller_2_3_link:
-          Value: true
-        right_front_roller_2_4_link:
-          Value: true
-        right_front_roller_2_5_link:
-          Value: true
-        right_front_roller_2_6_link:
-          Value: true
-        right_front_roller_2_7_link:
           Value: true
         t265_accel_frame:
           Value: true
@@ -263,174 +140,56 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_footprint:
-              ang_link0:
-                ang_link1:
-                  ang_link2:
-                    ang_link3:
-                      ang_link4:
-                        ang_link5:
-                          ang_link6:
-                            {}
-                          ang_link7:
-                            {}
-                          tip_link:
-                            {}
-              base_link:
-                d400_bottom_screw_frame:
-                  d400_link:
-                    d400_depth_frame:
-                      d400_color_frame:
-                        d400_color_optical_frame:
-                          {}
-                      d400_depth_optical_frame:
+        ang_link5:
+          tip_link:
+            {}
+        left_back_mecanum_wheel_link:
+          left_back_mecanum_adapter_link:
+            {}
+        left_front_mecanum_wheel_link:
+          left_front_mecanum_adapter_link:
+            {}
+        odom:
+          base_footprint:
+            ang_link0:
+              {}
+            base_link:
+              d400_bottom_screw_frame:
+                d400_link:
+                  d400_aligned_depth_to_color_frame:
+                    {}
+                  d400_depth_frame:
+                    d400_color_frame:
+                      d400_color_optical_frame:
                         {}
-                      d400_left_ir_frame:
-                        d400_left_ir_optical_frame:
-                          {}
-                      d400_right_ir_frame:
-                        d400_right_ir_optical_frame:
-                          {}
-                left_back_mecanum_wheel_link:
-                  left_back_mecanum_adapter_link:
-                    {}
-                  left_back_roller_1_1_link:
-                    {}
-                  left_back_roller_1_2_link:
-                    {}
-                  left_back_roller_1_3_link:
-                    {}
-                  left_back_roller_1_4_link:
-                    {}
-                  left_back_roller_1_5_link:
-                    {}
-                  left_back_roller_1_6_link:
-                    {}
-                  left_back_roller_1_7_link:
-                    {}
-                  left_back_roller_2_1_link:
-                    {}
-                  left_back_roller_2_2_link:
-                    {}
-                  left_back_roller_2_3_link:
-                    {}
-                  left_back_roller_2_4_link:
-                    {}
-                  left_back_roller_2_5_link:
-                    {}
-                  left_back_roller_2_6_link:
-                    {}
-                  left_back_roller_2_7_link:
-                    {}
-                left_front_mecanum_wheel_link:
-                  left_front_mecanum_adapter_link:
-                    {}
-                  left_front_roller_1_1_link:
-                    {}
-                  left_front_roller_1_2_link:
-                    {}
-                  left_front_roller_1_3_link:
-                    {}
-                  left_front_roller_1_4_link:
-                    {}
-                  left_front_roller_1_5_link:
-                    {}
-                  left_front_roller_1_6_link:
-                    {}
-                  left_front_roller_1_7_link:
-                    {}
-                  left_front_roller_2_1_link:
-                    {}
-                  left_front_roller_2_2_link:
-                    {}
-                  left_front_roller_2_3_link:
-                    {}
-                  left_front_roller_2_4_link:
-                    {}
-                  left_front_roller_2_5_link:
-                    {}
-                  left_front_roller_2_6_link:
-                    {}
-                  left_front_roller_2_7_link:
-                    {}
-                right_back_mecanum_wheel_link:
-                  right_back_mecanum_adapter_link:
-                    {}
-                  right_back_roller_1_1_link:
-                    {}
-                  right_back_roller_1_2_link:
-                    {}
-                  right_back_roller_1_3_link:
-                    {}
-                  right_back_roller_1_4_link:
-                    {}
-                  right_back_roller_1_5_link:
-                    {}
-                  right_back_roller_1_6_link:
-                    {}
-                  right_back_roller_1_7_link:
-                    {}
-                  right_back_roller_2_1_link:
-                    {}
-                  right_back_roller_2_2_link:
-                    {}
-                  right_back_roller_2_3_link:
-                    {}
-                  right_back_roller_2_4_link:
-                    {}
-                  right_back_roller_2_5_link:
-                    {}
-                  right_back_roller_2_6_link:
-                    {}
-                  right_back_roller_2_7_link:
-                    {}
-                right_front_mecanum_wheel_link:
-                  right_front_mecanum_adapter_link:
-                    {}
-                  right_front_roller_1_1_link:
-                    {}
-                  right_front_roller_1_2_link:
-                    {}
-                  right_front_roller_1_3_link:
-                    {}
-                  right_front_roller_1_4_link:
-                    {}
-                  right_front_roller_1_5_link:
-                    {}
-                  right_front_roller_1_6_link:
-                    {}
-                  right_front_roller_1_7_link:
-                    {}
-                  right_front_roller_2_1_link:
-                    {}
-                  right_front_roller_2_2_link:
-                    {}
-                  right_front_roller_2_3_link:
-                    {}
-                  right_front_roller_2_4_link:
-                    {}
-                  right_front_roller_2_5_link:
-                    {}
-                  right_front_roller_2_6_link:
-                    {}
-                  right_front_roller_2_7_link:
-                    {}
-                t265_pose_frame:
-                  t265_link:
-                    t265_accel_frame:
-                      t265_accel_optical_frame:
+                    d400_depth_optical_frame:
+                      {}
+                    d400_left_ir_frame:
+                      d400_left_ir_optical_frame:
                         {}
-                    t265_fisheye1_rgb_frame:
-                      t265_fisheye1_optical_frame:
+                    d400_right_ir_frame:
+                      d400_right_ir_optical_frame:
                         {}
-                    t265_fisheye2_rgb_frame:
-                      t265_fisheye2_optical_frame:
-                        {}
-                    t265_gyro_frame:
-                      t265_gyro_optical_frame:
-                        {}
+              t265_pose_frame:
+                t265_link:
+                  t265_accel_frame:
+                    t265_accel_optical_frame:
+                      {}
+                  t265_fisheye1_rgb_frame:
+                    t265_fisheye1_optical_frame:
+                      {}
+                  t265_fisheye2_rgb_frame:
+                    t265_fisheye2_optical_frame:
+                      {}
+                  t265_gyro_frame:
+                    t265_gyro_optical_frame:
+                      {}
+        right_back_mecanum_wheel_link:
+          right_back_mecanum_adapter_link:
+            {}
+        right_front_mecanum_wheel_link:
+          right_front_mecanum_adapter_link:
+            {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -455,7 +214,7 @@ Visualization Manager:
       Selectable: true
       Size (Pixels): 10
       Size (m): 0.02500000037252903
-      Style: Points
+      Style: Boxes
       Topic: /rtabmap/cloud_map
       Unreliable: false
       Use Fixed Frame: true
@@ -1383,7 +1142,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -1398,7 +1157,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /explore/frontiers
@@ -1462,8 +1221,8 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Class: rviz/Orbit
-      Distance: 1.1370275020599365
+      Class: rviz/ThirdPersonFollower
+      Distance: 7.3637566566467285
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -1471,27 +1230,27 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.24463431537151337
-        Y: 0.1783849596977234
-        Z: 0.2007439285516739
-      Focal Shape Fixed Size: false
+        X: -1.9190340042114258
+        Y: 1.0240201950073242
+        Z: -4.76837158203125e-07
+      Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.32539793848991394
-      Target Frame: <Fixed Frame>
-      Yaw: 4.138587951660156
+      Pitch: 0.6597965955734253
+      Target Frame: base_link
+      Yaw: 2.6404104232788086
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 2086
+  Height: 2002
   Hide Left Dock: false
   Hide Right Dock: false
   Image:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000400000000000003a300000720fc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b000000b000fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000006e00000720000001bc01000039fa000000010100000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000000ffffffff0000010b00fffffffb000000100044006900730070006c0061007900730100000000000003a3000001f700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000100044003400300030005f0049006d0067010000038e000000d70000000000000000fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006700000003c0000003ce0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c006900640065007200000007140000007a0000000000000000fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000000000010000034300000720fc0200000004fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000006e0000048d0000013200fffffffb0000000a0049006d0061006700650100000507000002870000002600fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000e700000005efc0100000002fb0000000800540069006d0065010000000000000e70000006dc00fffffffb0000000800540069006d00650100000000000004500000000000000000000007720000072000000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000400000000000003a3000006ccfc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b000000b000fffffffb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afc0000006e000006cc000001bc01000039fa000000010100000002fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000000ffffffff0000010b00fffffffb000000100044006900730070006c0061007900730100000000000003a3000001f700fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000100044003400300030005f0049006d0067010000038e000000d70000000000000000fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000000000000000fb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e006700000003c0000003ce0000000000000000fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c006900640065007200000007140000007a0000000000000000fb000000280020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff00000000000000000000000100000343000006ccfc0200000004fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000006e000004570000013200fffffffb0000000a0049006d00610067006501000004d1000002690000002600fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e1000001970000000300000cc00000005efc0100000002fb0000000800540069006d0065010000000000000cc0000006dc00fffffffb0000000800540069006d00650100000000000004500000000000000000000005c2000006cc00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -1500,6 +1259,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 3696
+  Width: 3264
   X: 144
-  Y: 0
+  Y: 54
