@@ -47,7 +47,7 @@
 
     <!--  -->
     <group if="$(arg localization)">
-        <include file="$(find omnibot_platform_navigation)/launch/load_map.launch"/>  
+        <!-- <include file="$(find omnibot_platform_navigation)/launch/load_map.launch"/>   -->
     </group>
     
     <!--  -->

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
 
-<node name="map_saver1" pkg="map_server" type="map_saver" args="-f $(find omnibot_platform_navigation)/maps/my_world_map_v3">
+<node name="map_saver1" pkg="map_server" type="map_saver" args="-f $(find omnibot_platform_navigation)/maps/my_world_map_v4">
         <remap from="/map" to="/rtabmap/grid_map"/>
   </node>
 
