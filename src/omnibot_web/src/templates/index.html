@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Omnibot GUI</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}">
+        
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                    <div
+                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                            id="menu">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Панель управления
+                                OmniBot</span>
+
+                            <!--  -->
+                            <li class="nav-item home">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/statisticks.png')}}" alt="user" width="32"
+                                        height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Состояние</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/navigation.svg')}}" alt="user"
+                                        width="32" height="32" class=" sidebar_nav_icon_filter"
+                                        alt="filter applied">
+                                    <i class="fs-4 bi-navigation"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Навигация</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item">
+                                <a  class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/cartographer.png')}}" alt="user"
+                                        width="32" height="32" class=" sidebar_nav_icon_filter"
+                                        alt="filter applied">
+                                    <i class="fs-4 bi-cartograph"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Картограф</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item">
+                                <a  class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/manip.png')}}" alt="user" width="32"
+                                        height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-manipulator"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Манипулятор</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/platform.png')}}" alt="user" width="32"
+                                        height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-platform"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Платформа</span>
+                                </a>
+                            </li>
+                    </div>
+                </div>
+                <div class="col py-3">
+                    <p id="content">Добро пожаловать на страницу управления OmniBot!!!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script>
+        $('.home').click(() => {
+
+            $.ajax({
+                type: "get",
+                url: "/home.html",
+                context: document.body
+            }).done(function (resp) {
+                $("#content").replaceWith(resp);
+            });
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
