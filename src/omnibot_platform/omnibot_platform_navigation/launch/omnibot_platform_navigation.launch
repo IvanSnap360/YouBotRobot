@@ -42,5 +42,7 @@
 
     <include file="$(find omnibot_platform_navigation)/launch/rtabmap.launch" >
         <arg name="localization" value="$(arg localization)"/>
+        <arg name="sim" value="$(arg sim)"/>
+        
     </include>  
 </launch>

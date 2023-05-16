@@ -9,8 +9,9 @@
 <arg name="localization" default="false" />
 <arg name="initial_pose" default="" />
 <arg name="wait_for_transform" default="0.2" />
-<!-- <arg name="database_path" default="$(find omnibot_platform_navigation)/maps/my_world.db" /> -->
-<arg name="database_path" default="$(find omnibot_platform_navigation)/maps/KV33_RTABMAP_DB_NICE1.db" />
+<arg name="sim" default="false"/>
+<arg name="database_path" default="$(find omnibot_platform_navigation)/maps/my_world.db" if="$(arg sim)"/>
+<arg name="database_path" default="$(find omnibot_platform_navigation)/maps/KV33_RTABMAP_DB_NICE1.db" unless="$(arg sim)"/>
 
 <arg if="$(arg localization)" name="args"  default=""/>
 <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
@@ -26,58 +27,48 @@
         <param name="use_action_for_goal" type="bool" value="true"/><!-- Planning Use actionlib to send the metric goals to move_base. The advantage over just connecting goal_out to move_base_simple/ goal is that rtabmap can have a feedback if the goal is reached or if move_base has failed. See move_base Action API for more info. -->
         <param name="map_negative_poses_ignored" type="bool" value="true"/>
         <!-- RTAB-Map's parameters -->
+        <!-- ################################################### -->
         <param name="Rtabmap/TimeThr" type="string" value="0" />
         <param name="Rtabmap/DetectionRate" type="string" value="20" />
         <param name="Rtabmap/ImageBufferSize" type="string" value="0" />
-        <!--  -->
-        <param name="RGBD/ProximityBySpace" type="string" value="true" />
-        <!-- Local loop closure detection (using estimated position) with locations in WM -->
-        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" />
-        <!-- Set to false to generate map correction between /map and /odom -->
+        <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/> 
+        <!-- ################################################### -->
         <param name="Kp/MaxDepth" type="string" value="4.0" />
-        <param name="Reg/Strategy" type="string" value="2" />
-        <!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
-        <param name="Icp/CorrespondenceRatio" type="string" value="0.3" />
-        <param name="Vis/MinInliers" type="string" value="5" />
-        <!-- 3D visual words minimum inliers to accept loop closure -->
-        <param name="Vis/InlierDistance" type="string" value="0.1" />
-        <!-- 3D visual words correspondence distance -->
-        <param name="RGBD/AngularUpdate" type="string" value="0.1" />
-        <!-- Update map only if the robot is moving -->
-        <param name="RGBD/LinearUpdate" type="string" value="0.1" />
-        <!-- Update map only if the robot is moving -->
-<<<<<<< HEAD
-        <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/>
-        <param name="RGBD/CreateOccupancyGrid" type="string" value="true"/>
-        <param name="Rtabmap/TimeThr" type="string" value="0"/>
-        <param name="Rtabmap/DetectionRate" type="string" value="10"/>
-        <param name="Rtabmap/ImageBufferSize" type="string" value="0"/>
-        <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
-        <param name="Reg/Force3DoF" type="string" value="true"/>
-        <param name="GridGlobal/MinSize" type="string" value="20"/>
-        <param name="Grid/Sensor" type="string" value="2"/>
-=======
+        <!-- ################################################### -->
+        <param name="RGBD/AngularUpdate" type="string" value="0.1" /><!-- Update map only if the robot is moving -->
+        <param name="RGBD/LinearUpdate" type="string" value="0.1" /><!-- Update map only if the robot is moving -->
         <param name="RGBD/OptimizeMaxError"     type="double" value="3"/>
->>>>>>> bdd8a1c931d3ce3637d10e1507c7981747af1bbc
-
         <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0" />
         <param name="RGBD/CreateOccupancyGrid" type="string" value="true" />
         <param name="RGBD/SavedLocalizationIgnored"  type="string" value="true"/>
-        <param name="Mem/RehearsalSimilarity" type="string" value="0.30" />
-        <param name="Reg/Force3DoF" type="string" value="true" />
-        <param name="GridGlobal/MinSize" type="string" value="20" />
-        <param name="Grid/Sensor" type="string" value="2" />
-        <!-- for dynamical obstacles -->
-        <param name="Grid/RayTracing" value="true" />
-        
         <param name="RGBD/StartAtOrigin" value="false"/>
         <param name="RGBD/NeighborLinkRefining"      type="string" value="true"/>
-
-        <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/> 
+        <param name="RGBD/ProximityBySpace" type="string" value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
+        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" /><!-- Set to false to generate map correction between /map and /odom -->
+        <!-- ################################################### -->
         <param name="Grid/MaxGroundHeight" value="0.1"/>
         <param name="Grid/MaxObstacleHeight" value="0.2"/>
         <param name="Grid/CellSize" value="0.025" />
         <param name="Grid/NormalsSegmentation" value="true"/>
+        <param name="Grid/Sensor" type="string" value="2" />
+        <param name="Grid/RayTracing" value="true" />
+        <!-- ################################################### -->
+        <param name="GridGlobal/MinSize" type="string" value="20" />
+        <!-- ################################################### -->
+        <param name="Reg/Force3DoF" type="string" value="true" />
+        <param name="Reg/Strategy" type="string" value="2" /><!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
+        <!-- ################################################### -->
+        <param name="Mem/RehearsalSimilarity" type="string" value="0.30" />
+        <param name="Mem/IncrementalMemory"  type="string" value="false"     if="$(arg localization)"/>
+        <param name="Mem/IncrementalMemory"  type="string" value="true"     unless="$(arg localization)"/>
+        <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+        <!-- ################################################### -->
+        <param name="Icp/CorrespondenceRatio" type="string" value="0.3" />
+        <!-- ################################################### -->
+        <param name="Vis/MinInliers" type="string" value="5" /><!-- 3D visual words minimum inliers to accept loop closure -->
+        <param name="Vis/InlierDistance" type="string" value="0.1" /> <!-- 3D visual words correspondence distance -->
+
+<!-- ################################################################################################################################################################# -->
         <!-- REMAPS -->
         <remap from="odom" to="odom_ekf"/>
         <remap from="scan" to="/$(arg camera2)/scan" />
@@ -85,7 +76,7 @@
         <remap from="depth/image" to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
         <remap from="rgb/camera_info" to="/$(arg camera2)/color/camera_info" />
         <!-- <remap from="rgbd_image" to="/$(arg camera2)/aligned_depth_to_color/image_raw"/> -->
-        <remap from="grid_map"               to="/map"/>  <!-- gridmap => map-->
+        <remap from="grid_map" to="/map"/>  <!-- gridmap => map-->
         <!-- SUBSCRIPTIONS -->
         <param name="subscribe_depth" type="bool" value="true" /> <!-- Subscribe to depth image -->
         <param name="subscribe_scan" type="bool" value="true" /><!-- Subscribe to laser scan -->
@@ -127,9 +118,7 @@
         <!-- RGBD -->
         <param name="rgbd_cameras" type="int" value="1"/><!-- Number of RGB-D cameras to use (when subscribe_rgbd is true). Well for now, a maximum of 4 cameras can be synchronized at the same time. If > 1, the rgbd_image topics should contain the camera index starting with 0. For example, if we have 2 cameras, you should set rgbd_image0 and rgbd_image1 topics. -->
         <!-- LOCALIZATION MODE -->
-        <param     if="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="false"/>
-        <param unless="$(arg localization)" name="Mem/IncrementalMemory" type="string" value="true"/>
-        <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+        
 
     </node>
 </group>
