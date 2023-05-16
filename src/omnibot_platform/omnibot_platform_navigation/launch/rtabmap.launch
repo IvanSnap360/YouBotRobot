@@ -9,7 +9,9 @@
 <arg name="localization" default="false" />
 <arg name="initial_pose" default="" />
 <arg name="wait_for_transform" default="0.2" />
-<arg name="database_path" default="$(find omnibot_platform_navigation)/maps/my_world.db" />
+<!-- <arg name="database_path" default="$(find omnibot_platform_navigation)/maps/my_world.db" /> -->
+<arg name="database_path" default="$(find omnibot_platform_navigation)/maps/KV33_RTABMAP_DB_NICE1.db" />
+
 <arg if="$(arg localization)" name="args"  default=""/>
 <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
 
