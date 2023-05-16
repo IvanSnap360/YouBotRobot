@@ -1,5 +1,14 @@
 #include "omnibot_manipulator_control_server_lib/omnibot_manipulator_control_server_lib.h"
 
+
+
+void OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::updateGoalState()
+{
+    std_msgs::Empty _rviz_goal_state_updater_msg;
+    _rviz_goal_state_updater_pub.publish(_rviz_goal_state_updater_msg);
+}
+
+
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(ros::NodeHandle *nh, std::string config_path)
 {
     _cfg = YAML::LoadFile(config_path);
@@ -63,6 +72,8 @@ OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(r
         }
     }
     _gripper_cmd_service_name = _cfg["services"]["gripper_cmd_service"]["name"].as<std::string>();
+
+    _rviz_goal_state_updater_pub = _nh->advertise<std_msgs::Empty>("/rviz/moveit/update_goal_state",10);
 }
 
 void OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::init()
@@ -151,10 +162,10 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::ManipMoveByJointValues(std::vector<
         return false;
     }
     _move_group_interface_arm->setJointValueTarget(joint_values);
-
+    
     ROS_INFO("Planning for joints positions [%.2lf %.2lf %.2lf %.2lf %.2lf]",
              joint_values[0], joint_values[1], joint_values[2], joint_values[3], joint_values[4]);
-
+    updateGoalState();
     bool success = (_move_group_interface_arm->plan(_arm_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
     ROS_INFO("Planning %s", success ? "SUCCESS" : "FAILED");
@@ -172,6 +183,7 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::ManipMoveByPosition(geometry_msgs::
 {
     new_pose.orientation.w = 1.0;
     _move_group_interface_arm->setPoseTarget(new_pose);
+    updateGoalState();
     ROS_INFO("Planning for position [x:%.2lf y:%.2lf z:%.2lf rx:%.2lf ry:%.2lf rz:%.2lf]",
              new_pose.position.x, new_pose.position.y, new_pose.position.z,
              new_pose.orientation.x, new_pose.orientation.y, new_pose.orientation.z);

@@ -37,13 +37,10 @@
     <group if="$(arg localization)">
         <!-- <include file="$(find omnibot_platform_navigation)/launch/load_map.launch" /> -->
         <!-- <include file="$(find omnibot_platform_navigation)/launch/localization.launch" />  -->
+        <include file="$(find omnibot_platform_navigation)/launch/move_base.launch" />  
     </group>
 
     <include file="$(find omnibot_platform_navigation)/launch/rtabmap.launch" >
         <arg name="localization" value="$(arg localization)"/>
     </include>  
-    
-    <!-- <include file="$(find omnibot_platform_navigation)/launch/move_base.launch" />   -->
-
-    
 </launch>

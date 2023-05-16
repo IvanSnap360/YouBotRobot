@@ -40,14 +40,17 @@
     </group>
 
     <!--  -->
-    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find omnibot_bringup)/rviz/rviz.rviz "/> 
+    <!-- <group if="$(arg rviz)">
+        <include file="$(find omnibot_bringup)/launch/rviz.launch" />
+    </group> -->
+    <node name="rviz" pkg="rviz" type="rviz" output="screen" args="-d $(find omnibot_bringup)/rviz/rviz.rviz"/> 
 
     <!--  -->
     <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch"/>
 
     <!--  -->
     <group if="$(arg localization)">
-        <include file="$(find omnibot_platform_navigation)/launch/load_map.launch"/>  
+        <!-- <include file="$(find omnibot_platform_navigation)/launch/load_map.launch"/>   -->
     </group>
     
     <!--  -->

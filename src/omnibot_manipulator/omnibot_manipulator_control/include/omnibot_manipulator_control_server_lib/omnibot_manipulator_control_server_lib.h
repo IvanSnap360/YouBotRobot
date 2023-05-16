@@ -10,6 +10,7 @@
 #include <geometry_msgs/Pose.h>
 #include <omnibot_manipulator_control/manipulator_cmd.h>
 #include <omnibot_manipulator_control/gripper_cmd.h>
+#include <std_msgs/Empty.h>
 
 #define degreesToRadians(degrees) degrees *M_PI / 180
 
@@ -50,7 +51,10 @@ private:
                                       omnibot_manipulator_control::manipulator_cmd::Response &res);
     bool _grp_cmd_service_server_cb_f(omnibot_manipulator_control::gripper_cmd::Request &req,
                                       omnibot_manipulator_control::gripper_cmd::Response &res);
-
+    
+    ros::Publisher _rviz_goal_state_updater_pub;
+    
+    void updateGoalState();
 public:
     OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(ros::NodeHandle *nh, std::string config_path);
     void init();
