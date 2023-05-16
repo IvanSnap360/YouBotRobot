@@ -1,8 +1,13 @@
 <?xml version="1.0"?>
 <launch>
 
+<<<<<<< HEAD
+<node name="map_saver1" pkg="map_server" type="map_saver" args="-f $(find omnibot_platform_navigation)/maps/kv33_map_2">
+        <remap from="/map" to="/grid_map"/>
+=======
 <node name="map_saver1" pkg="map_server" type="map_saver" args="-f $(find omnibot_platform_navigation)/maps/my_world_map_v4">
         <remap from="/map" to="/rtabmap/grid_map"/>
+>>>>>>> bdd8a1c931d3ce3637d10e1507c7981747af1bbc
   </node>
 
 </launch>

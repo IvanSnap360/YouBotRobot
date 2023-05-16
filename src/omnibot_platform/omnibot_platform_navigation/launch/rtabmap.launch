@@ -46,7 +46,19 @@
         <!-- Update map only if the robot is moving -->
         <param name="RGBD/LinearUpdate" type="string" value="0.1" />
         <!-- Update map only if the robot is moving -->
+<<<<<<< HEAD
+        <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0"/>
+        <param name="RGBD/CreateOccupancyGrid" type="string" value="true"/>
+        <param name="Rtabmap/TimeThr" type="string" value="0"/>
+        <param name="Rtabmap/DetectionRate" type="string" value="10"/>
+        <param name="Rtabmap/ImageBufferSize" type="string" value="0"/>
+        <param name="Mem/RehearsalSimilarity" type="string" value="0.30"/>
+        <param name="Reg/Force3DoF" type="string" value="true"/>
+        <param name="GridGlobal/MinSize" type="string" value="20"/>
+        <param name="Grid/Sensor" type="string" value="2"/>
+=======
         <param name="RGBD/OptimizeMaxError"     type="double" value="3"/>
+>>>>>>> bdd8a1c931d3ce3637d10e1507c7981747af1bbc
 
         <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0" />
         <param name="RGBD/CreateOccupancyGrid" type="string" value="true" />
