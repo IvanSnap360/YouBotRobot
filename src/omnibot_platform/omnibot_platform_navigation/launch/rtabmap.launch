@@ -25,7 +25,6 @@
         <param name="database_path" type="string" value="$(arg database_path)" if="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
 
         <param name="use_action_for_goal" type="bool" value="true"/><!-- Planning Use actionlib to send the metric goals to move_base. The advantage over just connecting goal_out to move_base_simple/ goal is that rtabmap can have a feedback if the goal is reached or if move_base has failed. See move_base Action API for more info. -->
-        <param name="map_negative_poses_ignored" type="bool" value="true"/>
         <!-- RTAB-Map's parameters -->
         <!-- ################################################### -->
         <param name="Rtabmap/TimeThr" type="string" value="0" />
@@ -52,6 +51,7 @@
         <param name="Grid/NormalsSegmentation" value="true"/>
         <param name="Grid/Sensor" type="string" value="2" />
         <param name="Grid/RayTracing" value="true" />
+        <param name="Grid/FromDepth"  type="string" value="true"/>
         <!-- ################################################### -->
         <param name="GridGlobal/MinSize" type="string" value="20" />
         <!-- ################################################### -->

@@ -9,7 +9,7 @@ class OctoHandler():
 
     def __init__(self):
         rospy.init_node('moveit_octomap_handler')
-        rospy.Subscriber('/mapData', Octomap, self.cb, queue_size=1)
+        rospy.Subscriber('/rtabmap/octomap_full', Octomap, self.cb, queue_size=1)
         pub = rospy.Publisher('/move_group/monitored_planning_scene', PlanningScene, queue_size=1)
         pub2 = rospy.Publisher('/planning_scene', PlanningScene, queue_size=1)
         r = rospy.Rate(0.25)
