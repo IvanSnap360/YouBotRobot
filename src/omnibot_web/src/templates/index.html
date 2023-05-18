@@ -8,11 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
 
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/battery_style.css') }}" />
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/progresbar_circle.css') }}" />
+
     <!-- Bootstrap CSS v5.2.1 -->
     <script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}">
     </script>
     <script src="{{ url_for('static', filename='js/navbar_handle.js') }}">
+    </script><script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap-progressbar.js') }}">
     </script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
@@ -98,19 +104,7 @@
         navbar_handle(".manipulator", "/manipulator.html")
         navbar_handle(".platform", "/platform.html")
 
-        function upd() {
-            $.ajax({
-                type: "get",
-                url: '/input_data',
-            }).done(function (resp) {
-                let d = JSON.parse(resp);
-                console.log(d);
-            });
-        }
-
-        $(document).ready(() => {
-            setInterval(upd, 500);
-        });
+       
     </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
         integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">

@@ -1,2 +1,145 @@
+<h1>Состояние</h1>
+<script type="text/javascript">
+    function battery_1_set_vals(cell1, cell2, cell3) {
+        $("#battery_1_cell_1")
+            .css("height", cell1 + "%")
+            .attr("aria-valuenow", cell1)
+            .text(cell1 + "%");
+        $("#battery_1_cell_2")
+            .css("height", cell2 + "%")
+            .attr("aria-valuenow", cell2)
+            .text(cell2 + "%");
+        $("#battery_1_cell_3")
+            .css("height", cell3 + "%")
+            .attr("aria-valuenow", cell3)
+            .text(cell3 + "%");
+    }
 
-    Состояние
+    function battery_2_set_vals(cell1, cell2, cell3) {
+        $("#battery_2_cell_1")
+            .css("height", cell1 + "%")
+            .attr("aria-valuenow", cell1)
+            .text(cell1 + "%");
+        $("#battery_2_cell_2")
+            .css("height", cell2 + "%")
+            .attr("aria-valuenow", cell2)
+            .text(cell2 + "%");
+        $("#battery_2_cell_3")
+            .css("height", cell3 + "%")
+            .attr("aria-valuenow", cell3)
+            .text(cell3 + "%");
+    }
+
+    function battery_1_upd() {
+        $.ajax({
+            type: "get",
+            url: "/battery_1",
+        }).done(function (resp) {
+            let d = JSON.parse(resp);
+            // console.log(d);
+            battery_1_set_vals(d["cell_1"], d["cell_2"], d["cell_3"])
+        });
+    }
+    function battery_2_upd() {
+        $.ajax({
+            type: "get",
+            url: "/battery_2",
+        }).done(function (resp) {
+            let d = JSON.parse(resp);
+            // console.log(d);
+            battery_2_set_vals(d["cell_1"], d["cell_2"], d["cell_3"])
+        });
+    }
+
+    // ####################################################################################################################################
+    function sys_state_upd_f(cpu_freq, cpu_load, mem_usage) {
+        // $("#cpu_usage")
+        //     .css("height", cpu_load + "%")
+        //     .attr("aria-valuenow", cpu_load)
+        //     .text(cpu_load + "%");
+        // $(".progress-circle-value").
+        var b1c1 = document.querySelector('.progress-circle-value');
+        b1c1.style.width = cpu_load + "%";
+        b1c1.innerHTML = cpu_load + "%";
+    }
+
+    function sys_state_upd() {
+        $.ajax({
+            type: "get",
+            url: "/sys_info",
+        }).done(function (resp) {
+            let d = JSON.parse(resp);
+            console.log(d);
+        });
+    }
+
+    $(document).ready(() => {
+        setInterval(battery_1_upd, 2000);
+        setInterval(battery_2_upd, 2000);
+        setInterval(sys_state_upd, 2000);
+
+    });
+</script>
+<div class="row">
+    <div class="card text-center align-items-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Батарея 1</h5>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_1_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60% </span>
+                </div>
+            </div>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_1_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60% </span>
+                </div>
+            </div>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_1_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60% Complete</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <div class="card text-center align-items-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Батарея 2</h5>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_2_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60%</span>
+                </div>
+            </div>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_2_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60% </span>
+                </div>
+            </div>
+            <div class="progress progress-bar-vertical">
+                <div id="battery_2_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
+                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                    <span class="sr-only">60% </span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="card text-center align-items-center" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">Бортовой компьютер</h5>
+            <div class="cirlce_progressbar">
+                <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="progress-circle-back" cx="80" cy="80" r="74"></circle>
+                    <circle class="progress-circle-prog" cx="80" cy="80" r="74"></circle>
+                </svg>
+                <div class="progress-text" data-progress="0">0%</div>
+            </div>
+        </div>
+    </div>
