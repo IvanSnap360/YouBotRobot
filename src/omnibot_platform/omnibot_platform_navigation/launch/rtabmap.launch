@@ -36,14 +36,16 @@
         <!-- ################################################### -->
         <param name="RGBD/AngularUpdate" type="string" value="0.1" /><!-- Update map only if the robot is moving -->
         <param name="RGBD/LinearUpdate" type="string" value="0.1" /><!-- Update map only if the robot is moving -->
-        <param name="RGBD/OptimizeMaxError"     type="double" value="3"/>
+        <param name="RGBD/OptimizeMaxError"     type="double" value="4"/>
         <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0" />
         <param name="RGBD/CreateOccupancyGrid" type="string" value="true" />
         <param name="RGBD/SavedLocalizationIgnored"  type="string" value="true"/>
         <param name="RGBD/StartAtOrigin" value="false"/>
-        <param name="RGBD/NeighborLinkRefining"      type="string" value="true"/>
+        <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
         <param name="RGBD/ProximityBySpace" type="string" value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
+        <param name="RGBD/ProximityByTime"      type="string" value="false"/> <!-- Local loop closure detection with locations in STM -->
         <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" /><!-- Set to false to generate map correction between /map and /odom -->
+        <param name="RGBD/LocalRadius"          type="string" value="5"/>     <!-- limit length of proximity detections -->
         <!-- ################################################### -->
         <param name="Grid/MaxGroundHeight" value="0.1"/>
         <param name="Grid/MaxObstacleHeight" value="0.2"/>
@@ -62,8 +64,13 @@
         <param name="Mem/IncrementalMemory"  type="string" value="false"     if="$(arg localization)"/>
         <param name="Mem/IncrementalMemory"  type="string" value="true"     unless="$(arg localization)"/>
         <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
+        <param name="Mem/STMSize"               type="string" value="30"/>    <!-- increased to 30 to avoid adding too many loop closures on just seen locations -->
         <!-- ################################################### -->
-        <param name="Icp/CorrespondenceRatio" type="string" value="0.3" />
+        <param name="Icp/CorrespondenceRatio"   type="string" value="0.2"/>   <!-- minimum scan overlap to accept loop closure -->
+        <param name="Icp/PM"                    type="string" value="false"/>
+        <param name="Icp/PointToPlane"          type="string" value="false"/>
+        <param name="Icp/MaxCorrespondenceDistance"  type="string" value="0.15"/>
+        <param name="Icp/VoxelSize"             type="string" value="0.05"/>
         <!-- ################################################### -->
         <param name="Vis/MinInliers" type="string" value="5" /><!-- 3D visual words minimum inliers to accept loop closure -->
         <param name="Vis/InlierDistance" type="string" value="0.1" /> <!-- 3D visual words correspondence distance -->
