@@ -1,26 +1,15 @@
 # Params for the octomap monitor
-# octomap_frame: some frame in which the robot moves
+octomap_frame: d400_link
 
 
 sensors: 
   - sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
     point_cloud_topic: /rtabmap/cloud_map
+    # point_cloud_topic: /rtabmap/cloud_obstacles
     # point_cloud_topic: /local_grid_obstacle
-    max_range: 2.0
-    max_update_rate: 0.05
+    max_range: 10.0
+    max_update_rate: 0.5
     point_subsample: 1
     padding_offset: 0.25
     padding_scale: 1.0
     filtered_cloud_topic: filtered_cloud
-  # - sensor_plugin: occupancy_map_monitor/DepthImageOctomapUpdater
-  #   image_topic: /d400/aligned_depth_to_color/image_raw
-  #   queue_size: 5
-  #   near_clipping_plane_distance: 0.3
-  #   far_clipping_plane_distance: 1.8
-  #   # In some situations, points can appear below the robot links.
-  #   # This happens because of padding. shadow_threshold removes those points whose distance is greater than shadow_threshold.
-  #   # Not sure if it execalty works that way, lower values e.g. 0.05 caused less removed voxels under the arm
-  #   shadow_threshold: 0.1
-  #   padding_scale: 0.4
-  #   padding_offset: 0.2
-  #   filtered_cloud_topic: filtered_cloud

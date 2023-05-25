@@ -39,6 +39,7 @@ def cartographer():
 def battery_1_upd_f():
     return json.dumps({"cell_1": random.randint(0, 100), "cell_2": random.randint(0, 100), "cell_3": random.randint(0, 100)})
 
+
 @app.route("/battery_2")
 def battery_2_upd_f():
     return json.dumps({"cell_1": random.randint(0, 100), "cell_2": random.randint(0, 100), "cell_3": random.randint(0, 100)})
@@ -49,14 +50,21 @@ def get_sys_info():
     cpufreq = psutil.cpu_freq()
     svmem = psutil.virtual_memory()
 
+    def get_cpu_temp():
+        path = "/sys/class/thermal/thermal_zone0/temp"
+        f = open(path, "r")
+        temp_raw = int(f.read().strip())
+        temp_cpu = float(temp_raw / 1000.0)
+        return temp_cpu
+
     data = {
-        "cpu_freq":cpufreq.current,
-        "cpu_load":psutil.cpu_percent(),
-        "mem_usage": svmem.percent
+        "cpu_freq": cpufreq.current,
+        "cpu_load": psutil.cpu_percent(),
+        "mem_usage": svmem.percent,
+        "cpu_temperature": get_cpu_temp() 
     }
 
     return json.dumps(data)
-
 
 
 if __name__ == "__main__":

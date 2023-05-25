@@ -12,7 +12,7 @@ class OctoHandler():
         rospy.Subscriber('/rtabmap/octomap_full', Octomap, self.cb, queue_size=1)
         pub = rospy.Publisher('/move_group/monitored_planning_scene', PlanningScene, queue_size=1)
         pub2 = rospy.Publisher('/planning_scene', PlanningScene, queue_size=1)
-        r = rospy.Rate(0.25)
+        r = rospy.Rate(10)
         while(not rospy.is_shutdown()):
             if(self.mapMsg is not None):
                 pub.publish(self.mapMsg)

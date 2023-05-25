@@ -52,15 +52,38 @@
     }
 
     // ####################################################################################################################################
-    function sys_state_upd_f(cpu_freq, cpu_load, mem_usage) {
-        // $("#cpu_usage")
-        //     .css("height", cpu_load + "%")
-        //     .attr("aria-valuenow", cpu_load)
-        //     .text(cpu_load + "%");
-        // $(".progress-circle-value").
-        var b1c1 = document.querySelector('.progress-circle-value');
-        b1c1.style.width = cpu_load + "%";
-        b1c1.innerHTML = cpu_load + "%";
+    function percentageToDegrees(percentage) {
+
+        return percentage / 100 * 360
+
+    }
+    function update_circle_progressbar(id, value) {
+        var left = $(id).find('.circle-progress-left .circle-progress-bar');
+        var right = $(id).find('.circle-progress-right .circle-progress-bar');
+        if (value > 0) {
+            if (value <= 50) {
+                right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+            } else {
+                right.css('transform', 'rotate(180deg)')
+                left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+            }
+        }
+        $(id).find("#value_text").html(value + "%")
+
+    }
+
+
+
+
+    function sys_state_upd_f(cpu_freq, cpu_load, mem_usage, temp) {
+        update_circle_progressbar("#cpu_load", cpu_load);
+        $("#mem_usage").html(mem_usage + "%")
+        $("#temperature").html(temp + "°C")
+
+
+        // var b1c1 = document.querySelector('#cpu_load');
+        // b1c1.style.width = cpu_load + "%";
+        // b1c1.innerHTML = cpu_load + "%";
     }
 
     function sys_state_upd() {
@@ -69,7 +92,8 @@
             url: "/sys_info",
         }).done(function (resp) {
             let d = JSON.parse(resp);
-            console.log(d);
+            // console.log(d);
+            sys_state_upd_f(d["cpu_freq"], d["cpu_load"], d["mem_usage"], d['cpu_temperature'])
         });
     }
 
@@ -80,66 +104,99 @@
 
     });
 </script>
-<div class="row">
-    <div class="card text-center align-items-center" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Батарея 1</h5>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_1_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60% </span>
+<!-- <div class="row justify-content-center align-items-center g-2">
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+    <div class="col">Column</div>
+</div> -->
+<div class="row justify-content-center">
+    <div class="col-4">
+        <div class="card text-center align-items-center h-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Батарея 1</h5>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_1_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"> </span>
+                    </div>
                 </div>
-            </div>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_1_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60% </span>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_1_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_1_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60% Complete</span>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_1_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!--  -->
-    <div class="card text-center align-items-center" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Батарея 2</h5>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_2_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60%</span>
+    <div class="col-4">
+        <div class="card text-center align-items-center h-auto" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Батарея 2</h5>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_2_cell_1" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_2_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+                <div class="progress progress-bar-vertical">
+                    <div id="battery_2_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
+                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
+                        <span class="sr-only"></span>
+                    </div>
                 </div>
             </div>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_2_cell_2" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60% </span>
-                </div>
-            </div>
-            <div class="progress progress-bar-vertical">
-                <div id="battery_2_cell_3" class="progress-bar progress-bar-danger" role="progressbar"
-                    aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="height: 60%;">
-                    <span class="sr-only">60% </span>
-                </div>
-            </div>
-        </div>
 
-    </div>
-</div>
-<div class="row">
-    <div class="card text-center align-items-center" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">Бортовой компьютер</h5>
-            <div class="cirlce_progressbar">
-                <svg class="progress-circle" width="200px" height="200px" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="progress-circle-back" cx="80" cy="80" r="74"></circle>
-                    <circle class="progress-circle-prog" cx="80" cy="80" r="74"></circle>
-                </svg>
-                <div class="progress-text" data-progress="0">0%</div>
-            </div>
         </div>
     </div>
+    <div class="col-4">
+        <div class="card text-center align-items-center w-auto h-auto" style="width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title">Бортовой компьютер</h5>
+                <div class="bg-white rounded-lg p-5 shadow">
+                    <h2 class="h6 font-weight-bold text-center mb-4">Загрузка ЦП</h2>
+                    <!-- Progress bar 1 -->
+                    <div id="cpu_load" class="circle-progress mx-auto" data-value='20'>
+                        <span class="circle-progress-left">
+                            <span class="circle-progress-bar border-primary"></span>
+                        </span>
+                        <span class="circle-progress-right">
+                            <span class="circle-progress-bar border-primary"></span>
+                        </span>
+                        <div
+                            class="circle-progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                            <div id="value_text" class="h2 font-weight-bold">80<sup class="small">%</sup></div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <br><br>
+                    <div class="row text-center mt-4">
+                        <div class="col-6 border-right">
+                            <div id="mem_usage" class="h4 font-weight-bold mb-0">28%</div><span
+                                class="small text-gray">Использование ОЗУ</span>
+                        </div>
+                        <div class="col-6">
+                            <div id="temperature" class="h4 font-weight-bold mb-0">60%</div><span
+                                class="small text-gray">Температура ЦП</span>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+            </div>

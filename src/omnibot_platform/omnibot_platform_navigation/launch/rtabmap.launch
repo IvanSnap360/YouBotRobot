@@ -47,9 +47,9 @@
         <param name="RGBD/OptimizeFromGraphEnd" type="string" value="false" /><!-- Set to false to generate map correction between /map and /odom -->
         <param name="RGBD/LocalRadius"          type="string" value="5"/>     <!-- limit length of proximity detections -->
         <!-- ################################################### -->
-        <param name="Grid/MaxGroundHeight" value="0.1"/>
-        <param name="Grid/MaxObstacleHeight" value="0.2"/>
-        <param name="Grid/CellSize" value="0.025" />
+        <param name="Grid/MaxGroundHeight" value="0.05"/>
+        <param name="Grid/MaxObstacleHeight" value="1.0"/>
+        <param name="Grid/CellSize" value="0.03" />
         <param name="Grid/NormalsSegmentation" value="true"/>
         <param name="Grid/Sensor" type="string" value="2" />
         <param name="Grid/RayTracing" value="true" />
