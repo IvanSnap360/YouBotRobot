@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Omnibot GUI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/battery_style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/progresbar_circle.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/bootstrap.min.css') }}" />
+    <script src="{{ url_for('static', filename='js/jquery-3.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/navbar_handle.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap-progressbar.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/easeljs.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/eventemitter2.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/roslib.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ros2d.js') }}"></script>
+    <script>
+        var ros = null
+    </script>
+    <script>
+        function displaySuccess(message) {
+            var html = '<div class="alert alert-success">'
+                + message
+                + '</div>';
+            $('#messages').html(html);
+        }
+        function ros_connect() {
+            ros = new ROSLIB.Ros();
+            // When a connection is established with rosbridge, a 'connection' event
+            // is emitted. In the event callback, we print a success message to the
+            // screen.
+            ros.on('connection', function () {
+                // displaySuccess is a convenience function for outputting messages in
+                // HTML.
+                displaySuccess('Roslibjs connected to rosbridge.');
+            });
+            // Connects to rosbridge.
+            ros.connect('ws://localhost:9090');
+        }
+
+        function init() {
+            ros_connect();
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <header>
+        <div class="container-fluid">
+            <div class="row flex-nowrap">
+                <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
+                    <div
+                        class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                        <ul class="nav navbar-dark bg-dark nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
+                            id="menu">
+                            <i class="fs-4"></i> <span class="ms-1 d-none d-sm-inline">Панель управления
+                                OmniBot</span>
+
+                            <!--  -->
+
+                            <li class="nav-item statistiks">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/statisticks.png')}}" alt="user"
+                                        width="32" height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Состояние</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item navigation">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/navigation.svg')}}" alt="user"
+                                        width="32" height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-navigation"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Навигация</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item cartographer">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/cartographer.png')}}" alt="user"
+                                        width="32" height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-cartograph"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Картограф</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item manipulator">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/manip.png')}}" alt="user" width="32"
+                                        height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-manipulator"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Манипулятор</span>
+                                </a>
+                            </li>
+                            <!--  -->
+                            <li class="nav-item platform">
+                                <a class="nav-link align-middle px-0">
+                                    <img src="{{url_for('static', filename='img/platform.png')}}" alt="user" width="32"
+                                        height="32" class=" sidebar_nav_icon_filter" alt="filter applied">
+                                    <i class="fs-4 bi-platform"></i> <span
+                                        class="ms-1 d-none d-sm-inline">Платформа</span>
+                                </a>
+                            </li>
+                    </div>
+                </div>
+                <div class="col py-3" id="content">
+                    <p id="content">Добро пожаловать на страницу управления OmniBot!!!</p>
+                    <div id="messages">
+                        <div class="alert">
+                            Waiting to connect to rosbridge.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script>
+        navbar_handle(".statistiks", "/statisticks.html")
+        navbar_handle(".navigation", "/navigation.html")
+        navbar_handle(".cartographer", "/cartographer.html")
+        navbar_handle(".manipulator", "/manipulator.html")
+        navbar_handle(".platform", "/platform.html")
+
+
+    </script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+</body>
+
+</html>

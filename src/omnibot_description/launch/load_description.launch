@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="rviz" default="false" />
+    <arg name="gui" default="false" />
+    <arg name="manipulator" default="false" />
+
+    <param name="robot_description"
+        command="$(find xacro)/xacro --inorder $(find omnibot_description)/urdf/omnibot_description.urdf.xacro use_manipulator:=$(arg manipulator)" />
+
+
+    <group if="$(arg rviz)">
+        <node name="rviz" pkg="rviz" type="rviz" output="screen"
+            args="-d $(find omnibot_description)/rviz/rviz.rviz " />
+        <node pkg="tf" type="static_transform_publisher" name="map2base_footprint"
+            args="0.0 0.0 0.05 0.0 0.0 0.0 /map /base_footprint 100" />
+    </group>
+
+
+    <group if="$(arg gui)">
+        <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui"
+            type="joint_state_publisher_gui" />
+    </group>
+
+    <group unless="$(arg gui)">
+        <node name="omnibot_robot_joint_state_publisher" pkg="joint_state_publisher"
+            type="joint_state_publisher" />
+    </group>
+
+
+    <node name="omnibot_robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" ns="omnibot_robot">
+        <param name="publish_frequency" value="200" />
+        <param name="use_tf_static" value="false" />
+        <param name="rate" value="200" />
+
+    </node>
+
+</launch>

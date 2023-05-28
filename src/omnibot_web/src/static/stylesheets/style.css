@@ -1,0 +1,10 @@
+#sidebar-nav {
+    width: 160px;
+}
+
+.sidebar_nav_icon_filter {
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
+}
+
+

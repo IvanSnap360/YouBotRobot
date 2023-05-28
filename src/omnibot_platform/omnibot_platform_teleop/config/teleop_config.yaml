@@ -1,0 +1,60 @@
+workMode: "terminal" # terminal, web(not working), joy(not working)
+
+workRate: 200.0 # also influence to output topic publish rate
+output_topic: "/omnibot_robot/cmd_vel"
+# output_topic: joy
+
+exit_key: 3 #Ctrl + C
+info_msg_counter_max: 30
+
+velocity_control_step: 0.05
+
+velocities_inverse:
+  linear_x_velocity:  false
+  linear_y_velocity:  true
+  angular_z_velocity: true
+
+velocities_params_paths:
+  
+  max_linear_x_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_x_max"
+  min_linear_x_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_x_min"
+
+  max_linear_y_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_y_max"
+  min_linear_y_velocity: "/omnibot_platform_drv_config/velocities_limits/linear_y_min"
+  
+  max_angular_z_velocity: "/omnibot_platform_drv_config/velocities_limits/angular_z_max"
+  min_angular_z_velocity: "/omnibot_platform_drv_config/velocities_limits/angular_z_min"
+
+  
+numpad_keys:
+  moving:
+    forward: "8"
+    backward: "2"
+    left: "4"
+    right: "6"
+    forward_left: "7"
+    forward_right: "9"
+    backward_left: "1"
+    backward_right: "3"
+    stop: "5"
+
+  rotating:
+    clockwise: "e"
+    counterclockwise: "q"
+
+wasd_keys:
+
+  moving:
+    forward: "w"
+    backward: "x"
+    left: "a"
+    right: "d"
+    forward_left: "q"
+    forward_right: "e"
+    backward_left: "z"
+    backward_right: "c"
+    stop: "s"
+
+  rotating:
+    clockwise: "t"
+    counterclockwise: "r"

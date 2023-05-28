@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<launch>
+
+    <rosparam command="load" file="$(find omnibot_control)/config/omnibot_control_config.yaml"/>
+    <node name="omnibot_robot_controllers_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="
+        joint_state_controller"
+        ns="omnibot_robot"
+    />
+
+
+</launch>

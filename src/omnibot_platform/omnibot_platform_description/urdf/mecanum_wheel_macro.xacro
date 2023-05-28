@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<robot name="mecanum_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find omnibot_platform_description)/urdf/wheel.xacro" />
+  <xacro:include filename="$(find omnibot_platform_description)/urdf/rollers.xacro"  />
+
+  <xacro:macro name="mecanum_wheel" params="name side interface *origin parent">  
+    
+    <xacro:wheel_link name="${name}" side="${side}" />    
+    <xacro:rollers_link name="${name}" side="${side}" />
+
+    <transmission name="${name}_mecanum_trans">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="${name}_mecanum_motor">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+        <joint name="${name}_mecanum_joint">
+            <hardwareInterface>${interface}</hardwareInterface>
+        </joint>
+    </transmission>
+
+    <joint name="${name}_mecanum_joint" type="continuous">
+        <xacro:insert_block name="origin" />
+        <parent link="${parent}" />
+        <child link="${name}_mecanum_wheel_link" />
+        <axis xyz="1 0 0" />
+        <limit lower="-3.14" upper="3.14" effort="1000.0" velocity="100.0" />
+    </joint>
+
+  </xacro:macro>
+
+</robot>

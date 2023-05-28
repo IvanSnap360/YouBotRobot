@@ -1,0 +1,1 @@
+roslaunch omnibot_bringup omnibot_bringup.launch sim:=false

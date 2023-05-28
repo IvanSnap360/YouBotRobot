@@ -1,0 +1,24 @@
+COM:
+  port: /dev/ttyUSB0
+  baudrate: 115200
+  timeout_ms: 100
+
+battery_1_frame_name: battery_1
+battery_2_frame_name: battery_2
+
+battery_1_topic_name: /battery_1
+battery_2_topic_name: /battery_2
+update_topic_data_rate_hz: 2.0
+
+Battery:
+  count: 2
+  serial_cells_count: 3
+
+# Serial input format
+# B1_C1:B1_C2:B1_C3-B2_C1:B2_C2:B2_C3
+parser:
+  cell_determinator:    ":"
+  battery_determinator: "-" 
+
+
+
