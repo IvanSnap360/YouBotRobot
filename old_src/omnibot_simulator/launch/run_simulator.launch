@@ -1,0 +1,67 @@
+<launch>
+
+
+    <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+    <arg name="paused" default="false" />
+    <arg name="use_sim_time" default="true" />
+    <arg name="gui" default="true" />
+    <arg name="headless" default="false" />
+    <arg name="debug" default="false" />
+
+    <!-- connect robot description -->
+    <param name="robot_description" textfile="$(find omnibot_description)/urdf/omnibot_robot.urdf"/>
+    <!-- connect manipulator controllers params -->
+    <include file="$(find omnibot_manipulator)/launch/omnibot_manipulator_config.launch">
+        <arg name="ns" value=""/>
+    </include>
+    <!-- connect platform controllers params -->
+    <include file="$(find omnibot_platform)/launch/omnibot_platform_config.launch">
+        <arg name="ns" value=""/>
+    </include>
+    <!-- connect gazebo_ros_control controllers params -->
+    <include file="$(find omnibot_simulator)/launch/config.launch">
+        <arg name="ns" value=""/>
+    </include>
+
+
+    <!-- connect joint state controller -->
+    <node name="joint_state_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller"/>
+    <!-- connect manipulator controllers -->
+    <include file="$(find omnibot_manipulator)/launch/omnibot_manipulator_controllers.launch">
+        <arg name="ns" value=""/>
+    </include>
+<<<<<<< HEAD
+=======
+    <!-- <node name="joint_velocity_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_velocity_controller"/> -->
+    <!-- <node name="forward_command_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="forward_command_controller"/> -->
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
+    <!-- connect platform controllers -->
+    <include file="$(find omnibot_platform)/launch/omnibot_platform_controllers.launch">
+        <arg name="ns" value=""/>
+    </include>
+    
+    <!-- connect diff drive controller -->
+    <!-- <include file="$(find omnibot_driver)/launch/bringup_diff_controller.launch"></include> -->
+
+<<<<<<< HEAD
+=======
+    <!-- bringup world -->
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find omnibot_simulator)/worlds/world2.world" />
+        <arg name="paused" default="true" />
+        <arg name="use_sim_time" default="true" />
+        <arg name="gui" default="true" />
+        <arg name="headless" default="false" />
+        <arg name="debug" default="false" />
+    </include>
+
+    <node pkg="gazebo_ros" type="spawn_model" name="omnibot_model_spawner" args="-urdf -param robot_description -z 0.05 -model omnibot_robot" respawn="false" output="screen">
+    </node>
+
+    
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    
+
+
+</launch>

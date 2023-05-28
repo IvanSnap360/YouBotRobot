@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<launch>
+
+    <!-- подключаем ноду драйвера указывая тип 
+        simple - без обратной связи / complex - с обратной связью -->
+    <include file="$(find omnibot_driver)/launch/bringup_driver.launch">
+        <arg name="driver_type" value="simple" />
+        <arg name="driver_connection" value="true" />
+    </include>
+
+    <include file="$(find omnibot_navigation)/launch/bringup_navigation.launch" />
+    
+</launch>

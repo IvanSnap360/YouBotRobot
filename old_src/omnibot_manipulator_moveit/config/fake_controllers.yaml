@@ -1,0 +1,16 @@
+controller_list:
+  - name: fake_arm_controller
+    type: $(arg execution_type)
+    joints:
+      - ang_joint1
+      - ang_joint2
+      - ang_joint3
+      - ang_joint4
+      - ang_joint5
+  - name: fake_gripper_controller
+    type: $(arg execution_type)
+    joints:
+      - ang_gripper
+initial:  # Define initial robot poses.
+  - group: arm
+    pose: default

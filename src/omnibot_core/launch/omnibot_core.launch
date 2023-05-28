@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+    <param name="omnibot_core_config_path" value="$(find omnibot_core)/config/config.yaml"/>
+
+    <node pkg="omnibot_core" type="omnibot_core_node" name="omnibot_core" output="screen"/>
+    
+
+</launch>

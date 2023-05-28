@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <param name="base_global_planner" value="navfn/NavfnROS" />
+        <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+        <!-- <rosparam file="$(find omnibot_platform_navigation)/config/costmap_converter_params.yaml" command="load" /> -->
+
+        <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" /> -->
+
+
+        <!-- <param name="base_local_planner" value="eband_local_planner/EBandPlannerROS"/> -->
+
+        
+        <!-- <param name="base_global_planner" value="global_planner/RRTGlobalPlanner"/>  -->
+
+        <rosparam file="$(find omnibot_platform_navigation)/config/navfn_global_planner_params.yaml"  command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/rrt_global_planner.yaml"         command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/dwa_local_planner_params.yaml"   command="load" />
+        
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="global_costmap" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/costmap_common_params.yaml"      command="load" ns="local_costmap" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/local_costmap_params.yaml"       command="load" />
+        <rosparam file="$(find omnibot_platform_navigation)/config/global_costmap_params.yaml"      command="load" /> 
+        <rosparam file="$(find omnibot_platform_navigation)/config/base_local_planner_params.yaml"  command="load" />
+
+
+        <rosparam file="$(find omnibot_platform_navigation)/config/teb_local_planner_params.yaml"   command="load" />
+
+        <param name="controller_frequency" value="5.0" />
+		<param name="controller_patience" value="15.0" />
+
+        <param name="planner_frequency" value="10.0" />
+		<!-- <param name="planner_patience" value=".0" /> -->
+
+
+        <remap from="/cmd_vel" to="/omnibot_robot/cmd_vel"/>\
+     </node>
+
+</launch>

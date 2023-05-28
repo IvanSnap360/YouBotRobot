@@ -4,5 +4,5 @@ devel/
 build/
 .catkin_workspace
 src/CMakeLists.txt
-git_log.log7
+git_log.log
 *.db

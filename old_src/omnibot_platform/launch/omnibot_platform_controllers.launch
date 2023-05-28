@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="ns" default="" />
+<<<<<<< HEAD
+    <node name="omnibot_platform_controllers_spawner_angle" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg ns)" args="
+=======
+    <node name="omnibot_platform_controllers_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/$(arg ns)" args="
+>>>>>>> 539d3a378cd48d3556f85776a1d8884e9df79ef8
+    left_forward_wheel_controller 
+    right_forward_wheel_controller 
+    left_backward_wheel_controller  
+    right_backward_wheel_controller "
+    />
+
+</launch>
