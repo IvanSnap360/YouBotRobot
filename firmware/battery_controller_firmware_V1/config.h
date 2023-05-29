@@ -1,5 +1,5 @@
 #define SERIAL_BAUDRATE 9600
-#define SERIAL_SEND_RATE_HZ 20.0
+#define SERIAL_SEND_RATE_HZ 2.0
 
 enum
 {

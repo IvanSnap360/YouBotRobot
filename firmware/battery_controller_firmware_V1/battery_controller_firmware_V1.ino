@@ -17,7 +17,7 @@ void setup()
     digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
     delay(100);
   }
-  digitalWrite(RELAY_CONTROL_PIN, ON);
+
 }
 
 void loop()
@@ -35,25 +35,32 @@ void loop()
     send_lt = millis();
   }
 
-  delay(200);
+  if (Serial.available() > 0)
+  {
+    int status = Serial.parseInt();
+    if (status > 0)
+      status = 1;
+    else
+      status = 0;
+    digitalWrite(RELAY_CONTROL_PIN, status);
+  }
 }
 
 void print_values()
 {
-  //    char buffer[300];
-  //
-  //    sprintf(buffer, "__%s__%s__%s__;__%s__%s__%s__",
-  //            battery[BATTERY_1][CELL_1]),
-  //            battery[BATTERY_1][CELL_2],
-  //            battery[BATTERY_1][CELL_3],
-  //            /*                         */
-  //            battery[BATTERY_2][CELL_1],
-  //            battery[BATTERY_2][CELL_2],
-  //            battery[BATTERY_2][CELL_3]
-  //            );
-
-  Serial.println( getVoltsFromPin(BATTERY_2_CELL_3_PIN));
-  //    memset(buffer,0,sizeof(buffer));
+  Serial.print("__");
+  Serial.print( battery[BATTERY_1][CELL_1]);
+  Serial.print("__");
+  Serial.print( battery[BATTERY_1][CELL_2]);
+  Serial.print("__");
+  Serial.print( battery[BATTERY_1][CELL_3]);
+  Serial.print("__;__");
+  Serial.print( battery[BATTERY_2][CELL_1]);
+  Serial.print("__");
+  Serial.print( battery[BATTERY_1][CELL_2]);
+  Serial.print("__");
+  Serial.print( battery[BATTERY_1][CELL_3]);
+  Serial.println("__");
 }
 
 float getVoltsFromPin(int pin)
