@@ -57,9 +57,9 @@ void print_values()
   Serial.print("__;__");
   Serial.print( battery[BATTERY_2][CELL_1]);
   Serial.print("__");
-  Serial.print( battery[BATTERY_1][CELL_2]);
+  Serial.print( battery[BATTERY_2][CELL_2]);
   Serial.print("__");
-  Serial.print( battery[BATTERY_1][CELL_3]);
+  Serial.print( battery[BATTERY_2][CELL_3]);
   Serial.println("__");
 }
 
@@ -67,8 +67,8 @@ float getVoltsFromPin(int pin)
 {
   float vin = 0.0;
   vin = ((analogRead(pin) * SOURCE_VOLTAGE_VOLTS) / ADC_MAX_VALUE) / (R2 / (R1 + R2));
-  if (vin < 0.01)
+  if (vin < 0.1)
     vin = 0.0;
 
-  return vin;
+  return abs(vin);
 }
