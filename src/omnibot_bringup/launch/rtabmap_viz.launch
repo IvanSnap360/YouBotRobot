@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="rtabmap_viz" type="rtabmap_viz" name="rtabmap_viz"
+        args="-d $(find rtabmap_demos)/launch/config/rgbd_gui.ini" output="screen">
+        <param name="subscribe_depth" type="bool" value="true" />
+        <param name="subscribe_scan" type="bool" value="true" />
+        <param name="frame_id" type="string" value="base_footprint" />
+        <param name="wait_for_transform" type="bool" value="true" />
+
+        <remap from="scan" to="/d400/scan" />
+        <remap from="rgb/image" to="/d400/color/image_raw" />
+        <remap from="depth/image" to="/d400/aligned_depth_to_color/image_raw" />
+        <remap from="rgb/camera_info" to="/d400/color/camera_info" />
+        <remap from="odom" to="/odom" />
+
+        <param name="rgb/image_transport" type="string" value="compressed" />
+        <param name="depth/image_transport" type="string" value="compressedDepth" />
+    </node>
+
+</launch>

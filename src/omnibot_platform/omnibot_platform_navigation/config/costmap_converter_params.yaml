@@ -1,6 +1,6 @@
-# costmap_converter/CostmapToPolygonsDBSMCCH:
+costmap_converter/CostmapToPolygonsDBSMCCH:
 # costmap_converter/CostmapToLinesDBSRANSAC:
-costmap_converter/CostmapToLinesDBSMCCH:
+# costmap_converter/CostmapToLinesDBSMCCH:
 # costmap_converter/CostmapToPolygonsDBSConcaveHull:
   cluster_max_distance: 0.4
   cluster_min_pts: 2

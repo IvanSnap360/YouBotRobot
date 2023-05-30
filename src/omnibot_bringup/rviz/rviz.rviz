@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /3DMap1
         - /Robot1/LaserScan1
         - /move_base1
         - /move_base1/TEB_planner1/global_path1
@@ -448,7 +449,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
@@ -459,11 +460,11 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.03999999910593033
       Style: Boxes
-      Topic: /rtabmap/cloud_map
+      Topic: /rtabmap/local_grid_obstacle
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
@@ -1182,7 +1183,10 @@ Visualization Manager:
               Marker Topic: /move_base/TebLocalPlannerROS/teb_markers
               Name: Marker
               Namespaces:
-                {}
+                LineObstacles: true
+                PolyObstacles: true
+                RobotFootprintModel: true
+                TebContainer: true
               Queue Size: 100
               Value: true
             - Alpha: 1
@@ -2546,9 +2550,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7303973436355591
+      Pitch: 0.5503974556922913
       Target Frame: base_link
-      Yaw: 2.603591203689575
+      Yaw: 1.8335918188095093
     Saved: ~
 Window Geometry:
   Displays:
