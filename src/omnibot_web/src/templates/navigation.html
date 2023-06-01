@@ -20,11 +20,16 @@
             displayPoseMarker();
         });
 
+        var traceShape = new ROS2D.TraceShape({
+            strokeSize: 0.1,
+            strokeColor: createjs.Graphics.getRGB(255, 0, 0, 1),
+            maxPoses: 250
+        });
 
         function displayPoseMarker() {
             // Create a marker representing the robot.
             var robotMarker = new ROS2D.NavigationArrow({
-                size: 0.4,
+                size: 0.3,
                 strokeSize: 0.02,
                 fillColor: createjs.Graphics.getRGB(255, 0, 0, 0.66),
                 pulse: false
@@ -55,6 +60,23 @@
                 robotMarker.visible = true;
             });
         }
+
+        //Draw planned path
+        var pathShape = new ROS2D.PathShape({
+            strokeSize: 0.1,
+            strokeColor: createjs.Graphics.getRGB(0, 255, 0, 0.5),
+        });
+        var listener = new ROSLIB.Topic({
+            ros: ros,
+            name: '/move_base/NavfnROS/plan',
+            messageType: 'nav_msgs/Path'
+        });
+        viewer2D.scene.addChild(pathShape);
+        listener.subscribe(function (message) {
+            // console.log(message);
+            pathShape.setPath(message);
+            //listener.unsubscribe();
+        });
     }
 
     $(document).ready(() => {

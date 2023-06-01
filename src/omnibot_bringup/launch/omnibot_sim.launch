@@ -64,5 +64,9 @@
         <arg name="localization"            value="$(arg localization)"/>
         <arg name="initial_pose"            value=""/>     
     </include>
-    
+
+
+
+<!-- START ROS WEB BRIDGE -->
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/>
 </launch>
