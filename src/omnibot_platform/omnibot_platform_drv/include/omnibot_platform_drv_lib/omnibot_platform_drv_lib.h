@@ -39,6 +39,8 @@ private:
     std::string _output_topic_frame_id, _output_topic_name, _input_topic_name;
     double _output_topic_rate;
 
+    bool inverse_linear_x,inverse_linear_y,inverse_angular_z;
+
     void _cmd_vel_sub_cb_f(const geometry_msgs::Twist::ConstPtr &twist);
     bool _check_is_node_IsSequence(YAML::Node node, std::string name);
 

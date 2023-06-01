@@ -39,7 +39,9 @@ OMNIBOT_PLATFORM_DRV_LIB::OMNIBOT_PLATFORM_DRV_LIB(ros::NodeHandle *nh, std::str
     _joints_control_msg.velocity.resize(_wheels_joints_count);
     _joints_control_msg.position.resize(_wheels_joints_count);
     
-
+    inverse_linear_x = _config["cmd_vel_inverse"]["linear_x"].as<bool>();
+    inverse_linear_y = _config["cmd_vel_inverse"]["linear_y"].as<bool>();
+    inverse_angular_z = _config["cmd_vel_inverse"]["angular_z"].as<bool>();
 
     if (_check_is_node_IsSequence(_config,"wheels_joints_names"))
     {
@@ -71,7 +73,9 @@ OMNIBOT_PLATFORM_DRV_LIB::OMNIBOT_PLATFORM_DRV_LIB(ros::NodeHandle *nh, std::str
 
 void OMNIBOT_PLATFORM_DRV_LIB::_cmd_vel_sub_cb_f(const geometry_msgs::Twist::ConstPtr &twist)
 {
-    _cmd_vel_input_msg = *twist;
+    _cmd_vel_input_msg.linear.x = inverse_linear_x ? -twist->linear.x : twist->linear.x;
+    _cmd_vel_input_msg.linear.y = inverse_linear_y ? -twist->linear.y : twist->linear.y; 
+    _cmd_vel_input_msg.angular.z = inverse_angular_z ? -twist->angular.z : twist->angular.z;
 }
 
 

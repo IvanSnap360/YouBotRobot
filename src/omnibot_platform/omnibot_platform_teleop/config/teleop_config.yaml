@@ -11,7 +11,7 @@ velocity_control_step: 0.05
 
 velocities_inverse:
   linear_x_velocity:  false
-  linear_y_velocity:  true
+  linear_y_velocity:  false
   angular_z_velocity: true
 
 velocities_params_paths:

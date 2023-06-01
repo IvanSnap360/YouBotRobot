@@ -1,0 +1,7 @@
+manipulator_cmd:
+  service_name:
+  startup_command: {type: 2, value: home}
+
+gripper_cmd:
+  service_name:
+  startup_command: {type: 2, value: open}
