@@ -9,10 +9,12 @@
 <arg name="wait_for_transform" default="0.2" />
 <arg name="sim" default="false"/>
 <!--  -->
-<arg name="world_db_name" default="my_world_db2.db" if="$(arg sim)"/>
-<arg name="world_db_name" default="KV33_RTABMAP_DB_NICE1.db" unless="$(arg sim)"/>
+<!-- <arg name="world_db_name" default="my_world_db2.db" if="$(arg sim)"/> -->
+<!-- <arg name="world_db_name" default="KV33_RTABMAP_DB_NICE1.db" unless="$(arg sim)"/> -->
+<arg name="world_db_name" default="rtabmap.db" unless="$(arg sim)"/>
 <!--  -->
 <arg name="database_path" default="$(find omnibot_platform_navigation)/maps/$(arg world_db_name)"/>
+<!-- <arg name="database_path" default="/home/ivan/.ros/rtabmap.db"/> -->
 
 <arg if="$(arg localization)" name="args"  default=""/>
 <arg unless="$(arg localization)" name="args"  default="--delete_db_on_start"/>
@@ -22,9 +24,9 @@
 
     <!-- RTABMAP PARAMS -->
         <param name="config_path" type="string" value=""/><!-- Path of a config files containing RTAB-Map's parameters. Parameters set in the launch file overwrite those in the config file. -->
-        <param name="database_path" type="string" value="~/.ros/rtabmap.db" unless="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
+        <param name="database_path" type="string" value="$(find omnibot_platform_navigation)/maps/$(arg world_db_name)" unless="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
+        <!-- <param name="database_path" type="string" value="~/.ros/rtabmap.db" unless="$(arg localization)"/>Path of the RTAB-Map's database. -->
         <param name="database_path" type="string" value="$(arg database_path)" if="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
-
         <param name="use_action_for_goal" type="bool" value="true"/><!-- Planning Use actionlib to send the metric goals to move_base. The advantage over just connecting goal_out to move_base_simple/ goal is that rtabmap can have a feedback if the goal is reached or if move_base has failed. See move_base Action API for more info. -->
         <!-- RTAB-Map's parameters -->
         <!-- ################################################### -->
@@ -69,8 +71,7 @@
         <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
         <param name="Mem/STMSize"               type="string" value="30"/>    <!-- increased to 30 to avoid adding too many loop closures on just seen locations -->
         <!-- ################################################### -->
-        <param name="Icp/CorrespondenceRatio"   type="string" value="0.5"/>   <!-- minimum scan overlap to accept loop closure -->
-        <param name="Icp/PM"                    type="string" value="true"/>
+        <param name="Icp/CorrespondenceRatio"   type="string" value="0.25"/>   <!-- minimum scan overlap to accept loop closure -->
         <param name="Icp/PointToPlane"          type="string" value="true"/>
         <param name="Icp/MaxCorrespondenceDistance"  type="string" value="0.15"/>
         <param name="Icp/VoxelSize"             type="string" value="0.05"/>
@@ -105,9 +106,9 @@
         <param name="wait_for_transform" type="bool" value="true"/><!-- Wait (maximum wait_for_transform_duration sec) for transform when a tf transform is not still available. -->
         <param name="wait_for_transform_duration" type="double" value="5.0"/><!-- Wait duration for wait_for_transform. -->
         <!-- GENERATORS -->
-        <param name=" gen_scan" type="bool" value="false"/> <!-- Generate laser scans from depth images (using the middle horizontal line of the depth image). Not generated if subscribe_scan or subscribe_scan_cloud are true. -->
+        <param name="gen_scan" type="bool" value="false"/> <!-- Generate laser scans from depth images (using the middle horizontal line of the depth image). Not generated if subscribe_scan or subscribe_scan_cloud are true. -->
         <param name="gen_scan_max_depth" type="double" value="4.0"/><!-- Maximum depth of the laser scans generated. -->
-        <param name=" gen_depth" type="bool" value="false"/><!-- Generate depth image from scan_cloud projection into RGB camera, taking into account displacement of the RGB camera accordingly to odometry and lidar frames. It works like pointcloud_to_depthimage node, but at slam frequency. -->
+        <param name="gen_depth" type="bool" value="false"/><!-- Generate depth image from scan_cloud projection into RGB camera, taking into account displacement of the RGB camera accordingly to odometry and lidar frames. It works like pointcloud_to_depthimage node, but at slam frequency. -->
         <param name="gen_depth_decimation" type="int" value="1"/><!-- Scale down image size of the camera info received (creating smaller depth image). -->
         <param name="gen_depth_fill_holes_size" type="int" value="0"/><!-- Fill holes of empty pixels up to this size. Values are interpolated from neighbor depth values. 0 means disabled. -->
         <param name="gen_depth_fill_iterations" type="double" value="0.1"/><!-- Maximum depth error (m) to interpolate. -->
@@ -121,7 +122,7 @@
         <param name="map_cleanup" type="bool" value="true"/><!-- Mapping If there is no subscription to any map cloud_map, grid_map or proj_map, clear the corresponding data. -->
         <param name="latch" type="bool" value="true"/><!-- Mapping If true, the last message published on the map topics will be saved and sent to new subscribers when they connect. -->
         <param name="map_always_update" type="bool" value="false"/><!-- Mapping Always update the occupancy grid map even if the graph has not been updated (e.g., by default when the robot is not moving, the graph is not growing). For example, if the environment is dynamic, we may want to update the map even when to robot is not moving. Another approach would be to force rtabmap to always update the graph (by setting RGBD/LinearUpdate to 0), which can be not efficient over time as the map will grow even if the robot doesn't move. -->
-        <param name=" map_empty_ray_tracing" type="bool" value="true"/><!-- Mapping Do ray tracing to fill unknown space for invalid 2D scan's rays (assuming invalid rays to be infinite). Used only when map_always_update is also true. -->
+        <param name="map_empty_ray_tracing" type="bool" value="true"/><!-- Mapping Do ray tracing to fill unknown space for invalid 2D scan's rays (assuming invalid rays to be infinite). Used only when map_always_update is also true. -->
         <param name="cloud_output_voxelized" type="bool" value="true"/><!-- Mapping Do a final voxel filtering after all clouds are assembled with a voxel size equals to Grid/CellSize. Used for cloud_map published topic. -->
         <param name="cloud_subtract_filtering" type="bool" value="true"/><!-- Mapping When appending a new cloud to cloud_map, filter points that have less neighbors than cloud_subtract_filtering_min_neighbors in the radius Grid/CellSize. This will helps to reconstruct the whole map' s cloud faster when a loop closure happens. Used for cloud_map published topic. -->
         <param name="cloud_subtract_filtering_min_neighbors" type="int" value="2"/><!-- Mapping See cloud_subtract_filtering parameter's description. -->
