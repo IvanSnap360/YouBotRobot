@@ -32,8 +32,8 @@ enum
 #define ON HIGH
 
 
-#define RESITOR_DIVIDER__R1_VAL_Om (float)2200.0
-#define RESITOR_DIVIDER__R2_VAL_Om (float)1000.0
+#define RESITOR_DIVIDER__R1_VAL_Om (float)100000.0
+#define RESITOR_DIVIDER__R2_VAL_Om (float)10000.0
 #define ADC_MAX_VALUE (float)1024.0
 #define SOURCE_VOLTAGE_VOLTS (float)4.6
 
