@@ -30,18 +30,18 @@
   <arg name="z_pos" default="0.3"/> -->
 
   <!-- MyWorld -->
-  <!-- <arg name="x_pos" default="-4.0"/>
+  <arg name="x_pos" default="-4.0"/>
   <arg name="y_pos" default="3.0"/>
-  <arg name="z_pos" default="0.3"/> -->
+  <arg name="z_pos" default="0.3"/>
   <!-- 
   <arg name="x_pos" default="0.0"/>
   <arg name="y_pos" default="-2.65"/>
   <arg name="z_pos" default="0.3"/> -->
 
-
+<!-- 
   <arg name="x_pos" default="0.0" />
   <arg name="y_pos" default="1.0" />
-  <arg name="z_pos" default="0.3" />
+  <arg name="z_pos" default="0.3" /> -->
 
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -65,7 +65,7 @@
     <!-- <arg name="world_name" value="$(find
     omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world_design1.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/garage.world" /> -->
-    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorld/MyWorldDyn.world" />
+    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorld/MyWorld.world" />
 
   </include>
 
