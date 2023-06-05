@@ -5,7 +5,7 @@
   <!-- Params for 3D sensors config -->
   <rosparam command="load" file="$(find omnibot_manipulator_moveit)/config/sensors_3d.yaml" />
   <!-- Params for the octomap monitor -->
-  <param name="octomap_frame" type="string" value="odom" />
+  <param name="octomap_frame" type="string" value="d400_arm" />
   <param name="octomap_resolution" type="double" value="0.1" /> <!-- in meters -->
   <param name="max_range" type="double" value="2.5" />
 

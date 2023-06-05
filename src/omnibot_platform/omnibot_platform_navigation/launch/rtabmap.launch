@@ -72,12 +72,12 @@
         <!-- ################################################### -->
         <param name="Icp/CorrespondenceRatio"      type="string" value="0.3"/>
         <!-- ################################################### -->
-        <param name="Vis/MinInliers"                            type="string"   value="15" /><!-- 3D visual words minimum inliers to accept loop closure -->
+        <param name="Vis/MinInliers"                            type="string"   value="10" /><!-- 3D visual words minimum inliers to accept loop closure -->
         <param name="Vis/InlierDistance"                        type="string"   value="0.1" /> <!-- 3D visual words correspondence distance -->
         <!-- ################################################### -->
         <param name="Optimizer/Slam2D"                          type="string"   value="true"/>
         <!-- ################################################### -->
-        <param name="Odom/Strategy"                             type="string"   value="5"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
+        <param name="Odom/Strategy"                             type="string"   value="0"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
         <param name="Odom/Holonomic"		                    type="string"   value="true"/> <!-- If the robot is holonomic (strafing commands can be issued). If not, y value will be estimated from x and yaw values (y=x*tan(yaw)).-->
         <param name="Odom/FilteringStrategy"                    type="string"   value="0"/> <!-- 0=No filtering 1=Kalman filtering 2=Particle filtering. This filter is used to smooth the odometry output.-->
 <!-- ################################################################################################################################################################# -->
