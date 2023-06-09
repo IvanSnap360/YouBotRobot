@@ -1,13 +1,10 @@
 #include "omnibot_manipulator_control_server_lib/omnibot_manipulator_control_server_lib.h"
 
-
-
 void OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::updateGoalState()
 {
     std_msgs::Empty _rviz_goal_state_updater_msg;
     _rviz_goal_state_updater_pub.publish(_rviz_goal_state_updater_msg);
 }
-
 
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(ros::NodeHandle *nh, std::string config_path)
 {
@@ -72,8 +69,31 @@ OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(r
         }
     }
     _gripper_cmd_service_name = _cfg["services"]["gripper_cmd_service"]["name"].as<std::string>();
+    // ##################################################################### //
+    // ######################## READ HARDWARE CONFIG ####################### //
+    // ##################################################################### //
+    _trajectory_followers_state = _cfg["hardware"]["default_state"].as<bool>();
+    _trajectory_followers_enable_service_name = _cfg["hardware"]["trajectoryFollowersEnableServiceName"].as<std::string>();
+    _manipulator_action_server_name = _cfg["hardware"]["input"]["manipulator_action_server_name"].as<std::string>();
+    _gripper_action_server_name = _cfg["hardware"]["input"]["gripper_action_server_name"].as<std::string>();
+    _actuators_trajectory_topic_name = _cfg["hardware"]["output"]["actuators_trajectory_topic"].as<std::string>();
 
-    _rviz_goal_state_updater_pub = _nh->advertise<std_msgs::Empty>("/rviz/moveit/update_goal_state",10);
+    _arm_trajectory_follower = new RobotTrajectoryFollower(_nh,
+                                                           _manipulator_action_server_name,
+                                                           _actuators_trajectory_topic_name);
+
+    _gripper_trajectory_follower = new RobotTrajectoryFollower(_nh,
+                                                               _gripper_action_server_name,
+                                                               _actuators_trajectory_topic_name);
+
+    _trajectory_followers_enable_service = _nh->advertiseService(
+        _trajectory_followers_enable_service_name, 
+        &OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f,
+        this);
+    
+
+
+    _rviz_goal_state_updater_pub = _nh->advertise<std_msgs::Empty>("/rviz/moveit/update_goal_state", 10);
 }
 
 void OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::init()
@@ -110,7 +130,6 @@ void OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::init()
 
     ROS_INFO("Initilazing gripper move group interface      DONE");
 }
-
 
 // ##################################################################### //
 // ####################### MANIPULATOR FUNCTIONS ####################### //
@@ -162,7 +181,7 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::ManipMoveByJointValues(std::vector<
         return false;
     }
     _move_group_interface_arm->setJointValueTarget(joint_values);
-    
+
     ROS_INFO("Planning for joints positions [%.2lf %.2lf %.2lf %.2lf %.2lf]",
              joint_values[0], joint_values[1], joint_values[2], joint_values[3], joint_values[4]);
     updateGoalState();
@@ -252,10 +271,9 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::GripperMoveBySavedPosition(std::str
     }
 }
 
-
 // ##################################################################### //
 // #################### SERVISES CALLBACK FUNCTIONS #################### //
-// ##################################################################### // 
+// ##################################################################### //
 
 bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_grp_cmd_service_server_cb_f(omnibot_manipulator_control::gripper_cmd::Request &req,
                                                                           omnibot_manipulator_control::gripper_cmd::Response &res)
@@ -297,8 +315,6 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_grp_cmd_service_server_cb_f(omnibo
     }
     return true;
 }
-
-
 
 bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_arm_cmd_service_server_cb_f(
     omnibot_manipulator_control::manipulator_cmd::Request &req,
@@ -378,6 +394,18 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_arm_cmd_service_server_cb_f(
     }
     return true;
 }
+
+
+bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f(std_srvs::SetBool::Request &req,
+                                                   std_srvs::SetBool::Response &res)
+{
+    _arm_trajectory_follower->setState((bool)req.data);
+    _gripper_trajectory_follower->setState((bool)req.data);
+    res.message = "Trajectory followers is " + req.data ? "ON" : "OFF";
+    res.success = true;
+    return true;
+}
+
 
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::~OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB()
 {

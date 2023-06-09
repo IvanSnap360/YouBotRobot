@@ -11,6 +11,10 @@
 #include <omnibot_manipulator_control/manipulator_cmd.h>
 #include <omnibot_manipulator_control/gripper_cmd.h>
 #include <std_msgs/Empty.h>
+#include "action_server_lib/action_server_lib.h"
+#include <control_msgs/FollowJointTrajectoryAction.h>
+#include <trajectory_msgs/JointTrajectory.h>
+#include <std_srvs/SetBool.h>
 
 #define degreesToRadians(degrees) degrees *M_PI / 180
 
@@ -39,6 +43,17 @@ private:
     ros::ServiceServer _arm_cmd_service_server;
     ros::ServiceServer _gripper_cmd_service_server;
 
+    RobotTrajectoryFollower *_arm_trajectory_follower;
+    RobotTrajectoryFollower *_gripper_trajectory_follower;
+    bool _trajectory_followers_state = false;
+    std::string _trajectory_followers_enable_service_name;
+    std::string _manipulator_action_server_name;
+    std::string _gripper_action_server_name;
+    std::string _actuators_trajectory_topic_name;
+    ros::ServiceServer _trajectory_followers_enable_service;
+    bool _trajectory_followers_enable_service_cb_f(std_srvs::SetBool::Request &req,
+                                                   std_srvs::SetBool::Response &res);
+
     bool ManipMoveByJointValues(std::vector<double> joint_values);
     bool ManipMoveByPosition(geometry_msgs::Pose new_pose);
     bool ManipMoveBySavedPosition(std::string pose_name);
@@ -51,10 +66,11 @@ private:
                                       omnibot_manipulator_control::manipulator_cmd::Response &res);
     bool _grp_cmd_service_server_cb_f(omnibot_manipulator_control::gripper_cmd::Request &req,
                                       omnibot_manipulator_control::gripper_cmd::Response &res);
-    
+
     ros::Publisher _rviz_goal_state_updater_pub;
-    
+
     void updateGoalState();
+
 public:
     OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(ros::NodeHandle *nh, std::string config_path);
     void init();

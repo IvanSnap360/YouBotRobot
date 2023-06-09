@@ -139,7 +139,7 @@ generate_messages(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
  INCLUDE_DIRS include
- LIBRARIES omnibot_manipulator_control_server_lib 
+ LIBRARIES omnibot_manipulator_control_server_lib action_server_lib
  CATKIN_DEPENDS roscpp rospy std_msgs dynamixel_workbench_msgs trajectory_msgs dynamixel_workbench_toolbox cmake_modules actionlib_msgs actionlib
 #  DEPENDS system_lib
 )
@@ -159,7 +159,8 @@ include_directories(
 ## Declare a C++ library
 add_library(${PROJECT_NAME}
   src/${PROJECT_NAME}_server_lib/omnibot_manipulator_control_server_lib.cpp
-)
+  src/action_server_lib/action_server_lib.cpp
+  )
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -171,7 +172,8 @@ add_library(${PROJECT_NAME}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_server_node
   src/omnibot_manipulator_control_server_node.cpp 
-  src/omnibot_manipulator_control_server_lib/omnibot_manipulator_control_server_lib.cpp)
+  src/omnibot_manipulator_control_server_lib/omnibot_manipulator_control_server_lib.cpp
+  src/action_server_lib/action_server_lib.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use

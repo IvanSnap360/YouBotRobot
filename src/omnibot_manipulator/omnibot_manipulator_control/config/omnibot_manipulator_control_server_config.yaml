@@ -18,3 +18,13 @@ services:
   gripper_cmd_service:
     name: gripper_cmd
     saved_poses: [{ name: "open", val: 0.025 }, { name: "close", val: 0.01 }]
+
+
+hardware:
+  default_state: false # on / off on startup
+  trajectoryFollowersEnableServiceName: trajectory_followers_enable
+  input:
+    manipulator_action_server_name: /maipulator_group_controller/follow_joint_trajectory
+    gripper_action_server_name:     /gripper_group_controller/follow_joint_trajectory
+  output:
+    actuators_trajectory_topic: /dynamixel_contoller/joint_trajectory
