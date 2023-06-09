@@ -19,6 +19,8 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_core
   moveit_ros_planning_interface
   moveit_visual_tools
+  actionlib_msgs
+  actionlib
 )
 
 ## System dependencies are found with CMake's conventions
@@ -138,7 +140,7 @@ generate_messages(
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES omnibot_manipulator_control_server_lib 
- CATKIN_DEPENDS roscpp rospy std_msgs dynamixel_workbench_msgs trajectory_msgs dynamixel_workbench_toolbox cmake_modules
+ CATKIN_DEPENDS roscpp rospy std_msgs dynamixel_workbench_msgs trajectory_msgs dynamixel_workbench_toolbox cmake_modules actionlib_msgs actionlib
 #  DEPENDS system_lib
 )
 
