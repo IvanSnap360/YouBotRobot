@@ -167,7 +167,7 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::ManipMoveByJointValues(std::vector<
              joint_values[0], joint_values[1], joint_values[2], joint_values[3], joint_values[4]);
     updateGoalState();
     bool success = (_move_group_interface_arm->plan(_arm_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
-
+    // _arm_plan.trajectory_.joint_trajectory.
     ROS_INFO("Planning %s", success ? "SUCCESS" : "FAILED");
 
     if (success)

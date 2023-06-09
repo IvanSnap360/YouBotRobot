@@ -1,0 +1,6 @@
+controller_list:
+  - name: maipulator_arm_contoller
+    action_ns: joint_trajectory_controller
+    type: FollowJointTrajectory
+    default: true
+    joints: [ang_joint1, ang_joint2, ang_joint3, ang_joint4, ang_joint5]
