@@ -36,7 +36,9 @@
         <param name="baud" value="115200"/>
     </node>
 
-    
+    <include file="$(find omnibot_manipulator_hw_controller)/launch/omnibot_manipulator_hw_controller.launch"/>
+
+    <include file="$(find omnibot_core)/launch/omnibot_core.launch"/>
     <!--  -->
     <include file="$(find sensor_odom_manager)/launch/sensor_odom_manager.launch"/>
 
