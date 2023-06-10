@@ -72,11 +72,11 @@ OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(r
     // ##################################################################### //
     // ######################## READ HARDWARE CONFIG ####################### //
     // ##################################################################### //
-    _trajectory_followers_state = _cfg["hardware"]["default_state"].as<bool>();
-    _trajectory_followers_enable_service_name = _cfg["hardware"]["trajectoryFollowersEnableServiceName"].as<std::string>();
-    _manipulator_action_server_name = _cfg["hardware"]["input"]["manipulator_action_server_name"].as<std::string>();
-    _gripper_action_server_name = _cfg["hardware"]["input"]["gripper_action_server_name"].as<std::string>();
-    _actuators_trajectory_topic_name = _cfg["hardware"]["output"]["actuators_trajectory_topic"].as<std::string>();
+    _trajectory_followers_state =                   _cfg["hardware"]["default_state"].as<bool>();
+    _trajectory_followers_enable_service_name =     _cfg["hardware"]["trajectoryFollowersEnableServiceName"].as<std::string>();
+    _manipulator_action_server_name =               _cfg["hardware"]["input"]["manipulator_action_server_name"].as<std::string>();
+    _gripper_action_server_name =                   _cfg["hardware"]["input"]["gripper_action_server_name"].as<std::string>();
+    _actuators_trajectory_topic_name =              _cfg["hardware"]["output"]["actuators_trajectory_topic"].as<std::string>();
 
     _arm_trajectory_follower = new RobotTrajectoryFollower(_nh,
                                                            _manipulator_action_server_name,
@@ -405,6 +405,7 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_servic
     res.success = true;
     return true;
 }
+
 
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::~OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB()
 {

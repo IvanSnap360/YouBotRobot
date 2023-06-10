@@ -11,8 +11,8 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
-  actionlib_msgs
-  actionlib
+  # actionlib_msgs
+  # actionlib
   message_generation
 
 )
@@ -72,11 +72,11 @@ find_package(Boost REQUIRED COMPONENTS system)
 # )
 
 ## Generate added messages and services with any dependencies listed here
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  actionlib_msgs
-)
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+#   actionlib_msgs
+# )
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -108,9 +108,9 @@ generate_messages(
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
- INCLUDE_DIRS include
- LIBRARIES omnibot_manipulator_hw_controller
- CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs actionlib
+#  INCLUDE_DIRS include
+#  LIBRARIES omnibot_manipulator_hw_controller
+#  CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs actionlib
 #  DEPENDS system_lib 
 )
 
@@ -139,7 +139,6 @@ include_directories(
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(${PROJECT_NAME}_node src/omnibot_manipulator_hw_controller_node.cpp)
-add_executable(action_server  src/action_server.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,9 +154,9 @@ add_executable(action_server  src/action_server.cpp)
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
 )
-target_link_libraries(action_server
-  ${catkin_LIBRARIES}
-)
+# target_link_libraries(action_server
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
