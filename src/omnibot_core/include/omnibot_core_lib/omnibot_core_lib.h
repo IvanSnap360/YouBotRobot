@@ -3,6 +3,7 @@
 #include <ros/ros.h>
 #include <omnibot_manipulator_control/manipulator_cmd.h>
 #include <omnibot_manipulator_control/gripper_cmd.h>
+#include <std_srvs/SetBool.h>
 #include <yaml-cpp/yaml.h>
 
 class OMNIBOT_CORE_LIB
@@ -16,6 +17,9 @@ private:
 
     std::string _gripper_service_name;
     ros::ServiceClient _gripper_service_client;
+
+    std::string _pointcloud_switcher_name;
+    ros::ServiceClient _pointcloud_switcher_client;
 
 public:
     OMNIBOT_CORE_LIB(ros::NodeHandle *nh, std::string config_path);

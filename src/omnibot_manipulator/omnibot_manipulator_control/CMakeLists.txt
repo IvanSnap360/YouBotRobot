@@ -178,6 +178,8 @@ add_executable(${PROJECT_NAME}_server_node
   src/action_server_lib/action_server_lib.cpp)
 
 add_executable(action_server_node src/action_server_node.cpp src/action_server_lib/action_server_lib.cpp)
+add_executable(pointcloud_swith_node src/pointcloud_swith_node.cpp)
+
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -200,6 +202,10 @@ target_link_libraries(action_server_node
 )
 
 
+target_link_libraries(pointcloud_swith_node
+  yaml-cpp
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############

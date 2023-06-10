@@ -42,7 +42,7 @@ private:
 
     ros::ServiceServer _arm_cmd_service_server;
     ros::ServiceServer _gripper_cmd_service_server;
-    
+
     bool ManipMoveByJointValues(std::vector<double> joint_values);
     bool ManipMoveByPosition(geometry_msgs::Pose new_pose);
     bool ManipMoveBySavedPosition(std::string pose_name);
