@@ -87,11 +87,9 @@ OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(r
                                                                _actuators_trajectory_topic_name);
 
     _trajectory_followers_enable_service = _nh->advertiseService(
-        _trajectory_followers_enable_service_name, 
+        _trajectory_followers_enable_service_name,
         &OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f,
         this);
-    
-
 
     _rviz_goal_state_updater_pub = _nh->advertise<std_msgs::Empty>("/rviz/moveit/update_goal_state", 10);
 }
@@ -184,7 +182,6 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::ManipMoveByJointValues(std::vector<
 
     ROS_INFO("Planning for joints positions [%.2lf %.2lf %.2lf %.2lf %.2lf]",
              joint_values[0], joint_values[1], joint_values[2], joint_values[3], joint_values[4]);
-    updateGoalState();
     bool success = (_move_group_interface_arm->plan(_arm_plan) == moveit::planning_interface::MoveItErrorCode::SUCCESS);
     // _arm_plan.trajectory_.joint_trajectory.
     ROS_INFO("Planning %s", success ? "SUCCESS" : "FAILED");
@@ -313,6 +310,8 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_grp_cmd_service_server_cb_f(omnibo
         break;
     }
     }
+    updateGoalState();
+
     return true;
 }
 
@@ -392,12 +391,13 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_arm_cmd_service_server_cb_f(
         break;
     }
     }
+    updateGoalState();
+
     return true;
 }
 
-
 bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f(std_srvs::SetBool::Request &req,
-                                                   std_srvs::SetBool::Response &res)
+                                                                                       std_srvs::SetBool::Response &res)
 {
     _arm_trajectory_follower->setState((bool)req.data);
     _gripper_trajectory_follower->setState((bool)req.data);
@@ -405,7 +405,6 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_servic
     res.success = true;
     return true;
 }
-
 
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::~OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB()
 {

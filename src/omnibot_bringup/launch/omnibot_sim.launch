@@ -42,6 +42,9 @@
         </include>
     </group>
 
+
+    <include file="$(find omnibot_core)/launch/omnibot_core.launch"/>
+
     <!--  -->
     <group if="$(arg rviz)">
         <include file="$(find omnibot_bringup)/launch/rviz.launch" />
