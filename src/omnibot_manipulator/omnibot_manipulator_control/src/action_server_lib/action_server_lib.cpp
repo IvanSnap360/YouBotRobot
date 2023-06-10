@@ -3,7 +3,7 @@
 RobotTrajectoryFollower::RobotTrajectoryFollower(ros::NodeHandle *_nh, std::string action_server_name, std::string traj_pub_name)
 {
 
-    _as = new actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction>(action_server_name, true);
+    _as = new actionlib::SimpleActionServer<control_msgs::FollowJointTrajectoryAction>(action_server_name, false);
     // Register callback functions:
     _as->registerGoalCallback(boost::bind(&RobotTrajectoryFollower::goalCB, this));
     _as->registerPreemptCallback(boost::bind(&RobotTrajectoryFollower::preemptCB, this));

@@ -39,7 +39,7 @@
     joint_state_publisher
          MoveIt's fake controller's joint states are considered via the 'source_list' parameter -->
       <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
-        <rosparam param="source_list">[/omnibot_robot/manipulator_joint_states_correcter]</rosparam>
+        <rosparam param="source_list">[/omnibot_robot/manipulator_joint_states_corrected]</rosparam>
       </node>
 
       <node name="omnibot_robot_state_publisher" pkg="robot_state_publisher"

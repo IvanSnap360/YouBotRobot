@@ -42,18 +42,7 @@ private:
 
     ros::ServiceServer _arm_cmd_service_server;
     ros::ServiceServer _gripper_cmd_service_server;
-
-    RobotTrajectoryFollower *_arm_trajectory_follower;
-    RobotTrajectoryFollower *_gripper_trajectory_follower;
-    bool _trajectory_followers_state = false;
-    std::string _trajectory_followers_enable_service_name;
-    std::string _manipulator_action_server_name;
-    std::string _gripper_action_server_name;
-    std::string _actuators_trajectory_topic_name;
-    ros::ServiceServer _trajectory_followers_enable_service;
-    bool _trajectory_followers_enable_service_cb_f(std_srvs::SetBool::Request &req,
-                                                   std_srvs::SetBool::Response &res);
-
+    
     bool ManipMoveByJointValues(std::vector<double> joint_values);
     bool ManipMoveByPosition(geometry_msgs::Pose new_pose);
     bool ManipMoveBySavedPosition(std::string pose_name);

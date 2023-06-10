@@ -16,10 +16,4 @@
       angle_joint5_controller 
       angle_gripper_controller 
       angle_gripper_sub_controller" />
-
-  <include file="$(find omnibot_manipulator_control)/launch/dynamixel.launch">
-    <arg name="usb_port" default="/dev/ttyACM0" />
-    <arg name="dxl_baud_rate" default="1000000" />
-    <arg name="namespace" default="dynamixel_contoller" />
-  </include>
 </launch>

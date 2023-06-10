@@ -40,14 +40,14 @@
         <!-- ################################################### -->
         <param name="RGBD/AngularUpdate"                        type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
         <param name="RGBD/LinearUpdate"                         type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
-        <param name="RGBD/OptimizeMaxError"                     type="double"   value="0"/> <!-- Reject loop closures if optimization error ratio is greater than this value (0=disabled). Ratio is computed as absolute error over standard deviation of each link. This will help to detect when a wrong loop closure is added to the graph. Not compatible with \"%s\" if enabled-->
+        <param name="RGBD/OptimizeMaxError"                     type="double"   value="5"/> <!-- Reject loop closures if optimization error ratio is greater than this value (0=disabled). Ratio is computed as absolute error over standard deviation of each link. This will help to detect when a wrong loop closure is added to the graph. Not compatible with \"%s\" if enabled-->
         <param name="RGBD/ProximityPathMaxNeighbors"            type="string"   value="0" />
         <param name="RGBD/CreateOccupancyGrid"                  type="string"   value="true" /> <!-- The proximity detection using only laser scans is disabled-->
         <param name="RGBD/NeighborLinkRefining"                 type="string"   value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
         <param name="RGBD/ProximityBySpace"                     type="string"   value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
         <param name="RGBD/ProximityByTime"                      type="string"   value="true"/> <!-- Local loop closure detection with locations in STM -->
         <param name="RGBD/OptimizeFromGraphEnd"                 type="string"   value="false" /><!-- Set to false to generate map correction between /map and /odom -->
-        <param name="RGBD/LocalRadius"                          type="string"   value="5"/>     <!-- limit length of proximity detections -->
+        <param name="RGBD/LocalRadius"                          type="string"   value="2"/>     <!-- limit length of proximity detections -->
         <!-- ################################################### -->
         <param name="Grid/MaxGroundHeight"                      type="string"   value="0.05"/>
         <param name="Grid/MaxObstacleHeight"                    type="string"   value="2.0"/>
@@ -67,15 +67,15 @@
         <param name="Mem/IncrementalMemory"                     type="string"   value="false"     if="$(arg localization)"/>
         <param name="Mem/IncrementalMemory"                     type="string"   value="true"     unless="$(arg localization)"/>
         <param name="Mem/InitWMWithAllNodes"                    type="string"   value="$(arg localization)"/>
-        <param name="Mem/STMSize"                               type="string"   value="30"/>    <!--  increased to 30 to avoid adding too many loop closures on just seen locations-->
+        <param name="Mem/STMSize"                               type="string"   value="40"/>    <!--  increased to 30 to avoid adding too many loop closures on just seen locations-->
         <!-- ################################################### -->
         <param name="Icp/CorrespondenceRatio"      type="string" value="0.3"/>
         <!-- ################################################### -->
-        <param name="Vis/MinInliers"                            type="string"   value="6" /><!-- 3D visual words minimum inliers to accept loop closure -->
-        <param name="Vis/InlierDistance"                        type="string"   value="0.1" /> <!-- 3D visual words correspondence distance -->
+        <param name="Vis/MinInliers"                            type="string"   value="15" /><!-- 3D visual words minimum inliers to accept loop closure -->
+        <param name="Vis/InlierDistance"                        type="string"   value="0.5" /> <!-- 3D visual words correspondence distance -->
         <!-- ################################################### -->
         <!-- ################################################### -->
-        <param name="Odom/Strategy"                             type="string"   value="0"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
+        <param name="Odom/Strategy"                             type="string"   value="12"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
         <!-- <param name="Odom/Holonomic"		                    ty/pe="string"   value="true"/> If the robot is holonomic (strafing commands can be issued). If not, y value will be estimated from x and yaw values (y=x*tan(yaw)). -->
         <param name="Odom/FilteringStrategy"                    type="string"   value="0"/> <!-- 0=No filtering 1=Kalman filtering 2=Particle filtering. This filter is used to smooth the odometry output.-->
 <!-- ################################################################################################################################################################# -->

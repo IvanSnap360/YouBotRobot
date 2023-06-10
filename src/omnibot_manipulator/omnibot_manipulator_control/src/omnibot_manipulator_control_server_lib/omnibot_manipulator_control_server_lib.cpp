@@ -72,25 +72,6 @@ OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(r
     // ##################################################################### //
     // ######################## READ HARDWARE CONFIG ####################### //
     // ##################################################################### //
-    _trajectory_followers_state =                   _cfg["hardware"]["default_state"].as<bool>();
-    _trajectory_followers_enable_service_name =     _cfg["hardware"]["trajectoryFollowersEnableServiceName"].as<std::string>();
-    _manipulator_action_server_name =               _cfg["hardware"]["input"]["manipulator_action_server_name"].as<std::string>();
-    _gripper_action_server_name =                   _cfg["hardware"]["input"]["gripper_action_server_name"].as<std::string>();
-    _actuators_trajectory_topic_name =              _cfg["hardware"]["output"]["actuators_trajectory_topic"].as<std::string>();
-
-    _arm_trajectory_follower = new RobotTrajectoryFollower(_nh,
-                                                           _manipulator_action_server_name,
-                                                           _actuators_trajectory_topic_name);
-
-    _gripper_trajectory_follower = new RobotTrajectoryFollower(_nh,
-                                                               _gripper_action_server_name,
-                                                               _actuators_trajectory_topic_name);
-
-    _trajectory_followers_enable_service = _nh->advertiseService(
-        _trajectory_followers_enable_service_name,
-        &OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f,
-        this);
-
     _rviz_goal_state_updater_pub = _nh->advertise<std_msgs::Empty>("/rviz/moveit/update_goal_state", 10);
 }
 
@@ -396,15 +377,6 @@ bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_arm_cmd_service_server_cb_f(
     return true;
 }
 
-bool OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::_trajectory_followers_enable_service_cb_f(std_srvs::SetBool::Request &req,
-                                                                                       std_srvs::SetBool::Response &res)
-{
-    _arm_trajectory_follower->setState((bool)req.data);
-    _gripper_trajectory_follower->setState((bool)req.data);
-    res.message = "Trajectory followers is " + req.data ? "ON" : "OFF";
-    res.success = true;
-    return true;
-}
 
 
 OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB::~OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB()
