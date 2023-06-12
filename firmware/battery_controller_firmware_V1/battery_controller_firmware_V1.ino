@@ -8,15 +8,9 @@ void print_values();
 float getVoltsFromPin(int pin);
 void setup()
 {
-  Serial.begin(SERIAL_BAUDRATE);
-  pinMode(LED_BUILTIN, OUTPUT);
-  pinMode(RELAY_CONTROL_PIN, OUTPUT);
-  digitalWrite(RELAY_CONTROL_PIN, OFF);
-  while (!Serial)
-  {
-    digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
-    delay(100);
-  }
+  Serial.begin(SERIAL_BAUDRATE); // инициаллизация последовательного порта
+  while (!Serial); // ждем открытия порта 
+
 
 }
 
