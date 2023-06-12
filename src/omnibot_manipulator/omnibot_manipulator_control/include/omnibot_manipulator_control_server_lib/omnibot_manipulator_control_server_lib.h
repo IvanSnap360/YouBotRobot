@@ -11,6 +11,10 @@
 #include <omnibot_manipulator_control/manipulator_cmd.h>
 #include <omnibot_manipulator_control/gripper_cmd.h>
 #include <std_msgs/Empty.h>
+#include "action_server_lib/action_server_lib.h"
+#include <control_msgs/FollowJointTrajectoryAction.h>
+#include <trajectory_msgs/JointTrajectory.h>
+#include <std_srvs/SetBool.h>
 
 #define degreesToRadians(degrees) degrees *M_PI / 180
 
@@ -51,10 +55,11 @@ private:
                                       omnibot_manipulator_control::manipulator_cmd::Response &res);
     bool _grp_cmd_service_server_cb_f(omnibot_manipulator_control::gripper_cmd::Request &req,
                                       omnibot_manipulator_control::gripper_cmd::Response &res);
-    
+
     ros::Publisher _rviz_goal_state_updater_pub;
-    
+
     void updateGoalState();
+
 public:
     OMNIBOT_MANIPULATOR_CONTROL_SERVER_LIB(ros::NodeHandle *nh, std::string config_path);
     void init();

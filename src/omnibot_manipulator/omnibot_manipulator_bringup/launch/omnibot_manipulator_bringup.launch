@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<launch>
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}" />
+
+    <arg name="sim" default="false" />
+    <arg name="use_rviz" default="false" />
+    <include file="$(find omnibot_manipulator_moveit)/launch/demo.launch">
+        <arg name="sim" value="$(arg sim)" />
+        <arg name="use_rviz" value="$(arg use_rviz)" />
+    </include>
+
+
+    <include
+        file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control_server.launch" />
+    <group if="$(arg sim)">
+        <include
+            file="$(find omnibot_manipulator_control)/launch/omnibot_manipulator_control.launch" />
+    </group>
+
+
+    <group unless="$(arg sim)">
+        <include
+            file="$(find omnibot_manipulator_hw_controller)/launch/omnibot_manipulator_hw_controller.launch" />
+        <include file="$(find omnibot_manipulator_control)/launch/action_server.launch" />
+    </group>
+    <include file="$(find omnibot_manipulator_control)/launch/pointcloud_switcher.launch" />
+</launch>

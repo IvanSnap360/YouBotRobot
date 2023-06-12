@@ -1,6 +1,6 @@
 <launch>
 	<!-- Define MoveIt controller manager plugin -->
 	<param name="ros_control_namespace" value="omnibot_robot"/>
-	
+
 	<param name="moveit_controller_manager" value="moveit_ros_control_interface::MoveItControllerManager" />
 </launch>

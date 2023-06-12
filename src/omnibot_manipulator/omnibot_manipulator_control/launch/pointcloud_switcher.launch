@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="omnibot_manipulator_control" type="pointcloud_swith_node" name="pointcloud_swith_node">
+        <param name="input_topic" value="/d400_arm/depth/color/points"/>
+        <param name="output_topic" value="/switcher/d400_arm/depth/color/points"/>
+        <param name="control_service_name" value="pointcloud_swith_node_cmd"/>
+    </node>
+
+</launch>

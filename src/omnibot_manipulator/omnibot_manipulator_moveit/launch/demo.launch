@@ -10,48 +10,70 @@
 
   <!-- By default, we are not in debug mode -->
   <arg name="debug" default="false" />
-
+  <arg name="sim" default="false" />
   <!-- By default, we will load or override the robot_description -->
-  <arg name="load_robot_description" default="true"/>
+  <arg name="load_robot_description" default="true" />
 
   <!-- Choose controller manager: fake, simple, or ros_control -->
-  <arg name="moveit_controller_manager" default="ros_control" />
+  <arg name="moveit_controller_manager" default="ros_control" if="$(arg sim)" />
+  <arg name="moveit_controller_manager" default="simple" unless="$(arg sim)" />
   <!-- Set execution mode for fake execution controllers -->
   <arg name="fake_execution_type" default="interpolate" />
+
 
   <!-- By default, hide joint_state_publisher's GUI in 'fake' controller_manager mode -->
   <arg name="use_gui" default="false" />
   <arg name="use_rviz" default="true" />
 
   <!-- If needed, broadcast static tf for robot root -->
-  <include file="$(dirname)/ros_controllers.launch"/>
-  <param name="ros_control_namespace" value="omnibot_robot"/>
-	<param name="moveit_controller_manager" value="moveit_ros_control_interface::MoveItControllerManager" />
-    <!-- Spawn the Gazebo ROS controllers -->
+  <include file="$(dirname)/ros_controllers.launch" />
+  <param name="ros_control_namespace" value="omnibot_robot" />
+  <param name="moveit_controller_manager"
+    value="moveit_ros_control_interface::MoveItControllerManager" />
+  <!-- Spawn the Gazebo ROS controllers -->
 
+  <!-- If needed, broadcast static tf for robot root -->
+  <group unless="$(arg sim)">
+    <group if="$(eval arg('moveit_controller_manager') == 'simple')">
+      <!-- We do not have a real robot connected, so publish fake joint states via a
+    joint_state_publisher
+         MoveIt's fake controller's joint states are considered via the 'source_list' parameter -->
+      <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[/omnibot_robot/manipulator_joint_states_corrected]</rosparam>
+      </node>
 
-    <!-- Given the published joint states, publish tf for the robot links -->
+      <node name="omnibot_robot_state_publisher" pkg="robot_state_publisher"
+        type="robot_state_publisher" ns="omnibot_robot">
+        <param name="publish_frequency" value="200" />
+        <param name="use_tf_static" value="false" />
+        <param name="rate" value="200" />
 
-  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+      </node>
+    </group>
+  </group>
+
+  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers
+  configured by default) -->
   <include file="$(dirname)/move_group.launch">
-    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="allow_trajectory_execution" value="true" />
     <arg name="moveit_controller_manager" value="$(arg moveit_controller_manager)" />
-    <arg name="fake_execution_type" value="$(arg fake_execution_type)"/>
-    <arg name="info" value="true"/>
-    <arg name="debug" value="$(arg debug)"/>
-    <arg name="pipeline" value="$(arg pipeline)"/>
-    <arg name="load_robot_description" value="$(arg load_robot_description)"/>
+    <arg name="fake_execution_type" value="$(arg fake_execution_type)" />
+    <arg name="info" value="true" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="pipeline" value="$(arg pipeline)" />
+    <arg name="load_robot_description" value="$(arg load_robot_description)" />
+    <arg name="sim" value="$(arg sim)" />
   </include>
 
   <!-- Run Rviz and load the default config to see the state of the move_group node -->
   <include file="$(dirname)/moveit_rviz.launch" if="$(arg use_rviz)">
-    <arg name="rviz_config" value="$(dirname)/moveit.rviz"/>
-    <arg name="debug" value="$(arg debug)"/>
+    <arg name="rviz_config" value="$(dirname)/moveit.rviz" />
+    <arg name="debug" value="$(arg debug)" />
   </include>
 
   <!-- If database loading was enabled, start mongodb as well -->
   <include file="$(dirname)/default_warehouse_db.launch" if="$(arg db)">
-    <arg name="moveit_warehouse_database_path" value="$(arg db_path)"/>
+    <arg name="moveit_warehouse_database_path" value="$(arg db_path)" />
   </include>
 
 </launch>

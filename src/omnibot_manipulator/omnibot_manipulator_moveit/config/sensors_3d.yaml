@@ -1,16 +1,27 @@
-# Params for the octomap monitor
-
-
+# sensors:
+#   []
 
 sensors: 
   - sensor_plugin: occupancy_map_monitor/PointCloudOctomapUpdater
     # point_cloud_topic: /rtabmap/cloud_map
     # point_cloud_topic: /rtabmap/cloud_obstacles
-    point_cloud_topic: /rtabmap/local_grid_obstacle
-    # point_cloud_topic: /d400/depth/color/points
-    max_range: 2.0
-    max_update_rate: 100.0
+    # point_cloud_topic: /rtabmap/local_grid_obstacle
+    point_cloud_topic: /switcher/d400_arm/depth/color/points
+    max_range: 3.0
+    max_update_rate: 50.0
     point_subsample: 1
-    padding_offset: 0.05
+    padding_offset: 0.08
     padding_scale: 1.0
     filtered_cloud_topic: filtered_cloud
+
+  # - sensor_plugin: occupancy_map_monitor/DepthImageOctomapUpdater
+  #   image_topic: /d400_arm/aligned_depth_to_color/image_raw
+  #   queue_size: 5
+  #   near_clipping_plane_distance: 1.0
+  #   far_clipping_plane_distance: 5.0
+  #   shadow_threshold: 1.0
+  #   padding_scale: 0.25
+  #   padding_offset: 0.1
+  #   max_update_rate: 10.0
+  #   filtered_cloud_topic: filtered_cloud
+  #   ns: d400_arm

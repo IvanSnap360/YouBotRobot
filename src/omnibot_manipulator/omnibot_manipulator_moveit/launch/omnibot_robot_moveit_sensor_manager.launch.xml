@@ -1,4 +1,2 @@
 <launch>
-    <rosparam command="load" file="$(find omnibot_manipulator_moveit)/config/sensors_3d.yaml"/>
-    
 </launch>

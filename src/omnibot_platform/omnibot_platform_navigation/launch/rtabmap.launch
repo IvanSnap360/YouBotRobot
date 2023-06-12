@@ -9,9 +9,9 @@
 <arg name="wait_for_transform" default="0.2" />
 <arg name="sim" default="false"/>
 <!--  -->
-<!-- <arg name="world_db_name" default="my_world_db2.db" if="$(arg sim)"/> -->
+<arg name="world_db_name" default="my_world_db2.db" if="$(arg sim)"/>
 <!-- <arg name="world_db_name" default="KV33_RTABMAP_DB_NICE1.db" unless="$(arg sim)"/> -->
-<arg name="world_db_name" default="rtabmap.db" unless="$(arg sim)"/>
+<!-- <arg name="world_db_name" default="rtabmap.db" unless="$(arg sim)"/> -->
 <!--  -->
 <arg name="database_path" default="$(find omnibot_platform_navigation)/maps/$(arg world_db_name)"/>
 <!-- <arg name="database_path" default="/home/ivan/.ros/rtabmap.db"/> -->
@@ -27,119 +27,118 @@
         <param name="database_path" type="string" value="$(find omnibot_platform_navigation)/maps/$(arg world_db_name)" unless="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
         <!-- <param name="database_path" type="string" value="~/.ros/rtabmap.db" unless="$(arg localization)"/>Path of the RTAB-Map's database. -->
         <param name="database_path" type="string" value="$(arg database_path)" if="$(arg localization)"/><!-- Path of the RTAB-Map's database. -->
-        <param name="use_action_for_goal" type="bool" value="true"/><!-- Planning Use actionlib to send the metric goals to move_base. The advantage over just connecting goal_out to move_base_simple/ goal is that rtabmap can have a feedback if the goal is reached or if move_base has failed. See move_base Action API for more info. -->
+      
         <!-- RTAB-Map's parameters -->
         <!-- ################################################### -->
-        <param name="Rtabmap/TimeThr" type="string" value="0" />
-        <param name="Rtabmap/DetectionRate" type="string" value="10" />
-        <param name="Rtabmap/ImageBufferSize" type="string" value="0" />
-        <param name="Rtabmap/StartNewMapOnLoopClosure" value="true"/> 
-        <param name="Rtabmap/PublishStats" type="string" value="true"/>
+        <param name="Rtabmap/TimeThr"                           type="string"   value="0" />
+        <param name="Rtabmap/DetectionRate"                     type="string"   value="10" />
+        <param name="Rtabmap/ImageBufferSize"                   type="string"   value="0" />
+        <param name="Rtabmap/StartNewMapOnLoopClosure"          type="string"   value="true"/> 
+        <param name="Rtabmap/PublishStats"                      type="string"   value="true"/>
         <!-- ################################################### -->
-        <param name="Kp/MaxDepth" type="string" value="4.0" />
+        <param name="Kp/MaxDepth"                               type="string"   value="4.0" />
         <!-- ################################################### -->
-        <param name="RGBD/AngularUpdate" type="string" value="0.01" /><!-- Update map only if the robot is moving -->
-        <param name="RGBD/LinearUpdate" type="string" value="0.01" /><!-- Update map only if the robot is moving -->
-        <param name="RGBD/OptimizeMaxError"     type="double" value="3"/>
-        <param name="RGBD/ProximityPathMaxNeighbors" type="string" value="0" />
-        <param name="RGBD/CreateOccupancyGrid" type="string" value="true" />
-        <param name="RGBD/SavedLocalizationIgnored"  type="string" value="true"/>
-        <param name="RGBD/StartAtOrigin" value="false"/>
-        <param name="RGBD/NeighborLinkRefining" type="string" value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
-        <param name="RGBD/ProximityBySpace" type="string" value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
-        <param name="RGBD/ProximityByTime"      type="string" value="true"/> <!-- Local loop closure detection with locations in STM -->
-        <param name="RGBD/OptimizeFromGraphEnd" type="string" value="true" /><!-- Set to false to generate map correction between /map and /odom -->
-        <param name="RGBD/LocalRadius"          type="string" value="5"/>     <!-- limit length of proximity detections -->
+        <param name="RGBD/AngularUpdate"                        type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
+        <param name="RGBD/LinearUpdate"                         type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
+        <param name="RGBD/OptimizeMaxError"                     type="double"   value="5"/> <!-- Reject loop closures if optimization error ratio is greater than this value (0=disabled). Ratio is computed as absolute error over standard deviation of each link. This will help to detect when a wrong loop closure is added to the graph. Not compatible with \"%s\" if enabled-->
+        <param name="RGBD/ProximityPathMaxNeighbors"            type="string"   value="0" />
+        <param name="RGBD/CreateOccupancyGrid"                  type="string"   value="true" /> <!-- The proximity detection using only laser scans is disabled-->
+        <param name="RGBD/NeighborLinkRefining"                 type="string"   value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
+        <param name="RGBD/ProximityBySpace"                     type="string"   value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
+        <param name="RGBD/ProximityByTime"                      type="string"   value="true"/> <!-- Local loop closure detection with locations in STM -->
+        <param name="RGBD/OptimizeFromGraphEnd"                 type="string"   value="false" /><!-- Set to false to generate map correction between /map and /odom -->
+        <param name="RGBD/LocalRadius"                          type="string"   value="2"/>     <!-- limit length of proximity detections -->
         <!-- ################################################### -->
-        <param name="Grid/MaxGroundHeight" value="0.05"/>
-        <param name="Grid/MaxObstacleHeight" value="2.0"/>
-        <param name="Grid/CellSize" value="0.05" />
-        <param name="Grid/NormalsSegmentation" value="true"/>
-        <param name="Grid/Sensor" type="string" value="2" />
-        <param name="Grid/RayTracing" value="true" />
-        <param name="Grid/FromDepth"  type="string" value="true"/>
-        <param name="Grid/3D" value="true"/>
+        <param name="Grid/MaxGroundHeight"                      type="string"   value="0.05"/>
+        <param name="Grid/MaxObstacleHeight"                    type="string"   value="2.0"/>
+        <param name="Grid/CellSize"                             type="string"   value="0.05" />
+        <param name="Grid/NormalsSegmentation"                  type="string"   value="true"/>
+        <param name="Grid/Sensor"                               type="string"   value="2" />
+        <param name="Grid/RayTracing"                           type="string"   value="true" />
+        <param name="Grid/3D"                                   type="string"   value="true"/>
         <!-- ################################################### -->
-        <param name="GridGlobal/MinSize" type="string" value="10" />
+        <param name="GridGlobal/MinSize"                        type="string"   value="10" />
         <!-- ################################################### -->
-        <param name="Reg/Force3DoF" type="string" value="true" />
-        <param name="Reg/Strategy" type="string" value="2" /><!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
+        <param name="Reg/Force3DoF"                             type="string"   value="true" />
+        <param name="Reg/Strategy"                              type="string"   value="2" /><!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
         <!-- ################################################### -->
-        <param name="Mem/RehearsalSimilarity" type="string" value="0.30" />
-        <param name="Mem/IncrementalMemory"  type="string" value="false"     if="$(arg localization)"/>
-        <param name="Mem/IncrementalMemory"  type="string" value="true"     unless="$(arg localization)"/>
-        <param name="Mem/InitWMWithAllNodes" type="string" value="$(arg localization)"/>
-        <param name="Mem/STMSize"               type="string" value="30"/>    <!-- increased to 30 to avoid adding too many loop closures on just seen locations -->
+        <param name="Mem/RehearsalSimilarity"                   type="string"   value="0.30"/>  <!--  Rehearsal similarity.-->
+        <!-- <param name="Mem/DepthAsMask"                           type="bool"     value="false"/> Use depth image as mask when extracting features for vocabulary -->
+        <param name="Mem/IncrementalMemory"                     type="string"   value="false"     if="$(arg localization)"/>
+        <param name="Mem/IncrementalMemory"                     type="string"   value="true"     unless="$(arg localization)"/>
+        <param name="Mem/InitWMWithAllNodes"                    type="string"   value="$(arg localization)"/>
+        <param name="Mem/STMSize"                               type="string"   value="40"/>    <!--  increased to 30 to avoid adding too many loop closures on just seen locations-->
         <!-- ################################################### -->
-        <param name="Icp/CorrespondenceRatio"   type="string" value="0.25"/>   <!-- minimum scan overlap to accept loop closure -->
-        <param name="Icp/PointToPlane"          type="string" value="true"/>
-        <param name="Icp/MaxCorrespondenceDistance"  type="string" value="0.15"/>
-        <param name="Icp/VoxelSize"             type="string" value="0.05"/>
+        <param name="Icp/CorrespondenceRatio"      type="string" value="0.3"/>
         <!-- ################################################### -->
-        <param name="Vis/MinInliers" type="string" value="15" /><!-- 3D visual words minimum inliers to accept loop closure -->
-        <param name="Vis/InlierDistance" type="string" value="0.1" /> <!-- 3D visual words correspondence distance -->
-
+        <param name="Vis/MinInliers"                            type="string"   value="15" /><!-- 3D visual words minimum inliers to accept loop closure -->
+        <param name="Vis/InlierDistance"                        type="string"   value="0.5" /> <!-- 3D visual words correspondence distance -->
+        <!-- ################################################### -->
+        <!-- ################################################### -->
+        <param name="Odom/Strategy"                             type="string"   value="12"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
+        <!-- <param name="Odom/Holonomic"		                    ty/pe="string"   value="true"/> If the robot is holonomic (strafing commands can be issued). If not, y value will be estimated from x and yaw values (y=x*tan(yaw)). -->
+        <param name="Odom/FilteringStrategy"                    type="string"   value="0"/> <!-- 0=No filtering 1=Kalman filtering 2=Particle filtering. This filter is used to smooth the odometry output.-->
 <!-- ################################################################################################################################################################# -->
         <!-- REMAPS -->
-        <remap from="odom" to="odom"/>
-        <remap from="scan" to="/$(arg camera2)/scan" />
-        <remap from="rgb/image" to="/$(arg camera2)/color/image_raw" />
-        <remap from="depth/image" to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
-        <remap from="rgb/camera_info" to="/$(arg camera2)/color/camera_info" />
-        <!-- <remap from="rgbd_image" to="/$(arg camera2)/aligned_depth_to_color/image_raw"/> -->
-        <remap from="grid_map" to="/map"/>  <!-- gridmap => map-->
+        <remap from="odom"                                      to="odom"/>
+        <remap from="scan"                                      to="/$(arg camera2)/scan" />
+        <remap from="rgb/image"                                 to="/$(arg camera2)/color/image_raw" />
+        <remap from="depth/image"                               to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
+        <remap from="rgb/camera_info"                           to="/$(arg camera2)/color/camera_info" />
+        <!-- <remap from="rgbd_image"                                to="/$(arg camera2)/aligned_depth_to_color/image_raw"/> -->
+        <remap from="grid_map"                                  to="/map"/>  <!-- gridmap => map-->
         <!-- SUBSCRIPTIONS -->
-        <param name="subscribe_depth" type="bool" value="true" /> <!-- Subscribe to depth image -->
-        <param name="subscribe_scan" type="bool" value="true" /><!-- Subscribe to laser scan -->
-        <param name="subscribe_scan_cloud" type="bool" value="false" /><!-- Subscribe to laser scan pointcloud -->
-        <param name="subscribe_stereo" type="bool" value="false" /><!-- Subscribe to stereo images -->
-        <param name="subscribe_rgbd" type="bool" value="false" /><!-- Subsribe to rgbd_image topic. -->
-        <!-- TF -->
-        <param name="frame_id" type="string" value="base_footprint" /><!-- The frame attached to the mobile base. -->
-        <param name="map_frame_id" type="string" value="map" /><!-- The frame attached to the map. -->
-        <param name="odom_frame_id" type="string" value="odom" /><!-- The frame attached to odometry. If empty,rtabmap will subscribe to odom topic to get odometry. If set, odometry is got from tf (in this case,the covariance value is fixed by odom_tf_angular_variance and odom_tf_linear_variance). -->
-        <param name="odom_tf_linear_variance" type="double" value="0.001"/><!-- When odom_frame_id is used, the first 3 values of the diagonal of the 6x6 covariance matrix are set to this value. -->
-        <param name="odom_tf_angular_variance" type="double" value="0.001"/> <!-- When odom_frame_id is used, the last 3 values of the diagonal of the 6x6 covariance matrix are set to this value. -->
-        <param name="queue_size" type="int" value="10"/><!-- Size of message queue for each synchronized topic. -->
-        <param name="publish_tf" type="bool" value="true"/>    <!-- Publish TF from / map to / odom. -->
-        <param name="tf_delay" type="double" value="0.05"/> <!-- Rate at which the TF from /map to /odom is published (20 Hz). -->
-        <param name="wait_for_transform" type="bool" value="true"/><!-- Wait (maximum wait_for_transform_duration sec) for transform when a tf transform is not still available. -->
-        <param name="wait_for_transform_duration" type="double" value="5.0"/><!-- Wait duration for wait_for_transform. -->
+        <param name="subscribe_depth"                           type="bool"     value="true" /> <!-- Subscribe to depth image -->
+        <param name="subscribe_scan"                            type="bool"     value="true" /><!-- Subscribe to laser scan -->
+        <param name="subscribe_scan_cloud"                      type="bool"     value="false" /><!-- Subscribe to laser scan pointcloud -->
+        <param name="subscribe_stereo"                          type="bool"     value="false" /><!-- Subscribe to stereo images -->
+        <param name="subscribe_rgbd"                            type="bool"     value="false" /><!-- Subsribe to rgbd_image topic. -->
+        <!-- TF --> 
+        <param name="frame_id"                                  type="string"   value="base_footprint" /><!-- The frame attached to the mobile base. -->
+        <param name="map_frame_id"                              type="string"   value="map" /><!-- The frame attached to the map. -->
+        <param name="odom_frame_id"                             type="string"   value="odom" /><!-- The frame attached to odometry. If empty,rtabmap will subscribe to odom topic to get odometry. If set, odometry is got from tf (in this case,the covariance value is fixed by odom_tf_angular_variance and odom_tf_linear_variance). -->
+        <param name="odom_tf_linear_variance"                   type="double"   value="0.001"/><!-- When odom_frame_id is used, the first 3 values of the diagonal of the 6x6 covariance matrix are set to this value. -->
+        <param name="odom_tf_angular_variance"                  type="double"   value="0.001"/> <!-- When odom_frame_id is used, the last 3 values of the diagonal of the 6x6 covariance matrix are set to this value. -->
+        <param name="queue_size"                                type="int"      value="10"/><!-- Size of message queue for each synchronized topic. -->
+        <param name="publish_tf"                                type="bool"     value="true"/>    <!-- Publish TF from / map to / odom. -->
+        <param name="tf_delay"                                  type="double"   value="0.05"/> <!-- Rate at which the TF from /map to /odom is published (20 Hz). -->
+        <param name="wait_for_transform"                        type="bool"     value="true"/><!-- Wait (maximum wait_for_transform_duration sec) for transform when a tf transform is not still available. -->
+        <param name="wait_for_transform_duration"               type="double"   value="5.0"/><!-- Wait duration for wait_for_transform. -->
         <!-- GENERATORS -->
-        <param name="gen_scan" type="bool" value="false"/> <!-- Generate laser scans from depth images (using the middle horizontal line of the depth image). Not generated if subscribe_scan or subscribe_scan_cloud are true. -->
-        <param name="gen_scan_max_depth" type="double" value="4.0"/><!-- Maximum depth of the laser scans generated. -->
-        <param name="gen_depth" type="bool" value="false"/><!-- Generate depth image from scan_cloud projection into RGB camera, taking into account displacement of the RGB camera accordingly to odometry and lidar frames. It works like pointcloud_to_depthimage node, but at slam frequency. -->
-        <param name="gen_depth_decimation" type="int" value="1"/><!-- Scale down image size of the camera info received (creating smaller depth image). -->
-        <param name="gen_depth_fill_holes_size" type="int" value="0"/><!-- Fill holes of empty pixels up to this size. Values are interpolated from neighbor depth values. 0 means disabled. -->
-        <param name="gen_depth_fill_iterations" type="double" value="0.1"/><!-- Maximum depth error (m) to interpolate. -->
-        <param name="gen_depth_fill_holes_error" type="int" value="1"/><!-- Number of iterations to fill holes. -->
+        <param name="gen_scan"                                  type="bool"     value="false"/> <!-- Generate laser scans from depth images (using the middle horizontal line of the depth image). Not generated if subscribe_scan or subscribe_scan_cloud are true. -->
+        <param name="gen_scan_max_depth"                        type="double"   value="4.0"/><!-- Maximum depth of the laser scans generated. -->
+        <param name="gen_depth"                                 type="bool"     value="false"/><!-- Generate depth image from scan_cloud projection into RGB camera, taking into account displacement of the RGB camera accordingly to odometry and lidar frames. It works like pointcloud_to_depthimage node, but at slam frequency. -->
+        <param name="gen_depth_decimation"                      type="int"      value="1"/><!-- Scale down image size of the camera info received (creating smaller depth image). -->
+        <param name="gen_depth_fill_holes_size"                 type="int"      value="0"/><!-- Fill holes of empty pixels up to this size. Values are interpolated from neighbor depth values. 0 means disabled. -->
+        <param name="gen_depth_fill_iterations"                 type="double"   value="0.1"/><!-- Maximum depth error (m) to interpolate. -->
+        <param name="gen_depth_fill_holes_error"                type="int"      value="1"/><!-- Number of iterations to fill holes. -->
         <!-- SYNC         -->
-        <param name="odom_sensor_sync" type="bool" value="true"/><!-- Adjust image and scan poses relatively to odometry pose for each node added to graph. For example, if an image received at t=1s has been synchronized with a scan at t=1.1s (and our reference stamp is the scan) and the robot is moving forward at 1 m/s, then we will ask TF to know the motion between t=1s and t=1.1s (which would be 0.1 m) for the camera to adjust its local transform (-10 cm) relative to scan frame at scan stamp. This also applies to multi-camera synchronization. -->
-        <param name="approx_sync" type="bool" value="true"/> <!-- Use approximate time synchronization of input messages. If false, note that the odometry input must have also exactly the same timestamps than the input images. -->
+        <param name="odom_sensor_sync"                          type="bool"     value="true"/><!-- Adjust image and scan poses relatively to odometry pose for each node added to graph. For example, if an image received at t=1s has been synchronized with a scan at t=1.1s (and our reference stamp is the scan) and the robot is moving forward at 1 m/s, then we will ask TF to know the motion between t=1s and t=1.1s (which would be 0.1 m) for the camera to adjust its local transform (-10 cm) relative to scan frame at scan stamp. This also applies to multi-camera synchronization. -->
+        <param name="approx_sync"                               type="bool"     value="true"/> <!-- Use approximate time synchronization of input messages. If false, note that the odometry input must have also exactly the same timestamps than the input images. -->
         <!-- MAPPING -->
-        <param name="map_filter_radius" type="double" value="0.0"/><!-- Mapping Filter nodes before creating the maps. Only load data for one node in the filter radius (the latest data is used) up to filter angle (map_filter_angle). Set to 0.0 to disable node filtering. Used for all published maps. -->
-        <param name="map_filter_angle" type="double" value="30.0"/><!-- Mapping Angle used when filtering nodes before creating the maps. See also map_filter_radius. Used for all published maps. -->
-        <param name="map_cleanup" type="bool" value="true"/><!-- Mapping If there is no subscription to any map cloud_map, grid_map or proj_map, clear the corresponding data. -->
-        <param name="latch" type="bool" value="true"/><!-- Mapping If true, the last message published on the map topics will be saved and sent to new subscribers when they connect. -->
-        <param name="map_always_update" type="bool" value="false"/><!-- Mapping Always update the occupancy grid map even if the graph has not been updated (e.g., by default when the robot is not moving, the graph is not growing). For example, if the environment is dynamic, we may want to update the map even when to robot is not moving. Another approach would be to force rtabmap to always update the graph (by setting RGBD/LinearUpdate to 0), which can be not efficient over time as the map will grow even if the robot doesn't move. -->
-        <param name="map_empty_ray_tracing" type="bool" value="true"/><!-- Mapping Do ray tracing to fill unknown space for invalid 2D scan's rays (assuming invalid rays to be infinite). Used only when map_always_update is also true. -->
-        <param name="cloud_output_voxelized" type="bool" value="true"/><!-- Mapping Do a final voxel filtering after all clouds are assembled with a voxel size equals to Grid/CellSize. Used for cloud_map published topic. -->
-        <param name="cloud_subtract_filtering" type="bool" value="true"/><!-- Mapping When appending a new cloud to cloud_map, filter points that have less neighbors than cloud_subtract_filtering_min_neighbors in the radius Grid/CellSize. This will helps to reconstruct the whole map' s cloud faster when a loop closure happens. Used for cloud_map published topic. -->
-        <param name="cloud_subtract_filtering_min_neighbors" type="int" value="2"/><!-- Mapping See cloud_subtract_filtering parameter's description. -->
+        <param name="map_filter_radius"                         type="double"   value="0.0"/><!-- Mapping Filter nodes before creating the maps. Only load data for one node in the filter radius (the latest data is used) up to filter angle (map_filter_angle). Set to 0.0 to disable node filtering. Used for all published maps. -->
+        <param name="map_filter_angle"                          type="double"   value="30.0"/><!-- Mapping Angle used when filtering nodes before creating the maps. See also map_filter_radius. Used for all published maps. -->
+        <param name="map_cleanup"                               type="bool"     value="true"/><!-- Mapping If there is no subscription to any map cloud_map, grid_map or proj_map, clear the corresponding data. -->
+        <param name="latch"                                     type="bool"     value="true"/><!-- Mapping If true, the last message published on the map topics will be saved and sent to new subscribers when they connect. -->
+        <param name="map_always_update"                         type="bool"     value="false"/><!-- Mapping Always update the occupancy grid map even if the graph has not been updated (e.g., by default when the robot is not moving, the graph is not growing). For example, if the environment is dynamic, we may want to update the map even when to robot is not moving. Another approach would be to force rtabmap to always update the graph (by setting RGBD/LinearUpdate to 0), which can be not efficient over time as the map will grow even if the robot doesn't move. -->
+        <param name="map_empty_ray_tracing"                     type="bool"     value="true"/><!-- Mapping Do ray tracing to fill unknown space for invalid 2D scan's rays (assuming invalid rays to be infinite). Used only when map_always_update is also true. -->
+        <param name="cloud_output_voxelized"                    type="bool"     value="true"/><!-- Mapping Do a final voxel filtering after all clouds are assembled with a voxel size equals to Grid/CellSize. Used for cloud_map published topic. -->
+        <param name="cloud_subtract_filtering"                  type="bool"     value="true"/><!-- Mapping When appending a new cloud to cloud_map, filter points that have less neighbors than cloud_subtract_filtering_min_neighbors in the radius Grid/CellSize. This will helps to reconstruct the whole map' s cloud faster when a loop closure happens. Used for cloud_map published topic. -->
+        <param name="cloud_subtract_filtering_min_neighbors"    type="int"      value="2"/><!-- Mapping See cloud_subtract_filtering parameter's description. -->
         <!-- RGBD -->
-        <param name="rgbd_cameras" type="int" value="1"/><!-- Number of RGB-D cameras to use (when subscribe_rgbd is true). Well for now, a maximum of 4 cameras can be synchronized at the same time. If > 1, the rgbd_image topics should contain the camera index starting with 0. For example, if we have 2 cameras, you should set rgbd_image0 and rgbd_image1 topics. -->
-        <!-- LOCALIZATION MODE -->
-        
+        <param name="rgbd_cameras"                              type="int"      value="1"/><!-- Number of RGB-D cameras to use (when subscribe_rgbd is true). Well for now, a maximum of 4 cameras can be synchronized at the same time. If > 1, the rgbd_image topics should contain the camera index starting with 0. For example, if we have 2 cameras, you should set rgbd_image0 and rgbd_image1 topics. -->
 
+        
+        <param name="use_action_for_goal"                       type="bool"     value="true"/><!-- Planning Use actionlib to send the metric goals to move_base. The advantage over just connecting goal_out to move_base_simple/ goal is that rtabmap can have a feedback if the goal is reached or if move_base has failed. See move_base Action API for more info. -->
     </node>
 </group>
 <node pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" name="depthimage_to_laserscan">
-    <param name="scan_height" value="0.07" />
-    <param name="output_frame_id" value="d400_link" />
-    <param name="range_min" type="double" value="0.1" />
-    <param name="range_max" type="double" value="4.0" />
-    <remap from="image" to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
-    <remap from="scan" to="/$(arg camera2)/scan" />
+    <param name="scan_height"       value="0.07" />
+    <param name="output_frame_id"   value="$(arg camera2)_link" />
+    <param name="range_min"         type="double" value="0.1" />
+    <param name="range_max"         type="double" value="4.0" />
+    <remap from="image"             to="/$(arg camera2)/aligned_depth_to_color/image_raw" />
+    <remap from="scan"              to="/$(arg camera2)/scan" />
 </node>
 
 </launch>

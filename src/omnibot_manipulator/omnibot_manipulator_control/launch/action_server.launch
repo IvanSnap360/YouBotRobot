@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<launch>
+
+    <node pkg="omnibot_manipulator_control" type="action_server_node" name="action_server_node">
+        <param name="manipulator_action_name"   value="/maipulator_group_controller/follow_joint_trajectory"/>
+        <param name="gripper_action_name"       value="/gripper_group_controller/follow_joint_trajectory"/>
+        <param name="output_topic_name"         value="/dynamixel_contoller/joint_trajectory"/>
+    </node>
+
+</launch>

@@ -61,7 +61,7 @@ float getVoltsFromPin(int pin)
 {
   float vin = 0.0;
   vin = ((analogRead(pin) * SOURCE_VOLTAGE_VOLTS) / ADC_MAX_VALUE) / (R2 / (R1 + R2));
-  if (vin < 0.1)
+  if (vin < 0.3)
     vin = 0.0;
 
   return abs(vin);

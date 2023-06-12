@@ -102,6 +102,47 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        d400_arm_bottom_screw_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_color_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_color_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_left_ir_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_left_ir_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        d400_arm_right_ir_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        d400_arm_right_ir_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         tip_link:
           Alpha: 1
           Show Axes: false
@@ -117,32 +158,12 @@ Visualization Manager:
       Value: true
       Visual Enabled: true
     - Class: rviz/TF
-      Enabled: true
+      Enabled: false
+      Filter (blacklist): ""
+      Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        ang_link0:
-          Value: true
-        ang_link1:
-          Value: true
-        ang_link2:
-          Value: true
-        ang_link3:
-          Value: true
-        ang_link4:
-          Value: true
-        ang_link5:
-          Value: true
-        ang_link6:
-          Value: true
-        ang_link7:
-          Value: true
-        map:
-          Value: true
-        tip_link:
-          Value: true
-        world:
-          Value: true
       Marker Alpha: 0.5
       Marker Scale: 0.30000001192092896
       Name: TF
@@ -150,22 +171,9 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          world:
-            ang_link0:
-              ang_link1:
-                ang_link2:
-                  ang_link3:
-                    ang_link4:
-                      ang_link5:
-                        ang_link6:
-                          {}
-                        ang_link7:
-                          {}
-                        tip_link:
-                          {}
+        {}
       Update Interval: 0
-      Value: true
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -210,9 +218,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.73539799451828
+      Pitch: 0.19539840519428253
       Target Frame: <Fixed Frame>
-      Yaw: 5.278582572937012
+      Yaw: 6.193588733673096
     Saved: ~
 Window Geometry:
   Displays:

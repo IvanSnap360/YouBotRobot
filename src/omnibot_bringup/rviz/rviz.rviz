@@ -83,6 +83,26 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        d400_arm_bottom_screw_frame:
+          Value: true
+        d400_arm_color_frame:
+          Value: true
+        d400_arm_color_optical_frame:
+          Value: true
+        d400_arm_depth_frame:
+          Value: true
+        d400_arm_depth_optical_frame:
+          Value: true
+        d400_arm_left_ir_frame:
+          Value: true
+        d400_arm_left_ir_optical_frame:
+          Value: true
+        d400_arm_link:
+          Value: true
+        d400_arm_right_ir_frame:
+          Value: true
+        d400_arm_right_ir_optical_frame:
+          Value: true
         d400_bottom_screw_frame:
           Value: true
         d400_color_frame:
@@ -277,6 +297,20 @@ Visualization Manager:
                             {}
                           ang_link7:
                             {}
+                          d400_arm_bottom_screw_frame:
+                            d400_arm_link:
+                              d400_arm_depth_frame:
+                                d400_arm_color_frame:
+                                  d400_arm_color_optical_frame:
+                                    {}
+                                d400_arm_depth_optical_frame:
+                                  {}
+                                d400_arm_left_ir_frame:
+                                  d400_arm_left_ir_optical_frame:
+                                    {}
+                                d400_arm_right_ir_frame:
+                                  d400_arm_right_ir_optical_frame:
+                                    {}
                           tip_link:
                             {}
               base_link:
@@ -457,7 +491,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.03999999910593033
       Style: Boxes
-      Topic: /rtabmap/local_grid_obstacle
+      Topic: /rtabmap/cloud_map
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -606,6 +640,47 @@ Visualization Manager:
               Show Axes: false
               Show Trail: false
               Value: true
+            d400_arm_bottom_screw_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_color_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_color_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_depth_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_depth_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_left_ir_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_left_ir_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_link:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+              Value: true
+            d400_arm_right_ir_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
+            d400_arm_right_ir_optical_frame:
+              Alpha: 1
+              Show Axes: false
+              Show Trail: false
             d400_bottom_screw_frame:
               Alpha: 1
               Show Axes: false
@@ -1588,6 +1663,47 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          d400_arm_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_left_ir_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_left_ir_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          d400_arm_right_ir_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_right_ir_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           d400_bottom_screw_frame:
             Alpha: 1
             Show Axes: false
@@ -2089,6 +2205,47 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          d400_arm_bottom_screw_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_color_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_color_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_depth_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_depth_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_left_ir_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_left_ir_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_link:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+            Value: true
+          d400_arm_right_ir_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
+          d400_arm_right_ir_optical_frame:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           d400_bottom_screw_frame:
             Alpha: 1
             Show Axes: false
@@ -2528,7 +2685,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.916483402252197
+      Distance: 0.7304148077964783
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -2536,17 +2693,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.28880730271339417
-        Y: 0.11647143214941025
-        Z: 0.5200644731521606
+        X: -0.04267846792936325
+        Y: 0.2888927161693573
+        Z: 0.13738508522510529
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.8103974461555481
+      Pitch: -0.12460232526063919
       Target Frame: base_link
-      Yaw: 1.2335915565490723
+      Yaw: 2.0085926055908203
     Saved: ~
 Window Geometry:
   Displays:

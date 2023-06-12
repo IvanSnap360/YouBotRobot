@@ -65,7 +65,7 @@
     <!-- <arg name="world_name" value="$(find
     omnibot_gazebo)/worlds/QuickSilverWorld/quicksilver_world_design1.world" /> -->
     <!-- <arg name="world_name" value="$(find omnibot_gazebo)/worlds/garage.world" /> -->
-    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorld/MyWorldDyn.world" />
+    <arg name="world_name" value="$(find omnibot_gazebo)/worlds/MyWorld/MyWorld.world" />
 
   </include>
 
