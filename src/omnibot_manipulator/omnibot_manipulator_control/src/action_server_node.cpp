@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
     else
     {
         ROS_ERROR("No set param 'manipulator_action_name'!!!");
+        ros::shutdown();
     }
     if (ros::param::has("~gripper_action_name"))
     {
@@ -24,6 +25,7 @@ int main(int argc, char *argv[])
     else
     {
         ROS_ERROR("No set param 'gripper_action_name'!!!");
+        ros::shutdown();
     }
     if (ros::param::has("~output_topic_name"))
     {
@@ -32,6 +34,7 @@ int main(int argc, char *argv[])
     else
     {
         ROS_ERROR("No set param 'output_topic_name'!!!");
+        ros::shutdown();
     }
 
     auto manipulator_server = RobotTrajectoryFollower(&nh, manipulator_action_name, output_topic_name);

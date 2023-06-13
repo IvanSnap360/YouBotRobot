@@ -17,8 +17,8 @@ Battery:
 # Serial input format
 # B1_C1:B1_C2:B1_C3-B2_C1:B2_C2:B2_C3
 parser:
-  cell_determinator:    ":"
-  battery_determinator: "-" 
+  cell_determinator:    "__"
+  battery_determinator: ";" 
 
 
 

@@ -1,6 +1,6 @@
 <launch>
   <arg name="standalone" default="false" />
-
+  <arg name="aruco_cubes_spawn" default="false"/>
 
   <rosparam command="load" file="$(find omnibot_gazebo)/config/gazebo_pids.yaml" />
   <!-- 
@@ -76,5 +76,7 @@
       output="screen" />
   </group>
 
-
+  <group if="$(arg aruco_cubes_spawn)">
+      <include file="$(find aruco_cubes_spawner)/launch/aruco_cubes_spawn.launch" />
+  </group>
 </launch>

@@ -6,3 +6,4 @@ build/
 src/CMakeLists.txt
 git_log.log
 *.db
+__pycache__

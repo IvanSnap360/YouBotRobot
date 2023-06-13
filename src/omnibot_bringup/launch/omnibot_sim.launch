@@ -54,7 +54,9 @@
     </group>
 
     <!--  -->
-    <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch" />
+    <include file="$(find omnibot_gazebo)/launch/omnibot_gazebo.launch">
+        <arg name="aruco_cubes_spawn" value="true"/>
+    </include>
 
     <!--  -->
     <group if="$(arg localization)">

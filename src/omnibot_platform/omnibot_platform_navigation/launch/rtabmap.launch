@@ -30,7 +30,7 @@
       
         <!-- RTAB-Map's parameters -->
         <!-- ################################################### -->
-        <param name="Rtabmap/TimeThr"                           type="string"   value="0" />
+        <param name="Rtabmap/TimeThr"                           type="string"   value="0" /> <!-- Maximum time allowed for map update (ms) (0 means infinity). When map update time exceeds this fixed time threshold, some nodes in Working Memory (WM) are transferred to Long-Term Memory to limit the size of the WM and decrease the update time.-->
         <param name="Rtabmap/DetectionRate"                     type="string"   value="10" />
         <param name="Rtabmap/ImageBufferSize"                   type="string"   value="0" />
         <param name="Rtabmap/StartNewMapOnLoopClosure"          type="string"   value="true"/> 
@@ -38,26 +38,30 @@
         <!-- ################################################### -->
         <param name="Kp/MaxDepth"                               type="string"   value="4.0" />
         <!-- ################################################### -->
-        <param name="RGBD/AngularUpdate"                        type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
-        <param name="RGBD/LinearUpdate"                         type="string"   value="0.1" /><!-- Update map only if the robot is moving -->
+        <param name="RGBD/Enabled"                              type="string"   value="true"/> <!-- Activate metric SLAM. If set to false, classic RTAB-Map loop closure detection is done using only images and without any metric information.-->
+        <param name="RGBD/AngularUpdate"                        type="string"   value="0.01" /><!-- Update map only if the robot is moving -->
+        <param name="RGBD/LinearUpdate"                         type="string"   value="0.01" /><!-- Update map only if the robot is moving -->
         <param name="RGBD/OptimizeMaxError"                     type="double"   value="5"/> <!-- Reject loop closures if optimization error ratio is greater than this value (0=disabled). Ratio is computed as absolute error over standard deviation of each link. This will help to detect when a wrong loop closure is added to the graph. Not compatible with \"%s\" if enabled-->
-        <param name="RGBD/ProximityPathMaxNeighbors"            type="string"   value="0" />
+        <param name="RGBD/ProximityPathMaxNeighbors"            type="string"   value="0" />  <!-- Maximum neighbor nodes compared on each path for one-to-many proximity detection. Set to 0 to disable one-to-many proximity detection (by merging the laser scans).-->
         <param name="RGBD/CreateOccupancyGrid"                  type="string"   value="true" /> <!-- The proximity detection using only laser scans is disabled-->
         <param name="RGBD/NeighborLinkRefining"                 type="string"   value="true"/>  <!-- Do odometry correction with consecutive laser scans -->
         <param name="RGBD/ProximityBySpace"                     type="string"   value="true" /> <!-- Local loop closure detection (using estimated position) with locations in WM -->
         <param name="RGBD/ProximityByTime"                      type="string"   value="true"/> <!-- Local loop closure detection with locations in STM -->
         <param name="RGBD/OptimizeFromGraphEnd"                 type="string"   value="false" /><!-- Set to false to generate map correction between /map and /odom -->
         <param name="RGBD/LocalRadius"                          type="string"   value="2"/>     <!-- limit length of proximity detections -->
+        <param name="RGBD/LoopClosureIdentityGuess"             type="string"   value="true"/> <!-- Use Identity matrix as guess when computing loop closure transform, otherwise no guess is used, thus assuming that registration strategy selected (%s) can deal with transformation estimation without guess.", kRegStrategy().c_str())-->
+        <param name="RGBD/LocalBundleOnLoopClosure"             type="string"   value="true"/> <!-- Do local bundle adjustment with neighborhood of the loop closure.-->
+        <param name="RGBD/ProximityMaxPaths"                    type="string"   value="0"/> <!-- Maximum paths compared (from the most recent) for proximity detection. 0 means no limit."-->
         <!-- ################################################### -->
-        <param name="Grid/MaxGroundHeight"                      type="string"   value="0.05"/>
-        <param name="Grid/MaxObstacleHeight"                    type="string"   value="2.0"/>
-        <param name="Grid/CellSize"                             type="string"   value="0.05" />
-        <param name="Grid/NormalsSegmentation"                  type="string"   value="true"/>
-        <param name="Grid/Sensor"                               type="string"   value="2" />
-        <param name="Grid/RayTracing"                           type="string"   value="true" />
-        <param name="Grid/3D"                                   type="string"   value="true"/>
+        <param name="Grid/MaxGroundHeight"                      type="string"   value="0"/> <!-- Maximum ground height (0=disabled).-->
+        <param name="Grid/MaxObstacleHeight"                    type="string"   value="2.0"/> <!-- Maximum obstacles height (0=disabled).-->
+        <param name="Grid/CellSize"                             type="string"   value="0.05" /> <!-- Resolution of the occupancy grid-->
+        <param name="Grid/NormalsSegmentation"                  type="string"   value="true"/> <!-- Segment ground from obstacles using point normals, otherwise a fast passthrough is used.-->
+        <param name="Grid/Sensor"                               type="string"   value="2" /> <!-- Create occupancy grid from selected sensor: 0=laser scan, 1=depth image(s) or 2=both laser scan and depth image(s).-->
+        <param name="Grid/RayTracing"                           type="string"   value="true" /> <!-- Ray tracing is done for each occupied cell, filling unknown space between the sensor and occupied cells. If %s=true, RTAB-Map should be built with OctoMap support, otherwise 3D ray tracing is ignored.-->
+        <param name="Grid/3D"                                   type="string"   value="true"/> <!-- "A 3D occupancy grid is required if you want an OctoMap (3D ray tracing). Set to false if you want only a 2D map, the cloud will be projected on xy plane. A 2D map can be still generated if checked, but it requires more memory and time to generate it.-->
         <!-- ################################################### -->
-        <param name="GridGlobal/MinSize"                        type="string"   value="10" />
+        <param name="GridGlobal/MinSize"                        type="string"   value="10" /> <!-- Minimum map size (m).-->
         <!-- ################################################### -->
         <param name="Reg/Force3DoF"                             type="string"   value="true" />
         <param name="Reg/Strategy"                              type="string"   value="2" /><!-- Loop closure transformation: 0=Visual, 1=ICP, 2=Visual+ICP -->
@@ -75,9 +79,9 @@
         <param name="Vis/InlierDistance"                        type="string"   value="0.5" /> <!-- 3D visual words correspondence distance -->
         <!-- ################################################### -->
         <!-- ################################################### -->
-        <param name="Odom/Strategy"                             type="string"   value="12"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
+        <param name="Odom/Strategy"                             type="string"   value="1"/> <!-- 0=Frame-to-Map (F2M) 1=Frame-to-Frame (F2F) 2=Fovis 3=viso2 4=DVO-SLAM 5=ORB_SLAM2 6=OKVIS 7=LOAM 8=MSCKF_VIO 9=VINS-Fusion 10=OpenVINS 11=FLOAM 12=Open3D-->
         <!-- <param name="Odom/Holonomic"		                    ty/pe="string"   value="true"/> If the robot is holonomic (strafing commands can be issued). If not, y value will be estimated from x and yaw values (y=x*tan(yaw)). -->
-        <param name="Odom/FilteringStrategy"                    type="string"   value="0"/> <!-- 0=No filtering 1=Kalman filtering 2=Particle filtering. This filter is used to smooth the odometry output.-->
+        <param name="Odom/FilteringStrategy"                    type="string"   value="2"/> <!-- 0=No filtering 1=Kalman filtering 2=Particle filtering. This filter is used to smooth the odometry output.-->
 <!-- ################################################################################################################################################################# -->
         <!-- REMAPS -->
         <remap from="odom"                                      to="odom"/>

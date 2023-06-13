@@ -8,6 +8,7 @@ bool publish_enable = false;
 bool control_service_cb_f(std_srvs::SetBool::Request &req, std_srvs::SetBool::Response &res)
 {
     publish_enable = (bool)req.data;
+    ROS_INFO("Pointcloud publisher is %s",req.data ? "ENABLED" : "DISABLED");
     res.message = "Pointcloud publisher is " + req.data ? "ENABLED" : "DISABLED";
     res.success = true;
     return true;
