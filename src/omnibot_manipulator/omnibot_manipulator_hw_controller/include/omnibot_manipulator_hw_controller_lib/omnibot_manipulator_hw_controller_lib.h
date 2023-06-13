@@ -1,0 +1,15 @@
+#ifndef __OMNIBOT_MANIPULATOR_HW_CONTROLLER_H__
+#define __OMNIBOT_MANIPULATOR_HW_CONTROLLER_H__
+#include <dynamixel_workbench_toolbox/dynamixel_workbench.h>
+class OMNIBOT_MANIPULATOR_HW_CONTROLLER
+{
+private:
+    
+public:
+    OMNIBOT_MANIPULATOR_HW_CONTROLLER();
+    ~OMNIBOT_MANIPULATOR_HW_CONTROLLER();
+};
+
+
+
+#endif // __OMNIBOT_MANIPULATOR_HW_CONTROLLER_H__
