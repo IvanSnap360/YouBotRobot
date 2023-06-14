@@ -128,7 +128,7 @@ endif(NOT ${YAML_CPP_VERSION} VERSION_LESS "0.5")
 catkin_package(
  INCLUDE_DIRS include
  LIBRARIES omnibot_manipulator_hw_controller_lib
- CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs actionlib
+ CATKIN_DEPENDS roscpp rospy std_msgs actionlib_msgs actionlib trajectory_msgs dynamixel_workbench_msgs dynamixel_workbench_toolbox cmake_modules
 #  DEPENDS system_lib 
 )
 
@@ -141,12 +141,14 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${YAML_CPP_INCLUDE_DIRS}
+
 )
 
-## Declare a C++ library
-# add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/omnibot_manipulator_hw_controller.cpp
-# )
+# Declare a C++ library
+add_library(${PROJECT_NAME}
+  src/${PROJECT_NAME}_lib/omnibot_manipulator_hw_controller_lib.cpp
+)
 
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
@@ -156,7 +158,8 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/omnibot_manipulator_hw_controller_node.cpp)
+add_executable(${PROJECT_NAME}_node src/omnibot_manipulator_hw_controller_node.cpp 
+                                    src/omnibot_manipulator_hw_controller_lib/omnibot_manipulator_hw_controller_lib.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -171,10 +174,9 @@ add_executable(${PROJECT_NAME}_node src/omnibot_manipulator_hw_controller_node.c
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
+  yaml-cpp
 )
-# target_link_libraries(action_server
-#   ${catkin_LIBRARIES}
-# )
+
 
 #############
 ## Install ##
