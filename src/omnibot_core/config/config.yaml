@@ -1,4 +1,0 @@
-manipulator_on: true
-manipulator_cmd_service_name: manipulator_cmd_service
-gripper_cmd_service_name: gripper_cmd
-pointcloud_switcher_name: /pointcloud_swith_node/pointcloud_swith_node_cmd

@@ -1,6 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <node pkg="aruco_cubes_spawner" type="gen_aruco_cubes.py" name="aruco_cubes_spawner_node" output="screen"/>
-
-</launch>

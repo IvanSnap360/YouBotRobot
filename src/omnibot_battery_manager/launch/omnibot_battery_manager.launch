@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <param name="omnibot_battery_manager_config_path" value="$(find omnibot_battery_manager)/config/config.yaml"/>
-    <node pkg="omnibot_battery_manager" type="omnibot_battery_manager_node" name="omnibot_battery_manager_node" output="screen"/>
-
-</launch>

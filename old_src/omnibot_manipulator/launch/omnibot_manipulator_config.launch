@@ -1,5 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-    <arg name="ns" default=""/>
-    <rosparam command="load" file="$(find omnibot_manipulator)/config/omnibot_manipulator_config.yaml" ns="$(arg ns)"/>
-</launch>

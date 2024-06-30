@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<launch>
-
-    <rosparam command="load" file="$(find omnibot_driver)/config/diff_driver_controller_config.yaml"/>
-    
-    <node name="omnibot_diff_controller_manager_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="omnibot_diff_controller"/>
-
-</launch>
