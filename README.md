@@ -1,3 +1,4 @@
-# YouBotRobot
- 
-Проект для участия в RoboCup
+# OmniBot
+
+Проект для изучения ROS 
+
