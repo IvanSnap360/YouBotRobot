@@ -1,9 +1,7 @@
 .vscode/
 build/
-devel/
-build/
-.catkin_workspace
+install/
 src/CMakeLists.txt
-git_log.log
+log/
 *.db
 __pycache__
