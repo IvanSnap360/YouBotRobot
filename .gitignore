@@ -5,3 +5,6 @@ src/CMakeLists.txt
 log/
 *.db
 __pycache__
+*.b#*
+*.s#*
+*.log
