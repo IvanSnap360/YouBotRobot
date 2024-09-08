@@ -6,29 +6,28 @@ from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration,NotSubstitution
-from launch_ros.actions import Node
 from launch.conditions import IfCondition
-import launch
-import launch_ros.actions
+from launch_ros.actions import Node
 import xacro
 
 
-
-
 def generate_launch_description():
-    package_path = get_package_share_directory('omnibot_platform_description')
-    path = os.path.join(package_path, 'urdf/', "omnibot_platform.urdf.xacro")
+    package_path = get_package_share_directory('omnibot_description')
+    path = os.path.join(package_path, 'urdf/', "omnibot_description.urdf.xacro")
     assert os.path.exists(path), f"Path: {path} not exists!!!"
-
-    robot_description = xacro.process_file(path, mappings={'robot_namespace' : '/'}).toxml()
     
     stand_alone_launch = LaunchConfiguration('stand_alone')
-    rviz = LaunchConfiguration('rviz')
     gui_launch = LaunchConfiguration("gui_launch")
+    rviz = LaunchConfiguration("rviz")
+
     
+    DeclareLaunchArgument("rviz", default_value="True", choices=["True", "False"])
     DeclareLaunchArgument("stand_alone", default_value="True", choices=["True", "False"])
     DeclareLaunchArgument("gui_launch", default_value="False", choices=["True", "False"])
-
+    
+    robot_description = xacro.process_file(path, mappings={'robot_namespace' : 'omnibot_robot',
+        'use_manipulator' : 'False'}).toxml()
+    
     
 
     robot_state_pub = Node(
@@ -56,7 +55,7 @@ def generate_launch_description():
                     output="screen",
                     condition = IfCondition(gui_launch)
                 )
-
+    
     rviz_node = Node(
                 package='rviz2',
                 namespace='',
@@ -67,12 +66,10 @@ def generate_launch_description():
                 condition = IfCondition(rviz)
                 )
     
-    
-    loader = LaunchDescription()
+    loader =  LaunchDescription()
     loader.add_action(robot_state_pub)
     loader.add_action(joint_state_pub)
     loader.add_action(joint_state_gui_pub)
     loader.add_action(rviz_node)
     return loader
-
 
