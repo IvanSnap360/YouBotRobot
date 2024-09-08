@@ -17,7 +17,7 @@
 
     <xacro:property name="base_link_offset_x" value="0.0" />
     <xacro:property name="base_link_offset_y" value="0.0" />
-    <xacro:property name="base_link_offset_z" value="0.00" />
+    <xacro:property name="base_link_offset_z" value="0.0" />
 
     <xacro:property name="base_link_rotate_x" value="0.0" />
     <xacro:property name="base_link_rotate_y" value="3.14" />
@@ -49,17 +49,17 @@
     <xacro:property name="d435_xacro_path"
         value="$(find omnibot_platform_description)/urdf/_d435.urdf.xacro" />
 
-    <xacro:property name="t265_x_offset" value="0.226500" />
+    <xacro:property name="t265_x_offset" value="${0.191250 + 0.0135}" />
     <xacro:property name="t265_y_offset" value="0.0" />
-    <xacro:property name="t265_z_offset" value="0.094250" />
+    <xacro:property name="t265_z_offset" value="${0.202950 - 0.035}" />
 
     <xacro:property name="t265_x_rotate" value="0.0" />
     <xacro:property name="t265_y_rotate" value="0.0" />
     <xacro:property name="t265_z_rotate" value="0.0" />
 
-    <xacro:property name="d435_x_offset" value="${0.196 + 0.0105 + 0.005}" />
+    <xacro:property name="d435_x_offset" value="${0.176250 + 0.012}" />
     <xacro:property name="d435_y_offset" value="0.0" />
-    <xacro:property name="d435_z_offset" value="0.114" />
+    <xacro:property name="d435_z_offset" value="${0.230460 - 0.05}" />
 
     <xacro:property name="d435_x_rotate" value="0.0" />
     <xacro:property name="d435_y_rotate" value="0.0" />
@@ -69,13 +69,13 @@
     <xacro:property name="rplidar_a3_xacro_path" 
         value="$(find omnibot_platform_description)/urdf/rplidar_a3.urdf.xacro" />
 
-    <xacro:property name="rplidar_a3_x_offset" value="0.00"/>
-    <xacro:property name="rplidar_a3_y_offset" value="0.00"/>
-    <xacro:property name="rplidar_a3_z_offset" value="0.00"/>
+    <xacro:property name="rplidar_a3_x_offset" value="0.168000"/>
+    <xacro:property name="rplidar_a3_y_offset" value="0.0"/>
+    <xacro:property name="rplidar_a3_z_offset" value="${0.148960 - 0.035}"/> 
 
     <xacro:property name="rplidar_a3_x_rotate" value="0.00"/>
     <xacro:property name="rplidar_a3_y_rotate" value="0.00"/>
-    <xacro:property name="rplidar_a3_z_rotate" value="0.00"/>
+    <xacro:property name="rplidar_a3_z_rotate" value="1.57"/>
 
     <!--  INCLUDES -->
     <xacro:include filename="${omniwheel_macro_path}" />
@@ -122,7 +122,7 @@
     <joint name="base_footprint_joint" type="fixed">
         <parent link="base_footprint" />
         <child link="base_link" />
-        <origin xyz="0.0 0.0 0.08" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0" />
     </joint>
 
 
@@ -152,16 +152,16 @@
 
     <xacro:sensor_t265 parent="base_link" name="t265" topics_ns="t265"
         odom_xyz="0.0 0.0 0.0" odom_rpy="0.0 0.0 0.0" unite_imu_method="true">
-        <origin xyz="${t265_x_offset}  ${t265_y_offset} ${t265_z_offset}" rpy="0 0 0" />
+        <origin xyz="${t265_x_offset}  ${t265_y_offset} ${t265_z_offset}" rpy="${t265_x_rotate}  ${t265_y_rotate} ${t265_z_rotate}" />
     </xacro:sensor_t265>
 
     
-    <xacro:sensor_d435 parent="base_link" name="d400" topics_ns="d400" align_depth="true" enable_pointCloud="true">
-        <origin xyz="${d435_x_offset} ${d435_y_offset}  ${d435_z_offset}" rpy="0.0 0.0 0.0" />
+    <xacro:sensor_d435 parent="base_link" name="d435" topics_ns="d435" align_depth="true" enable_pointCloud="true">
+        <origin xyz="${d435_x_offset} ${d435_y_offset}  ${d435_z_offset}" rpy="${d435_x_rotate} ${d435_y_rotate}  ${d435_z_rotate}" />
     </xacro:sensor_d435>
 
     <xacro:rplidar_a3 suffix="front">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}" rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}"/>
         <parent link="base_link"/>        
     </xacro:rplidar_a3>
 </robot>
