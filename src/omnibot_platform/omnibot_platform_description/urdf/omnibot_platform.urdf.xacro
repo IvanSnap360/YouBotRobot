@@ -43,38 +43,45 @@
 
 
     <!-- REALSENSE -->
-
-    <!-- <xacro:property name="t265_xacro_path"
-        value="$(find omnibot_platform_description)/urdf/t265.xacro" />
-    <xacro:property name="t265_mesh_path"
-        value="package://omnibot_platform_description/meshes/t265.stl" /> -->
-
     <xacro:property name="t265_xacro_path"
         value="$(find omnibot_platform_description)/urdf/_t265.urdf.xacro" />
+
+    <xacro:property name="d435_xacro_path"
+        value="$(find omnibot_platform_description)/urdf/_d435.urdf.xacro" />
 
     <xacro:property name="t265_x_offset" value="0.226500" />
     <xacro:property name="t265_y_offset" value="0.0" />
     <xacro:property name="t265_z_offset" value="0.094250" />
 
-    <!-- <xacro:property name="d435_xacro_path"
-        value="$(find omnibot_platform_description)/urdf/d435.urdf.xacro" />
-    <xacro:property name="d435_mesh_path"
-        value="package://omnibot_platform_description/meshes/d435.stl" /> -->
-    <xacro:property name="d435_xacro_path"
-        value="$(find omnibot_platform_description)/urdf/_d435.urdf.xacro" />
-
+    <xacro:property name="t265_x_rotate" value="0.0" />
+    <xacro:property name="t265_y_rotate" value="0.0" />
+    <xacro:property name="t265_z_rotate" value="0.0" />
 
     <xacro:property name="d435_x_offset" value="${0.196 + 0.0105 + 0.005}" />
     <xacro:property name="d435_y_offset" value="0.0" />
     <xacro:property name="d435_z_offset" value="0.114" />
-    <!-- <xacro:property name="d435_x_offset" value="-0.01950" />
-    <xacro:property name="d435_y_offset" value="0.0" />
-    <xacro:property name="d435_z_offset" value="0.019" /> -->
+
+    <xacro:property name="d435_x_rotate" value="0.0" />
+    <xacro:property name="d435_y_rotate" value="0.0" />
+    <xacro:property name="d435_z_rotate" value="0.0" />
+
+    <!-- LIDAR -->
+    <xacro:property name="rplidar_a3_xacro_path" 
+        value="$(find omnibot_platform_description)/urdf/rplidar_a3.urdf.xacro" />
+
+    <xacro:property name="rplidar_a3_x_offset" value="0.00"/>
+    <xacro:property name="rplidar_a3_y_offset" value="0.00"/>
+    <xacro:property name="rplidar_a3_z_offset" value="0.00"/>
+
+    <xacro:property name="rplidar_a3_x_rotate" value="0.00"/>
+    <xacro:property name="rplidar_a3_y_rotate" value="0.00"/>
+    <xacro:property name="rplidar_a3_z_rotate" value="0.00"/>
 
     <!--  INCLUDES -->
     <xacro:include filename="${omniwheel_macro_path}" />
     <xacro:include filename="${d435_xacro_path}" />
     <xacro:include filename="${t265_xacro_path}" />
+    <xacro:include filename="${rplidar_a3_xacro_path}"/>
     <xacro:include filename="$(find omnibot_platform_description)/urdf/inertia_calc.xacro" />
 
 
@@ -152,4 +159,9 @@
     <xacro:sensor_d435 parent="base_link" name="d400" topics_ns="d400" align_depth="true" enable_pointCloud="true">
         <origin xyz="${d435_x_offset} ${d435_y_offset}  ${d435_z_offset}" rpy="0.0 0.0 0.0" />
     </xacro:sensor_d435>
+
+    <xacro:rplidar_a3 suffix="front">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_link"/>        
+    </xacro:rplidar_a3>
 </robot>
