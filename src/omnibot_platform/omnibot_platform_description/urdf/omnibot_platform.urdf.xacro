@@ -24,7 +24,7 @@
     <xacro:property name="base_link_rotate_z" value="-1.57" />
 
     <xacro:property name="base_link_mesh_path"
-        value="package://omnibot_platform_description/meshes/ros_base_link.dae" />
+        value="file://$(find omnibot_platform_description)/meshes/ros_base_link.dae" />
 
 
     <xacro:property name="base_link_mesh_scale_x" value="0.001" />
@@ -150,7 +150,7 @@
             rpy="0.0 0.0 -1.57" />
     </xacro:mecanum_wheel>
 
-    <xacro:sensor_t265 parent="base_link" name="t265" topics_ns="t265"
+    <!-- <xacro:sensor_t265 parent="base_link" name="t265" topics_ns="t265"
         odom_xyz="0.0 0.0 0.0" odom_rpy="0.0 0.0 0.0" unite_imu_method="true">
         <origin xyz="${t265_x_offset}  ${t265_y_offset} ${t265_z_offset}" rpy="${t265_x_rotate}  ${t265_y_rotate} ${t265_z_rotate}" />
     </xacro:sensor_t265>
@@ -158,7 +158,7 @@
     
     <xacro:sensor_d435 parent="base_link" name="d435" topics_ns="d435" align_depth="true" enable_pointCloud="true">
         <origin xyz="${d435_x_offset} ${d435_y_offset}  ${d435_z_offset}" rpy="${d435_x_rotate} ${d435_y_rotate}  ${d435_z_rotate}" />
-    </xacro:sensor_d435>
+    </xacro:sensor_d435> -->
 
     <xacro:rplidar_a3 suffix="front">
         <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}" rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}"/>

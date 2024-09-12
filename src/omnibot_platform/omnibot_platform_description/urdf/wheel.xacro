@@ -6,13 +6,13 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 ${1.57 * side}" />
         <geometry>
-          <mesh filename="package://omnibot_platform_description/meshes/wheel_base.dae" scale="${side / 1000} 0.001 0.001" />
+          <mesh filename="file://$(find omnibot_platform_description)/meshes/wheel_base.dae" scale="${side / 1000} 0.001 0.001" />
         </geometry>        
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="0 0 ${1.57 * side}" />
         <geometry>
-          <mesh filename="package://omnibot_platform_description/meshes/wheel_base.dae" scale="${side / 1000} 0.001 0.001" />
+          <mesh filename="file://$(find omnibot_platform_description)/meshes/wheel_base.dae" scale="${side / 1000} 0.001 0.001" />
         </geometry>
       </collision>
       <inertial>
@@ -32,13 +32,13 @@
       <visual>
         <origin xyz="0 0.035 0" rpy="0 0 ${1.57 * side}" />
         <geometry>
-          <mesh filename="package://omnibot_platform_description/meshes/adapter.dae" scale="${side / 1000} 0.001 0.001" />
+          <mesh filename="file://$(find omnibot_platform_description)/meshes/adapter.dae" scale="${side / 1000} 0.001 0.001" />
         </geometry>        
       </visual>
       <collision>
         <origin xyz="0 0.035 0" rpy="0 0 ${1.57 * side}" />
         <geometry>
-          <mesh filename="package://omnibot_platform_description/meshes/adapter.dae" scale="${side / 1000} 0.001 0.001" />
+          <mesh filename="file://$(find omnibot_platform_description)/meshes/adapter.dae" scale="${side / 1000} 0.001 0.001" />
         </geometry>
       </collision>
       <inertial>
