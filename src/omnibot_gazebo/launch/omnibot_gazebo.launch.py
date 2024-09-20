@@ -5,7 +5,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration
+from launch.substitutions import LaunchConfiguration, TextSubstitution
 from launch_ros.actions import Node
 from launch.conditions import IfCondition
 from launch.actions import TimerAction
@@ -14,6 +14,17 @@ from launch.actions import TimerAction
 def generate_launch_description():
 
     omnibot_gazebo_package_path = get_package_share_directory("omnibot_gazebo")
+    omnibot_description_package_path = get_package_share_directory(
+        "omnibot_description"
+    )
+
+    gui_gazebo = LaunchConfiguration("gui_gazebo")
+    gui_rviz = LaunchConfiguration("gui_rviz")
+
+    DeclareLaunchArgument("gui_rviz", default_value="False", choices=["True", "False"])
+    DeclareLaunchArgument(
+        "gui_gazebo", default_value="False", choices=["True", "False"]
+    )
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -22,9 +33,22 @@ def generate_launch_description():
                 "/gazebo.launch.py",
             ]
         ),
-        launch_arguments={"verbose": "true",
-                          "gui": "true"}.items(),
+        launch_arguments={"verbose": "true", "gui": gui_gazebo}.items(),
     )
+
+    rviz_node = Node(
+        package="rviz2",
+        namespace="",
+        executable="rviz2",
+        name="rviz2",
+        output="screen",
+        arguments=[
+            "-d"
+            + os.path.join(omnibot_description_package_path, "config", "rviz_cfg.rviz")
+        ],
+        condition=IfCondition(gui_rviz),
+    )
+
     spawn_entity_cmd = Node(
         package="gazebo_ros",
         executable="spawn_entity.py",
@@ -47,6 +71,7 @@ def generate_launch_description():
 
     return LaunchDescription(
         [
+            rviz_node,
             gazebo,
             spawn_entity_cmd,
         ]

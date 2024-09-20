@@ -37,8 +37,6 @@ install(
 install(
   PROGRAMS
   launch/omnibot_gazebo.launch.py  launch/omnibot_gazebo.launch.py
-  launch/gazebo.launch.py
-
   DESTINATION lib/${PROJECT_NAME}
 )
 
