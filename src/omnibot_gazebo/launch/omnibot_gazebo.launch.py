@@ -11,38 +11,43 @@ from launch.conditions import IfCondition
 from launch.actions import TimerAction
 
 
-
 def generate_launch_description():
-    
+
     omnibot_gazebo_package_path = get_package_share_directory("omnibot_gazebo")
 
-    
-    gzclient = IncludeLaunchDescription(
+    gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory("gazebo_ros"), "launch", "gzserver.launch.py")
+            [
+                os.path.join(get_package_share_directory("gazebo_ros"), "launch"),
+                "/gazebo.launch.py",
+            ]
         ),
-        launch_arguments={"verbose": "true"}.items(), # "extra_gazebo_args": "-s libgazebo_ros_p3d.so"
-    )
-    gzserver = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-                os.path.join(get_package_share_directory("gazebo_ros"), "launch", "gzclient.launch.py")
-        ),
-        launch_arguments={"verbose": "true"}.items(),
+        launch_arguments={"verbose": "true",
+                          "gui": "true"}.items(),
     )
     spawn_entity_cmd = Node(
-    package='gazebo_ros', 
-    executable='spawn_entity.py',
-    arguments=['-entity', "omnibot_robot", 
-                '-topic', '/robot_description',
-                    '-x', "0.00",
-                    '-y', "0.00",
-                    '-z', "0.05",
-                    '-Y', "0.00"],
-                    output='screen')
-    
-    
-    return LaunchDescription([
-        gzclient,
-        gzserver,
-        spawn_entity_cmd
-    ])
+        package="gazebo_ros",
+        executable="spawn_entity.py",
+        arguments=[
+            "-entity",
+            "omnibot_robot",
+            "-topic",
+            "/robot_description",
+            "-x",
+            "0.00",
+            "-y",
+            "0.00",
+            "-z",
+            "0.05",
+            "-Y",
+            "0.00",
+        ],
+        output="screen",
+    )
+
+    return LaunchDescription(
+        [
+            gazebo,
+            spawn_entity_cmd,
+        ]
+    )

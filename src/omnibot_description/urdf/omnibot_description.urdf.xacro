@@ -1,14 +1,24 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_robot">
 
+
+
     <xacro:arg name="use_manipulator" default="false" />
     <xacro:arg name="robot_namespace" default="omnibot_robot" />
     
     <xacro:property name="ns" value="$(arg robot_namespace)"/>
     
+    <!-- <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+    <ros2_control> -->
+    
     <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
             <robotNamespace>${ns}</robotNamespace>
+            <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
+             <parameters>$(find omnibot_gazebo)/config/controller_manager.yaml</parameters>
         </plugin>
     </gazebo>
     
