@@ -16,8 +16,7 @@ The camera specs can be found at https://www.intelrealsense.com/how-to-getting-i
 
 <robot name="sensor_t265" xmlns:xacro="http://ros.org/wiki/xacro">
   <!--File includes-->
-  <xacro:include filename="$(find omnibot_platform_description)/urdf/_t265.gazebo.xacro"/>
-
+  <xacro:include filename="_t265.gazebo.xacro"/>
     <!-- odom_xyz, odom_rpy params are the transformation from the robot base_link to the camera reference frame (camerea_pose_frame) 
   they are needed for the simulation of the camera slam capabilities -->
   <xacro:macro name="sensor_t265" params="parent
@@ -64,14 +63,14 @@ The camera specs can be found at https://www.intelrealsense.com/how-to-getting-i
       <visual>
       <origin xyz="0 0 0" rpy="${M_PI / 2} 0 ${M_PI /2}"/>
         <geometry>
-            <mesh filename="package://omnibot_platform_description/meshes/t265_full.stl" scale="0.001 0.001 0.001"/>
+            <mesh filename="file://$(find omnibot_platform_description)/meshes/t265_full.stl" scale="0.001 0.001 0.001"/>
         </geometry>
         <material name="${name}_aluminum"/>
       </visual>
       <collision>
         <origin xyz="0 0 0" rpy="${M_PI / 2} 0 ${M_PI /2}"/>
         <geometry>
-          <mesh filename="package://omnibot_platform_description/meshes/t265_simplified.stl"  scale="0.001 0.001 0.001"/>
+          <mesh filename="file://$(find omnibot_platform_description)/meshes/t265_simplified.stl"  scale="0.001 0.001 0.001"/>
         </geometry>
       </collision>
       <inertial>

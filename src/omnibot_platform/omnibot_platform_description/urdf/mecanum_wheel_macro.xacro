@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
 <robot name="mecanum_wheel" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:include filename="$(find omnibot_platform_description)/urdf/wheel.xacro" />
-  <xacro:include filename="$(find omnibot_platform_description)/urdf/rollers.xacro"  />
+  <xacro:include filename="wheel.xacro" />
+  <xacro:include filename="rollers.xacro"  />
 
   <xacro:macro name="mecanum_wheel" params="name side interface *origin parent">  
     

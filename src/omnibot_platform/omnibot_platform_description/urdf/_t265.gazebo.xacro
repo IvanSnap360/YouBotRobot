@@ -1,18 +1,5 @@
 <?xml version="1.0"?>
-
-<!--
-Aknolegment: This file was copied from the realsense repository of 
-pal-robotics-forks( https://github.com/pal-robotics-forks/realsense/ ) 
-and modified to add IMU and odometry.
-
-License: Apache 2.0. See LICENSE file in root directory.
-Copyright(c) 2017 PAL Robotics, S.L. All Rights Reserved
-
-This is the Gazebo URDF model for the Intel RealSense T265 camera
--->
-
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
-
   <xacro:macro name="gazebo_t265" params="camera_name topics_ns
                                           fisheye1_reference_link
                                           fisheye2_reference_link
@@ -49,7 +36,7 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
       <kd>1</kd>
       <!--<max_vel>0.01</max_vel>
       <min_depth>0</min_depth>-->
-      <sensor name="${camera_name}fisheye1" type="wideanglecamera">
+      <sensor name="${camera_name}_fisheye1" type="wideanglecamera">
         <!-- <origin xyz="0 0 0" rpy="0 ${M_PI/2} 0"/> -->
         <update_rate>${fisheye_fps}</update_rate>
         <camera>
@@ -74,9 +61,8 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
             <!-- resolution of the cubemap texture, the highter it is - the sharper is your image -->
             <env_texture_size>1024</env_texture_size>
           </lens>
-
         </camera>
-        <plugin name="${camera_name}fisheye1" filename="libgazebo_ros_camera.so">
+        <plugin name="${camera_name}_fisheye1" filename="libgazebo_ros_camera.so">
           <alwaysOn>true</alwaysOn>
           <updateRate>${fisheye_fps}</updateRate>
           <cameraName>${topics_ns}/fisheye1</cameraName>
@@ -109,7 +95,7 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
       <kd>1</kd>
       <!--<max_vel>0.01</max_vel>
       <min_depth>0</min_depth>-->
-      <sensor name="${camera_name}fisheye2" type="wideanglecamera">
+      <sensor name="${camera_name}_fisheye2" type="wideanglecamera">
         <!-- <origin xyz="0 0 0" rpy="0 ${M_PI/2} 0"/> -->
         <update_rate>${fisheye_fps}</update_rate>
         <camera>
@@ -134,10 +120,9 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
             <!-- resolution of the cubemap texture, the highter it is - the sharper is your image -->
             <env_texture_size>1024</env_texture_size>
           </lens>
-
         </camera>
         <always_on>1</always_on>
-        <plugin name="${camera_name}fisheye2" filename="libgazebo_ros_camera.so">
+        <plugin name="${camera_name}_fisheye2" filename="libgazebo_ros_camera.so">
           <alwaysOn>true</alwaysOn>
           <updateRate>${fisheye_fps}</updateRate>
           <cameraName>${topics_ns}/fisheye2</cameraName>
@@ -153,12 +138,13 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
         </plugin>
       </sensor>
       <!-- IMU -->
-      <xacro:if value="${unite_imu_method == 'copy' or unite_imu_method == 'linear_interpolation'}">
+      <!-- <xacro:if value="${unite_imu_method == 'copy' or unite_imu_method == 'linear_interpolation'}"> -->
         <sensor name="${camera_name}_imu" type="imu">
           <always_on>true</always_on>
           <update_rate>${gyro_fps}</update_rate>
           <topic>${camera_name}/imu/sample</topic>
-          <plugin name="{camera_name}imu" filename="libgazebo_ros_imu_sensor.so">
+          <plugin name="${camera_name}_imu" filename="libgazebo_ros_imu_sensor.so">
+            <initial_orientation_as_reference>false</initial_orientation_as_reference>
             <topicName>${camera_name}/imu/sample</topicName>
             <bodyName>${camera_name}_pose_frame</bodyName>
             <frameName>${gyro_optical_frame}</frameName>
@@ -168,10 +154,10 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
             <rpyOffset>0 0 0</rpyOffset>
           </plugin>
         </sensor>
-      </xacro:if>
+      <!-- </xacro:if> -->
       <!-- Accel and gyro -->
       <xacro:unless value="${unite_imu_method == 'copy' or unite_imu_method == 'linear_interpolation'}">
-        <sensor name="{camera_name}accel" type="imu">
+        <sensor name="${camera_name}_accel" type="imu">
           <always_on>true</always_on>
           <update_rate>${accel_fps}</update_rate>
           <plugin name="${topics_ns}_accel_plugin" filename="librealsense_gazebo_accel_sensor.so">
@@ -206,15 +192,23 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
 
     <gazebo>
       <!-- Odom from SLAM -->
-      <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">
+      <plugin name="libgazebo_ros_p3d" filename="libgazebo_ros_p3d.so">
             <alwaysOn>true</alwaysOn>
             <updateRate>${odom_fps}</updateRate>
-            <bodyName>${pose_frame}</bodyName>
+            <bodyName>${camera_name}_pose_frame</bodyName>
             <topicName>${topics_ns}/odom/sample</topicName>
             <gaussianNoise>0.01</gaussianNoise>
-            <frameName>map</frameName>
             <xyzOffsets>${odom_xyz}</xyzOffsets>
             <rpyOffsets>${odom_rpy}</rpyOffsets>
+
+            <ros>
+              <namespace>t265</namespace>
+              <remapping>odom:=odom</remapping>
+              </ros>
+              <frame_name>map</frame_name>
+              <body_name>base_footprint</body_name>
+              <update_rate>200.0</update_rate>
+              <gaussian_noise>0.01</gaussian_noise>
         </plugin>
     </gazebo>
   </xacro:macro>
