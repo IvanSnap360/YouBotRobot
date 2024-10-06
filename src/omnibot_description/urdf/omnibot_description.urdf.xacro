@@ -49,7 +49,7 @@
         <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
             <robot_param>robot_description</robot_param>
             <robot_param_node>robot_state_publisher</robot_param_node>
-            <parameters>$(find omnibot_description)/config/controller_manager.yaml</parameters>
+            <parameters>$(find omnibot_platform_control)/config/controller_manager.yaml</parameters>
         </plugin>
     </gazebo>
 

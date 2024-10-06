@@ -29,25 +29,6 @@ def generate_launch_description():
     robot_description = xacro.process_file(urdf_path, mappings={'robot_namespace' : 'omnibot_robot',
         'use_manipulator' : 'False'}).toxml()
     
-    robot_controllers = PathJoinSubstitution(
-        [
-            FindPackageShare('omnibot_description'),
-            'config',
-            'controller_manager.yaml',
-        ]
-    )
-    
-    load_joint_state_broadcaster = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'joint_state_broadcaster'],
-        output='screen'
-    )
-
-    load_joint_velocity_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'velocity_controller'],
-        output='screen'
-    )
-
     robot_state_pub = Node(
                 package="robot_state_publisher",
                 executable="robot_state_publisher",
@@ -82,21 +63,12 @@ def generate_launch_description():
                 condition = IfCondition(rviz)
                 )
     
-    control_node = Node(
-        package="controller_manager",
-        executable="ros2_control_node",
-        parameters=[robot_controllers],
-        output="screen",
-    )
+    
     
     loader =  LaunchDescription()
-    loader.add_action(control_node)
     loader.add_action(robot_state_pub)
     loader.add_action(joint_state_pub)
     loader.add_action(joint_state_gui_pub)
     loader.add_action(rviz_node)
-    loader.add_action(load_joint_state_broadcaster)
-    loader.add_action(load_joint_velocity_controller)
-  
     return loader
 

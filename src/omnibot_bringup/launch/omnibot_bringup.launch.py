@@ -24,6 +24,9 @@ def generate_launch_description():
     omnibot_description_package_path = get_package_share_directory(
         "omnibot_description"
     )
+    omnibot_platform_control_package_path = get_package_share_directory(
+        "omnibot_platform_control"
+    )
 
     omnibot_description_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -39,6 +42,16 @@ def generate_launch_description():
             "gui": "False",
         }.items(),
     )
+    
+    
+    omnibot_platrform_control_launch = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(
+                omnibot_platform_control_package_path, "launch", "omnibot_platform_control.launch.py"
+            )
+        ),
+        # launch_arguments={"sim": sim}.items(),
+    )
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(
@@ -52,4 +65,5 @@ def generate_launch_description():
     loader = LaunchDescription()
     loader.add_action(omnibot_description_launch)
     loader.add_action(gazebo_launch)
+    loader.add_action(omnibot_platrform_control_launch)
     return loader

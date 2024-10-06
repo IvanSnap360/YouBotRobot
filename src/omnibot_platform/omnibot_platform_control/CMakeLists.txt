@@ -7,6 +7,11 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(control_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(rclcpp_action REQUIRED)
+find_package(std_msgs REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -22,5 +27,40 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+add_executable(example_velocity src/example_velocity.cpp)
+ament_target_dependencies(example_velocity
+  rclcpp
+  std_msgs
+)
+
+
+install(
+  DIRECTORY
+    launch
+    config
+    src
+  DESTINATION
+    share/${PROJECT_NAME}/
+)
+
+install(
+  PROGRAMS
+  launch/omnibot_platform_control.launch.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+install(
+  TARGETS
+    # example_position
+    # example_position_pid
+    example_velocity
+    # example_effort
+    # example_diff_drive
+    # example_tricycle_drive
+    # example_gripper
+  DESTINATION
+    lib/${PROJECT_NAME}
+)
 
 ament_package()
