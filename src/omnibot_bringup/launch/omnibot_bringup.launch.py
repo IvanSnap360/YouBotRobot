@@ -50,7 +50,7 @@ def generate_launch_description():
                 omnibot_platform_control_package_path, "launch", "omnibot_platform_control.launch.py"
             )
         ),
-        # launch_arguments={"sim": sim}.items(),
+        launch_arguments={"sim": sim}.items(),
     )
     gazebo_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(

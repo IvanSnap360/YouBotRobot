@@ -15,7 +15,9 @@ from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 
 def generate_launch_description():
-    
+    sim = LaunchConfiguration("sim")
+    DeclareLaunchArgument("sim", default_value="False", choices=["True", "False"])
+
     robot_controllers = PathJoinSubstitution(
         [
             FindPackageShare('omnibot_platform_control'),
