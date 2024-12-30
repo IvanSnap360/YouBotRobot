@@ -1,2 +1,2 @@
-rm -rf install/ build/
+rm -rf install/ build/ log/
 colcon build --symlink-install

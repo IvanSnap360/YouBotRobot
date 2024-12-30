@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_platfrom">
+    <arg name="robot_ns" default="omnibot_robot"/>
+
+    <!-- BASE_LINK -->
+    <xacro:property name="base_link_mesh_path" value="file://$(find omnibot_platform_description)/meshes/base_link.dae" />
+
+    <xacro:property name="base_link_offset_x" value="0.0" />
+    <xacro:property name="base_link_offset_y" value="0.0" />
+    <xacro:property name="base_link_offset_z" value="0.0" />
+
+    <xacro:property name="base_link_rotate_x" value="0.0" />
+    <xacro:property name="base_link_rotate_y" value="3.14" />
+    <xacro:property name="base_link_rotate_z" value="-1.57" />
+
+    <xacro:property name="base_link_mesh_scale_x" value="0.001" />
+    <xacro:property name="base_link_mesh_scale_y" value="0.001" />
+    <xacro:property name="base_link_mesh_scale_z" value="0.001" />
+
+
+    <!-- WHEELS -->
+    <xacro:property name="wheel_macro_path" value="mecanum_wheel_macro.xacro" />
+
+    <xacro:property name="wheel_base_width" value="0.306100" />
+    <xacro:property name="wheel_base_lenth" value="0.336000" />
+
+    <xacro:property name="wheel_offset_x" value="${(wheel_base_lenth / 2)}" />
+    <xacro:property name="wheel_offset_y" value="${(wheel_base_width / 2) + 0.035}" />
+    <xacro:property name="wheel_offset_z" value="0.015500" />
+
+
+    <!--  INCLUDES -->
+    <xacro:include filename="${wheel_macro_path}" />
+    <!-- <xacro:include filename="${d435_xacro_path}" /> -->
+    <!-- <xacro:include filename="${t265_xacro_path}" /> -->
+    <!-- <xacro:include filename="${rplidar_a3_xacro_path}"/> -->
+    <xacro:include filename="$(find omnibot_platform_description)/urdf/inertia_calc.xacro" />
+
+     <!--  PLATFORM DESCRIPTION -->
+    <link name="base_footprint"/>
+    <link name="base_link">
+        <inertial>
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}"
+                rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}" />
+            <mass value="3.0" />
+            <xacro:box_inertia m="3.0" x="${wheel_base_width}" y="${wheel_base_lenth}" z="0.2" />
+        </inertial>
+        <visual name="">
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}"
+                rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}" />
+            <geometry>
+                <mesh filename="${base_link_mesh_path}"
+                    scale="${base_link_mesh_scale_x} ${base_link_mesh_scale_y} ${base_link_mesh_scale_z}" />
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0" />
+                <texture filename="" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}"
+                rpy="${base_link_rotate_x} ${base_link_rotate_y} ${base_link_rotate_z}" />
+            <geometry>
+                <mesh filename="${base_link_mesh_path}"
+                    scale="${base_link_mesh_scale_x} ${base_link_mesh_scale_y} ${base_link_mesh_scale_z}" />
+            </geometry>
+        </collision>
+    </link>
+
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_footprint" />
+        <child link="base_link" />
+        <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0" />
+    </joint>
+
+
+    <xacro:mecanum_wheel name="left_front" side="1"
+        interface="hardware_interface/VelocityJointInterface" parent="base_link">
+        <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+            rpy="0.0 0.0 1.57" />
+    </xacro:mecanum_wheel>
+
+    <xacro:mecanum_wheel name="right_front" side="-1"
+        interface="hardware_interface/VelocityJointInterface" parent="base_link">
+        <origin xyz="${wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}"
+            rpy="0.0 0.0 1.57" />
+    </xacro:mecanum_wheel>
+
+    <xacro:mecanum_wheel name="left_back" side="-1"
+        interface="hardware_interface/VelocityJointInterface" parent="base_link">
+        <origin xyz="${-wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
+            rpy="0.0 0.0 -1.57" />
+    </xacro:mecanum_wheel>
+
+    <xacro:mecanum_wheel name="right_back" side="1"
+        interface="hardware_interface/VelocityJointInterface" parent="base_link">
+        <origin xyz="${-wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}"
+            rpy="0.0 0.0 -1.57" />
+    </xacro:mecanum_wheel>
+    
+</robot>
