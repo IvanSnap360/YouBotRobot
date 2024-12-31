@@ -10,6 +10,17 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_package(controller_manager REQUIRED)
+find_package(gz_ros2_control REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(ros_gz REQUIRED)
+find_package(ros_gz_bridge REQUIRED)
+find_package(ros_gz_image REQUIRED)
+find_package(ros_gz_sim REQUIRED)
+find_package(ros2_control REQUIRED)
+find_package(ros2_controllers REQUIRED)
+find_package(trajectory_msgs REQUIRED)
+find_package(xacro REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -22,5 +33,17 @@ if(BUILD_TESTING)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
 endif()
+
+install(DIRECTORY
+  launch
+  worlds
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+install(  
+  PROGRAMS
+  launch/omnibot_sim.launch.py
+  DESTINATION lib/${PROJECT_NAME}
+  )
 
 ament_package()

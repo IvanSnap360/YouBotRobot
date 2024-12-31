@@ -52,10 +52,6 @@
                 <mesh filename="${base_link_mesh_path}"
                     scale="${base_link_mesh_scale_x} ${base_link_mesh_scale_y} ${base_link_mesh_scale_z}" />
             </geometry>
-            <material name="">
-                <color rgba="1.0 0.0 0.0 1.0" />
-                <texture filename="" />
-            </material>
         </visual>
         <collision>
             <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}"

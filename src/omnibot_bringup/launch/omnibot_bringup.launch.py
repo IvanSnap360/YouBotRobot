@@ -12,25 +12,39 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     
+    #omnibot description
     omnibot_description_package_path = get_package_share_directory("omnibot_description")
     omnibot_description_file = os.path.join(omnibot_description_package_path,"launch","omnibot_description.launch.py")
+    #omnibot sim
+    omnibot_sim_package_path = get_package_share_directory("omnibot_sim")
+    omnibot_sim_file = os.path.join(omnibot_sim_package_path,"launch","omnibot_sim.launch.py")
     
     rviz = LaunchConfiguration('rviz', default='false')
-    sim = LaunchConfiguration('sim', default='false')
-    sim_gui = LaunchConfiguration('sim', default='false')
+    control_gui = LaunchConfiguration('control_gui', default='false')
+    gazebo = LaunchConfiguration('gazebo', default='false')
+    gazebo_gui = LaunchConfiguration('gazebo_gui', default='false')
     
     DeclareLaunchArgument("rviz", default_value="True", choices=["True", "False"])
-    DeclareLaunchArgument("sim", default_value="True", choices=["True", "False"])
-    DeclareLaunchArgument("sim_gui", default_value="True", choices=["True", "False"])
+    DeclareLaunchArgument("gazebo", default_value="True", choices=["True", "False"])
+    DeclareLaunchArgument("gazebo_gui", default_value="True", choices=["True", "False"])
+    DeclareLaunchArgument("control_gui", default_value="True", choices=["True", "False"])
     
     
     omnibot_description_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_description_file),
         launch_arguments={
             "robot_ns": "omnibot_robot",
             "add_manipulator": "False",
-            "control_gui": "False",
+            "control_gui": control_gui,
         }.items(),
     )
+    
+    gazebo_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_sim_file),
+        launch_arguments={
+            "gazebo_gui": gazebo_gui,
+        }.items(),
+        condition=IfCondition(gazebo)
+    )
+                                             
     
     rviz_node = Node(
         package='rviz2',
@@ -43,5 +57,6 @@ def generate_launch_description():
     
     return LaunchDescription([
         omnibot_description_launch,
-        rviz_node
+        rviz_node,
+        gazebo_launch
     ])
