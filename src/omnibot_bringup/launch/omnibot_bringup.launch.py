@@ -3,11 +3,12 @@ import os
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
-from launch.actions import IncludeLaunchDescription
+from launch.actions import IncludeLaunchDescription,ExecuteProcess, RegisterEventHandler, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration,NotSubstitution,Command,PathJoinSubstitution
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
+from launch.event_handlers import OnProcessExit
 
 
 def generate_launch_description():
@@ -44,8 +45,33 @@ def generate_launch_description():
         }.items(),
         condition=IfCondition(gazebo)
     )
-                                             
     
+    
+    start_velocity_controller_cmd = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'velocity_controller'],
+        output='screen'
+    )
+
+    # Start joint state broadcaster
+    start_joint_state_broadcaster_cmd = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
+             'joint_state_broadcaster'],
+        output='screen'
+    )                       
+    
+    
+     # Register event handler for sequencing
+    load_joint_state_broadcaster_cmd = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=start_joint_state_broadcaster_cmd,
+            on_exit=[start_velocity_controller_cmd]))
+    
+    delayed_start = TimerAction(
+        period=10.0,
+        actions=[start_joint_state_broadcaster_cmd]
+    )
+
     rviz_node = Node(
         package='rviz2',
         executable='rviz2',
@@ -58,5 +84,7 @@ def generate_launch_description():
     return LaunchDescription([
         omnibot_description_launch,
         rviz_node,
-        gazebo_launch
+        gazebo_launch,
+        delayed_start,
+        load_joint_state_broadcaster_cmd
     ])

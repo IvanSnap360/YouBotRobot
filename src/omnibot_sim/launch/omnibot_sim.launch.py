@@ -9,6 +9,7 @@ from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, Text
 from launch_ros.actions import Node
 from ros_gz_sim.actions import GzSpawnModel
 from launch.conditions import IfCondition
+from ros_gz_bridge.actions import RosGzBridge
 
 
 def generate_launch_description():
@@ -56,8 +57,18 @@ def generate_launch_description():
             '-Y', "0.0"
         ])
     
+    config_file_path = os.path.join(omnibot_sim_pkg, 'config', 'omnibot_ros_gz_bridge.yaml')
+
+    # Create the launch description and populate
+    
+    ros_gz_bridge = RosGzBridge(
+            bridge_name="omnibot_ros_gz_bridge",
+            config_file=config_file_path
+        )
+    
     return LaunchDescription([
         gz_sim_launch,
         gz_sim_launch_NO_GUI,
-        start_gazebo_ros_spawner_cmd
+        start_gazebo_ros_spawner_cmd,
+        ros_gz_bridge
     ])

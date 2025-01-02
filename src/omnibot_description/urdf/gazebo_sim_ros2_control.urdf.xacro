@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro">
+    <xacro:macro name="load_gazebo_sim_ros2_control_plugin" params="robot_name use_gazebo">
+        <xacro:if value="${use_gazebo}">
+            <gazebo>
+                <plugin filename="gz_ros2_control-system"
+                    name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+                    <parameters>$(find omnibot_description)/config/omnibot_robot_ros2_controllers.yaml</parameters>
+                </plugin>
+            </gazebo>
+
+            <ros2_control name="RobotSystem" type="system">
+                <hardware>
+                    <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+                </hardware>
+
+                <joint name="left_front_mecanum_joint">
+                    <command_interface name="velocity">
+                        <param name="min">-50.0</param>
+                        <param name="max">50.0</param>
+                    </command_interface>
+                    <state_interface name="position" />
+                    <state_interface name="velocity" />
+                </joint>
+
+                <joint name="right_front_mecanum_joint">
+                    <command_interface name="velocity">
+                        <param name="min">-50.0</param>
+                        <param name="max">50.0</param>
+                    </command_interface>
+                    <state_interface name="position" />
+                    <state_interface name="velocity" />
+                </joint>
+
+                <joint name="left_back_mecanum_joint">
+                    <command_interface name="velocity">
+                        <param name="min">-50.0</param>
+                        <param name="max">50.0</param>
+                    </command_interface>
+                    <state_interface name="position" />
+                    <state_interface name="velocity" />
+                </joint>
+
+                <joint name="right_back_mecanum_joint">
+                    <command_interface name="velocity">
+                        <param name="min">-50.0</param>
+                        <param name="max">50.0</param>
+                    </command_interface>
+                    <state_interface name="position" />
+                    <state_interface name="velocity" />
+                </joint>
+
+            </ros2_control>
+        </xacro:if>
+    </xacro:macro>
+</robot>

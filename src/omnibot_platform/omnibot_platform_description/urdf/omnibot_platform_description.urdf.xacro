@@ -28,12 +28,24 @@
     <xacro:property name="wheel_offset_y" value="${(wheel_base_width / 2) + 0.035}" />
     <xacro:property name="wheel_offset_z" value="0.015500" />
 
+    
+    <!-- LIDAR -->
+    <xacro:property name="rplidar_a3_xacro_path" value="rplidar_a3.urdf.xacro" />
+
+    <xacro:property name="rplidar_a3_x_offset" value="0.168000"/>
+    <xacro:property name="rplidar_a3_y_offset" value="0.0"/>
+    <xacro:property name="rplidar_a3_z_offset" value="${0.148960 - 0.035}"/> 
+
+    <xacro:property name="rplidar_a3_x_rotate" value="0.00"/>
+    <xacro:property name="rplidar_a3_y_rotate" value="0.00"/>
+    <xacro:property name="rplidar_a3_z_rotate" value="1.57"/>
+
 
     <!--  INCLUDES -->
     <xacro:include filename="${wheel_macro_path}" />
     <!-- <xacro:include filename="${d435_xacro_path}" /> -->
     <!-- <xacro:include filename="${t265_xacro_path}" /> -->
-    <!-- <xacro:include filename="${rplidar_a3_xacro_path}"/> -->
+    <xacro:include filename="${rplidar_a3_xacro_path}"/>
     <xacro:include filename="$(find omnibot_platform_description)/urdf/inertia_calc.xacro" />
 
      <!--  PLATFORM DESCRIPTION -->
@@ -93,5 +105,13 @@
         <origin xyz="${-wheel_offset_x} ${-wheel_offset_y} ${wheel_offset_z}"
             rpy="0.0 0.0 -1.57" />
     </xacro:mecanum_wheel>
+
+
+
+    <xacro:rplidar_a3 suffix="front">
+        <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}" rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}"/>
+        <parent link="base_link"/>        
+    </xacro:rplidar_a3>
+    
     
 </robot>
