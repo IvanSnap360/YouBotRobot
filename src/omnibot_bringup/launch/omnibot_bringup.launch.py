@@ -5,7 +5,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription,ExecuteProcess, RegisterEventHandler, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration,NotSubstitution,Command,PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration,NotSubstitution,Command,PathJoinSubstitution,AndSubstitution
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
 from launch.event_handlers import OnProcessExit
@@ -35,7 +35,6 @@ def generate_launch_description():
         launch_arguments={
             "robot_ns": "omnibot_robot",
             "add_manipulator": "False",
-            "control_gui": control_gui,
         }.items(),
     )
     
@@ -81,10 +80,29 @@ def generate_launch_description():
         condition = IfCondition(rviz)
     )
     
+    joint_state_pub = Node(
+                    package="joint_state_publisher",
+                    executable="joint_state_publisher",
+                    name="joint_state_publisher",
+                    output="screen",
+                    condition = IfCondition(AndSubstitution(NotSubstitution(gazebo) ,NotSubstitution(control_gui)))
+                )
+    
+    joint_state_gui_pub = Node(
+                    package="joint_state_publisher_gui",
+                    executable="joint_state_publisher_gui",
+                    name="joint_state_publisher_gui",
+                    output="screen",
+                    condition = IfCondition(AndSubstitution(NotSubstitution(gazebo) ,control_gui))
+                )
+    
+    
     return LaunchDescription([
         omnibot_description_launch,
         rviz_node,
         gazebo_launch,
         delayed_start,
+        joint_state_pub,
+        joint_state_gui_pub,
         load_joint_state_broadcaster_cmd
     ])

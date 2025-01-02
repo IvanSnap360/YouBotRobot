@@ -107,7 +107,6 @@
     </xacro:mecanum_wheel>
 
 
-
     <xacro:rplidar_a3 suffix="front">
         <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}" rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}"/>
         <parent link="base_link"/>        

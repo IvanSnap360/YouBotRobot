@@ -20,11 +20,9 @@ def generate_launch_description():
     
     robot_ns = LaunchConfiguration('robot_ns', default='omnibot_robot')
     add_manipulator = LaunchConfiguration('add_manipulator', default='false')
-    control_gui = LaunchConfiguration('control_gui', default='false')
-  
+      
     DeclareLaunchArgument("robot_ns", default_value="omnibot_robot")
     DeclareLaunchArgument("add_manipulator", default_value="False")
-    DeclareLaunchArgument("control_gui", default_value="False")
 
     description = xacro.process_file(urdf_path, 
         mappings={
@@ -45,24 +43,8 @@ def generate_launch_description():
             }],
     )
     
-    joint_state_pub = Node(
-                    package="joint_state_publisher",
-                    executable="joint_state_publisher",
-                    name="joint_state_publisher",
-                    output="screen",
-                    condition = IfCondition(NotSubstitution(control_gui))
-                )
-    
-    joint_state_gui_pub = Node(
-                    package="joint_state_publisher_gui",
-                    executable="joint_state_publisher_gui",
-                    name="joint_state_publisher_gui",
-                    output="screen",
-                    condition = IfCondition(control_gui)
-                )
     
     return LaunchDescription([
         robot_state_publisher_node,
-        joint_state_pub,
-        joint_state_gui_pub,
+
     ])

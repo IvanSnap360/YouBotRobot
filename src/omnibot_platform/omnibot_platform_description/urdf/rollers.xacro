@@ -77,7 +77,7 @@
               <max_vel>100</max_vel>
             </ode>
           </contact>
-        </surface>
+         </surface>
 
       </link>
 

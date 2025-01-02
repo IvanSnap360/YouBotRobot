@@ -51,6 +51,81 @@
                 </joint>
 
             </ros2_control>
+
+            <gazebo>
+                <plugin filename="gz-sim-joint-state-publisher-system"
+                    name="gz::sim::systems::JointStatePublisher">
+                    <joint_name>left_front_mecanum_joint</joint_name>
+                    <joint_name>left_front_roller_1_7_joint</joint_name>
+                    <joint_name>left_front_roller_1_6_joint</joint_name>
+                    <joint_name>left_front_roller_1_5_joint</joint_name>
+                    <joint_name>left_front_roller_1_4_joint</joint_name>
+                    <joint_name>left_front_roller_1_3_joint</joint_name>
+                    <joint_name>left_front_roller_1_2_joint</joint_name>
+                    <joint_name>left_front_roller_1_1_joint</joint_name>
+                    <joint_name>left_front_roller_2_7_joint</joint_name>
+                    <joint_name>left_front_roller_2_6_joint</joint_name>
+                    <joint_name>left_front_roller_2_5_joint</joint_name>
+                    <joint_name>left_front_roller_2_4_joint</joint_name>
+                    <joint_name>left_front_roller_2_3_joint</joint_name>
+                    <joint_name>left_front_roller_2_2_joint</joint_name>
+                    <joint_name>left_front_roller_2_1_joint</joint_name>
+
+
+
+                    <joint_name>right_front_mecanum_joint</joint_name>
+                    <joint_name>right_front_roller_1_7_joint</joint_name>
+                    <joint_name>right_front_roller_1_6_joint</joint_name>
+                    <joint_name>right_front_roller_1_5_joint</joint_name>
+                    <joint_name>right_front_roller_1_4_joint</joint_name>
+                    <joint_name>right_front_roller_1_3_joint</joint_name>
+                    <joint_name>right_front_roller_1_2_joint</joint_name>
+                    <joint_name>right_front_roller_1_1_joint</joint_name>
+                    <joint_name>right_front_roller_2_7_joint</joint_name>
+                    <joint_name>right_front_roller_2_6_joint</joint_name>
+                    <joint_name>right_front_roller_2_5_joint</joint_name>
+                    <joint_name>right_front_roller_2_4_joint</joint_name>
+                    <joint_name>right_front_roller_2_3_joint</joint_name>
+                    <joint_name>right_front_roller_2_2_joint</joint_name>
+                    <joint_name>right_front_roller_2_1_joint</joint_name>
+
+
+                    <joint_name>left_back_mecanum_joint</joint_name>
+                    <joint_name>left_back_roller_1_7_joint</joint_name>
+                    <joint_name>left_back_roller_1_6_joint</joint_name>
+                    <joint_name>left_back_roller_1_5_joint</joint_name>
+                    <joint_name>left_back_roller_1_4_joint</joint_name>
+                    <joint_name>left_back_roller_1_3_joint</joint_name>
+                    <joint_name>left_back_roller_1_2_joint</joint_name>
+                    <joint_name>left_back_roller_1_1_joint</joint_name>
+                    <joint_name>left_back_roller_2_7_joint</joint_name>
+                    <joint_name>left_back_roller_2_6_joint</joint_name>
+                    <joint_name>left_back_roller_2_5_joint</joint_name>
+                    <joint_name>left_back_roller_2_4_joint</joint_name>
+                    <joint_name>left_back_roller_2_3_joint</joint_name>
+                    <joint_name>left_back_roller_2_2_joint</joint_name>
+                    <joint_name>left_back_roller_2_1_joint</joint_name>
+
+                    
+                    <joint_name>right_back_mecanum_joint</joint_name>
+                    <joint_name>right_back_roller_1_7_joint</joint_name>
+                    <joint_name>right_back_roller_1_6_joint</joint_name>
+                    <joint_name>right_back_roller_1_5_joint</joint_name>
+                    <joint_name>right_back_roller_1_4_joint</joint_name>
+                    <joint_name>right_back_roller_1_3_joint</joint_name>
+                    <joint_name>right_back_roller_1_2_joint</joint_name>
+                    <joint_name>right_back_roller_1_1_joint</joint_name>
+                    <joint_name>right_back_roller_2_7_joint</joint_name>
+                    <joint_name>right_back_roller_2_6_joint</joint_name>
+                    <joint_name>right_back_roller_2_5_joint</joint_name>
+                    <joint_name>right_back_roller_2_4_joint</joint_name>
+                    <joint_name>right_back_roller_2_3_joint</joint_name>
+                    <joint_name>right_back_roller_2_2_joint</joint_name>
+                    <joint_name>right_back_roller_2_1_joint</joint_name>
+                    
+
+                </plugin>
+            </gazebo>
         </xacro:if>
     </xacro:macro>
 </robot>
