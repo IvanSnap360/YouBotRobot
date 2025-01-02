@@ -3,9 +3,6 @@
 
     <xacro:arg name="robot_name" default="omnibot_robot"/>
 
-    <xacro:include filename="$(find omnibot_description)/urdf/gazebo_sim_ros2_control.urdf.xacro" />
-    <xacro:load_gazebo_sim_ros2_control_plugin robot_name="$(arg robot_name)" use_gazebo="true"/>
-
     <xacro:include filename="$(find omnibot_platform_description)/urdf/omnibot_platform_description.urdf.xacro" />
 
 </robot>

@@ -1,9 +1,134 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_platfrom">
-    <arg name="robot_ns" default="omnibot_robot"/>
+    <arg name="robot_ns" default="omnibot_robot" />
+
+    <gazebo>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find omnibot_platform_control)/config/omnibot_platform_ros2_controllers.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+    <ros2_control name="OmnibotPlatformSystem" type="system">
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
+
+        <joint name="left_front_mecanum_joint">
+            <command_interface name="velocity">
+                <param name="min">-50.0</param>
+                <param name="max">50.0</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="right_front_mecanum_joint">
+            <command_interface name="velocity">
+                <param name="min">-50.0</param>
+                <param name="max">50.0</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="left_back_mecanum_joint">
+            <command_interface name="velocity">
+                <param name="min">-50.0</param>
+                <param name="max">50.0</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+        <joint name="right_back_mecanum_joint">
+            <command_interface name="velocity">
+                <param name="min">-50.0</param>
+                <param name="max">50.0</param>
+            </command_interface>
+            <state_interface name="position" />
+            <state_interface name="velocity" />
+        </joint>
+
+    </ros2_control>
+
+    <gazebo>
+        <plugin filename="gz-sim-joint-state-publisher-system"
+            name="gz::sim::systems::JointStatePublisher">
+            <joint_name>left_front_mecanum_joint</joint_name>
+            <joint_name>left_front_roller_1_7_joint</joint_name>
+            <joint_name>left_front_roller_1_6_joint</joint_name>
+            <joint_name>left_front_roller_1_5_joint</joint_name>
+            <joint_name>left_front_roller_1_4_joint</joint_name>
+            <joint_name>left_front_roller_1_3_joint</joint_name>
+            <joint_name>left_front_roller_1_2_joint</joint_name>
+            <joint_name>left_front_roller_1_1_joint</joint_name>
+            <joint_name>left_front_roller_2_7_joint</joint_name>
+            <joint_name>left_front_roller_2_6_joint</joint_name>
+            <joint_name>left_front_roller_2_5_joint</joint_name>
+            <joint_name>left_front_roller_2_4_joint</joint_name>
+            <joint_name>left_front_roller_2_3_joint</joint_name>
+            <joint_name>left_front_roller_2_2_joint</joint_name>
+            <joint_name>left_front_roller_2_1_joint</joint_name>
+
+
+            <joint_name>right_front_mecanum_joint</joint_name>
+            <joint_name>right_front_roller_1_7_joint</joint_name>
+            <joint_name>right_front_roller_1_6_joint</joint_name>
+            <joint_name>right_front_roller_1_5_joint</joint_name>
+            <joint_name>right_front_roller_1_4_joint</joint_name>
+            <joint_name>right_front_roller_1_3_joint</joint_name>
+            <joint_name>right_front_roller_1_2_joint</joint_name>
+            <joint_name>right_front_roller_1_1_joint</joint_name>
+            <joint_name>right_front_roller_2_7_joint</joint_name>
+            <joint_name>right_front_roller_2_6_joint</joint_name>
+            <joint_name>right_front_roller_2_5_joint</joint_name>
+            <joint_name>right_front_roller_2_4_joint</joint_name>
+            <joint_name>right_front_roller_2_3_joint</joint_name>
+            <joint_name>right_front_roller_2_2_joint</joint_name>
+            <joint_name>right_front_roller_2_1_joint</joint_name>
+
+
+            <joint_name>left_back_mecanum_joint</joint_name>
+            <joint_name>left_back_roller_1_7_joint</joint_name>
+            <joint_name>left_back_roller_1_6_joint</joint_name>
+            <joint_name>left_back_roller_1_5_joint</joint_name>
+            <joint_name>left_back_roller_1_4_joint</joint_name>
+            <joint_name>left_back_roller_1_3_joint</joint_name>
+            <joint_name>left_back_roller_1_2_joint</joint_name>
+            <joint_name>left_back_roller_1_1_joint</joint_name>
+            <joint_name>left_back_roller_2_7_joint</joint_name>
+            <joint_name>left_back_roller_2_6_joint</joint_name>
+            <joint_name>left_back_roller_2_5_joint</joint_name>
+            <joint_name>left_back_roller_2_4_joint</joint_name>
+            <joint_name>left_back_roller_2_3_joint</joint_name>
+            <joint_name>left_back_roller_2_2_joint</joint_name>
+            <joint_name>left_back_roller_2_1_joint</joint_name>
+
+
+            <joint_name>right_back_mecanum_joint</joint_name>
+            <joint_name>right_back_roller_1_7_joint</joint_name>
+            <joint_name>right_back_roller_1_6_joint</joint_name>
+            <joint_name>right_back_roller_1_5_joint</joint_name>
+            <joint_name>right_back_roller_1_4_joint</joint_name>
+            <joint_name>right_back_roller_1_3_joint</joint_name>
+            <joint_name>right_back_roller_1_2_joint</joint_name>
+            <joint_name>right_back_roller_1_1_joint</joint_name>
+            <joint_name>right_back_roller_2_7_joint</joint_name>
+            <joint_name>right_back_roller_2_6_joint</joint_name>
+            <joint_name>right_back_roller_2_5_joint</joint_name>
+            <joint_name>right_back_roller_2_4_joint</joint_name>
+            <joint_name>right_back_roller_2_3_joint</joint_name>
+            <joint_name>right_back_roller_2_2_joint</joint_name>
+            <joint_name>right_back_roller_2_1_joint</joint_name>
+
+
+        </plugin>
+    </gazebo>
+
 
     <!-- BASE_LINK -->
-    <xacro:property name="base_link_mesh_path" value="file://$(find omnibot_platform_description)/meshes/base_link.dae" />
+    <xacro:property name="base_link_mesh_path"
+        value="file://$(find omnibot_platform_description)/meshes/base_link.dae" />
 
     <xacro:property name="base_link_offset_x" value="0.0" />
     <xacro:property name="base_link_offset_y" value="0.0" />
@@ -28,28 +153,28 @@
     <xacro:property name="wheel_offset_y" value="${(wheel_base_width / 2) + 0.035}" />
     <xacro:property name="wheel_offset_z" value="0.015500" />
 
-    
+
     <!-- LIDAR -->
     <xacro:property name="rplidar_a3_xacro_path" value="rplidar_a3.urdf.xacro" />
 
-    <xacro:property name="rplidar_a3_x_offset" value="0.168000"/>
-    <xacro:property name="rplidar_a3_y_offset" value="0.0"/>
-    <xacro:property name="rplidar_a3_z_offset" value="${0.148960 - 0.035}"/> 
+    <xacro:property name="rplidar_a3_x_offset" value="0.168000" />
+    <xacro:property name="rplidar_a3_y_offset" value="0.0" />
+    <xacro:property name="rplidar_a3_z_offset" value="${0.148960 - 0.035}" />
 
-    <xacro:property name="rplidar_a3_x_rotate" value="0.00"/>
-    <xacro:property name="rplidar_a3_y_rotate" value="0.00"/>
-    <xacro:property name="rplidar_a3_z_rotate" value="1.57"/>
+    <xacro:property name="rplidar_a3_x_rotate" value="0.00" />
+    <xacro:property name="rplidar_a3_y_rotate" value="0.00" />
+    <xacro:property name="rplidar_a3_z_rotate" value="1.57" />
 
 
     <!--  INCLUDES -->
     <xacro:include filename="${wheel_macro_path}" />
     <!-- <xacro:include filename="${d435_xacro_path}" /> -->
     <!-- <xacro:include filename="${t265_xacro_path}" /> -->
-    <xacro:include filename="${rplidar_a3_xacro_path}"/>
+    <xacro:include filename="${rplidar_a3_xacro_path}" />
     <xacro:include filename="$(find omnibot_platform_description)/urdf/inertia_calc.xacro" />
 
-     <!--  PLATFORM DESCRIPTION -->
-    <link name="base_footprint"/>
+    <!--  PLATFORM DESCRIPTION -->
+    <link name="base_footprint" />
     <link name="base_link">
         <inertial>
             <origin xyz="${base_link_offset_x} ${base_link_offset_y} ${base_link_offset_z}"
@@ -108,9 +233,10 @@
 
 
     <xacro:rplidar_a3 suffix="front">
-        <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}" rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}"/>
-        <parent link="base_link"/>        
+        <origin xyz="${rplidar_a3_x_offset} ${rplidar_a3_y_offset} ${rplidar_a3_z_offset}"
+            rpy="${rplidar_a3_x_rotate} ${rplidar_a3_y_rotate} ${rplidar_a3_z_rotate}" />
+        <parent link="base_link" />
     </xacro:rplidar_a3>
-    
-    
+
+
 </robot>

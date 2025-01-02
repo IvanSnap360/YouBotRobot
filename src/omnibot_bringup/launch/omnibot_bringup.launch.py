@@ -16,6 +16,12 @@ def generate_launch_description():
     #omnibot description
     omnibot_description_package_path = get_package_share_directory("omnibot_description")
     omnibot_description_file = os.path.join(omnibot_description_package_path,"launch","omnibot_description.launch.py")
+    #omnibot_platform_control
+    omnibot_platform_control_package_path = get_package_share_directory("omnibot_platform_control")
+    omnibot_platform_control_file = os.path.join(omnibot_platform_control_package_path,"launch","omnibot_platform_contollers.launch.py")
+    #omnibot_navigation
+    #omnibot_manipulator
+    #omnibot_state_machine
     #omnibot sim
     omnibot_sim_package_path = get_package_share_directory("omnibot_sim")
     omnibot_sim_file = os.path.join(omnibot_sim_package_path,"launch","omnibot_sim.launch.py")
@@ -44,32 +50,8 @@ def generate_launch_description():
         }.items(),
         condition=IfCondition(gazebo)
     )
-    
-    
-    start_velocity_controller_cmd = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'velocity_controller'],
-        output='screen'
-    )
 
-    # Start joint state broadcaster
-    start_joint_state_broadcaster_cmd = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'joint_state_broadcaster'],
-        output='screen'
-    )                       
     
-    
-     # Register event handler for sequencing
-    load_joint_state_broadcaster_cmd = RegisterEventHandler(
-        event_handler=OnProcessExit(
-            target_action=start_joint_state_broadcaster_cmd,
-            on_exit=[start_velocity_controller_cmd]))
-    
-    delayed_start = TimerAction(
-        period=10.0,
-        actions=[start_joint_state_broadcaster_cmd]
-    )
 
     rviz_node = Node(
         package='rviz2',
@@ -96,13 +78,14 @@ def generate_launch_description():
                     condition = IfCondition(AndSubstitution(NotSubstitution(gazebo) ,control_gui))
                 )
     
+    omnibot_controllers = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_platform_control_file))
+    
     
     return LaunchDescription([
         omnibot_description_launch,
         rviz_node,
         gazebo_launch,
-        delayed_start,
         joint_state_pub,
         joint_state_gui_pub,
-        load_joint_state_broadcaster_cmd
+        omnibot_controllers
     ])
