@@ -35,7 +35,7 @@ def generate_launch_description():
     
     gz_sim_launch = IncludeLaunchDescription(PythonLaunchDescriptionSource(gz_sim_launch_path),
         launch_arguments={
-            "gz_args": [f"-r {world_path}"],
+            "gz_args": [f"-r -v 4 {world_path}"],
             'on_exit_shutdown': 'True'
             }.items(),
         condition=IfCondition(gz_sim_gui)

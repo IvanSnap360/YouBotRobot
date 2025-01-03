@@ -6,6 +6,8 @@
         <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
             <parameters>$(find omnibot_platform_control)/config/omnibot_platform_ros2_controllers.yaml</parameters>
         </plugin>
+
+        
     </gazebo>
 
     <ros2_control name="OmnibotPlatformSystem" type="system">
@@ -206,7 +208,7 @@
         <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0" />
     </joint>
 
-
+    
     <xacro:mecanum_wheel name="left_front" side="1"
         interface="hardware_interface/VelocityJointInterface" parent="base_link">
         <origin xyz="${wheel_offset_x} ${wheel_offset_y} ${wheel_offset_z}"
