@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="rplidar_a3">
-    <xacro:macro name="rplidar_a3" params="suffix *origin *parent">
-    
+    <xacro:macro name="rplidar_a3"
+        params="suffix *origin *parent 
+    gazebo_material_ambient:='0.1 0.1 0.1 1'
+    gazebo_material_diffuse:='0.1 0.1 0.1 1'
+    gazebo_material_specular:='0.1 0.1 0.1 1'">
 
 
         <link name="${suffix}_rplidar_a3_link">
@@ -13,41 +16,55 @@
             <visual name="">
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
                 <geometry>
-                    <mesh filename="file://$(find omnibot_platform_description)/meshes/rplidarA3.dae" scale="0.001 0.001 0.001"/>
+                    <mesh
+                        filename="file://$(find omnibot_platform_description)/meshes/rplidarA3.dae"
+                        scale="0.001 0.001 0.001" />
                 </geometry>
             </visual>
             <collision>
                 <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
                 <geometry>
-                    <mesh filename="file://$(find omnibot_platform_description)/meshes/rplidarA3.dae" scale="0.001 0.001 0.001"/>
+                    <mesh
+                        filename="file://$(find omnibot_platform_description)/meshes/rplidarA3.dae"
+                        scale="0.001 0.001 0.001" />
                 </geometry>
             </collision>
-            
+
         </link>
 
         <joint name="${suffix}_rplidar_a3_joint" type="fixed">
-            <xacro:insert_block name="parent"/>
-            <child link="${suffix}_rplidar_a3_link"/>
-            <xacro:insert_block name="origin"/>
+            <xacro:insert_block name="parent" />
+            <child link="${suffix}_rplidar_a3_link" />
+            <xacro:insert_block name="origin" />
+        </joint>
+
+        <link name="${suffix}_rplidar_a3_scan_link" />
+
+        <joint name="${suffix}_rplidar_a3_scan_joint" type="fixed">
+            <parent link="${suffix}_rplidar_a3_link" />
+            <child link="${suffix}_rplidar_a3_scan_link" />
+            <origin xyz="0.0 0.0 0.03" rpy="0.0 0.0 0.0" />
         </joint>
 
 
-
-         <gazebo reference="${suffix}_rplidar_a3_link">
-           
+        <gazebo reference="${suffix}_rplidar_a3_scan_link">
+            <material>
+                <ambient>${gazebo_material_ambient}</ambient>
+                <diffuse>${gazebo_material_diffuse}</diffuse>
+                <specular>${gazebo_material_specular}</specular>
+            </material>
             <sensor name="${suffix}_lidar_sensor" type="gpu_lidar">
-                <gz_frame_id>${suffix}_rplidar_a3_link</gz_frame_id>
                 <topic>scan</topic>
                 <update_rate>40</update_rate>
-                                <always_on>true</always_on>
+                <always_on>true</always_on>
                 <visualize>true</visualize>
-                <ray>
+                <lidar>
                     <scan>
                         <horizontal>
                             <samples>720</samples>
                             <resolution>1</resolution>
-                            <min_angle>-3.14159265</min_angle>
-                            <max_angle>3.14159265</max_angle>
+                            <min_angle>-3.1415</min_angle>
+                            <max_angle>3.1415</max_angle>
                         </horizontal>
                         <vertical>
                             <samples>1</samples>
@@ -57,7 +74,7 @@
                         </vertical>
                     </scan>
                     <range>
-                        <min>0.2</min>
+                        <min>0.0385</min>
                         <max>25.0</max>
                         <resolution>0.01</resolution>
                     </range>
@@ -66,14 +83,17 @@
                         <mean>0.0</mean>
                         <stddev>0.01</stddev>
                     </noise>
-                </ray>
-
+                    <visibility_mask>4294967294</visibility_mask>
+                    <frame_id>${suffix}_rplidar_a3_scan_link</frame_id>
+                </lidar>
+                <gz_frame_id>${suffix}_rplidar_a3_scan_link</gz_frame_id>
+                
             </sensor>
         </gazebo>
 
     </xacro:macro>
 
- <!-- <sensor type="gpu_lidar" name="head_rplidar_sensor">
+    <!-- <sensor type="gpu_lidar" name="head_rplidar_sensor">
                 <pose>0 0 0.06 0 0 0</pose>
                 <visualize>true</visualize>
                 <update_rate>40</update_rate>

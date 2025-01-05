@@ -2,7 +2,8 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="omnibot_robot">
 
     <xacro:arg name="robot_name" default="omnibot_robot"/>
-
+    
+    
     <xacro:include filename="$(find omnibot_platform_description)/urdf/omnibot_platform_description.urdf.xacro" />
 
 </robot>

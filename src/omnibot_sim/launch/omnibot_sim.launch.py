@@ -2,7 +2,7 @@ import os
 
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument,AppendEnvironmentVariable
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution, LaunchConfiguration, TextSubstitution,IfElseSubstitution,NotSubstitution
@@ -21,7 +21,8 @@ def generate_launch_description():
 
     
     
-    world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'my_empty_world.sdf')
+    # world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'house.world')
+    world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'empty.world')
     
     
     
@@ -59,7 +60,10 @@ def generate_launch_description():
     
     config_file_path = os.path.join(omnibot_sim_pkg, 'config', 'omnibot_ros_gz_bridge.yaml')
 
-    # Create the launch description and populate
+    
+    set_env_vars_resources = AppendEnvironmentVariable(
+        'GZ_SIM_RESOURCE_PATH',os.path.join(omnibot_sim_pkg, 'models'))
+    
     
     ros_gz_bridge = RosGzBridge(
             bridge_name="omnibot_ros_gz_bridge",
@@ -67,6 +71,7 @@ def generate_launch_description():
         )
     
     return LaunchDescription([
+        set_env_vars_resources,
         gz_sim_launch,
         gz_sim_launch_NO_GUI,
         start_gazebo_ros_spawner_cmd,

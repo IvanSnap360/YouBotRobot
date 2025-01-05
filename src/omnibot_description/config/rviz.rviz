@@ -27,7 +27,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -81,6 +81,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        front_rplidar_a3_scan_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         left_back_mecanum_adapter_link:
           Alpha: 1
           Show Axes: false
@@ -422,6 +426,8 @@ Visualization Manager:
           Value: true
         front_rplidar_a3_link:
           Value: true
+        front_rplidar_a3_scan_link:
+          Value: true
         left_back_mecanum_adapter_link:
           Value: true
         left_back_mecanum_wheel_link:
@@ -559,7 +565,8 @@ Visualization Manager:
         base_footprint:
           base_link:
             front_rplidar_a3_link:
-              {}
+              front_rplidar_a3_scan_link:
+                {}
             left_back_mecanum_wheel_link:
               left_back_mecanum_adapter_link:
                 {}
@@ -696,16 +703,16 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz_default_plugins/LaserScan
       Color: 255; 255; 255
-      Color Transformer: ""
+      Color Transformer: Intensity
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 4096
+      Max Intensity: 0
       Min Color: 0; 0; 0
       Min Intensity: 0
       Name: LaserScan
-      Position Transformer: ""
+      Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.009999999776482582
@@ -766,25 +773,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.377557396888733
+      Distance: 1.0365610122680664
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.0403718538582325
-        Y: 0.16260766983032227
-        Z: 0.004820393864065409
+        X: 0.11786820739507675
+        Y: 0.14224405586719513
+        Z: 0.15795961022377014
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4053982198238373
+      Pitch: 0.7353982925415039
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.0185770988464355
+      Yaw: 0.6235767602920532
     Saved: ~
 Window Geometry:
   Displays:
