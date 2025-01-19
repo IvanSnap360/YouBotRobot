@@ -8,7 +8,6 @@ Panels:
         - /Status1
         - /DepthCloud1
         - /DepthCloud1/Auto Size1
-        - /PointCloud21
       Splitter Ratio: 0.5
     Tree Height: 1538
   - Class: rviz_common/Selection
@@ -820,7 +819,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: RGB8
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -840,7 +839,7 @@ Visualization Manager:
         Value: /d435/depth/points
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
@@ -921,25 +920,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 1.106305718421936
+      Distance: 4.030261516571045
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.3704390227794647
-        Y: -0.16933409869670868
-        Z: 0.24929988384246826
+        X: 0.04673710837960243
+        Y: -0.03168881684541702
+        Z: 0.3353080153465271
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: -0.014601954258978367
+      Pitch: 0.3803980350494385
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.306759357452393
+      Yaw: 3.2849462032318115
     Saved: ~
 Window Geometry:
   Displays:

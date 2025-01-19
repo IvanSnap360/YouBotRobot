@@ -34,7 +34,8 @@
                     <topic>${name}_mecanum_joint/velocity</topic>
                     <initial_velocity>0.0</initial_velocity>
       </plugin>
-     
+     <mu1 value="1.2" />
+     <mu2 value="1.2" />
     </gazebo>
   </xacro:macro>
 

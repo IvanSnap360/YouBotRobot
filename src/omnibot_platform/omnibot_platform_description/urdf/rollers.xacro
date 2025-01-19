@@ -59,26 +59,7 @@
             iyy="0.00076000" iyz="0.0"
             izz="0.00076000" />
         </inertial>
-        <surface>
-          <friction>
-            <ode>
-              <mu1>10.2</mu1>
-              <mu2>10.2</mu2>
-              <kp>1e15</kp>
-              <kd>1e13</kd>
-            </ode>
-          </friction>
-          <bounce>
-            <restitution_coefficient>0.01</restitution_coefficient>
-            <threshold>0</threshold>
-          </bounce>
-          <contact>
-            <ode>
-              <max_vel>100</max_vel>
-            </ode>
-          </contact>
-         </surface>
-
+  
       </link>
 
       <joint name="${joint_name}_joint" type="continuous">
@@ -103,11 +84,28 @@
         </actuator>
       </transmission>
 
-      <!-- <gazebo reference="${joint_name}_link">
-        <selfCollide>0</selfCollide>
-        <kp>1000000</kp>
-        <kd>100</kd>
-      </gazebo> -->
+      <gazebo reference="${joint_name}_link">
+        <surface>
+          <friction>
+            <ode>
+              <mu1>10.2</mu1>
+              <mu2>10.2</mu2>
+              <kp>1e15</kp>
+              <kd>1e13</kd>
+            </ode>
+          </friction>
+          <bounce>
+            <restitution_coefficient>0.01</restitution_coefficient>
+            <threshold>0</threshold>
+          </bounce>
+          <contact>
+            <ode>
+              <max_vel>100</max_vel>
+            </ode>
+          </contact>
+         </surface>
+      </gazebo>
+    
 
       <xacro:roller_loop name="${name}" side="${side}" num="${num}" loop="${loop - 1}"
         wheel_side2="${wheel_side2}" />
