@@ -69,7 +69,7 @@
         <parent link="${name}_mecanum_wheel_link" />
         <child link="${joint_name}_link" />
         <!-- <safety_controller k_velocity="10.0" /> -->
-        <dynamics damping="0.001" friction="0.0001" />
+        <dynamics damping="0.1" friction="1" />
       </joint>
 
 
