@@ -1,0 +1,39 @@
+node_name: "omnibot_platform_mecanum_drv"
+input_topic_name: "cmd_vel"
+output_topic_name: "wheels_cmd"
+calculate_frequency_hz: 50.0
+
+platform_parameters:
+  # wheel radius
+  wheel_radius: 0.075 
+  # wheel separation
+  wheel_base_lenth: 0.336000
+  # wheel base
+  wheel_base_width: 0.306100
+  # wheel count
+  wheel_count: 4
+
+input_topic_inverse:
+  linear_x: false
+  linear_y: false
+  angular_z: false
+
+wheels_joints_names:
+  left_front: 
+    name: "left_front_mecanum_joint"
+    reverse: false
+##########################
+  right_front: 
+    name: "right_front_mecanum_joint"
+    reverse: false
+##########################
+  left_back: 
+    name: "left_back_mecanum_joint"
+    reverse: false
+##########################
+  right_back: 
+    name: "right_back_mecanum_joint"
+    reverse: false
+
+  
+  

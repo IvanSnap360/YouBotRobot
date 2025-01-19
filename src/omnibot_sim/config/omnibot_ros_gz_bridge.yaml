@@ -37,3 +37,72 @@
   ros_type_name: "sensor_msgs/msg/LaserScan"
   gz_type_name: "gz.msgs.LaserScan"
   direction: GZ_TO_ROS
+
+###########################################################
+#############REALSENSE_D435_CAMERA_BRIDGE##################
+###########################################################
+### common
+- ros_topic_name: "/d435/depth/camera_info"
+  gz_topic_name: "/d435/depth/camera_info"
+  ros_type_name: "sensor_msgs/msg/CameraInfo"
+  gz_type_name: "gz.msgs.CameraInfo"
+  direction: GZ_TO_ROS
+###########################################################
+### depth 
+- ros_topic_name: "/d435/depth/depth_image"
+  gz_topic_name: "/d435/depth/depth_image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/d435/depth/image"
+  gz_topic_name: "/d435/depth/image"
+  ros_type_name: "sensor_msgs/msg/Image"
+  gz_type_name: "gz.msgs.Image"
+  direction: GZ_TO_ROS
+
+- ros_topic_name: "/d435/depth/points"
+  gz_topic_name: "/d435/depth/points"
+  ros_type_name: "sensor_msgs/msg/PointCloud2"
+  gz_type_name: "gz.msgs.PointCloudPacked"
+  direction: GZ_TO_ROS
+# ###########################################################
+# ### color 
+# - ros_topic_name: "/d435/color/image_raw"
+#   gz_topic_name: "/d435/color/image_raw"
+#   ros_type_name: "sensor_msgs/msg/Image"
+#   gz_type_name: "gz.msgs.Image"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/d435/color/camera_info"
+#   gz_topic_name: "/d435/color/camera_info"
+#   ros_type_name: "sensor_msgs/msg/CameraInfo"
+#   gz_type_name: "gz.msgs.CameraInfo"
+#   direction: GZ_TO_ROS
+# ###########################################################
+# ### infra 1
+# - ros_topic_name: "/d435/infra1/image_rect_raw"
+#   gz_topic_name: "/d435/infra1/image_rect_raw"
+#   ros_type_name: "sensor_msgs/msg/Image"
+#   gz_type_name: "gz.msgs.Image"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/d435/infra1/camera_info"
+#   gz_topic_name: "/d435/infra1/camera_info"
+#   ros_type_name: "sensor_msgs/msg/CameraInfo"
+#   gz_type_name: "gz.msgs.CameraInfo"
+#   direction: GZ_TO_ROS
+# ###########################################################
+# ### infra 2 
+# - ros_topic_name: "/d435/infra2/image_rect_raw"
+#   gz_topic_name: "/d435/infra2/image_rect_raw"
+#   ros_type_name: "sensor_msgs/msg/Image"
+#   gz_type_name: "gz.msgs.Image"
+#   direction: GZ_TO_ROS
+
+# - ros_topic_name: "/d435/infra2/camera_info"
+#   gz_topic_name: "/d435/infra2/camera_info"
+#   ros_type_name: "sensor_msgs/msg/CameraInfo"
+#   gz_type_name: "gz.msgs.CameraInfo"
+#   direction: GZ_TO_ROS
+# ###########################################################

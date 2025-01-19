@@ -162,7 +162,7 @@
     <xacro:property name="wheel_offset_z" value="0.015500" />
 
 
-    <!-- LIDAR -->
+    <!-- RPLIDAR A3 -->
     <xacro:property name="rplidar_a3_xacro_path" value="rplidar_a3.urdf.xacro" />
 
     <xacro:property name="rplidar_a3_x_offset" value="0.168000" />
@@ -173,10 +173,21 @@
     <xacro:property name="rplidar_a3_y_rotate" value="0.00" />
     <xacro:property name="rplidar_a3_z_rotate" value="1.57" />
 
+    <!-- REALSENSE D435 -->
+    <xacro:property name="d435_x_offset" value="${0.176250 + 0.012}" />
+    <xacro:property name="d435_y_offset" value="0.0" />
+    <xacro:property name="d435_z_offset" value="${0.230460 - 0.05}" />
+
+    <xacro:property name="d435_x_rotate" value="0.0" />
+    <xacro:property name="d435_y_rotate" value="0.0" />
+    <xacro:property name="d435_z_rotate" value="0.0" />
+    <xacro:property name="d435_xacro_path"
+        value="$(find omnibot_platform_description)/urdf/_d435.urdf.xacro" />
+
 
     <!--  INCLUDES -->
     <xacro:include filename="${wheel_macro_path}" />
-    <!-- <xacro:include filename="${d435_xacro_path}" /> -->
+    <xacro:include filename="${d435_xacro_path}" />
     <!-- <xacro:include filename="${t265_xacro_path}" /> -->
     <xacro:include filename="${rplidar_a3_xacro_path}" />
     <xacro:include filename="$(find omnibot_platform_description)/urdf/inertia_calc.xacro" />
@@ -210,11 +221,11 @@
 
 
     <gazebo reference="base_link">
-    <material>
+        <material>
             <ambient>0.1 0.1 0.1 1</ambient>
             <diffuse>0.1 0.1 0.1 1</diffuse>
             <specular>0.1 0.1 0.1 1</specular>
-    </material>
+        </material>
         <visibility_flags>1</visibility_flags>
         <self_collide>0</self_collide>
         <kinematic>1</kinematic>
@@ -257,4 +268,7 @@
     </xacro:rplidar_a3>
 
 
+    <xacro:sensor_d435 parent_link="base_link" name="d435" topics_ns="d435" align_depth="true" publish_pointcloud="true">
+        <origin xyz="${d435_x_offset} ${d435_y_offset}  ${d435_z_offset}" rpy="0.0 0.0 0.0" />
+    </xacro:sensor_d435>
 </robot>
