@@ -1,0 +1,9 @@
+
+from: "wheels_cmd"
+to:
+  [
+    "/left_front_mecanum_joint/velocity",
+    "/right_front_mecanum_joint/velocity",
+    "/left_back_mecanum_joint/velocity",
+    "/right_back_mecanum_joint/velocity"
+  ]

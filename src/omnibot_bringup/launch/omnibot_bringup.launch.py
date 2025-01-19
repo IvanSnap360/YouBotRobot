@@ -19,6 +19,10 @@ def generate_launch_description():
     #omnibot_platform_control
     omnibot_platform_control_package_path = get_package_share_directory("omnibot_platform_control")
     omnibot_platform_control_file = os.path.join(omnibot_platform_control_package_path,"launch","omnibot_platform_contollers.launch.py")
+    omnibot_platform_translate_to_controllers_file = os.path.join(omnibot_platform_control_package_path,"launch","joint_control_to_contoller_translate.launch.py")
+    
+    omnibot_platform_mecanum_drv_pkg = get_package_share_directory("omnibot_platform_mecanum_drv")
+    omnibot_platform_mecanum_drv_file = os.path.join(omnibot_platform_mecanum_drv_pkg,"launch","omnibot_platform_mecanum_drv.launch.py")
     #omnibot_navigation
     #omnibot_manipulator
     #omnibot_state_machine
@@ -80,12 +84,18 @@ def generate_launch_description():
     
     omnibot_controllers = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_platform_control_file))
     
+    omnibot_mecanum_drv = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_platform_mecanum_drv_file))
+    
+    omnibot_platform_translate_to_controllers = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_platform_translate_to_controllers_file))
     
     return LaunchDescription([
-        omnibot_description_launch,
         rviz_node,
         gazebo_launch,
         joint_state_pub,
         joint_state_gui_pub,
-        omnibot_controllers
+        
+        omnibot_controllers,
+        omnibot_mecanum_drv,
+        omnibot_description_launch,
+        omnibot_platform_translate_to_controllers
     ])

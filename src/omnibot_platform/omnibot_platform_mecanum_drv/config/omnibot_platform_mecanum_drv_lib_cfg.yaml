@@ -29,11 +29,11 @@ wheels_joints_names:
 ##########################
   left_back: 
     name: "left_back_mecanum_joint"
-    reverse: false
+    reverse: true
 ##########################
   right_back: 
     name: "right_back_mecanum_joint"
-    reverse: false
+    reverse: true
 
   
   

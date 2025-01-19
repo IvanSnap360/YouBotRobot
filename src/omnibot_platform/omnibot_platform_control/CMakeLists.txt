@@ -7,7 +7,25 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
+pkg_check_modules(YAML_CPP REQUIRED yaml-cpp)
+find_path(YAML_CPP_INCLUDE_DIR
+  NAMES yaml_cpp.h
+  PATHS ${YAML_CPP_INCLUDE_DIRS}
+)
+find_library(YAML_CPP_LIBRARY
+  NAMES YAML_CPP
+  PATHS ${YAML_CPP_LIBRARY_DIRS}
+)
+
+
+include_directories(
+  include
+)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
@@ -29,13 +47,32 @@ install(
   DIRECTORY
   config
   launch
+  src
+  include
+  ${YAML_CPP_INCLUDE_DIRS}
   DESTINATION share/${PROJECT_NAME}/
 )
 
 install(
   PROGRAMS
   launch/omnibot_platform_contollers.launch.py
+  launch/joint_control_to_contoller_translate.launch.py
   DESTINATION lib/${PROJECT_NAME}
 )
+
+add_executable(omnibot_platform_translate_to_controllers
+  src/joint_control_to_contoller_translate_node.cpp 
+  )
+ament_target_dependencies(omnibot_platform_translate_to_controllers rclcpp std_msgs geometry_msgs sensor_msgs)
+
+install(TARGETS 
+omnibot_platform_translate_to_controllers
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+target_link_libraries(omnibot_platform_translate_to_controllers
+    ${YAML_CPP_LIBRARIES}
+  )
+
 
 ament_package()

@@ -11,13 +11,13 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return LaunchDescription([
-         Node(
-            package="omnibot_platform_mecanum_drv",
-            executable="omnibot_platform_mecanum_drv",
-            name="omnibot_platform_mecanum_drv_node",
-            output="screen",
+        Node(
+            package='omnibot_platform_control',
+            executable='omnibot_platform_translate_to_controllers',
+            name='omnibot_platform_translate_to_controllers_node',
+            output='screen',
             parameters=[
-                {"config_file_path": os.path.join(get_package_share_directory('omnibot_platform_mecanum_drv'), 'config', 'omnibot_platform_mecanum_drv_lib_cfg.yaml')}
+                {"config_file_path": os.path.join(get_package_share_directory('omnibot_platform_control'), 'config', 'translation_config.yaml')}
             ]
-        )
+            ),
     ])
