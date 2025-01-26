@@ -69,7 +69,7 @@
         <parent link="${name}_mecanum_wheel_link" />
         <child link="${joint_name}_link" />
         <!-- <safety_controller k_velocity="10.0" /> -->
-        <dynamics damping="0.1" friction="1" />
+        <dynamics damping="0.001" friction="0.0001" />
       </joint>
 
 
@@ -88,8 +88,8 @@
         <surface>
           <friction>
             <ode>
-              <mu1>10.2</mu1>
-              <mu2>10.2</mu2>
+              <mu1>100</mu1>
+              <mu2>50</mu2>
               <kp>1e15</kp>
               <kd>1e13</kd>
             </ode>
@@ -107,6 +107,11 @@
       </gazebo>
     
 
+    <gazebo reference="${joint_name}_link">
+        <selfCollide>0</selfCollide>
+        <kp>1000000</kp>
+        <kd>100000</kd>
+      </gazebo>
       <xacro:roller_loop name="${name}" side="${side}" num="${num}" loop="${loop - 1}"
         wheel_side2="${wheel_side2}" />
 
