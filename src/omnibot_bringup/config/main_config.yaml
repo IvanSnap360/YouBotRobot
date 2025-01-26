@@ -1,0 +1,16 @@
+omnibot_config:
+  ros__parameters:
+    platform:
+        base_params:
+          wheel_radius: 0.05
+          wheel_base_lenth: 0.336000
+          wheel_base_width: 0.306100
+          wheel_count: 4
+          
+        velocities_limits:
+          linear_x_max:  +2.0
+          linear_x_min:  -2.0
+          linear_y_max:  +2.0
+          linear_y_min:  -2.0
+          angular_z_max: +2.0
+          angular_z_min: -2.0

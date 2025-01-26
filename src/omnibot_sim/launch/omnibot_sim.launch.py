@@ -22,7 +22,7 @@ def generate_launch_description():
     
     
     # world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'house.world')
-    world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'house.world')
+    world_path = os.path.join(omnibot_sim_pkg, 'worlds', 'empty.world')
     
     
     

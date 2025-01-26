@@ -5,10 +5,12 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription,ExecuteProcess, RegisterEventHandler, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration,NotSubstitution,Command,PathJoinSubstitution,AndSubstitution
+from launch.substitutions import LaunchConfiguration,NotSubstitution,Command,PathJoinSubstitution,AndSubstitution,FindExecutable
 from launch.conditions import IfCondition
 from launch_ros.actions import Node
 from launch.event_handlers import OnProcessExit
+import yaml
+
 
 
 def generate_launch_description():
@@ -88,12 +90,22 @@ def generate_launch_description():
     
     omnibot_platform_translate_to_controllers = IncludeLaunchDescription(PythonLaunchDescriptionSource(omnibot_platform_translate_to_controllers_file))
     
+    omnibot_bringup = Node(
+        package='omnibot_bringup',
+        executable='omnibot_config',
+        name='omnibot_config',
+        output='screen',
+        parameters=[{"config_file_path": os.path.join(get_package_share_directory('omnibot_bringup'), 'config', 'main_config.yaml')}]
+    )
+    
     return LaunchDescription([
         rviz_node,
         gazebo_launch,
         joint_state_pub,
         joint_state_gui_pub,
         
+        
+        omnibot_bringup,
         omnibot_controllers,
         omnibot_mecanum_drv,
         omnibot_description_launch,
